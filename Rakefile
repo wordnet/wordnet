@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Rails4Bootstrap::Application.load_tasks
+Application.load_tasks

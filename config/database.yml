@@ -1,0 +1,27 @@
+# PostgreSQL. Versions 8.2 and up are supported.
+#
+# Install the pg driver:
+#   gem install pg
+# On OS X with Homebrew:
+#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+#
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  # min_messages: warning
+  #   debug5, debug4, debug3, debug2, debug1,
+  #   log, notice, warning, error, fatal, and panic
+
+development:
+  <<: *default
+  database: <%= `echo $(basename $PWD)_development` %>
+
+test:
+  <<: *default
+  database: <%= `echo $(basename $PWD)_test` %>
+
+production:
+  <<: *default
+  database: <%= `echo $(basename $PWD)_production` %>

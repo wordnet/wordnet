@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Rails4Bootstrap::Application.config.secret_key_base = '7aeb6754f22aa61b14e035a13efac79a697ec32e4094b4515253ca0310b3750114f775c1b4c0d821ed4b58111bc76c2cf4b3ec0ae5aa0739fee6bc95a2b91a66'
+Application.config.secret_key_base = '7aeb6754f22aa61b14e035a13efac79a697ec32e4094b4515253ca0310b3750114f775c1b4c0d821ed4b58111bc76c2cf4b3ec0ae5aa0739fee6bc95a2b91a66'

@@ -1,4 +1,4 @@
-Rails4Bootstrap::Application.routes.draw do
+Application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -39,7 +39,7 @@ Rails4Bootstrap::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
@@ -53,4 +53,9 @@ Rails4Bootstrap::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  match '(errors)/:status', to: 'errors#show',
+    constraints: { status: /\d{3}/ },
+    defaults: { status: '500' },
+    via: :all
 end
