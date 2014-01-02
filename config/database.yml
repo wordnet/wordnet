@@ -9,7 +9,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: 5
+  pool: 100
   # min_messages: warning
   #   debug5, debug4, debug3, debug2, debug1,
   #   log, notice, warning, error, fatal, and panic
