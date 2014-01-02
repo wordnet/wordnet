@@ -53,3 +53,5 @@ end
 group :test do
   gem 'rspec-rails', '~> 2.14'
 end
+
+gem 'rails_12factor', group: :production
