@@ -2,7 +2,12 @@ class Synset < ActiveRecord::Base
 
   has_many :senses, :through => :synset_senses
   has_many :synset_senses
-  has_many :synset_relations, :foreign_key => "parent_id"
+
+  has_many :child_relations, :foreign_key => "parent_id",
+    :class_name => "SynsetRelation"
+
+  has_many :parent_relations, :foreign_key => "child_id",
+    :class_name => "SynsetRelation"
 
   include Importable
   include Exportable
@@ -28,4 +33,15 @@ class Synset < ActiveRecord::Base
     end
   end
 
+  def as_json(options = {})
+    if options[:only_lemmas]
+      super.merge(
+        lemmas: senses.flat_map { |s| s.lexemes.select(:lemma).map(&:lemma) }
+      )
+    else
+      super.merge(
+        senses: senses.map { |s| s.as_json(:only_lemma => true) }
+      )
+    end
+  end
 end

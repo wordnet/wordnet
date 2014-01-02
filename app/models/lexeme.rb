@@ -24,4 +24,9 @@ class Lexeme < ActiveRecord::Base
     end
   end
 
+  def as_json(options = {})
+    super.merge(
+      :senses => senses.map(&:as_json)
+    )
+  end
 end

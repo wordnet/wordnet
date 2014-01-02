@@ -3,6 +3,19 @@ class Sense < ActiveRecord::Base
   has_many :lexemes, through: :lexeme_senses
   has_many :lexeme_senses
 
+  has_many :child_relations, :foreign_key => "parent_id",
+    :class_name => "SenseRelation"
+
+  has_many :parent_relations, :foreign_key => "child_id",
+    :class_name => "SenseRelation"
+
+  has_many :synset_senses
+  has_many :synsets, through: :synset_senses
+
+  def synset
+    synsets.first
+  end
+
   include Importable
   include Exportable
 
@@ -24,6 +37,18 @@ class Sense < ActiveRecord::Base
         domain_id: lemma[:domain],
         comment: lemma[:comment] == "brak danych" ? nil : lemma[:comment].presence
       }
+    end
+  end
+
+  def as_json(options = {})
+    if options[:only_lemma]
+      super.merge(
+        :lemma => lexemes.first.lemma
+      )
+    else
+      super.merge(
+        :synsets => synsets.map { |s| s.as_json(:only_lemmas => true) }
+      )
     end
   end
 
