@@ -1,17 +1,25 @@
-# Rails 4 Bootstrap [![Dependency Status][gemnasium-img-url]][gemnasium-url] [![Code Climate][codeclimate-img-url]][codeclimate-url] [![Build Status][travis-img-url]][travis-url]
+# Wordnet
 
-[codeclimate-img-url]: https://codeclimate.com/github/sheerun/rails4-bootstrap.png
-[codeclimate-url]: https://codeclimate.com/github/sheerun/rails4-bootstrap
-[gemnasium-img-url]: https://gemnasium.com/sheerun/rails4-bootstrap.png
-[gemnasium-url]: https://gemnasium.com/sheerun/rails4-bootstrap
-[travis-img-url]: https://travis-ci.org/sheerun/rails4-bootstrap.png
-[travis-url]: https://travis-ci-org/sheerun/rails4-bootstrap
+Open Source engine for Wordnet databases.
 
-My systematic way of making bullet-proof Rails 4 bootstrap template.
+## Requirements
 
-Every commit is assigned to Github issue. Each alternative being evaluated.
+- Ruby 2.1.0
+- PostgreSQL 9
+- Neo4J 2
+- MySQL (for WordnetSQL import)
 
-Essential things in the master branch, optional features in branches, ready for fast-forward merging.
+## Installation
+
+```
+# Load wordnet database to MySQL
+
+rbenv install 2.1.0
+rbenv use 2.1.0
+bundle install
+
+bin/rake wordnet:import
+```
 
 ## License
 
