@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
 
 # Core
 gem 'rails', '4.0.2'
@@ -28,6 +27,7 @@ gem 'sequel'
 gem 'mysql2'
 gem 'ruby-progressbar'
 gem 'thread', :require => 'thread/pool'
+gem 'upsert'
 
 # Neo4J export
 gem 'neography'

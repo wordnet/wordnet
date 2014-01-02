@@ -31,10 +31,12 @@ ActiveRecord::Schema.define(version: 20140102000447) do
   add_index "lexemes", ["lemma"], name: "index_lexemes_on_lemma", unique: true, using: :btree
 
   create_table "sense_relations", force: true do |t|
-    t.uuid    "parent_id"
-    t.uuid    "child_id"
-    t.integer "relation_id"
+    t.uuid    "parent_id",   null: false
+    t.uuid    "child_id",    null: false
+    t.integer "relation_id", null: false
   end
+
+  add_index "sense_relations", ["parent_id", "child_id", "relation_id"], name: "sense_relations_idx", unique: true, using: :btree
 
   create_table "senses", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
     t.integer "external_id", null: false

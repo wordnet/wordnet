@@ -8,8 +8,8 @@ module Importable
     end
 
     def wordnet_import!(options = {}, connection = self.wordnet_connection)
-      batch_size = options.fetch(:batch_size, 300)
-      pool_size = options.fetch(:pool_size, 3)
+      batch_size = options.fetch(:batch_size, 500)
+      pool_size = options.fetch(:pool_size, 2)
       pages = options.fetch(:pages,
         (self.wordnet_count(connection).to_f / batch_size).ceil
       )
@@ -21,9 +21,13 @@ module Importable
         :smoothing => 0.8
       )
 
+      mutex = Mutex.new
       pool = Thread.pool(pool_size)
+      conn = self.connection
+      table = self.table_name
 
       (0...pages).each do |page|
+
         pool.process do
           begin
             entities = self.wordnet_load(connection, page * batch_size, batch_size)
@@ -42,20 +46,19 @@ module Importable
               end
             end
 
-            entities.each do |hash|
-              unique_map = Hash[unique_attributes.map { |a| [a, hash[a]] }]
-
-              if entity = self.find_by(unique_map)
-                # entity.update(hash) rescue nil
-              else
-                self.create(hash) rescue nil
+            mutex.synchronize do
+              Upsert.batch(conn, table) do |upsert|
+                entities.each do |hash|
+                  unique_map = Hash[unique_attributes.map { |a| [a, hash.delete(a)] }]
+                  upsert.row(unique_map, hash)
+                end
               end
             end
 
           rescue => e
             puts e.message
           ensure
-            progressbar.increment
+             progressbar.increment
           end
         end
       end

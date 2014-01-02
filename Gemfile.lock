@@ -176,6 +176,7 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    upsert (2.0.3)
     yajl-ruby (1.2.0)
     yard (0.8.7.3)
 
@@ -209,4 +210,5 @@ DEPENDENCIES
   slim-rails (~> 2.0)
   thread
   uglifier (~> 2.3)
+  upsert
   yajl-ruby
