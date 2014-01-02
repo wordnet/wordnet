@@ -2,10 +2,10 @@ class Synset < ActiveRecord::Base
 
   has_many :senses, :through => :synset_senses
   has_many :synset_senses
-
   has_many :synset_relations, :foreign_key => "parent_id"
 
   include Importable
+  include Exportable
 
   def self.unique_attributes
     [:external_id]

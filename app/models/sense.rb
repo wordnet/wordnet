@@ -4,6 +4,7 @@ class Sense < ActiveRecord::Base
   has_many :lexeme_senses
 
   include Importable
+  include Exportable
 
   def self.unique_attributes
     [:external_id]

@@ -1,10 +1,9 @@
 class Lexeme < ActiveRecord::Base
-
-  has_many :senses
-
-  validates :lemma, :uniqueness => true
+  has_many :senses, through: :lexeme_senses
+  has_many :lexeme_senses
 
   include Importable
+  include Exportable
 
   def self.unique_attributes
     [:lemma]
@@ -24,4 +23,5 @@ class Lexeme < ActiveRecord::Base
       { lemma: lemma }
     end
   end
+
 end

@@ -1,5 +1,6 @@
 class LexemeSense < ActiveRecord::Base
   include Importable
+  include Exportable
 
   belongs_to :lexeme
   belongs_to :sense
@@ -28,4 +29,18 @@ class LexemeSense < ActiveRecord::Base
     end
   end
 
+
+  def self.export_index(connection)
+    nil
+  end
+
+  def self.export_query
+    "MATCH (a:Lexeme { id: {lexeme_id} }), " +
+          "(b:Sense { id: {sense_id} }) " +
+    "MERGE (a)-[r:can_mean]->(b)"
+  end
+
+  def self.export_properties(entity)
+    { lexeme_id: entity.lexeme_id, sense_id: entity.sense_id }
+  end
 end
