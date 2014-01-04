@@ -1,0 +1,58 @@
+.columns
+  display: table
+  width: 100%
+
+  & > .column
+    display: table-cell
+    vertical-align: top
+
+  & + &
+    margin-top: 2rem
+    border-top: 2px solid $list-border-color
+
+.column
+  .content-columns &
+    padding-top: 4rem
+    padding-bottom: 4rem
+
+.column--left,
+.column--right
+  width: 25%
+
+  .content-columns &
+    background: #f8f8f8
+
+.column--main
+  padding-right: 4rem
+  padding-left: 4rem
+
+.top
+  position: fixed
+  z-index: 1
+  top: 0
+  right: 0
+  left: 0
+  height: $top-height
+  background: #525252
+  overflow: hidden
+
+  & + *
+    margin-top: $top-height
+
+  .column
+    height: $top-height !important
+    vertical-align: middle
+
+  .column--right
+    padding-right: 2 * $list-horizontal-padding
+
+  a
+    display: inline-block
+    color: $secondary-link-color
+    font-weight: 600
+    line-height: 1.2
+    margin-left: $list-horizontal-padding
+
+  .top__logo
+    font-size: 1.4em
+    letter-spacing: -0.05rem

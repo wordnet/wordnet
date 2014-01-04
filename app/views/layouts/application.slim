@@ -1,9 +1,23 @@
-doctype
-html
+doctype html
+html lang="pl"
   head
-    title Rails4Bootstrap
-    = stylesheet_link_tag    "application", media: "all"
-    = javascript_include_tag "application"
-    = csrf_meta_tags
+    meta charset="utf-8"
+    title Wordnet
+
+    = stylesheet_link_tag '//fonts.googleapis.com/css?family=Open+Sans:400,300,600,700', media: 'all'
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+
   body
+    header.top
+      .columns
+        .column.column--left
+          a.top__logo href="/" Polish Wordnet
+        .column.column--main
+          input type="search"
+
+        nav.column.column--right.u__text-right
+          a href="/" O projekcie
+          a href="/" GitHub
+
     = yield

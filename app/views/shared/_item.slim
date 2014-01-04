@@ -1,0 +1,11 @@
+a.item *attributes
+  i.item__name
+    = name
+
+    - unless local_assigns[:number].nil?
+      | &nbsp;
+      b.item__number= number
+
+  - unless local_assigns[:description].nil?
+    span.u__hidden<> —
+    span.item__description= description

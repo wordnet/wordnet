@@ -1,0 +1,30 @@
+- 3.times do
+  .content-columns.columns
+    .content-column.column.column--left
+      - 3.times do
+        section.list
+          .list__header
+            | Hiponimia
+            b< 10&nbsp;połączeń
+          ul
+            - 2.times do |n|
+              li= item 'lorem ipsum', class: 'list__item list__item--arrow', number: 1, description: 'Lorem ipsum dolor sit amet'
+            li
+              a.list__item.list__item--more href="/"
+                | Pokaż pozostałe 8
+
+    .content-column.column.column--main
+      | Main content goes here…
+
+    .content-column.column.column--right
+      - 2.times do
+        section.list.list--right
+          .list__header
+            | Fuzzynimia synsetów
+            b< 10&nbsp;połączeń
+          ul
+            - 3.times do |n|
+              li= item 'lorem ipsum', class: 'list__item list__item--arrow', number: 1, description: 'Lorem ipsum dolor sit amet'
+            li
+              a.list__item.list__item--more href="/"
+                | Pokaż pozostałe 7

@@ -1,0 +1,33 @@
+%item
+  display: block
+  font-style: normal
+  font-weight: 400
+
+.item
+  @extend %item
+  @extend %word-wrap
+  color: $secondary-link-color
+
+.item__name
+  @extend %item
+  color: $primary-link-color
+  font-weight: 700
+
+.item__number
+  display: inline-block
+  min-width: 1rem
+  position: relative
+  top: -0.1rem
+  left: 0.15rem
+  background: $list-border-color
+  color: #fff
+  border-radius: 1rem
+  font-size: 0.7em
+  font-weight: 600
+  line-height: 1rem
+  text-align: center
+  vertical-align: middle
+
+.item__description
+  @extend %item
+  padding-top: 0.1rem

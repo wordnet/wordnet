@@ -1,0 +1,58 @@
+.list
+  & + &
+    padding-top: 3rem
+
+.list__item
+  display: block
+  padding: $list-vertical-padding $list-horizontal-padding
+  border-bottom: 1px solid $list-border-color
+
+  .list--right &
+    padding-left: 30px
+
+.list__item--arrow
+  $image: "chevron-right@2x.png"
+  $image-width: image-width($image) / 2
+  $image-height: image-height($image) / 2
+
+  background: asset-data-url($image) no-repeat
+  background-size: $image-width $image-height
+  background-position: right ($list-vertical-padding + 1px)
+  padding-right: 25px
+
+  .list--right &
+    background-position: $list-horizontal-padding ($list-vertical-padding + 1px)
+    padding-right: $list-horizontal-padding
+
+.list__item--more
+  color: $secondary-link-color
+  font-size: 0.8em
+  font-weight: 600
+  text-transform: uppercase
+
+  &::before
+    $image: "elipsis@2x.png"
+    $image-width: image-width($image) / 2
+    $image-height: image-height($image) / 2
+
+    +pseudo(inline-block)
+    width: round($image-width * 1.4)
+    height: $image-height
+    position: relative
+    top: -0.1rem
+    background: asset-data-url($image) no-repeat
+    background-size: $image-width $image-height
+    vertical-align: middle
+
+.list__header
+  @extend .list__item
+  padding-top: 0
+  font-size: 1.4em
+  font-weight: 700
+  line-height: 1.2
+  letter-spacing: -0.05rem
+
+  b
+    font-weight: 300
+    color: $secondary-link-color
+
