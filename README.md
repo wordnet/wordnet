@@ -18,6 +18,7 @@ rbenv install 2.1.0
 rbenv use 2.1.0
 bundle install
 
+bin/rake db:create db:migrate
 bin/rake wordnet:import
 ```
 
