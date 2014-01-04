@@ -1,5 +1,7 @@
 Application.routes.draw do
 
+  root to: 'home#index'
+
   mount API::Engine => '/api'
 
   match '(errors)/:status', to: 'errors#show',
