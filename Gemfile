@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'https://rails-assets.org'
 
 # Core
 gem 'rails', '4.0.2'
@@ -10,15 +11,16 @@ gem 'dotenv-rails', '~> 0.9'
 gem 'yajl-ruby', :require => 'yajl'
 
 # Frontend
-# For assets precompilation on non-macs install node.js.
-# therubyracer is discouraged because of high memory usage.
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '~> 2.3'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'slim-rails', '~> 2.0'
-gem 'jquery-rails', '~> 3.0'
 gem 'quiet_assets', '~> 1.0'
 gem 'compass-rails', '~> 1.1.3'
+
+# Rails Assets
+gem 'rails-assets-angular', '~> 1.2.7'
+gem 'rails-assets-lodash', '~> 2.4'
 
 gem 'ohm'
 gem 'ohm-contrib'
@@ -38,7 +40,6 @@ gem 'neo4j-cypher'
 gem 'grape', '~> 0.6.1'
 gem 'grape-kaminari', '~> 0.1.0'
 gem 'draper'
-
 
 group :development do
   gem 'awesome_print'

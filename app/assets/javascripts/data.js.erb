@@ -1,0 +1,54 @@
+// Dummy data
+
+synset_relations = [
+<% 10.times do |n| %>
+  {
+    id: '',
+    name: 'Hiponimia',
+    direction: 'outgoing',
+    related_to: {
+      id: '',
+      lemma: 'lorem ipsum',
+      position: 1,
+      description: 'Lorem ipsum dolor sit amet'
+    }
+  },
+<% end %>
+<% 20.times do |n| %>
+  {
+    id: '',
+    name: 'Hiperonimia',
+    direction: 'incoming',
+    related_to: {
+      id: '',
+      lemma: 'dolor sit',
+      position: 1,
+      description: null
+    }
+  },
+<% end %>
+<% 5.times do |n| %>
+  {
+    id: '',
+    name: 'Fuzzynimia synsetów',
+    direction: 'incoming',
+    related_to: {
+      id: '',
+      lemma: 'lorem ipsum',
+      position: 1,
+      description: 'Lorem ipsum dolor sit amet'
+    }
+  },
+<% end %>
+  {
+    id: '',
+    name: 'Meronimia',
+    direction: 'outgoing',
+    related_to: {
+      id: '',
+      lemma: 'dolor sit',
+      position: 3,
+      description: 'Lorem ipsum dolor sit amet'
+    }
+  }
+]

@@ -1,11 +1,12 @@
 a.item *attributes
-  i.item__name
-    = name
+  i.item__lemma
+    | {{ #{name}.lemma }}
 
-    - unless local_assigns[:number].nil?
+    span ng-show="#{name}.position"
       | &nbsp;
-      b.item__number= number
+      b.item__position ng-bind="#{name}.position"
 
-  - unless local_assigns[:description].nil?
+  span ng-show="#{name}.description"
     span.u__hidden<> —
-    span.item__description= description
+    span.item__description
+      | {{ #{name}.description }}

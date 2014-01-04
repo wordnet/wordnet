@@ -1,5 +1,5 @@
 doctype html
-html lang="pl"
+html lang="pl" ng-app="wordnet"
   head
     meta charset="utf-8"
     title Wordnet
@@ -8,7 +8,7 @@ html lang="pl"
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
 
-  body
+  body ng-controller="SearchCtrl"
     header.top
       .columns
         .column.column--left
