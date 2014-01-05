@@ -12,3 +12,6 @@
 
   # Mimicking the case of multiple results on a single page
   $scope.relation_sets = _.map([relations, relations], _.cloneDeep)
+
+  $scope.goTo = (id) ->
+    console.log id
