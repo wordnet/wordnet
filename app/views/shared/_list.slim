@@ -1,8 +1,7 @@
 section.list class="list--#{direction}" ng-repeat="list in relations.#{direction}"
   h1.list__header
     | {{ list.name }}
-    b<
-      | {{ list.children.length }}&nbsp;połączenia
+    inflect< word="połączenie" count="{{ list.children.length }}" template="<b>${count}&nbsp;${word}</b>"
 
   ul
     li ng-repeat="child in list.children | limitTo: list.truncate_after"
@@ -10,4 +9,4 @@ section.list class="list--#{direction}" ng-repeat="list in relations.#{direction
 
     li ng-show="list.truncate_after < list.children.length"
       a.list__item.list__item--more href="#" ng-click="list.truncate_after = 100"
-        | Pokaż pozostałe&nbsp;{{ list.children.length - list.truncate_after }}
+        inflect word="pozostały" count="{{ list.children.length - list.truncate_after }}" template="Pokaż ${word}&nbsp;${count}"
