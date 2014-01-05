@@ -51,4 +51,30 @@ synset_relations = [
       description: 'Lorem ipsum dolor sit amet'
     }
   }
-]
+];
+
+main_synset = {
+  id: '',
+  description: 'Lorem ipsum dolor sit amet',
+  definitions: _.shuffle([
+    <% 3.times do |n| %>
+    'Lorem ipsum dolor sit amet <%= n + 1 %>',
+    <% end %>
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ultricies adipiscing quam sed lobortis. Sed condimentum, orci nec ornare malesuada, risus dui ullamcorper nisi, eget sodales enim arcu nec lacus. Sed ligula elit, tincidunt eget quam at, pellentesque dignissim dui. Quisque elit massa, accumsan tincidunt fringilla a, dignissim quis est.'
+  ]),
+  source: 'Princeton Wordnet 3.0',
+  children: _.shuffle([{
+    <% 4.times do %>
+      id: '9876543210',
+      lemma: 'lorem ipsum',
+      position: 1,
+      description: 'Lorem ipsum dolor sit amet'
+    }, {
+    <% end %>
+      id: '9876543210',
+      lemma: 'dolor sit',
+      position: 2,
+      description: null
+    }
+  ])
+}
