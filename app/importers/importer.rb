@@ -1,43 +1,9 @@
+require 'progress_bar_importer'
+require 'thread_pool_importer'
+
 class Importer
-  module ProgressBarAspect
-    def import!(*args, &block)
-      @progress_bar = ProgressBar.create(
-        :title => self.class.name.split('::').last,
-        :total => @pages,
-        :format => "%t: |%B| %c/%C %E",
-        :smoothing => 0.8
-      )
-
-      super(*args, &block)
-    end
-
-    def import_entities!(*args, &block)
-      super(*args, &block)
-      @progress_bar.increment
-    end
-  end
-
-  module ThreadPoolAspect
-    def import!(*args, &block)
-      @thread_pool = Thread::Pool.new(2)
-      super(*args, &block)
-      @thread_pool.shutdown
-    end
-
-    def import_entities!(*args, &block)
-      @thread_pool.process do
-        begin
-          super(*args, &block)
-        rescue Exception => e
-          puts e.message
-          raise
-        end
-      end
-    end
-  end
-
-  prepend ProgressBarAspect
-  prepend ThreadPoolAspect
+  prepend ProgressBarImporter
+  prepend ThreadPoolImporter
 
   def total_count
     raise NotImplementedError.new("You must implement total_count.")
