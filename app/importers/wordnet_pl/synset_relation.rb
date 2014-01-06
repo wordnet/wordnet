@@ -16,11 +16,11 @@ module WordnetPl
       [:parent_id, :child_id, :relation_id]
     end
 
-    def wordnet_count
+    def total_count
       @connection[:synsetrelation].max(:PARENT_ID)
     end
 
-    def wordnet_load(limit, offset)
+    def load_batch(limit, offset)
       raw = @connection[:synsetrelation].
         select(:PARENT_ID, :CHILD_ID, :REL_ID).
         where('PARENT_ID >= ? AND PARENT_ID < ?', offset, offset + limit).

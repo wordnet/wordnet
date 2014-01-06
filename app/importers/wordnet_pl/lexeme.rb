@@ -10,7 +10,7 @@ module WordnetPl
       [:lemma]
     end
 
-    def wordnet_count
+    def total_count
       @connection[:lexicalunit].max(:ID)
     end
 
@@ -18,7 +18,7 @@ module WordnetPl
       "lexemes"
     end
 
-    def wordnet_load(limit, offset)
+    def load_batch(limit, offset)
       raw = @connection[:lexicalunit].select(:lemma).order(:ID).
         where('ID >= ? AND ID < ?', offset, offset + limit).to_a
 

@@ -16,11 +16,11 @@ module WordnetPl
       [:parent_id, :child_id, :relation_id]
     end
 
-    def wordnet_count
+    def total_count
       @connection[:lexicalrelation].max(:PARENT_ID)
     end
 
-    def wordnet_load(limit, offset)
+    def load_batch(limit, offset)
       raw = @connection[:lexicalrelation].
         select(:PARENT_ID, :CHILD_ID, :REL_ID).
         order(:PARENT_ID).

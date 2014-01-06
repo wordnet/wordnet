@@ -14,7 +14,7 @@ module WordnetPl
       [:external_id]
     end
 
-    def wordnet_count
+    def total_count
       @connection[:lexicalunit].max(:ID)
     end
 
@@ -24,7 +24,7 @@ module WordnetPl
       }
     end
 
-    def wordnet_load(limit, offset)
+    def load_batch(limit, offset)
       raw = @connection[:lexicalunit].
         select(:ID, :comment, :domain, :lemma).
         order(:ID).

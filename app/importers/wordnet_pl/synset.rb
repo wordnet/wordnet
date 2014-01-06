@@ -10,11 +10,11 @@ module WordnetPl
       [:external_id]
     end
 
-    def wordnet_count
+    def total_count
       @connection[:synset].max(:ID)
     end
 
-    def wordnet_load(limit, offset)
+    def load_batch(limit, offset)
       raw = @connection[:synset].select(:ID, :comment, :definition).order(:ID).
         where('ID >= ? AND ID < ?', offset, offset + limit).to_a
 

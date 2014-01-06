@@ -20,11 +20,11 @@ module WordnetPl
       [:synset_id, :sense_id]
     end
 
-    def wordnet_count
+    def total_count
       @connection[:unitandsynset].max(:LEX_ID)
     end
 
-    def wordnet_load(limit, offset)
+    def load_batch(limit, offset)
       raw = @connection[:unitandsynset].
         select(:LEX_ID, :SYN_ID, :unitindex).
         order(:LEX_ID).

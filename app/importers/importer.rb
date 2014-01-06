@@ -11,7 +11,7 @@ class Importer
       super(*args, &block)
     end
 
-    def batch_import!(*args, &block)
+    def import_batch!(*args, &block)
       super(*args, &block)
       @progress_bar.increment
     end
@@ -24,7 +24,7 @@ class Importer
       @thread_pool.shutdown
     end
 
-    def batch_import!(*args, &block)
+    def import_batch!(*args, &block)
       @thread_pool.process do
         begin
           super(*args, &block)
@@ -39,12 +39,12 @@ class Importer
   prepend ProgressBarAspect
   prepend ThreadPoolAspect
 
-  def wordnet_count
-    raise NotImplementedError.new("You must implement wordnet_count.")
+  def total_count
+    raise NotImplementedError.new("You must implement total_count.")
   end
 
-  def wordnet_load(offset, limit)
-    raise NotImplementedError.new("You must implement wordnet_load.")
+  def load_batch(offset, limit)
+    raise NotImplementedError.new("You must implement load_batch.")
   end
 
   def table_name
@@ -59,18 +59,18 @@ class Importer
     )
 
     @batch_size = options.fetch(:batch_size, 500)
-    @pages = options.fetch(:pages, (wordnet_count.to_f / @batch_size).ceil)
+    @pages = options.fetch(:pages, (total_count.to_f / @batch_size).ceil)
     @mutex = Mutex.new
   end
 
   def wordnet_import!
     (0...@pages).each do |page|
-      batch_import!(@batch_size, page * @batch_size)
+      import_batch!(@batch_size, page * @batch_size)
     end
   end
 
-  def batch_import!(limit, offset)
-    entities = wordnet_load(limit, offset)
+  def import_batch!(limit, offset)
+    entities = load_batch(limit, offset)
 
     if respond_to?(:uuid_mappings)
       uuid_mappings.each do |key, opts|
