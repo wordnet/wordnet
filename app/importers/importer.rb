@@ -1,6 +1,6 @@
 class Importer
   module ProgressBarAspect
-    def wordnet_import!(*args, &block)
+    def import!(*args, &block)
       @progress_bar = ProgressBar.create(
         :title => self.class.name.split('::').last,
         :total => @pages,
@@ -18,7 +18,7 @@ class Importer
   end
 
   module ThreadPoolAspect
-    def wordnet_import!(*args, &block)
+    def import!(*args, &block)
       @thread_pool = Thread::Pool.new(2)
       super(*args, &block)
       @thread_pool.shutdown
@@ -63,7 +63,7 @@ class Importer
     @mutex = Mutex.new
   end
 
-  def wordnet_import!
+  def import!
     (0...@pages).each do |page|
       import_entities!(@batch_size, page * @batch_size)
     end
