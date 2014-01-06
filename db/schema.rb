@@ -11,18 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102000447) do
+ActiveRecord::Schema.define(version: 20140106182233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
-
-  create_table "lexeme_senses", force: true do |t|
-    t.uuid "lexeme_id", null: false
-    t.uuid "sense_id",  null: false
-  end
-
-  add_index "lexeme_senses", ["lexeme_id", "sense_id"], name: "index_lexeme_senses_on_lexeme_id_and_sense_id", unique: true, using: :btree
 
   create_table "lexemes", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
     t.string "lemma", null: false
@@ -42,9 +35,11 @@ ActiveRecord::Schema.define(version: 20140102000447) do
     t.integer "external_id", null: false
     t.integer "domain_id"
     t.text    "comment"
+    t.uuid    "lexeme_id"
   end
 
   add_index "senses", ["external_id"], name: "index_senses_on_external_id", unique: true, using: :btree
+  add_index "senses", ["lexeme_id"], name: "index_senses_on_lexeme_id", using: :btree
 
   create_table "synset_relations", force: true do |t|
     t.uuid    "parent_id",   null: false

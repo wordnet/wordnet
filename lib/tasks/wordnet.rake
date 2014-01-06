@@ -3,13 +3,12 @@ namespace :wordnet do
 
   task :import, [:klass] => [:environment] do |t, args|
     if args[:klass].present?
-      Object.const_get(args[:klass]).wordnet_import!
+      WordnetPl.const_get(args[:klass]).new.wordnet_import!
     else
       [
-        Lexeme, Sense, Synset,
-        LexemeSense, SynsetSense,
-        SenseRelation, SynsetRelation
-      ].map(&:wordnet_import!)
+        "Lexeme", "Sense", "Synset", "SynsetSense",
+        "SenseRelation", "SynsetRelation"
+      ].map { |c| WordnetPl.const_get(c).new.wordnet_import! }
     end
   end
 

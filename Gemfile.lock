@@ -231,6 +231,7 @@ GEM
       coercible (~> 1.0)
       descendants_tracker (~> 0.0.1)
       equalizer (~> 0.0.7)
+    wisper (1.2.1)
     yajl-ruby (1.2.0)
     yard (0.8.7.3)
 
@@ -271,4 +272,5 @@ DEPENDENCIES
   thread
   uglifier (~> 2.3)
   upsert
+  wisper (~> 1.2.0)
   yajl-ruby

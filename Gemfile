@@ -31,6 +31,7 @@ gem 'mysql2'
 gem 'ruby-progressbar'
 gem 'thread', :require => 'thread/pool'
 gem 'upsert'
+gem 'wisper', '~> 1.2.0'
 
 # Neo4J export
 gem 'neography'
