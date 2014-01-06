@@ -25,13 +25,16 @@ module WordnetPl
     end
 
     def wordnet_load(limit, offset)
-      raw = @connection[:unitandsynset].select(:LEX_ID, :SYN_ID).order(:LEX_ID).
+      raw = @connection[:unitandsynset].
+        select(:LEX_ID, :SYN_ID, :unitindex).
+        order(:LEX_ID).
         where('LEX_ID >= ? AND LEX_ID < ?', offset, offset + limit).to_a
 
       raw.map do |membership|
         {
           sense_id: membership[:LEX_ID],
-          synset_id: membership[:SYN_ID]
+          synset_id: membership[:SYN_ID],
+          sense_index: membership[:unitindex]
         }
       end
     end
