@@ -26,16 +26,17 @@ module WordnetPl
 
     def wordnet_load(limit, offset)
       raw = @connection[:lexicalunit].
-        select(:ID, :comment, :domain, :lemma).
+        select(:ID, :comment, :domain, :lemma, :pos).
         order(:ID).
         where('ID >= ? AND ID < ?', offset, offset + limit).to_a
 
-      raw.map do |lemma|
+      raw.map do |lexeme|
         {
-          external_id: lemma[:ID],
-          domain_id: lemma[:domain],
-          lexeme_id: lemma[:lemma],
-          comment: lemma[:comment] == "brak danych" ? nil : lemma[:comment].presence
+          external_id: lexeme[:ID],
+          domain_id: lexeme[:domain],
+          lexeme_id: lexeme[:lemma],
+          position: lexeme[:pos],
+          comment: lexeme[:comment] == "brak danych" ? nil : lexeme[:comment].presence
         }
       end
     end

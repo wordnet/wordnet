@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140106182233) do
+ActiveRecord::Schema.define(version: 20140106203510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20140106182233) do
     t.integer "domain_id"
     t.text    "comment"
     t.uuid    "lexeme_id"
+    t.integer "position"
   end
 
   add_index "senses", ["external_id"], name: "index_senses_on_external_id", unique: true, using: :btree
