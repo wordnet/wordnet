@@ -11,7 +11,7 @@ class Importer
       super(*args, &block)
     end
 
-    def import_batch!(*args, &block)
+    def import_entities!(*args, &block)
       super(*args, &block)
       @progress_bar.increment
     end
@@ -24,7 +24,7 @@ class Importer
       @thread_pool.shutdown
     end
 
-    def import_batch!(*args, &block)
+    def import_entities!(*args, &block)
       @thread_pool.process do
         begin
           super(*args, &block)
@@ -43,8 +43,8 @@ class Importer
     raise NotImplementedError.new("You must implement total_count.")
   end
 
-  def load_batch(offset, limit)
-    raise NotImplementedError.new("You must implement load_batch.")
+  def load_entities(offset, limit)
+    raise NotImplementedError.new("You must implement load_entities.")
   end
 
   def table_name
@@ -65,12 +65,12 @@ class Importer
 
   def wordnet_import!
     (0...@pages).each do |page|
-      import_batch!(@batch_size, page * @batch_size)
+      import_entities!(@batch_size, page * @batch_size)
     end
   end
 
-  def import_batch!(limit, offset)
-    entities = load_batch(limit, offset)
+  def import_entities!(limit, offset)
+    entities = load_entities(limit, offset)
 
     if respond_to?(:uuid_mappings)
       uuid_mappings.each do |key, opts|

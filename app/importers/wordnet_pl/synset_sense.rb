@@ -24,7 +24,7 @@ module WordnetPl
       @connection[:unitandsynset].max(:LEX_ID)
     end
 
-    def load_batch(limit, offset)
+    def load_entities(limit, offset)
       raw = @connection[:unitandsynset].
         select(:LEX_ID, :SYN_ID, :unitindex).
         order(:LEX_ID).

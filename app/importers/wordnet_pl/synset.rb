@@ -14,7 +14,7 @@ module WordnetPl
       @connection[:synset].max(:ID)
     end
 
-    def load_batch(limit, offset)
+    def load_entities(limit, offset)
       raw = @connection[:synset].select(:ID, :comment, :definition).order(:ID).
         where('ID >= ? AND ID < ?', offset, offset + limit).to_a
 

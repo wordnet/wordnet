@@ -24,7 +24,7 @@ module WordnetPl
       }
     end
 
-    def load_batch(limit, offset)
+    def load_entities(limit, offset)
       raw = @connection[:lexicalunit].
         select(:ID, :comment, :domain, :lemma).
         order(:ID).

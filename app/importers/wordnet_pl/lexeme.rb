@@ -18,7 +18,7 @@ module WordnetPl
       "lexemes"
     end
 
-    def load_batch(limit, offset)
+    def load_entities(limit, offset)
       raw = @connection[:lexicalunit].select(:lemma).order(:ID).
         where('ID >= ? AND ID < ?', offset, offset + limit).to_a
 

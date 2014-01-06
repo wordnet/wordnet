@@ -20,7 +20,7 @@ module WordnetPl
       @connection[:lexicalrelation].max(:PARENT_ID)
     end
 
-    def load_batch(limit, offset)
+    def load_entities(limit, offset)
       raw = @connection[:lexicalrelation].
         select(:PARENT_ID, :CHILD_ID, :REL_ID).
         order(:PARENT_ID).

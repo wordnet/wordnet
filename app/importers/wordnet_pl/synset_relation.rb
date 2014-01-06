@@ -20,7 +20,7 @@ module WordnetPl
       @connection[:synsetrelation].max(:PARENT_ID)
     end
 
-    def load_batch(limit, offset)
+    def load_entities(limit, offset)
       raw = @connection[:synsetrelation].
         select(:PARENT_ID, :CHILD_ID, :REL_ID).
         where('PARENT_ID >= ? AND PARENT_ID < ?', offset, offset + limit).
