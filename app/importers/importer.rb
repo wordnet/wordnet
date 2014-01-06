@@ -1,9 +1,11 @@
 require 'progress_bar_importer'
 require 'thread_pool_importer'
+require 'synchronized_write_importer'
 
 class Importer
   prepend ProgressBarImporter
   prepend ThreadPoolImporter
+  prepend SynchronizedWriteImporter
 
   def total_count
     raise NotImplementedError.new("You must implement total_count.")
@@ -26,7 +28,6 @@ class Importer
 
     @batch_size = options.fetch(:batch_size, 500)
     @pages = options.fetch(:pages, (total_count.to_f / @batch_size).ceil)
-    @mutex = Mutex.new
   end
 
   def import!
@@ -37,7 +38,11 @@ class Importer
 
   def import_entities!(limit, offset)
     entities = load_entities(limit, offset)
+    entities = preprocess_entities(entities)
+    persist_entities!(entities)
+  end
 
+  def preprocess_entities(entities)
     if respond_to?(:uuid_mappings)
       uuid_mappings.each do |key, opts|
         uuid_mapping = Hash[
@@ -54,12 +59,14 @@ class Importer
       end
     end
 
-    @mutex.synchronize do
-      Upsert.batch(@base_connection, table_name) do |upsert|
-        entities.each do |hash|
-          unique_map = Hash[unique_attributes.map { |a| [a, hash.delete(a)] }]
-          upsert.row(unique_map, hash)
-        end
+    entities
+  end
+
+  def persist_entities!(entities)
+    Upsert.batch(@base_connection, table_name) do |upsert|
+      entities.each do |hash|
+        unique_map = Hash[unique_attributes.map { |a| [a, hash.delete(a)] }]
+        upsert.row(unique_map, hash)
       end
     end
   end
