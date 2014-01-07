@@ -6,22 +6,18 @@ module WordnetPl
       super
     end
 
-    def table_name
-      "senses"
-    end
-
-    def unique_attributes
-      [:external_id]
-    end
-
     def total_count
       @connection[:lexicalunit].max(:ID)
     end
 
-    def uuid_mappings
-      {
-        :lexeme_id => { table: :lexemes, attribute: :lemma },
-      }
+    def process_entities!(entities)
+      lexemes = entities.map { |e| { lemma: e[:lexeme_id] } }
+
+      persist_entities!("lexemes", lexemes, [:lemma])
+
+      entities = process_uuid_mappings(entities, :lexeme_id => { table: :lexemes, attribute: :lemma })
+
+      persist_entities!("senses", entities, [:external_id])
     end
 
     def load_entities(limit, offset)

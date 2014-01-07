@@ -37,35 +37,39 @@ class Importer
   end
 
   def import_entities!(limit, offset)
-    entities = load_entities(limit, offset)
-    entities = preprocess_entities(entities)
-    persist_entities!(entities)
+    process_entities!(load_entities(limit, offset))
   end
 
-  def preprocess_entities(entities)
+  def process_entities!(entities)
     if respond_to?(:uuid_mappings)
-      uuid_mappings.each do |key, opts|
-        uuid_mapping = Hash[
-          @sequel_connection[opts[:table]].select(:id, opts[:attribute]).
-          where(opts[:attribute] => entities.map { |w| w[key] }).to_a.
-          map { |w| [w[opts[:attribute]], w[:id]] }
-        ]
+      entities = process_uuid_mappings(entities, uuid_mappings)
+    end
 
-        entities.each do |entity|
-          entity[key] = uuid_mapping[entity.delete(key)]
-        end
+    persist_entities!(table_name, entities, unique_attributes)
+  end
 
-        entities.select! { |w| w[key].present? }
+  def process_uuid_mappings(entities, uuid_mappings)
+    uuid_mappings.each do |key, opts|
+      uuid_mapping = Hash[
+        @sequel_connection[opts[:table]].select(:id, opts[:attribute]).
+        where(opts[:attribute] => entities.map { |w| w[key] }).to_a.
+        map { |w| [w[opts[:attribute]], w[:id]] }
+      ]
+
+      entities.each do |entity|
+        entity[key] = uuid_mapping[entity.delete(key)]
       end
+
+      entities.select! { |w| w[key].present? }
     end
 
     entities
   end
 
-  def persist_entities!(entities)
+  def persist_entities!(table_name, entities, unique_attributes)
     Upsert.batch(@base_connection, table_name) do |upsert|
       entities.each do |hash|
-        unique_map = Hash[unique_attributes.map { |a| [a, hash.delete(a)] }]
+        unique_map = hash.extract!(*unique_attributes)
         upsert.row(unique_map, hash)
       end
     end

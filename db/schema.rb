@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 20140106213106) do
     t.integer "domain_id"
     t.text    "comment"
     t.uuid    "lexeme_id"
-    t.integer "position"
   end
 
   add_index "senses", ["external_id"], name: "index_senses_on_external_id", unique: true, using: :btree

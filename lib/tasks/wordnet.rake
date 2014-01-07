@@ -6,7 +6,7 @@ namespace :wordnet do
       WordnetPl.const_get(args[:klass]).new.import!
     else
       [
-        "Lexeme", "Sense", "Synset", "SynsetSense",
+        "Sense", "Synset", "SynsetSense",
         "SenseRelation", "SynsetRelation"
       ].map { |c| WordnetPl.const_get(c).new.import! }
     end
