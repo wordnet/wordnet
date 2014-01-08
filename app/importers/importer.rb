@@ -4,7 +4,7 @@ require 'synchronized_write_importer'
 
 class Importer
   prepend ProgressBarImporter
-  # prepend ThreadPoolImporter
+  prepend ThreadPoolImporter
   prepend SynchronizedWriteImporter
 
   def total_count
@@ -26,7 +26,7 @@ class Importer
         merge("adapter" => "postgres")
     )
 
-    @batch_size = options.fetch(:batch_size, 500)
+    @batch_size = options.fetch(:batch_size, 400)
     @pages = options.fetch(:pages, (total_count.to_f / @batch_size).ceil)
   end
 

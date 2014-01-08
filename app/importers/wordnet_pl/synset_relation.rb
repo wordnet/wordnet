@@ -2,6 +2,7 @@ module WordnetPl
   class SynsetRelation < Importer
     def initialize
       @connection = Sequel.connect('mysql2://root@localhost/wordnet', :max_connections => 10)
+      @relation_ids = ::RelationType.all.to_a.map(&:id)
       super
     end
 
@@ -23,16 +24,19 @@ module WordnetPl
     def load_entities(limit, offset)
       raw = @connection[:synsetrelation].
         select(:PARENT_ID, :CHILD_ID, :REL_ID).
+        order(:PARENT_ID).
         where('PARENT_ID >= ? AND PARENT_ID < ?', offset, offset + limit).
         to_a
 
       raw.map do |relation|
-        {
-          relation_id: relation[:REL_ID],
-          parent_id: relation[:PARENT_ID],
-          child_id: relation[:CHILD_ID]
-        }
-      end
+        if @relation_ids.include?(relation[:REL_ID])
+          {
+            relation_id: relation[:REL_ID],
+            parent_id: relation[:PARENT_ID],
+            child_id: relation[:CHILD_ID]
+          }
+        end
+      end.compact
     end
 
     def table_name
