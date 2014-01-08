@@ -28,39 +28,15 @@ class Sense < ActiveRecord::Base
     end
 
     if options[:relations]
-      sense_relations =
-        relations.map { |r| r.as_json }
+      data[:relations] =
+        (relations.map { |r| r.as_json } +
+        synset.relations.map { |r| r.as_json }).
+        group_by { |r| r[:relation_id] }
 
-      synset_relations =
-        synset.relations.map { |r| r.as_json }
-
-      reverse_sense_relations =
-        reverse_relations.map { |r| r.as_json(:reverse => true) }
-
-      reverse_synset_relations =
-        synset.reverse_relations.map { |r| r.as_json(:reverse => true) }
-
-      synsets_hash = 
-        Hash[synset_relations.map { |r| [r[:relation_id], r[:synset]] }]
-
-      senses_hash = 
-        Hash[sense_relations.map { |r| [r[:relation_id], r[:sense]] }]
-
-      reverse_synsets_hash = 
-        Hash[reverse_synset_relations.map { |r| [r[:relation_id], r[:synset]] }]
-
-      reverse_senses_hash = 
-        Hash[reverse_sense_relations.map { |r| [r[:relation_id], r[:sense]] }]
-
-      data[:relations] = {
-        synsets: synsets_hash,
-        senses: senses_hash
-      }
-
-      data[:reverse_relations] = {
-        synsets: reverse_synsets_hash,
-        senses: reverse_senses_hash
-      }
+      data[:reverse_relations] =
+        (reverse_relations.map { |r| r.as_json(:reverse => true) } +
+        synset.reverse_relations.map { |r| r.as_json(:reverse => true) }).
+        group_by { |r| r[:relation_id] }
     end
 
     data

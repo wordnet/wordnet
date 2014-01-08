@@ -1,41 +1,31 @@
-.content-columns.columns ng-repeat="synset in synsets"
+.content-columns.columns ng-repeat="sense in senses"
   .content-column.column.column--left
     = render 'shared/list', direction: 'incoming'
 
   article.content-column.column.column--main
     h1.definition-header
-      | Właściwości synsetu
-      b< ng-if="synsets.length > 1"
-        | {{ $index + 1 }}&nbsp;z&nbsp;{{ synsets.length }}
+      | {{ sense.lemma }} ({{sense.sense_index}})
+      b< ng-if="senses.length > 1"
+        | {{ $index + 1 }}&nbsp;z&nbsp;{{ senses.length }}
 
     section.definition.definition--major
-      h1.definition__term ng-if="synset.children.length <= 1" Słowo
-      h1.definition__term ng-if="synset.children.length > 1" Synset
+      h1.definition__term ng-if="sense.synonyms.length <= 1" Synonim
+      h1.definition__term ng-if="sense.synonyms.length > 1" Synonimy
       ul.definition__content.definition__list
-        li.definition__list__item ng-repeat="child in synset.children"
-          a.item href="#" prevent-default="" ng-click="goTo(child.id)"
+        li.definition__list__item ng-repeat="synonym in sense.synonyms"
+          a.item href="#" prevent-default="" ng-click="loadSense(synonym.id)"
             i.item__lemma
-              | {{ child.lemma }}
-              span ng-if="child.position"
+              | {{ synonym.lemma }}
+              span ng-if="synonym.sense_index"
                 | &nbsp;
-                b.item__position ng-bind="child.position"
-            span ng-if="child.description"
+                b.item__position ng-bind="synonym.sense_index"
+            span ng-if="synonym.comment"
               span.u__hidden<> —
-              span.item__description ng-bind="child.description"
+              span.item__description ng-bind="synonym.comment"
 
-    section.definition
-      h1.definition__term ng-if="synset.definitions.length <= 1" Definicja
-      h1.definition__term ng-if="synset.definitions.length > 1" Definicje
-      ul.definition__content.definition__list
-        li.definition__list__item ng-repeat="d in synset.definitions" ng-bind="d"
-
-    dl.definition
-      dt.definition__term Komentarz
-      dd.definition__content ng-bind="synset.description"
-
-    dl.definition.definition--minor
+    /dl.definition.definition--minor
       dt.definition__term Źródło
-      dd.definition__content ng-bind="synset.source"
+      dd.definition__content ng-bind="sense.source"
 
   .content-column.column.column--right
     = render 'shared/list', direction: 'outgoing'

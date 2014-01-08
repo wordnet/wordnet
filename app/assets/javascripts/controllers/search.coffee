@@ -1,24 +1,24 @@
 App = angular.module('wordnet')
 
-App.controller 'SearchCtrl', ($scope, lexemes) ->
-  relations = {}
+App.filter "byRelationId",  ->
+  (collection) ->
+    _.memoize (collection) ->
+      _.groupBy collection, (item) ->
+        item.relation_id
 
-  $scope.lexemes = lexemes
+App.controller 'SearchCtrl', ($scope, getLexemes, getSense) ->
+  $scope.getLexemes = getLexemes
+  $scope.getSense = getSense
 
-  _(synset_relations).groupBy('direction').forIn (collection, direction) ->
-    relations[direction] = []
+  $scope.senses = []
 
-    _(collection).groupBy('name').forIn (collection, name) ->
-      relations[direction].push
-        name: name
-        children: _(collection).sortBy('lemma').pluck('related_to').value()
-        truncate_after: 3
+  $scope.onLexemeSelect = (lexeme) ->
+    # You want to fetch all of them, just sample
+    $scope.loadSense(lexeme.senses[0])
 
-  # Mimicking the case of multiple results on a single page
-  synset_data = _.extend(main_synset, senses: relations)
-  synsets = _.map([synset_data, synset_data], _.cloneDeep)
+  $scope.loadSense = (sense_id) ->
+    getSense(sense_id).then (sense) ->
+      $scope.senses = [sense]
 
-  $scope.synsets = synsets
-
-  $scope.goTo = (id) ->
-    console.log id
+  $scope.truncateAfter = (senses) ->
+    3

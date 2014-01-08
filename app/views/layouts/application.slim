@@ -20,8 +20,10 @@ html lang="pl" ng-app="wordnet"
             img src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Alabama.svg/45px-Flag_of_Alabama.svg.png"
               span bind-html-unsafe="match.model.lemma | typeaheadHighlight:query"
         input(type="search" ng-model="lexeme" typeahead-template-url="autocompleteTemplate.html"
-          typeahead="lexeme for lexemes in lexemes($viewValue)"
-          typeahead-wait-ms="200")
+          typeahead="lexeme for lexemes in getLexemes($viewValue)"
+          typeahead-wait-ms="200"
+          typeahead-editable="false"
+          typeahead-on-select="onLexemeSelect($item)")
 
 
         nav.column.column--right.u__text-right
