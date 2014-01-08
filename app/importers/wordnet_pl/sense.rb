@@ -10,14 +10,30 @@ module WordnetPl
       @connection[:lexicalunit].max(:ID)
     end
 
-    def process_entities!(entities)
-      lexemes = entities.map { |e| { lemma: e[:lexeme_id] } }
+    def process_entities!(senses)
+      lexemes = senses.map { |e| { lemma: e[:lexeme_id] } }
 
       persist_entities!("lexemes", lexemes, [:lemma])
 
-      entities = process_uuid_mappings(entities, :lexeme_id => { table: :lexemes, attribute: :lemma })
+      senses = process_uuid_mappings(senses, :lexeme_id => { table: :lexemes, attribute: :lemma })
+      senses = fill_indexes(senses)
 
-      persist_entities!("senses", entities, [:external_id])
+      persist_entities!("senses", senses, [:external_id])
+    end
+
+    def fill_indexes(senses)
+      rows = @connection[:unitandsynset].
+        select(:LEX_ID, :unitindex).
+        where(:LEX_ID => senses.map { |s| s[:external_id] }).
+        to_a
+
+      index_mapping = Hash[rows.map { |row| [row[:LEX_ID], row[:unitindex]] } ]
+
+      senses.each { |s|
+        s[:sense_index] = index_mapping[s[:external_id]].to_i + 1
+      }
+
+      senses
     end
 
     def load_entities(limit, offset)

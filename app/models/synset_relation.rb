@@ -18,16 +18,10 @@ class SynsetRelation < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    if options[:only_child]
-      {
-        child: child.as_json(:only_lemma => true),
-        relation_id: relation_id
-      }
-    elsif options[:only_parent]
-      {
-        parent: parent.as_json(:only_lemma => true),
-        relation_id: relation_id
-      }
+    if options[:reverse]
+      { relation_id: relation_id, synset: parent.as_json }
+    else
+      { relation_id: relation_id, synset: child.as_json }
     end
   end
 end

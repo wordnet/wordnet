@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140106213106) do
+ActiveRecord::Schema.define(version: 20140108142505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20140106213106) do
   end
 
   add_index "lexemes", ["lemma"], name: "index_lexemes_on_lemma", unique: true, using: :btree
+
+  create_table "relation_types", force: true do |t|
+    t.integer "parent_id"
+    t.string  "name"
+    t.string  "reverse_name"
+    t.text    "description"
+  end
 
   create_table "sense_relations", force: true do |t|
     t.uuid    "parent_id",   null: false
@@ -36,6 +43,7 @@ ActiveRecord::Schema.define(version: 20140106213106) do
     t.integer "domain_id"
     t.text    "comment"
     t.uuid    "lexeme_id"
+    t.integer "sense_index"
   end
 
   add_index "senses", ["external_id"], name: "index_senses_on_external_id", unique: true, using: :btree
@@ -50,9 +58,8 @@ ActiveRecord::Schema.define(version: 20140106213106) do
   add_index "synset_relations", ["parent_id", "child_id", "relation_id"], name: "synset_relations_idx", unique: true, using: :btree
 
   create_table "synset_senses", force: true do |t|
-    t.uuid    "synset_id",   null: false
-    t.uuid    "sense_id",    null: false
-    t.integer "sense_index"
+    t.uuid "synset_id", null: false
+    t.uuid "sense_id",  null: false
   end
 
   add_index "synset_senses", ["synset_id", "sense_id"], name: "index_synset_senses_on_synset_id_and_sense_id", unique: true, using: :btree
