@@ -9,12 +9,20 @@ html lang="pl" ng-app="wordnet"
     = javascript_include_tag 'application'
 
   body ng-controller="SearchCtrl"
+
     header.top
       .columns
         .column.column--left
           a.top__logo href="/" Polish Wordnet
         .column.column--main
-          input type="search"
+        script id="autocompleteTemplate.html" type="text/ng-template"
+          a
+            img src="http://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Alabama.svg/45px-Flag_of_Alabama.svg.png"
+              span bind-html-unsafe="match.model.lemma | typeaheadHighlight:query"
+        input(type="search" ng-model="lexeme" typeahead-template-url="autocompleteTemplate.html"
+          typeahead="lexeme for lexemes in lexemes($viewValue)"
+          typeahead-wait-ms="200")
+
 
         nav.column.column--right.u__text-right
           a href="/" O projekcie

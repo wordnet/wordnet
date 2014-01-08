@@ -1,5 +1,9 @@
-@app.controller 'SearchCtrl', ($scope) ->
+App = angular.module('wordnet')
+
+App.controller 'SearchCtrl', ($scope, lexemes) ->
   relations = {}
+
+  $scope.lexemes = lexemes
 
   _(synset_relations).groupBy('direction').forIn (collection, direction) ->
     relations[direction] = []

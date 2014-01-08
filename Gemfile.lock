@@ -159,6 +159,8 @@ GEM
       railties (= 4.0.2)
       sprockets-rails (~> 2.0.0)
     rails-assets-angular (1.2.7)
+    rails-assets-angular-bootstrap (0.9.0)
+      rails-assets-angular (>= 1)
     rails-assets-lodash (2.4.1)
     rails_12factor (0.0.2)
       rails_serve_static_assets
@@ -262,6 +264,7 @@ DEPENDENCIES
   quiet_assets (~> 1.0)
   rails (= 4.0.2)
   rails-assets-angular (~> 1.2.7)
+  rails-assets-angular-bootstrap
   rails-assets-lodash (~> 2.4)
   rails_12factor
   rspec-rails (~> 2.14)

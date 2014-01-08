@@ -21,6 +21,7 @@ gem 'compass-rails', '~> 1.1.3'
 # Rails Assets
 gem 'rails-assets-angular', '~> 1.2.7'
 gem 'rails-assets-lodash', '~> 2.4'
+gem 'rails-assets-angular-bootstrap'
 
 gem 'ohm'
 gem 'ohm-contrib'

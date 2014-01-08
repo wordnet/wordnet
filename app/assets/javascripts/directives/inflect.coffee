@@ -1,4 +1,6 @@
-@app.directive 'inflect', ->
+App = angular.module('wordnet')
+
+App.directive 'inflect', ->
   restrict: 'E'
   replace: true
   link: (scope, element, attributes) ->
