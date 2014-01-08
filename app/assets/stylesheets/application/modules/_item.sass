@@ -6,12 +6,17 @@
 .item
   @extend %item
   @extend %word-wrap
-  color: $secondary-link-color
 
 .item__lemma
   @extend %item
-  color: $primary-link-color
-  font-weight: 700
+  font-weight: 600
+
+  a &
+    color: $primary-link-color
+
+  .header &
+    margin-left: -1px
+    color: $default-color
 
 .item__position
   display: inline-block
@@ -28,6 +33,15 @@
   text-align: center
   vertical-align: middle
 
+  .header &
+    font-size: 0.5em
+    font-weight: 700 !important
+    top: 0
+
 .item__description
   @extend %item
   padding-top: 0.1rem
+  color: $secondary-link-color
+
+.item__description--inline
+  display: inline

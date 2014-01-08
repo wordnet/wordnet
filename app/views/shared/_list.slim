@@ -1,12 +1,10 @@
 section.list class="list--#{direction}" ng-repeat="(relation_id, senses) in sense.relations"
   h1.list__header
     | {{ relations[relation_id].name }}
-    inflect<(word="połączenie"
-      count="{{ senses.length }}"
-      template="<b>${count}&nbsp;${word}</b>")
+    inflect< word="połączenie" count="{{ senses.length }}" template="<b class='list__header__aux'>${count}&nbsp;${word}</b>"
 
-  ul
-    li ng-repeat="sense in senses | limitTo: truncateAfter(senses)"
+  ul ng-init="truncate_after = 3"
+    li ng-repeat="sense in senses | limitTo:truncate_after"
       a.item.list__item.list__item--arrow href="#" prevent-default="" ng-click="loadSense(sense.id)"
         i.item__lemma
           | {{ sense.target.lemma }}
@@ -17,6 +15,6 @@ section.list class="list--#{direction}" ng-repeat="(relation_id, senses) in sens
           span.u__hidden<> —
           span.item__description ng-bind="sense.target.comment"
 
-    li ng-show="truncateAfter(senses) < senses.length"
-      a.list__item.list__item--more href="#" prevent-default="" ng-click="list.truncate_after = 100"
-        inflect word="pozostały" count="{{ list.children.length - list.truncate_after }}" template="Pokaż ${word}&nbsp;${count}"
+    li ng-show="truncate_after < senses.length"
+      a.list__item.list__item--more href="#" prevent-default="" ng-click="truncate_after = truncate_after + 100"
+        inflect word="pozostały" count="{{ senses.length - truncate_after }}" template="Pokaż ${word}&nbsp;${count}"
