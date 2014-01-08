@@ -3,6 +3,11 @@ module API
     include API::Base
 
     include Grape::Kaminari
+
+    before do
+      header['Access-Control-Allow-Origin'] = '*'
+      header['Access-Control-Request-Method'] = '*'
+    end
     
     resource :relations do
       get do
