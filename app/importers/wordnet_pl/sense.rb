@@ -27,13 +27,28 @@ module WordnetPl
         where('ID >= ? AND ID < ?', offset, offset + limit).to_a
 
       raw.map do |lemma|
+
         {
           external_id: lemma[:ID],
           domain_id: lemma[:domain],
           lexeme_id: lemma[:lemma],
-          comment: lemma[:comment] == "brak danych" ? nil : lemma[:comment].presence
+          comment: process_comment(lemma[:comment])
         }
       end
+    end
+
+    private
+
+    def process_comment(comment)
+      return nil if comment.blank?
+      return nil if comment == "brak danych"
+      return nil if comment.include?("{")
+      return nil if comment.include?("#")
+      return nil if comment.include?("WSD")
+      return nil if comment.size < 3
+      return nil if comment == "AOds"
+      return nil unless comment.match(/[a-z]/)
+      comment
     end
 
   end
