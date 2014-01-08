@@ -1,0 +1,32 @@
+.dropdown-field
+  display: block
+  width: 100%
+  font: inherit
+
+.dropdown-menu
+  position: absolute
+  left: 0
+  right: 0
+  background: $column-background
+  border-radius: 3px
+  box-shadow: 0 0.1rem 1rem rgba($default-color, 0.2)
+  overflow: hidden
+
+.dropdown-menu__item
+  display: block !important
+  padding: 0.65rem 0 0.65rem 1rem
+  color: $secondary-link-color
+  font-weight: normal !important
+  line-height: 1
+  overflow: hidden
+
+  .active > &
+    background: $primary-link-color
+    color: darken($column-background, 10%)
+
+    b, strong
+      color: #fff
+
+  b, strong
+    font-weight: 600
+    color: $default-color

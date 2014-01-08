@@ -1,7 +1,7 @@
 section.list class="list--#{direction}" ng-repeat="(relation_id, senses) in sense.relations"
   h1.list__header
     | {{ relations[relation_id].name }}
-    inflect< word="połączenie" count="{{ senses.length }}" template="<b class='list__header__aux'>${count}&nbsp;${word}</b>"
+    inflect< ng-if="senses.length > 1" word="połączenie" count="{{ senses.length }}" template="<b class='list__header__aux'>${count}&nbsp;${word}</b>"
 
   ul ng-init="truncate_after = 3"
     li ng-repeat="sense in senses | limitTo:truncate_after"

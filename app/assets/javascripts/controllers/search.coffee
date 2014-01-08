@@ -23,6 +23,3 @@ App.controller 'SearchCtrl', ($scope, getLexemes, getSense, getRelations) ->
   $scope.loadSense = (sense_id) ->
     getSense(sense_id).then (sense) ->
       $scope.senses = [sense]
-
-  $scope.truncateAfter = (senses) ->
-    3

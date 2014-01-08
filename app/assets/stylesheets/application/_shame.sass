@@ -17,14 +17,19 @@
 
 .column--left,
 .column--right
-  width: 25%
+  width: $column-width
 
   .content-columns &
-    background: #f8f8f8
+    background: $column-background
 
 .column--main
   padding-right: 4rem
   padding-left: 4rem
+  min-height: 100%
+
+  .top &
+    position: relative
+    min-height: auto
 
 .top
   position: fixed
@@ -34,7 +39,6 @@
   left: 0
   height: $top-height
   background: #525252
-  // overflow: hidden
 
   & + *
     margin-top: $top-height
@@ -46,7 +50,7 @@
   .column--right
     padding-right: 2 * $list-horizontal-padding
 
-  a
+  a:not(.dropdown-menu__item)
     display: inline-block
     color: $secondary-link-color
     font-weight: 600
