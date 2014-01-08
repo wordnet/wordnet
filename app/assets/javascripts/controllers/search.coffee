@@ -6,11 +6,15 @@ App.filter "byRelationId",  ->
       _.groupBy collection, (item) ->
         item.relation_id
 
-App.controller 'SearchCtrl', ($scope, getLexemes, getSense) ->
+App.controller 'SearchCtrl', ($scope, getLexemes, getSense, getRelations) ->
   $scope.getLexemes = getLexemes
   $scope.getSense = getSense
 
   $scope.senses = []
+
+  $scope.loadRelations = ->
+    getRelations().then (relations) ->
+      $scope.relations = _.indexBy(relations, (r) -> r.id)
 
   $scope.onLexemeSelect = (lexeme) ->
     # You want to fetch all of them, just sample

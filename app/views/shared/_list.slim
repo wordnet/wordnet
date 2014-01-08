@@ -1,6 +1,6 @@
 section.list class="list--#{direction}" ng-repeat="(relation_id, senses) in sense.relations"
   h1.list__header
-    | {{ relation_id }}
+    | {{ relations[relation_id].name }}
     inflect<(word="połączenie"
       count="{{ senses.length }}"
       template="<b>${count}&nbsp;${word}</b>")
