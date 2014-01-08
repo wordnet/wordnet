@@ -20,6 +20,7 @@ class Sense < ActiveRecord::Base
       :id => id,
       :lemma => lexeme.lemma,
       :sense_index => sense_index,
+      :language => language,
       :comment => comment || synset.definition || synset.comment || ""
     }
 

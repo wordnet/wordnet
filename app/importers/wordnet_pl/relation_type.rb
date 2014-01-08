@@ -38,7 +38,7 @@ module WordnetPl
       reverses = {}
 
       two_ways.each do |relation|
-        unless reverses.has_key?(relation[:id])
+        unless reverses[relation[:reverse_id]] || reverses[relation[:id]]
           relation[:reverse_name] = by_id[relation[:reverse_id]][:name]
           reverses[relation[:id]] = relation
         end

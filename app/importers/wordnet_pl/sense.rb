@@ -11,7 +11,10 @@ module WordnetPl
     end
 
     def process_entities!(senses)
-      lexemes = senses.map { |e| { lemma: e[:lexeme_id] } }
+      lexemes = senses.map { |e| {
+        lemma: e[:lexeme_id],
+        language: e[:language]
+      } }
 
       persist_entities!("lexemes", lexemes, [:lemma])
 
@@ -38,7 +41,7 @@ module WordnetPl
 
     def load_entities(limit, offset)
       raw = @connection[:lexicalunit].
-        select(:ID, :comment, :domain, :lemma).
+        select(:ID, :comment, :domain, :lemma, :project).
         order(:ID).
         where('ID >= ? AND ID < ?', offset, offset + limit).to_a
 
@@ -48,7 +51,8 @@ module WordnetPl
           external_id: lemma[:ID],
           domain_id: lemma[:domain],
           lexeme_id: lemma[:lemma],
-          comment: process_comment(lemma[:comment])
+          comment: process_comment(lemma[:comment]),
+          language: lemma[:project] > 0 ? 'pl_PL' : 'en_GB'
         }
       end
     end
