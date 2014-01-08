@@ -3,16 +3,24 @@
     = render 'shared/list', direction: 'incoming'
 
   article.content-column.column.column--main
-    h1.definition-header
-      | {{ sense.lemma }} ({{sense.sense_index}})
-      b< ng-if="senses.length > 1"
-        | {{ $index + 1 }}&nbsp;z&nbsp;{{ senses.length }}
+    h1.header.item.definition-header
+      i.item__lemma
+        | {{ sense.lemma }}
+        span ng-if="sense.sense_index"
+          | &nbsp;
+          b.item__position ng-bind="sense.sense_index"
+
+    dl.definition.definition--aux ng-if="sense.comment"
+      dt.definition__term
+        span.u__hidden Definicja
+      dd.definition__content
+        span.item__description.item__description--inline ng-bind="sense.comment"
 
     section.definition.definition--major
       h1.definition__term ng-if="sense.synonyms.length <= 1" Synonim
       h1.definition__term ng-if="sense.synonyms.length > 1" Synonimy
       ul.definition__content.definition__list
-        li.definition__list__item ng-repeat="synonym in sense.synonyms"
+        li.definition__list__item ng-repeat="synonym in sense.synonyms" ng-if="synonym.id != sense.id"
           a.item href="#" prevent-default="" ng-click="loadSense(synonym.id)"
             i.item__lemma
               | {{ synonym.lemma }}
