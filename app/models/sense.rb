@@ -21,6 +21,7 @@ class Sense < ActiveRecord::Base
       :lemma => lexeme.lemma,
       :sense_index => sense_index,
       :language => language,
+      :domain_id => domain_id,
       :comment => comment || synset.definition || synset.comment || ""
     }
 

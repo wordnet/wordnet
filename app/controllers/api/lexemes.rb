@@ -15,6 +15,12 @@ module API
       end
     end
 
+    resource :domains do
+      get do
+        Domain.all
+      end
+    end
+
     resource :senses do
       get '/:sense_id' do
         Sense.find(params[:sense_id]).as_json(
