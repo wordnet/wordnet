@@ -3,19 +3,13 @@ class Sense < ActiveRecord::Base
   include Exportable
 
   belongs_to :lexeme
+  belongs_to :synset
 
   has_many :relations, :foreign_key => "parent_id",
     :class_name => "SenseRelation"
 
   has_many :reverse_relations, :foreign_key => "child_id",
     :class_name => "SenseRelation"
-
-  has_many :synset_senses
-  has_many :synsets, through: :synset_senses
-
-  def synset
-    synsets.first
-  end
 
   def as_json(options = {})
     data =  {

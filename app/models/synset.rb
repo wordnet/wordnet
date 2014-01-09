@@ -2,8 +2,7 @@ class Synset < ActiveRecord::Base
 
   include Exportable
 
-  has_many :senses, :through => :synset_senses
-  has_many :synset_senses
+  has_many :senses
 
   has_many :relations, :foreign_key => "parent_id",
     :class_name => "SynsetRelation"

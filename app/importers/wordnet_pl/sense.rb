@@ -12,28 +12,34 @@ module WordnetPl
 
     def process_entities!(senses)
       lexemes = senses.map { |e| {
-        lemma: e[:lemma],
-        language: e[:language]
+        lemma: e[:lemma]
       } }
 
       persist_entities!("lexemes", lexemes, [:lemma])
 
-      senses = process_uuid_mappings(senses, :lexeme_id => { table: :lexemes, attribute: :lemma })
       senses = fill_indexes(senses)
+
+      senses = process_uuid_mappings(
+        senses,
+        :lexeme_id => { table: :lexemes, attribute: :lemma },
+        :synset_id => { table: :synsets, attribute: :external_id }
+      )
 
       persist_entities!("senses", senses, [:external_id])
     end
 
     def fill_indexes(senses)
       rows = @connection[:unitandsynset].
-        select(:LEX_ID, :unitindex).
+        select(:LEX_ID, :SYN_ID, :unitindex).
         where(:LEX_ID => senses.map { |s| s[:external_id] }).
         to_a
 
       index_mapping = Hash[rows.map { |row| [row[:LEX_ID], row[:unitindex]] } ]
+      synset_mapping = Hash[rows.map { |row| [row[:LEX_ID], row[:SYN_ID]] } ]
 
       senses.each { |s|
         s[:sense_index] = index_mapping[s[:external_id]].to_i + 1
+        s[:synset_id] = synset_mapping[s[:external_id]]
       }
 
       senses
