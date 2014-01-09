@@ -1,3 +1,9 @@
+.content-columns.content-columns--blank.columns ng-if="!senses.length"
+  .content-column.column.column--left
+  p.column.column--main.u__dim
+    | Użyj wyszukiwarki by&nbsp;rozpocząć.
+  .content-column.column.column--right
+
 .content-columns.columns ng-repeat="sense in senses"
   .content-column.column.column--left
     = render 'shared/list', direction: 'incoming'
