@@ -5,14 +5,17 @@
   padding: 0.3rem 0.6rem 0.35rem
   border: none
   border-radius: 999em
+  color: $secondary-link-color
   font-size: 1rem
   font-family: inherit
   font-weight: 600
   line-height: 1 !important
+  transition: $default-transition
 
   &:focus
     outline: none
     background-color: #ffefda
+    color: $default-color
 
 .dropdown-field--search
   $image: "loupe@2x.png"
@@ -24,7 +27,6 @@
   background-repeat: no-repeat
   background-position: 0.75rem center
   padding-left: 1.7rem
-
 
 .dropdown-menu
   position: absolute
@@ -43,6 +45,7 @@
   font-weight: normal !important
   line-height: 1
   overflow: hidden
+  transition: none
 
   .active > &
     background: $primary-link-color

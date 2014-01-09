@@ -44,6 +44,13 @@
     background-size: $image-width $image-height
     vertical-align: middle
 
+a.list__item--more
+  &:hover
+    color: darken($secondary-link-color, 15%)
+
+  &:active
+    color: $active-link-color
+
 .list__header
   @extend .list__item
   padding-top: 0
