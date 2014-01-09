@@ -2,6 +2,8 @@ App = angular.module('wordnet')
 
 App.filter 'tweakRelationName', ->
   (name) ->
+    return 'Nieoznaczona relacja' unless name
+
     n = ('' + name).replace(/_+/g, ' ')
     n.substr(0, 1).toUpperCase() + n.substr(1)
 
