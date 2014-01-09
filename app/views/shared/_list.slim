@@ -1,6 +1,8 @@
-section.list class="list--#{direction}" ng-repeat="(relation_id, senses) in sense.relations"
+- prefix = direction == 'outgoing' ? 'reverse_' : ''
+
+section.list class="list--#{direction}" ng-repeat="(relation_id, senses) in sense.#{prefix}relations"
   h1.list__header
-    | {{ relations[relation_id].name }}
+    | {{ relations[relation_id].#{prefix}name | tweakRelationName }}
     inflect< ng-if="senses.length > 1" word="połączenie" count="{{ senses.length }}" template="<b class='list__header__aux'>${count}&nbsp;${word}</b>"
 
   ul ng-init="truncate_after = 3"

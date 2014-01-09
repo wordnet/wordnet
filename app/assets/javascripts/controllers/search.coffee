@@ -1,10 +1,11 @@
 App = angular.module('wordnet')
 
-App.filter "byRelationId",  ->
-  (collection) ->
-    _.memoize (collection) ->
-      _.groupBy collection, (item) ->
-        item.relation_id
+App.filter 'tweakRelationName', ->
+  (name) ->
+    console.log name
+
+    n = ('' + name).replace(/_+/g, ' ')
+    n.substr(0, 1).toUpperCase() + n.substr(1)
 
 App.controller 'SearchCtrl', ($scope, getLexemes, getSense, getRelations) ->
   $scope.getLexemes = getLexemes
