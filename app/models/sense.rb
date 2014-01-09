@@ -1,5 +1,7 @@
 class Sense < ActiveRecord::Base
 
+  include Exportable
+
   belongs_to :lexeme
 
   has_many :relations, :foreign_key => "parent_id",
@@ -42,6 +44,30 @@ class Sense < ActiveRecord::Base
     end
 
     data
+  end
+
+  def self.export_index(connection)
+    connection.create_schema_index(self.name, "id")
+  end
+
+  def self.export_query
+    "MERGE (n:#{self.name} { id: {id} }) " +
+    "ON CREATE SET " +
+    "n.domain_id = {domain_id}, " +
+    "n.comment = {comment}, " +
+    "n.sense_index = {sense_index}, " +
+    "n.language = {language}, " +
+    "n.lemma = {lemma} " +
+    "ON MATCH SET " +
+    "n.domain_id = {domain_id}, " +
+    "n.comment = {comment}, " +
+    "n.sense_index = {sense_index}, " +
+    "n.language = {language}, " +
+    "n.lemma = {lemma}"
+  end
+
+  def self.export_properties(entity)
+    entity.as_json.except(:external_id)
   end
 
 end

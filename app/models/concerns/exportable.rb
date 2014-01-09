@@ -6,7 +6,7 @@ module Exportable
     def neo4j_export!(options = {}, connection = Neography::Rest.new)
       batch_size = options.fetch(:batch_size, 500)
 
-      query = self.export_query # cache
+      query = self.export_query.freeze
 
       progressbar = ProgressBar.create(
         :title => self.to_s.split('::').last,
@@ -19,7 +19,7 @@ module Exportable
         self.export_index(connection)
       end
 
-      pool = Thread.pool(2)
+      pool = Thread.pool(4)
 
       mutex = Mutex.new
 

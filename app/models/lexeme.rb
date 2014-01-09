@@ -1,6 +1,8 @@
 class Lexeme < ActiveRecord::Base
   has_many :senses
 
+  include Exportable
+
   def as_json(options = {})
     {
       lemma: lemma,

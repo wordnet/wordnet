@@ -121,6 +121,8 @@ GEM
       rubyzip (~> 1.0.0)
     nest (1.1.2)
       redis
+    ngmin-rails (0.4.0)
+      rails (>= 3.1)
     ohm (1.3.2)
       nest (~> 1.0)
       redis
@@ -163,6 +165,7 @@ GEM
     rails-assets-angular (1.2.7)
     rails-assets-angular-bootstrap (0.9.0)
       rails-assets-angular (>= 1)
+    rails-assets-angular-cache (2.2.0)
     rails-assets-lodash (2.4.1)
     rails_12factor (0.0.2)
       rails_serve_static_assets
@@ -257,6 +260,7 @@ DEPENDENCIES
   mysql2
   neo4j-cypher
   neography
+  ngmin-rails
   ohm
   ohm-contrib
   pg
@@ -268,6 +272,7 @@ DEPENDENCIES
   rails (= 4.0.2)
   rails-assets-angular (~> 1.2.7)
   rails-assets-angular-bootstrap
+  rails-assets-angular-cache
   rails-assets-lodash (~> 2.4)
   rails_12factor
   rspec-rails (~> 2.14)
