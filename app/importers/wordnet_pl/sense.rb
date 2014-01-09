@@ -12,7 +12,7 @@ module WordnetPl
 
     def process_entities!(senses)
       lexemes = senses.map { |e| {
-        lemma: e[:lexeme_id],
+        lemma: e[:lemma],
         language: e[:language]
       } }
 
@@ -51,6 +51,7 @@ module WordnetPl
           external_id: lemma[:ID],
           domain_id: lemma[:domain],
           lexeme_id: lemma[:lemma],
+          lemma: lemma[:lemma],
           comment: process_comment(lemma[:comment]),
           language: lemma[:project] > 0 ? 'pl_PL' : 'en_GB'
         }

@@ -18,11 +18,11 @@ class Sense < ActiveRecord::Base
   def as_json(options = {})
     data =  {
       :id => id,
-      :lemma => lexeme.lemma,
+      :lemma => lemma,
       :sense_index => sense_index,
       :language => language,
       :domain_id => domain_id,
-      :comment => comment || synset.definition || synset.comment || ""
+      :comment => comment
     }
 
     if options[:synonyms]

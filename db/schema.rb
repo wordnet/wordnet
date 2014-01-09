@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140108223237) do
+ActiveRecord::Schema.define(version: 20140109010109) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,10 +47,12 @@ ActiveRecord::Schema.define(version: 20140108223237) do
     t.uuid    "lexeme_id"
     t.integer "sense_index"
     t.string  "language"
+    t.string  "lemma"
   end
 
   add_index "senses", ["external_id"], name: "index_senses_on_external_id", unique: true, using: :btree
   add_index "senses", ["language"], name: "index_senses_on_language", using: :btree
+  add_index "senses", ["lemma"], name: "index_senses_on_lemma", using: :btree
   add_index "senses", ["lexeme_id"], name: "index_senses_on_lexeme_id", using: :btree
 
   create_table "synset_relations", force: true do |t|
