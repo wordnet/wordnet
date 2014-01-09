@@ -1,12 +1,36 @@
 .dropdown-field
+  -webkit-appearance: none
   display: block
   width: 100%
-  font: inherit
+  padding: 0.3rem 0.6rem 0.35rem
+  border: none
+  border-radius: 999em
+  font-size: 1rem
+  font-family: inherit
+  font-weight: 600
+  line-height: 1 !important
+
+  &:focus
+    outline: none
+    background-color: #ffefda
+
+.dropdown-field--search
+  $image: "loupe@2x.png"
+  $image-width: image-width($image) / 2
+  $image-height: image-height($image) / 2
+
+  background-image: asset-data-url($image)
+  background-size: $image-width $image-height
+  background-repeat: no-repeat
+  background-position: 0.75rem center
+  padding-left: 1.7rem
+
 
 .dropdown-menu
   position: absolute
   left: 0
   right: 0
+  margin-top: 1px
   background: $column-background
   border-radius: 3px
   box-shadow: 0 0.1rem 1rem rgba($default-color, 0.2)
