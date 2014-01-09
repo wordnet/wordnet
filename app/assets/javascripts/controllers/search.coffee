@@ -18,9 +18,21 @@ App.controller 'SearchCtrl', ($scope, getLexemes, getSense, getRelations) ->
       $scope.relations = _.indexBy(relations, (r) -> r.id)
 
   $scope.onLexemeSelect = (lexeme) ->
-    # You want to fetch all of them, just sample
-    $scope.loadSense(lexeme.senses[0])
+    $scope.senses = []
+    $scope.pendingLoad = lexeme.senses
+    $scope.pushSense($scope.pendingLoad.shift())
+
+  $scope.pushSense = (sense_id) ->
+    getSense(sense_id).then (sense) ->
+      $scope.senses.push(sense)
+      if nextPending = $scope.pendingLoad.shift()
+        $scope.pushSense(nextPending)
 
   $scope.loadSense = (sense_id) ->
     getSense(sense_id).then (sense) ->
       $scope.senses = [sense]
+
+  $scope.onSenseSelect = (sense_id) ->
+    $scope.senses = []
+    $scope.loadSense(sense_id)
+

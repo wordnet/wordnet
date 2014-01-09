@@ -1,5 +1,7 @@
 class SynsetRelation < ActiveRecord::Base
 
+  include Exportable
+
   belongs_to :parent, :class_name => "Synset"
   belongs_to :child, :class_name => "Synset"
 

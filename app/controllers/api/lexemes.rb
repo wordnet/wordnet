@@ -8,7 +8,14 @@ module API
       header['Access-Control-Allow-Origin'] = '*'
       header['Access-Control-Request-Method'] = '*'
     end
-    
+
+    resource :graph do
+      get '/:query' do
+        # neo.execute_query('match (s:Sense)-[:belongs_to]->(t:Synset)<-[:belongs_to]-(s2:Sense) where s.id = "abca8066-774b-11e3-8eaa-e7fb1d35049d" return s2.lemma, s2.comment, s2.sense_index, s2.language')
+        neo = Neography::Rest.new
+      end
+    end
+
     resource :relations do
       get do
         RelationType.all

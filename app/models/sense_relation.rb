@@ -1,5 +1,7 @@
 class SenseRelation < ActiveRecord::Base
 
+  include Exportable
+
   belongs_to :parent, :class_name => "Sense"
   belongs_to :child, :class_name => "Sense"
 
@@ -10,7 +12,7 @@ class SenseRelation < ActiveRecord::Base
   def self.export_query
     "MATCH (a:Sense { id: {parent_id} }), " +
           "(b:Sense { id: {child_id} }) " +
-    "MERGE (a)-[r:relation { id: {relation_id} }]->(b)"
+    "MERGE (a)-[r:relation { id: {relation_id}, sense: true }]->(b)"
   end
 
   def self.export_properties(entity)

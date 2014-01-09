@@ -1,5 +1,7 @@
 class SynsetSense < ActiveRecord::Base
 
+  include Exportable
+
   belongs_to :synset
   belongs_to :sense
 

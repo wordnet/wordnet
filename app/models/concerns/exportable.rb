@@ -19,7 +19,7 @@ module Exportable
         self.export_index(connection)
       end
 
-      pool = Thread.pool(4)
+      pool = Thread.pool(2)
 
       mutex = Mutex.new
 

@@ -1,21 +1,21 @@
 - prefix = direction == 'outgoing' ? 'reverse_' : ''
 
-section.list class="list--#{direction}" ng-repeat="(relation_id, senses) in sense.#{prefix}relations"
+section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{prefix}relations"
   h1.list__header
-    | {{ relations[relation_id].#{prefix}name | tweakRelationName }}
-    inflect< ng-if="senses.length > 1" word="połączenie" count="{{ senses.length }}" template="<b class='list__header__aux'>${count}&nbsp;${word}</b>"
+    | {{ (relations[relation_type.relation_id].#{prefix}name  || relations[relation_type.relation_id].name) | tweakRelationName }}
+    inflect< ng-if="relation_type.senses.length > 1" word="połączenie" count="{{ relation_type.senses.length }}" template="<b class='list__header__aux'>${count}&nbsp;${word}</b>"
 
   ul ng-init="truncate_after = 3"
-    li ng-repeat="sense in senses | limitTo:truncate_after"
-      a.item.list__item.list__item--arrow href="#" prevent-default="" ng-click="loadSense(sense.target.id)"
+    li ng-repeat="sense in relation_type.senses | limitTo:truncate_after"
+      a.item.list__item.list__item--arrow href="#" prevent-default="" ng-click="loadSense(sense.id)"
         i.item__lemma
-          | {{ sense.target.lemma }}
-          span ng-if="sense.target.sense_index"
+          | {{ sense.lemma }}
+          span ng-if="sense.sense_index"
             | &nbsp;
-            b.item__position ng-bind="sense.target.sense_index"
-        span ng-if="sense.target.comment"
+            b.item__position ng-bind="sense.sense_index"
+        span ng-if="sense.comment"
           span.u__hidden<> —
-          span.item__description ng-bind="sense.target.comment"
+          span.item__description ng-bind="sense.comment"
 
     li ng-show="truncate_after < senses.length"
       a.list__item.list__item--more href="#" prevent-default="" ng-click="truncate_after = truncate_after + 100"
