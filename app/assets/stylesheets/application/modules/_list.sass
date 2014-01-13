@@ -25,6 +25,8 @@
     padding-right: $list-horizontal-padding
 
 .list__item--more
+  padding-top: round($list-vertical-padding / 2)
+  padding-bottom: round($list-vertical-padding / 2)
   color: $secondary-link-color
   font-size: 0.8em
   font-weight: 600
@@ -35,7 +37,8 @@
     $image-width: image-width($image) / 2
     $image-height: image-height($image) / 2
 
-    +pseudo(inline-block)
+    content: ""
+    display: inline-block
     width: round($image-width * 1.4)
     height: $image-height
     position: relative
@@ -62,4 +65,3 @@ a.list__item--more
   .list__header__aux
     font-weight: 300
     color: $secondary-link-color
-

@@ -1,11 +1,12 @@
 - prefix = direction == 'outgoing' ? 'reverse_' : ''
 
-section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{prefix}relations"
+section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{prefix}relations" ng-init="count = relation_type.senses.length"
   h1.list__header
     | {{ relations[relation_type.relation_id] | getRelationName:'#{direction}' }}
-    inflect< ng-if="relation_type.senses.length > 1" word="połączenie" count="{{ relation_type.senses.length }}" template="<b class='list__header__aux'>${count}&nbsp;${word}</b>"
+    b.list__header__aux< ng-if="count > 1"
+      | {{ count }}&nbsp;{{ 'połączenie' | inflect:count }}
 
-  ul ng-init="truncate_after = 3"
+  ul ng-init="truncate_after = 2"
     li ng-repeat="sense in relation_type.senses | limitTo:truncate_after"
       a.item.list__item.list__item--arrow href="#" prevent-default="" ng-click="loadSense(sense.id)"
         i.item__lemma
@@ -17,6 +18,6 @@ section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{pref
           span.u__hidden<> —
           span.item__description ng-bind="sense.comment"
 
-    li ng-show="truncate_after < senses.length"
-      a.list__item.list__item--more href="#" prevent-default="" ng-click="truncate_after = truncate_after + 100"
-        inflect word="pozostały" count="{{ senses.length - truncate_after }}" template="Pokaż ${word}&nbsp;${count}"
+    li ng-show="truncate_after < count"
+      a.list__item.list__item--more href="" ng-click="truncate_after = truncate_after * 100"
+        | Pokaż {{ 'pozostały' | inflect:(count - truncate_after) }}
