@@ -34,7 +34,7 @@
       ul.definition__content.definition__list
         li.definition__list__item ng-repeat="synonym in sense.synonyms" ng-if="synonym.id != sense.id"
           a.item href="#" prevent-default="" ng-click="loadSense(synonym.id)"
-            i.item__lemma
+            b.item__lemma
               | {{ synonym.lemma }}
               span ng-if="synonym.sense_index"
                 | &nbsp;

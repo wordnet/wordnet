@@ -2,7 +2,7 @@
 
 section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{prefix}relations"
   h1.list__header
-    | {{ (relations[relation_type.relation_id].#{prefix}name  || relations[relation_type.relation_id].name) | tweakRelationName }}
+    | {{ relations[relation_type.relation_id] | getRelationName:'#{direction}' }}
     inflect< ng-if="relation_type.senses.length > 1" word="połączenie" count="{{ relation_type.senses.length }}" template="<b class='list__header__aux'>${count}&nbsp;${word}</b>"
 
   ul ng-init="truncate_after = 3"

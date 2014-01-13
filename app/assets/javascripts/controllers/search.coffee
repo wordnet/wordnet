@@ -1,11 +1,21 @@
 App = angular.module('wordnet')
 
-App.filter 'tweakRelationName', ->
-  (name) ->
-    return 'Nieoznaczona relacja' unless name
+App.filter 'getRelationName', ->
+  toString = (value) ->
+    '' + (value || '')
 
-    n = ('' + name).replace(/_+/g, ' ')
+  tweak = (name) ->
+    n = toString(name).replace(/_+/g, ' ')
     n.substr(0, 1).toUpperCase() + n.substr(1)
+
+  (relation, direction) ->
+    name = tweak(relation.name)
+    reverse_name = tweak(relation.reverse_name)
+    direction = toString(direction).toLowerCase()
+
+    return name unless direction == 'outgoing'
+    return reverse_name if reverse_name
+    "← (#{name || 'Relacja nieoznaczona'})"
 
 App.controller 'SearchCtrl', ($scope, getLexemes, getSense, getRelations) ->
   $scope.getLexemes = getLexemes

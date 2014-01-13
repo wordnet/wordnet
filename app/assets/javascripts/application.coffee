@@ -1,12 +1,10 @@
 #= require lodash
-#= require data
 #= require angular
 #= require angular-bootstrap
 #= require_self
 #= require_tree ./controllers
 #= require_tree ./directives
 
-# DOMAIN = "http://8cca7fb.ngrok.com"
 DOMAIN = "http://localhost:3000"
 
 App = angular.module('wordnet', ['ui.bootstrap'])
