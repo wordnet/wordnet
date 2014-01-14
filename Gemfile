@@ -24,6 +24,7 @@ gem 'rails-assets-angular', '~> 1.2.7'
 gem 'rails-assets-lodash', '~> 2.4'
 gem 'rails-assets-angular-bootstrap'
 gem 'rails-assets-angular-cache'
+gem 'rails-assets-open-sans-fontface'
 
 gem 'ngmin-rails'
 
