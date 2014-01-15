@@ -9,6 +9,52 @@ class Sense < ActiveRecord::Base
   has_many :reverse_relations, :foreign_key => "child_id",
     :class_name => "SenseRelation"
 
+  def fetch_relations
+    neo = Neography::Rest.new
+    query = """
+      match (s:Singleton{ id: {sense_id} }),
+            (s-[:relation*0..1 { weight: 0 }]->(h:Synset)), 
+            (h-[r:relation { weight: 1 }]->(i:Synset)),
+            (i-[r2:synset_sense]->(target:Sense))
+      return {
+        relation_id: r.id,
+        senses: collect({
+          id: target.id,
+          lemma: target.lemma,
+          comment: target.comment,
+          sense_index: target.sense_index
+        })
+      }
+    """.strip_heredoc
+
+    neo.execute_query(
+      query, sense_id: id
+    )["data"].map(&:first)
+  end
+
+  def fetch_reverse_relations
+    neo = Neography::Rest.new
+    query = """
+      match (s:Singleton{ id: {sense_id} }),
+            (s-[:relation*0..1 { weight: 0 }]->(h:Synset)), 
+            (h<-[r:relation { weight: 1 }]-(i:Synset)),
+            (i-[r2:synset_sense]->(target:Sense))
+      return {
+        relation_id: r.id,
+        senses: collect({
+          id: target.id,
+          lemma: target.lemma,
+          comment: target.comment,
+          sense_index: target.sense_index
+        })
+      }
+    """.strip_heredoc
+
+    neo.execute_query(
+      query, sense_id: id
+    )["data"].map(&:first)
+  end
+
   def as_json(options = {})
     data =  {
       :id => id,
@@ -24,15 +70,8 @@ class Sense < ActiveRecord::Base
     end
 
     if options[:relations]
-      data[:relations] =
-        (relations.map { |r| r.as_json } +
-        synset.relations.map { |r| r.as_json }).
-        group_by { |r| r[:relation_id] }
-
-      data[:reverse_relations] =
-        (reverse_relations.map { |r| r.as_json(:reverse => true) } +
-        synset.reverse_relations.map { |r| r.as_json(:reverse => true) }).
-        group_by { |r| r[:relation_id] }
+      data[:relations] = fetch_relations
+      data[:reverse_relations] = fetch_reverse_relations
     end
 
     data

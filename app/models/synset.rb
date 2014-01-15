@@ -11,12 +11,4 @@ class Synset < ActiveRecord::Base
   def as_json(options = {})
     senses.order(:sense_index).first.as_json
   end
-
-  def export_query
-    "MERGE (n:#{self.name} { id: {id} })"
-  end
-
-  def export_properties(entity)
-    { id: entity.id }
-  end
 end
