@@ -22,3 +22,20 @@
 
 .u__dim
   color: $secondary-link-color
+
+.u__bold
+  font-weight: 600
+
+.u__next
+  @extend .u__bold
+
+  &::after
+    content: " →"
+    font-weight: normal
+
+.u__previous
+  @extend .u__bold
+
+  &::before
+    content: "← "
+    font-weight: normal

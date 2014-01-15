@@ -15,10 +15,15 @@ html
     background-size: percentage($main-column-units / $grid-units) 1px
 
 a
+  color: $primary-link-color
   text-decoration: none
   transition: $default-transition
 
+  &:hover
+    color: $hover-link-color
+
   &:active
+    color: $active-link-color
     transition: none !important
 
 body, p,

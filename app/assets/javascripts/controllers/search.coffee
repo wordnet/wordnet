@@ -22,6 +22,7 @@ App.controller 'SearchCtrl', ($scope, getLexemes, getSense, getRelations) ->
   $scope.getSense = getSense
 
   $scope.senses = []
+  $scope.current_sense = 0
 
   $scope.loadRelations = ->
     getRelations().then (relations) ->
@@ -41,6 +42,7 @@ App.controller 'SearchCtrl', ($scope, getLexemes, getSense, getRelations) ->
   $scope.loadSense = (sense_id) ->
     getSense(sense_id).then (sense) ->
       $scope.senses = [sense]
+      $scope.current_sense = 0
 
   $scope.onSenseSelect = (sense_id) ->
     $scope.senses = []
