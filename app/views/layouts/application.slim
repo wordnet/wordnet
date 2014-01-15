@@ -9,13 +9,13 @@ html lang="pl" ng-app="wordnet"
 
   body ng-controller="SearchCtrl" ng-init="loadRelations()"
     header.top
-      .columns
-        .column.column--left
-          a.top__logo href="/" Polish Wordnet
-        .column.column--main
-          = render 'shared/autocomplete'
-
-        nav.column.column--right.u__text-right
-          a href="https://github.com/wordnet/wordnet" GitHub
+      .wrapper
+        .grid
+          .container.grid__cell.grid__cell--5-20
+            a.top__logo href="/" Polish Wordnet
+          .container.container--main.grid__cell.grid__cell--10-20
+            = render 'shared/autocomplete'
+          .container.grid__cell.grid__cell--5-20.u__text-right
+            a href="https://github.com/wordnet/wordnet" GitHub
 
     = yield

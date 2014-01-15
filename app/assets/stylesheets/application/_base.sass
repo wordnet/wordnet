@@ -2,10 +2,17 @@
   box-sizing: border-box
 
 html
-  background: #fff
+  background: $column-background
+  background-image: linear-gradient(to right, $main-column-background, $main-column-background)
+  background-size: ($wrapper-width * $main-column-units / $grid-units) 1px
+  background-position: top center
+  background-repeat: repeat-y
   color: #222
   font: 12px/1.4 "Open Sans", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif
   text-rendering: optimizeLegibility
+
+  @media (max-width: $wrapper-width)
+    background-size: percentage($main-column-units / $grid-units) 1px
 
 a
   text-decoration: none

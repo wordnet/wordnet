@@ -1,36 +1,3 @@
-.columns
-  display: table
-  width: 100%
-
-  & > .column
-    display: table-cell
-    vertical-align: top
-
-  & + &
-    margin-top: 2rem
-    border-top: 2px solid $list-border-color
-
-.column
-  .content-columns &
-    padding-top: 4rem
-    padding-bottom: 4rem
-
-.column--left,
-.column--right
-  width: $column-width
-
-  .content-columns:not(.content-columns--blank) &
-    background: $column-background
-
-.column--main
-  padding-right: 4rem
-  padding-left: 4rem
-  min-height: 100%
-
-  .top &
-    position: relative
-    min-height: auto
-
 .top
   position: fixed
   z-index: 1
@@ -41,14 +8,7 @@
   background: #525252
 
   & + *
-    margin-top: $top-height
-
-  .column
-    height: $top-height !important
-    vertical-align: middle
-
-  .column--right
-    padding-right: 2 * $list-horizontal-padding
+    margin-top: $top-height * 1.5
 
   a:not(.dropdown-menu__item)
     display: inline-block

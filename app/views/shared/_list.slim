@@ -9,11 +9,10 @@ section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{pref
   ul ng-init="truncate_after = 2"
     li ng-repeat="sense in relation_type.senses | limitTo:truncate_after"
       a.item.list__item.list__item--arrow href="#" prevent-default="" ng-click="loadSense(sense.id)"
-        i.item__lemma
+        b.item__lemma
           | {{ sense.lemma }}
-          span ng-if="sense.sense_index"
-            | &nbsp;
-            b.item__position ng-bind="sense.sense_index"
+          i.item__position ng-if="sense.sense_index"
+            | &nbsp;{{ sense.sense_index }}
         span ng-if="sense.comment"
           span.u__hidden<> —
           span.item__description ng-bind="sense.comment"

@@ -1,0 +1,31 @@
+.wrapper
+  display: block
+  max-width: $wrapper-width
+  margin: 0 auto
+
+.grid
+  display: block
+  margin: 0
+  padding: 0
+  font-size: 0
+  text-align: left
+
+.grid__cell
+  display: inline-block
+  vertical-align: top
+  width: 100%
+  margin: 0
+  padding: 0
+  font-size: 1rem
+  text-align: left
+
+@for $unit from 1 through ($grid-units - 1)
+  .grid__cell--#{$unit}-#{$grid-units}
+    width: 100% * $unit / $grid-units !important
+
+.container
+  padding: 20px
+
+.container--main
+  padding-right: 30px
+  padding-left: 30px
