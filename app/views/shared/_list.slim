@@ -1,10 +1,7 @@
 - prefix = direction == 'outgoing' ? 'reverse_' : ''
 
 section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{prefix}relations" ng-init="count = relation_type.senses.length"
-  h1.list__header
-    | {{ relations[relation_type.relation_id] | getRelationName:'#{direction}' }}
-    b.list__header__aux< ng-if="count > 1"
-      | {{ count }}&nbsp;{{ 'połączenie' | inflect:count }}
+  h1.list__header ng-bind="relations[relation_type.relation_id] | getRelationName:'#{direction}'"
 
   ul ng-init="truncate_after = 2"
     li ng-repeat="sense in relation_type.senses | limitTo:truncate_after"
@@ -19,4 +16,4 @@ section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{pref
 
     li ng-show="truncate_after < count"
       a.list__item.list__item--more href="" ng-click="truncate_after = truncate_after * 100"
-        | Pokaż {{ 'pozostały' | inflect:(count - truncate_after) }}
+        | Pokaż pozostałe {{ count - truncate_after }}&nbsp;{{ 'połączenie' | inflect:(count - truncate_after) }}
