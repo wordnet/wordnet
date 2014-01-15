@@ -1,7 +1,5 @@
 class SenseRelation < ActiveRecord::Base
 
-  include Exportable
-
   belongs_to :parent, :class_name => "Sense"
   belongs_to :child, :class_name => "Sense"
 

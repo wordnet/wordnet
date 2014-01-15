@@ -14,13 +14,12 @@ namespace :wordnet do
 
   task :export, [:klass] => [:environment] do |t, args|
     if args[:klass].present?
-      Object.const_get(args[:klass]).neo4j_export!
+      Neo4j.const_get(args[:klass]).new.export!
     else
       [
-        Lexeme, Sense, Synset,
-        LexemeSense, SynsetSense,
-        SenseRelation, SynsetRelation
-      ].map(&:neo4j_export!)
+        "Sense", "Synset", "SynsetSense",
+        "SenseRelation", "SynsetRelation"
+      ].map { |c| Neo4j.const_get(c).new.export! }
     end
   end
 end

@@ -1,7 +1,5 @@
 class Synset < ActiveRecord::Base
 
-  include Exportable
-
   has_many :senses
 
   has_many :relations, :foreign_key => "parent_id",
