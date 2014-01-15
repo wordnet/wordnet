@@ -33,8 +33,7 @@ module WordnetPl
       raw.map do |membership|
         {
           sense_id: membership[:LEX_ID],
-          synset_id: membership[:SYN_ID],
-          sense_index: membership[:unitindex]
+          synset_id: membership[:SYN_ID]
         }
       end
     end
