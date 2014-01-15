@@ -1,0 +1,6 @@
+(
+  neo4j stop
+  cd `brew --prefix neo4j`
+  rm -rf libexec/data/*
+  neo4j start
+)
