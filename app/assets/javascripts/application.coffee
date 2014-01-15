@@ -3,7 +3,6 @@
 #= require angular-bootstrap
 #= require_self
 #= require_tree ./controllers
-#= require_tree ./directives
 #= require_tree ./filters
 
 DOMAIN = "http://localhost:3000"
