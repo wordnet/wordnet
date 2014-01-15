@@ -4,48 +4,21 @@
 
 .list__item
   display: block
-  padding: $list-vertical-padding $list-horizontal-padding
+  padding: $list-vertical-padding 0 ($list-vertical-padding + 0.1em)
   border-bottom: 1px solid $list-border-color
 
-  .list--outgoing &
-    padding-left: 30px
-
-.list__item--arrow
-  $image: "chevron-right@2x.png"
+.list__item--more
+  $image: "elipsis@2x.png"
   $image-width: image-width($image) / 2
   $image-height: image-height($image) / 2
 
+  padding-left: round($image-width * 1.4)
   background: asset-data-url($image) no-repeat
   background-size: $image-width $image-height
-  background-position: right ($list-vertical-padding + 1px)
-  padding-right: 25px
-
-  .list--outgoing &
-    background-position: $list-horizontal-padding ($list-vertical-padding + 1px)
-    padding-right: $list-horizontal-padding
-
-.list__item--more
-  padding-top: round($list-vertical-padding / 2)
-  padding-bottom: round($list-vertical-padding / 2)
+  background-position: 1px center
   color: $secondary-link-color
-  font-size: 0.8em
+  font-size: 0.85em
   font-weight: 600
-  text-transform: uppercase
-
-  &::before
-    $image: "elipsis@2x.png"
-    $image-width: image-width($image) / 2
-    $image-height: image-height($image) / 2
-
-    content: ""
-    display: inline-block
-    width: round($image-width * 1.4)
-    height: $image-height
-    position: relative
-    top: -0.1rem
-    background: asset-data-url($image) no-repeat
-    background-size: $image-width $image-height
-    vertical-align: middle
 
 a.list__item--more
   &:hover
