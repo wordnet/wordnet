@@ -1,46 +1,32 @@
-.dropdown-field
-  -webkit-appearance: none
-  display: block
-  width: 100%
-  padding: 0.3rem 0.6rem 0.35rem
-  border: none
-  border-radius: 999em
-  color: $secondary-link-color
-  font-size: 1rem
-  font-family: inherit
-  font-weight: 600
-  line-height: 1 !important
-  transition: $default-transition
+.autocomplete
+  position: relative
 
-  &:focus
-    outline: none
-    background-color: #ffefda
-    color: $default-color
-
-.dropdown-field--search
+.autocomplete__field
   $image: "loupe@2x.png"
   $image-width: image-width($image) / 2
   $image-height: image-height($image) / 2
 
+  display: inline-block
+  border-radius: 999em
   background-image: asset-data-url($image)
   background-size: $image-width $image-height
   background-repeat: no-repeat
   background-position: 0.75rem center
   padding-left: 1.7rem
 
-.dropdown-menu
+.autocomplete__menu
   position: absolute
   left: 0
-  right: 0
+  width: 100%
   margin-top: 1px
   background: $column-background
   border-radius: 3px
   box-shadow: 0 0.1rem 1rem rgba($default-color, 0.2)
   overflow: hidden
 
-.dropdown-menu__item
+.autocomplete__menu__item
   display: block !important
-  padding: 0.65rem 0 0.65rem 1rem
+  padding: 0.65em 0 0.65em 1em
   color: $secondary-link-color
   font-weight: normal !important
   line-height: 1
@@ -57,3 +43,7 @@
   b, strong
     font-weight: 600
     color: $default-color
+
+// Vendor class
+.dropdown-menu
+  @extend .autocomplete__menu

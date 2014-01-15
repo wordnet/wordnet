@@ -1,0 +1,34 @@
+.top
+  position: fixed
+  z-index: 1
+  top: 0
+  right: 0
+  left: 0
+  height: $top-height
+  background: $top-background
+  line-height: $top-height - 2px
+
+  & + *
+    margin-top: $top-height
+
+  a
+    color: $top-link-color
+
+    &:hover
+      color: $top-hover-link-color
+
+    &:active
+      color: $top-active-link-color
+
+.top__container
+  @extend .container
+  padding-top: 0
+  padding-bottom: 0
+
+.top__container--main
+  @extend .container--main
+
+.top__logo
+  font-size: 1.4em
+  font-weight: 600
+  letter-spacing: -0.05rem

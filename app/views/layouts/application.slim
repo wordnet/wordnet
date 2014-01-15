@@ -11,11 +11,11 @@ html lang="pl" ng-app="wordnet"
     header.top
       .wrapper
         .grid
-          .container.grid__cell.grid__cell--5-20
-            a.top__logo href="/" Polish Wordnet
-          .container.container--main.grid__cell.grid__cell--10-20
+          h1.top__container.grid__cell.grid__cell--5-20
+            a.top__logo href="/" title="Polski Wordnet" Polish Wordnet
+          .top__container.top__container--main.grid__cell.grid__cell--10-20
             = render 'shared/autocomplete'
-          .container.grid__cell.grid__cell--5-20.u__text-right
-            a href="https://github.com/wordnet/wordnet" GitHub
+          .top__container.grid__cell.grid__cell--5-20.u__text-right
+            a href="https://github.com/wordnet/wordnet" title="Źródło na GitHubie" GitHub
 
     = yield
