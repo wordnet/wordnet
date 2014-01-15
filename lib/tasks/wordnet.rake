@@ -18,8 +18,7 @@ namespace :wordnet do
     else
       [
         Lexeme, Sense, Synset,
-        LexemeSense, SynsetSense,
-        SenseRelation, SynsetRelation
+        SynsetSense, SenseRelation, SynsetRelation
       ].map(&:neo4j_export!)
     end
   end
