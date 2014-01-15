@@ -8,7 +8,7 @@ section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{pref
 
   ul ng-init="truncate_after = 2"
     li ng-repeat="sense in relation_type.senses | limitTo:truncate_after"
-      a.item.list__item href="#" prevent-default="" ng-click="loadSense(sense.id)"
+      a.item.list__item href="" ng-click="loadSense(sense.id)"
         b.item__lemma
           | {{ sense.lemma }}
           i.item__position ng-if="sense.sense_index"
