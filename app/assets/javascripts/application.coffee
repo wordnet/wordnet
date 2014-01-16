@@ -14,6 +14,11 @@ App.factory 'getLexemes', ($http) ->
     $http.get("#{DOMAIN}/api/lexemes/#{prefix}", cache: true).then (response) ->
       response.data
 
+App.factory 'getHyponyms', ($http) ->
+  (sense_id) ->
+    $http.get("#{DOMAIN}/api/hyponyms/#{sense_id}", cache: true).then (response) ->
+      response.data
+
 App.factory 'getSense', ($http, getRelations) ->
   (sense_id) ->
     getRelations().then (relations) ->

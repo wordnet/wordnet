@@ -7,12 +7,23 @@ module Neo4j
       MERGE (a)-[r:relation { id: {relation_id}, weight: 1 }]->(b)
     """.gsub(/\s+/, ' ').strip.freeze
 
+    HYPONYM_QUERY = """
+      MATCH (a:Synset { id: {parent_id} }),
+      (b:Synset { id: {child_id} })
+      MERGE (a)-[r:relation { id: {relation_id}, weight: 1 }]->(b)
+      MERGE (a)-[r2:hyponym]->(b)
+    """.gsub(/\s+/, ' ').strip.freeze
+
     def export_index(connection)
       nil
     end
 
     def export_query(entity)
-      EXPORT_QUERY
+      if entity[:relation_id] == 10
+        HYPONYM_QUERY
+      else
+        EXPORT_QUERY
+      end
     end
 
     def export_properties(entity)
