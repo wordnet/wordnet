@@ -30,15 +30,13 @@ module WordnetPl
 
     def fill_indexes(senses)
       rows = @connection[:unitandsynset].
-        select(:LEX_ID, :SYN_ID, :unitindex).
+        select(:LEX_ID, :SYN_ID).
         where(:LEX_ID => senses.map { |s| s[:external_id] }).
         to_a
 
-      index_mapping = Hash[rows.map { |row| [row[:LEX_ID], row[:unitindex]] } ]
       synset_mapping = Hash[rows.map { |row| [row[:LEX_ID], row[:SYN_ID]] } ]
 
       senses.each { |s|
-        s[:sense_index] = index_mapping[s[:external_id]].to_i + 1
         s[:synset_id] = synset_mapping[s[:external_id]]
       }
 
@@ -59,7 +57,8 @@ module WordnetPl
           lexeme_id: lemma[:lemma],
           lemma: lemma[:lemma],
           comment: process_comment(lemma[:comment]),
-          language: lemma[:project] > 0 ? 'pl_PL' : 'en_GB'
+          language: lemma[:project] > 0 ? 'pl_PL' : 'en_GB',
+          sense_index: lemma[:variant]
         }
       end
     end
