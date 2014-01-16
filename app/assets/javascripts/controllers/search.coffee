@@ -17,7 +17,7 @@ App.filter 'getRelationName', ->
     return reverse_name if reverse_name
     "← (#{name || 'Relacja nieoznaczona'})"
 
-App.controller 'SearchCtrl', ($scope, getLexemes, getSense, getRelations) ->
+App.controller 'SearchCtrl', ($scope, getLexemes, getSense, getRelations, $modal) ->
   $scope.getLexemes = getLexemes
   $scope.getSense = getSense
 
@@ -49,3 +49,9 @@ App.controller 'SearchCtrl', ($scope, getLexemes, getSense, getRelations) ->
     $scope.senses = []
     $scope.loadSense(sense_id)
 
+  $scope.showHyponyms = (sense_id) ->
+    $modal.open
+      templateUrl: 'hyponymsTemplate.html'
+      controller: 'HyponymCtrl'
+      resolve:
+        sense_id: -> sense_id
