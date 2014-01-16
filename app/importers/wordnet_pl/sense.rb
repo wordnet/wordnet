@@ -45,7 +45,7 @@ module WordnetPl
 
     def load_entities(limit, offset)
       raw = @connection[:lexicalunit].
-        select(:ID, :comment, :domain, :lemma, :project).
+        select(:ID, :comment, :domain, :lemma, :project, :variant).
         order(:ID).
         where('ID >= ? AND ID < ?', offset, offset + limit).to_a
 
