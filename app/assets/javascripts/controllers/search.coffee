@@ -29,13 +29,13 @@ App.controller 'SearchCtrl', ($scope, getLexemes, getSense, getRelations) ->
       $scope.relations = _.indexBy(relations, (r) -> r.id)
 
   $scope.onLexemeSelect = (lexeme) ->
+    $scope.lexeme = lexeme.lemma
     $scope.senses = []
     $scope.pendingLoad = lexeme.senses
     $scope.pushSense($scope.pendingLoad.shift())
 
   $scope.pushSense = (sense_id) ->
     getSense(sense_id).then (sense) ->
-      console.log(sense)
       $scope.senses.push(sense)
       if nextPending = $scope.pendingLoad.shift()
         $scope.pushSense(nextPending)
