@@ -50,7 +50,7 @@ module API
         query = """
           match (k:Singleton{ id: {sense_id} }),
                 k-[:relation { id: 0 }]->(n:Synset),
-                p = n-[r:relation*0..5 { id: 10 }]->(s:Synset),
+                p = n-[r:hyponym*0..]->(s:Synset),
                 s-[:synset_sense]->(s2:Sense)
 
           return distinct({
