@@ -16,7 +16,7 @@ module WordnetPl
 
     def load_entities(limit, offset)
       raw = @connection[:relationtype].
-        select(:ID, :PARENT_ID, :REVERSE_ID, :name, :description).to_a
+        select(:ID, :PARENT_ID, :REVERSE_ID, :name, :description, :order).to_a
 
       raw.map do |relation|
         {
@@ -24,13 +24,18 @@ module WordnetPl
           name: relation[:name],
           parent_id: relation[:PARENT_ID],
           reverse_id: relation[:REVERSE_ID],
-          description: relation[:description]
+          description: relation[:description],
+          priority: relation[:PARENT_ID].nil? ? relation[:order] * 100 : relation[:order]
         }
       end
     end
 
     def process_entities!(relations)
       by_id = Hash[relations.map { |r| [r[:id], r] }]
+
+      relations.each do |r|
+        r[:priority] += by_id[r[:parent_id]][:priority] if r[:parent_id].present?
+      end
 
       one_ways = relations.select { |r| r[:reverse_id].blank? }
       two_ways = relations.select { |r| r[:reverse_id].present? }
@@ -47,7 +52,7 @@ module WordnetPl
       all_relations = one_ways + reverses.map { |k, v| v }
 
       all_relations = all_relations.map do |r|
-        r.extract!(:id, :name, :parent_id, :name, :description, :reverse_name)
+        r.extract!(:id, :name, :parent_id, :name, :description, :reverse_name, :priority)
       end
 
       persist_entities!("relation_types", all_relations, [:id])

@@ -4,7 +4,7 @@ require 'synchronized_write_importer'
 
 class Importer
   prepend ProgressBarImporter
-  prepend ThreadPoolImporter
+  # prepend ThreadPoolImporter
   prepend SynchronizedWriteImporter
 
   def total_count

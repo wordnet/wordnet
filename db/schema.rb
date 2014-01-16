@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140109013627) do
+ActiveRecord::Schema.define(version: 20140115230003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140109013627) do
     t.string  "name"
     t.string  "reverse_name"
     t.text    "description"
+    t.integer "priority"
   end
 
   create_table "sense_relations", force: true do |t|
