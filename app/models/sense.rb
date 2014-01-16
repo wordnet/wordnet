@@ -42,6 +42,7 @@ class Sense < ActiveRecord::Base
             (i-[r2:synset_sense]->(target:Sense))
       return {
         relation_id: r.id,
+        language: target.language,
         senses: collect({
           id: target.id,
           lemma: target.lemma,
