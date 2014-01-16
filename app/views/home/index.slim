@@ -5,13 +5,13 @@
       .top__container.top__container--main.grid__cell.grid__cell--10-20
         .grid
           .grid__cell.grid__cell--7-20
-            a.u__previous href="" ng-href="/{{sense.homographs[sense.sense_index - 2]}}" ng-show="sense.sense_index > 1"
+            a.u__previous href="" ng-href="/{{sense.homographs[sense_index - 1]}}" ng-show="sense_index > 0"
               | Poprzedni
           .grid__cell.grid__cell--6-20.u__text-center
-            span.u__bold ng-bind="sense.sense_index"
+            span.u__bold ng-bind="sense_index + 1"
             span.u__dim< ng-bind-template="z {{ sense.homographs.length }} homografów"
           .grid__cell.grid__cell--7-20.u__text-right
-            a.u__next href="" ng-href="/{{sense.homographs[sense.sense_index]}}" ng-show="sense.sense_index < sense.homographs.length"
+            a.u__next href="" ng-href="/{{sense.homographs[sense_index + 1]}}" ng-show="sense_index < sense.homographs.length - 1"
               | Następny
 
 .wrapper.u__pad ng-class="{'u__pad--more': sense.homographs.length > 1}"

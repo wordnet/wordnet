@@ -4,7 +4,7 @@ class Lexeme < ActiveRecord::Base
   def as_json(options = {})
     {
       lemma: lemma,
-      senses: senses.order(:sense_index).map(&:id)
+      senses: senses.order(language: :desc, sense_index: :asc).map(&:id)
     }
   end
 end

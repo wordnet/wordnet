@@ -26,12 +26,14 @@ App.filter 'getRelationName', ->
 
 App.controller 'SenseCtrl', ($scope, getSense, getRelations, $modal, $routeParams) ->
   $scope.sense = null
+  $scope.sense_index = 0
 
   getRelations().then (relations) ->
     $scope.relations = _.indexBy(relations, (r) -> r.id)
 
     getSense($routeParams.senseId).then (sense) ->
       $scope.sense = sense
+      $scope.sense_index = sense.homographs.indexOf(sense.id)
 
   $scope.showHyponyms = (sense_id) ->
     $modal.open
