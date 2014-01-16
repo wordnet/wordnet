@@ -1,5 +1,5 @@
 h1.header.item.definition-header
-  b.item__lemma
+  span.item__lemma ng-class="{'u__flagged': sense.language == 'en_GB'}"
     | {{ sense.lemma }}
     i.item__position ng-if="sense.sense_index"
       | &nbsp;{{ sense.sense_index }}
