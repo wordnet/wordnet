@@ -5,14 +5,14 @@ section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{pref
 
   ul ng-init="truncate_after = 2"
     li ng-repeat="sense in relation_type.senses | limitTo:truncate_after"
-      a.item.list__item href="" ng-click="loadSense(sense.id)"
+      a.item.list__item href="" ng-click="loadSense(sense.id)" ng-attr-title="{{ sense.comment }}"
         b.item__lemma
           | {{ sense.lemma }}
           i.item__position ng-if="sense.sense_index"
             | &nbsp;{{ sense.sense_index }}
-        span ng-if="sense.comment"
-          span.u__hidden<> —
-          span.item__description.item__description--small.u__truncate ng-bind="sense.comment"
+          span.item__description.item__description--small.u__truncate ng-if="sense.comment"
+            span.u__hidden<> —
+            | {{ sense.comment }}
 
     li ng-show="truncate_after < count"
       a.list__item.list__item--more href="" ng-click="truncate_after = truncate_after * 100"

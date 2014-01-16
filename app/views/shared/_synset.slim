@@ -24,9 +24,8 @@ section.definition.definition--major ng-if="sense.synonyms.length >= 2"
       a.item href="" ng-click="loadSense(synonym.id)"
         b.item__lemma
           | {{ synonym.lemma }}
-          span ng-if="synonym.sense_index"
-            | &nbsp;
-            b.item__position ng-bind="synonym.sense_index"
-        span ng-if="synonym.comment"
-          span.u__hidden<> —
-          span.item__description ng-bind="synonym.comment"
+          i.item__position ng-if="synonym.sense_index"
+            | &nbsp;{{ synonym.sense_index }}
+          span.item__description.item__description--small.u__truncate ng-if="synonym.comment"
+            span.u__hidden<> —
+            | {{ synonym.comment }}
