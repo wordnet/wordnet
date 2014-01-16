@@ -1,26 +1,25 @@
-.top.top--alternative ng-show="senses.length > 1"
+.top.top--alternative ng-show="sense.homographs.length > 1"
   .wrapper
     .grid
       .top__container.grid__cell.grid__cell--5-20
       .top__container.top__container--main.grid__cell.grid__cell--10-20
         .grid
           .grid__cell.grid__cell--7-20
-            a.u__previous href="" ng-click="current_sense = current_sense - 1" ng-show="current_sense > 0"
+            a.u__previous href="" ng-href="/{{sense.homographs[sense.sense_index - 2]}}" ng-show="sense.sense_index > 1"
               | Poprzedni
           .grid__cell.grid__cell--6-20.u__text-center
-            span.u__bold ng-bind="current_sense + 1"
-            span.u__dim< ng-bind-template="z {{ senses.length }} jednostek"
+            span.u__bold ng-bind="sense.sense_index"
+            span.u__dim< ng-bind-template="z {{ sense.homographs.length }} homografów"
           .grid__cell.grid__cell--7-20.u__text-right
-            a.u__next href="" ng-click="current_sense = current_sense + 1" ng-show="current_sense < senses.length - 1"
+            a.u__next href="" ng-href="/{{sense.homographs[sense.sense_index - 2]}}" ng-show="sense.sense_index < sense.homographs.length"
               | Następny
 
-.wrapper.u__pad ng-class="{'u__pad--more': senses.length > 1}"
-  .grid ng-if="!senses.length"
+.wrapper.u__pad ng-class="{'u__pad--more': sense.homographs.length > 1}"
+  .grid ng-if="!sense"
     .container.grid__cell.grid__cell--5-20
     .container.container--main.grid__cell.grid__cell--10-20.u__dim
       | Użyj wyszukiwarki by&nbsp;rozpocząć.
-
-  .grid ng-repeat="sense in senses" ng-show="$index == current_sense"
+  .grid
     .container.grid__cell.grid__cell--5-20
       = render 'shared/list', direction: 'incoming'
     .container.container--main.grid__cell.grid__cell--10-20

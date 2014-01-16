@@ -7,8 +7,8 @@ html lang="pl" ng-app="wordnet"
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
 
-  body ng-controller="SearchCtrl" ng-init="loadRelations()"
-    header.top.top--invert
+  body
+    header.top.top--invert ng-controller="SearchCtrl"
       .wrapper
         .grid
           h1.top__container.grid__cell.grid__cell--5-20
@@ -18,5 +18,8 @@ html lang="pl" ng-app="wordnet"
           .top__container.grid__cell.grid__cell--5-20.u__text-right
             a href="https://github.com/wordnet/wordnet" title="Źródło na GitHubie" GitHub
 
-    = yield
-    = render 'shared/hyponyms'
+    div ng-view=""
+
+    script type="text/ng-template" id="index.html"
+      = yield
+      = render 'shared/hyponyms'

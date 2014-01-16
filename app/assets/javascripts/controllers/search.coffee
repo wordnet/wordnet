@@ -1,5 +1,12 @@
 App = angular.module('wordnet')
 
+App.config ($routeProvider, $locationProvider) ->
+  $routeProvider.when '/:senseId',
+    controller: 'SenseCtrl'
+    templateUrl: 'index.html'
+
+  $locationProvider.html5Mode(true)
+
 App.filter 'getRelationName', ->
   toString = (value) ->
     '' + (value || '')
@@ -17,37 +24,14 @@ App.filter 'getRelationName', ->
     return reverse_name if reverse_name
     "← (#{name || 'Relacja nieoznaczona'})"
 
-App.controller 'SearchCtrl', ($scope, getLexemes, getSense, getRelations, $modal) ->
-  $scope.getLexemes = getLexemes
-  $scope.getSense = getSense
+App.controller 'SenseCtrl', ($scope, getSense, getRelations, $modal, $routeParams) ->
+  $scope.sense = null
 
-  $scope.senses = []
-  $scope.current_sense = 0
+  getRelations().then (relations) ->
+    $scope.relations = _.indexBy(relations, (r) -> r.id)
 
-  $scope.loadRelations = ->
-    getRelations().then (relations) ->
-      $scope.relations = _.indexBy(relations, (r) -> r.id)
-
-  $scope.onLexemeSelect = (lexeme) ->
-    $scope.lexeme = lexeme.lemma
-    $scope.senses = []
-    $scope.pendingLoad = lexeme.senses
-    $scope.pushSense($scope.pendingLoad.shift())
-
-  $scope.pushSense = (sense_id) ->
-    getSense(sense_id).then (sense) ->
-      $scope.senses.push(sense)
-      if nextPending = $scope.pendingLoad.shift()
-        $scope.pushSense(nextPending)
-
-  $scope.loadSense = (sense_id) ->
-    getSense(sense_id).then (sense) ->
-      $scope.senses = [sense]
-      $scope.current_sense = 0
-
-  $scope.onSenseSelect = (sense_id) ->
-    $scope.senses = []
-    $scope.loadSense(sense_id)
+    getSense($routeParams.senseId).then (sense) ->
+      $scope.sense = sense
 
   $scope.showHyponyms = (sense_id) ->
     $modal.open
@@ -55,3 +39,9 @@ App.controller 'SearchCtrl', ($scope, getLexemes, getSense, getRelations, $modal
       controller: 'HyponymCtrl'
       resolve:
         sense_id: -> sense_id
+
+App.controller 'SearchCtrl', ($scope, getLexemes, $location) ->
+  $scope.getLexemes = getLexemes
+
+  $scope.onLexemeSelect = (lexeme) ->
+    $location.path("/#{lexeme.senses[0]}")

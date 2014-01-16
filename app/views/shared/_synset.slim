@@ -21,7 +21,7 @@ section.definition.definition--major ng-if="sense.synonyms.length >= 2"
   h1.definition__term Synonimy
   ul.definition__content.definition__list
     li.definition__list__item ng-repeat="synonym in sense.synonyms" ng-if="synonym.id != sense.id"
-      a.item href="" ng-click="loadSense(synonym.id)"
+      a.item href="" ng-href="/{{synonym.id}}"
         b.item__lemma
           | {{ synonym.lemma }}
           i.item__position ng-if="synonym.sense_index"

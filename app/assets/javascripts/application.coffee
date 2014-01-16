@@ -1,13 +1,14 @@
 #= require lodash
 #= require angular
 #= require angular-bootstrap
+#= require angular-route
 #= require_self
 #= require_tree ./controllers
 #= require_tree ./filters
 
 DOMAIN = "http://localhost:3000"
 
-App = angular.module('wordnet', ['ui.bootstrap'])
+App = angular.module('wordnet', ['ui.bootstrap', 'ngRoute'])
 
 App.factory 'getLexemes', ($http) ->
   (prefix) ->
