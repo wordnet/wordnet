@@ -26,6 +26,7 @@ module Neo4j
     def export_index!
       if @connection.get_schema_index("Sense").empty?
         @connection.create_schema_index("Sense", "id")
+        @connection.create_schema_index("Sense", "lemma")
       end
 
       if @connection.get_schema_index("Singleton").empty?
