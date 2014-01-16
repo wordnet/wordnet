@@ -67,11 +67,9 @@ class Sense < ActiveRecord::Base
       :comment => comment
     }
 
-    if options[:synonyms]
+    if options[:extended]
+      data[:homographs] = lexeme.senses.select(&:id).map(&:id)
       data[:synonyms] = synset.senses.map(&:as_json)
-    end
-
-    if options[:relations]
       data[:relations] = fetch_relations
       data[:reverse_relations] = fetch_reverse_relations
     end

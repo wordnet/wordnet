@@ -3,7 +3,7 @@
 section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{prefix}relations | orderBy:'priority'" ng-init="count = relation_type.senses.length"
   h1.list__header ng-bind="relations[relation_type.relation_id] | getRelationName:'#{direction}'" ng-class="{'u__flagged': relation_type.language == 'en_GB'}"
 
-  ul ng-init="truncate_after = 2"
+  ul ng-init="truncate_after = 3"
     li ng-repeat="sense in relation_type.senses | limitTo:truncate_after"
       a.item.list__item href="" ng-href="/{{sense.id}}" ng-attr-title="{{ sense.comment }}"
         b.item__lemma
