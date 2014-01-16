@@ -26,6 +26,14 @@ section.definition.definition--major ng-if="sense.synonyms.length >= 2"
           | {{ synonym.lemma }}
           i.item__position ng-if="synonym.sense_index"
             | &nbsp;{{ synonym.sense_index }}
-          span.item__description.item__description--small.u__truncate ng-if="synonym.comment"
-            span.u__hidden<> —
-            | {{ synonym.comment }}
+        span.item__description.item__description--small ng-if="synonym.comment"
+          span.u__hidden<> —
+          | {{ synonym.comment }}
+
+dl.definition
+  dt.definition__term
+    span.u__hidden Hiponimy
+  dd.definition__content
+    span.item__description.item__description--inline
+      a.u__bold href="" ng-click="showHyponyms(sense.id)"
+        | Pokaż ścieżkę&nbsp;hiponimów
