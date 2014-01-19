@@ -42,8 +42,9 @@ App.controller 'SenseCtrl', ($scope, getSense, getRelations, $modal, $routeParam
       resolve:
         sense_id: -> sense_id
 
-App.controller 'SearchCtrl', ($scope, getLexemes, $location) ->
+App.controller 'SearchCtrl', ($scope, $location, $anchorScroll, getLexemes) ->
   $scope.getLexemes = getLexemes
 
   $scope.onLexemeSelect = (lexeme) ->
     $location.path("/#{lexeme.senses[0]}")
+    $anchorScroll()
