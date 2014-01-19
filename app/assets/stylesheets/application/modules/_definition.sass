@@ -1,33 +1,21 @@
 .definition
-  display: table
-  width: 100%
-  padding: ($list-vertical-padding * 2) 0
-  border-top: 1px solid rgba($list-border-color, 0.5)
+  & + &
+    margin-top: $definition-vertical-padding
+    padding-top: $definition-vertical-padding
+    border-top: 1px solid $definition-border-color
 
-.definition--aux
-  margin-top: -0.5rem
-  padding-top: 0
-  border-top: none
-
-.definition--minor
-  color: $secondary-link-color
-
-%defition__child
-  display: table-cell
-  vertical-align: top
+  .definition--header + &
+    margin-top: $list-vertical-padding * strip-unit($header-font-size)
 
 .definition__term
-  @extend %defition__child
-  width: 20%
-  padding: 0.075rem 0.5rem 0 0
-  font-size: 0.8em
+  font-size: 0.85em
   font-weight: 600
   text-transform: uppercase
   color: $secondary-link-color
 
-.definition__content
-  @extend %defition__child
+  .definition--header &
+    padding-top: 0.4em
 
-.definition__list__item
+.definition__content__item
   & + &
     padding-top: $list-vertical-padding

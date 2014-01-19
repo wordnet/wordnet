@@ -32,7 +32,10 @@ App.factory 'getSense', ($http, getRelations) ->
           relation.type = relations[relation.relation_id]
           relation.priority = relations[relation.relation_id].priority
 
-        sense
+        # Filter out the current sense
+        # (so it’s not duplicated as its own synonym)
+        synonyms_without_sense = _.filter(sense.synonyms, (s) -> s.id != sense_id)
+        _.extend(sense, synonyms: synonyms_without_sense)
 
 App.factory 'getRelations', ($http) ->
   ->
