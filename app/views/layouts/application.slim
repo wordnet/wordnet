@@ -2,7 +2,7 @@ doctype html
 html lang="pl" ng-app="wordnet"
   head
     meta charset="utf-8"
-    title Wordnet
+    title Słowosieć
 
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
@@ -12,7 +12,7 @@ html lang="pl" ng-app="wordnet"
       .wrapper
         .grid
           h1.top__container.grid__cell.grid__cell--5-20
-            a.top__logo href="/" title="Polski Wordnet" Polish Wordnet
+            a.top__logo href="/" Słowosieć
           .top__container.top__container--main.grid__cell.grid__cell--10-20
             = render 'shared/autocomplete'
           .top__container.grid__cell.grid__cell--5-20.u__text-right
