@@ -16,15 +16,8 @@
   line-height: $top-alternative-height - 1px
   overflow: hidden
 
-.top--invert
-  a
-    color: $top-link-color
-
-    &:hover
-      color: $top-hover-link-color
-
-    &:active
-      color: $top-active-link-color
+.top--invert a
+  @extend %inverted-link
 
 .top__container
   @extend .container

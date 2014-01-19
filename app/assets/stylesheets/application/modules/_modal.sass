@@ -4,17 +4,26 @@
   right: 0
   bottom: 0
   left: 0
-  background: rgba($column-background, 0.95)
-  overflow: auto
-  padding: $top-height
+  background: $modal-overlay-background
+  overflow: hidden
+  padding: 20px
+
+.modal__content
+  @extend .wrapper
+  position: relative
+  max-width: round($wrapper-width / 2)
+  max-height: 100%
+  padding: 25px 20px
+  border-radius: 3px
+  background-color: $modal-background
+  text-align: center
+  overflow: scroll
 
 .modal__close
+  @extend %inverted-link
   position: fixed
   top: 0
   right: 0
   padding: 20px
   border-radius: 2px
   font-weight: 600
-
-.modal__content
-  text-align: center
