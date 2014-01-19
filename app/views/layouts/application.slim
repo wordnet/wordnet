@@ -14,7 +14,7 @@ html lang="pl" ng-app="wordnet"
           h1.top__container.grid__cell.grid__cell--5-20
             a.top__logo href="/" Słowosieć
           .top__container.top__container--main.grid__cell.grid__cell--10-20
-            = render 'shared/autocomplete'
+            = render 'shared/search_field'
           .top__container.grid__cell.grid__cell--5-20.u__text-right
             a href="https://github.com/wordnet/wordnet" title="Źródło na GitHubie" GitHub
 
@@ -22,4 +22,7 @@ html lang="pl" ng-app="wordnet"
 
     script type="text/ng-template" id="index.html"
       = yield
-      = render 'shared/hyponyms'
+    script type="text/ng-template" id="autocompleteTemplate.html"
+      = render 'shared/templates/autocomplete'
+    script type="text/ng-template" id="hyponymsTemplate.html"
+      = render 'shared/templates/hyponyms'

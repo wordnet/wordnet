@@ -1,6 +1,2 @@
-script id="autocompleteTemplate.html" type="text/ng-template"
-  a.autocomplete__menu__item href=""
-    span.u__truncate bind-html-unsafe="match.model.lemma | typeaheadHighlight:query"
-
 .autocomplete
   input.autocomplete__field type="search" autofocus="" ng-model="lexeme" typeahead-template-url="autocompleteTemplate.html" typeahead="lexeme for lexemes in getLexemes($viewValue)" typeahead-wait-ms="200" typeahead-editable="false" typeahead-on-select="onLexemeSelect($item)"
