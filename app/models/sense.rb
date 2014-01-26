@@ -24,6 +24,7 @@ class Sense < ActiveRecord::Base
           id: target.id,
           lemma: target.lemma,
           comment: target.comment,
+          part_of_speech: target.part_of_speech,
           sense_index: target.sense_index
         })
       }
@@ -49,6 +50,7 @@ class Sense < ActiveRecord::Base
           id: target.id,
           lemma: target.lemma,
           comment: target.comment,
+          part_of_speech: target.part_of_speech,
           sense_index: target.sense_index
         })
       }
