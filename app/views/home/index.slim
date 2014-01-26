@@ -9,7 +9,7 @@
               | Poprzedni
           .grid__cell.grid__cell--6-20.u__text-center
             span.u__bold ng-bind="sense_index + 1"
-            span.u__dim< ng-bind-template="z {{ sense.homographs.length }} jednostek"
+            span.u__dim< ng-bind-template="z {{ sense.homographs.length }} jednostek leksykalnych"
           .grid__cell.grid__cell--7-20.u__text-right
             a.u__next href="" ng-href="/{{sense.homographs[sense_index + 1]}}" ng-show="sense_index < sense.homographs.length - 1"
               | Następny
