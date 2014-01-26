@@ -19,7 +19,7 @@ class Sense < ActiveRecord::Base
       return {
         relation_id: r.id,
         language: target.language,
-        target_type: head(labels(i)),
+        target_type: lower(head(labels(i))),
         senses: collect({
           id: target.id,
           lemma: target.lemma,
@@ -44,7 +44,7 @@ class Sense < ActiveRecord::Base
       return {
         relation_id: r.id,
         language: target.language,
-        target_type: head(labels(i)),
+        target_type: lower(head(labels(i))),
         senses: collect({
           id: target.id,
           lemma: target.lemma,
