@@ -22,7 +22,8 @@ module WordnetPl
         {
           external_id: synset[:ID],
           comment: process_comment(synset[:comment]),
-          definition: process_definition(synset[:definition])
+          definition: process_definition(synset[:definition]),
+          examples: extract_examples(synset[:definition])
         }
       end
     end
@@ -32,6 +33,21 @@ module WordnetPl
     end
 
     private
+
+    def extract_examples(definition)
+      return [] if definition.blank?
+      
+      definition.split(';')[1..-1].map do |example|
+        if example.include?('"')
+          custom_strip(example, " \"")
+        end
+      end.compact
+    end
+
+    def custom_strip(string, chars)
+      ars = Regexp.escape(chars)
+      string.gsub(/\A[#{chars}]+|[#{chars}]+\Z/, "")
+    end
 
     def process_comment(comment)
       return nil if comment == "brak danych"

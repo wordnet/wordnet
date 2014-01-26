@@ -12,7 +12,8 @@ class Synset < ActiveRecord::Base
     {
       senses: senses.order(:sense_index).as_json,
       comment: comment,
-      definition: definition
+      definition: definition,
+      examples: examples
     }
   end
 end

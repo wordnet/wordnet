@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126215545) do
+ActiveRecord::Schema.define(version: 20140126232808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,9 +75,10 @@ ActiveRecord::Schema.define(version: 20140126215545) do
   add_index "synset_senses", ["synset_id", "sense_id"], name: "index_synset_senses_on_synset_id_and_sense_id", unique: true, using: :btree
 
   create_table "synsets", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
-    t.integer "external_id", null: false
+    t.integer "external_id",              null: false
     t.text    "comment"
     t.text    "definition"
+    t.string  "examples",    default: [],              array: true
   end
 
   add_index "synsets", ["external_id"], name: "index_synsets_on_external_id", unique: true, using: :btree
