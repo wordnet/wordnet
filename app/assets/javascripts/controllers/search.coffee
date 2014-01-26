@@ -1,6 +1,10 @@
 App = angular.module('wordnet')
 
 App.config ($routeProvider, $locationProvider) ->
+  $routeProvider.when '/',
+    controller: 'SenseCtrl'
+    templateUrl: 'index.html'
+
   $routeProvider.when '/:senseId',
     controller: 'SenseCtrl'
     templateUrl: 'index.html'

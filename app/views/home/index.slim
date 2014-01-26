@@ -19,7 +19,7 @@
     .container.grid__cell.grid__cell--5-20
     .container.container--main.grid__cell.grid__cell--10-20.u__dim
       | Użyj wyszukiwarki by&nbsp;rozpocząć.
-  .grid
+  .grid ng-if="sense"
     .container.grid__cell.grid__cell--5-20
       = render 'shared/list', direction: 'incoming'
     .container.container--main.grid__cell.grid__cell--10-20
