@@ -9,6 +9,10 @@ class Synset < ActiveRecord::Base
     :class_name => "SynsetRelation"
 
   def as_json(options = {})
-    senses.order(:sense_index).first.as_json
+    {
+      senses: senses.order(:sense_index).as_json,
+      comment: comment,
+      definition: definition
+    }
   end
 end
