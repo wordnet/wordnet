@@ -13,12 +13,13 @@ class Sense < ActiveRecord::Base
     neo = Neography::Rest.new
     query = """
       match (s:Singleton{ id: {sense_id} }),
-            (s-[:relation*0..1 { weight: 0 }]->(h:Synset)), 
+            (s-[:relation*0..1 { weight: 0 }]->(h:Synset)),
             (h-[r:relation { weight: 1 }]->(i:Synset)),
             (i-[r2:synset_sense]->(target:Sense))
       return {
         relation_id: r.id,
         language: target.language,
+        target_type: head(labels(i)),
         senses: collect({
           id: target.id,
           lemma: target.lemma,
@@ -37,12 +38,13 @@ class Sense < ActiveRecord::Base
     neo = Neography::Rest.new
     query = """
       match (s:Singleton{ id: {sense_id} }),
-            (s-[:relation*0..1 { weight: 0 }]->(h:Synset)), 
+            (s-[:relation*0..1 { weight: 0 }]->(h:Synset)),
             (h<-[r:relation { weight: 1 }]-(i:Synset)),
             (i-[r2:synset_sense]->(target:Sense))
       return {
         relation_id: r.id,
         language: target.language,
+        target_type: head(labels(i)),
         senses: collect({
           id: target.id,
           lemma: target.lemma,
