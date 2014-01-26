@@ -2,7 +2,7 @@
 
 section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{prefix}relations | orderBy:'priority' | orderBy:'target_type'" ng-init="count = relation_type.senses.length"
   h1.list__header.u__header ng-bind="relations[relation_type.relation_id] | getRelationName:'#{direction}'"
-  h2 ng-bind="relation_type.target_type"
+  / h2 ng-bind="relation_type.target_type"
 
   ul ng-init="truncate_after = 3"
     li ng-repeat="sense in relation_type.senses | limitTo:truncate_after"

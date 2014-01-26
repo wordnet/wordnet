@@ -17,8 +17,7 @@
     .grid__cell.grid__cell--5-20
       h1.definition__term Przykłady
     ul.grid__cell.grid__cell--15-20.definition__content
-      li.definition__content__item ng-repeat="example in sense.synset.examples"
-        span.item__description.item__description--small ng-bind="example"
+      li.definition__content__item ng-repeat="example in sense.synset.examples" ng-bind="example"
 
 .definition ng-if="sense.synset.senses.length"
   section.grid
