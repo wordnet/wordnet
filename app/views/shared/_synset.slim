@@ -4,7 +4,7 @@
       .definition__term ng-bind="sense.part_of_speech | uppercase"
     h1.grid__cell.grid__cell--15-20.definition__content
       .item
-        span.item__lemma.u__header ng-class="{'u__flagged': sense.language == 'en_GB'}"
+        span.item__lemma.u__header item-flag="sense.language"
           | {{ sense.lemma }}
           i.item__position ng-if="sense.sense_index"
             | &nbsp;{{ sense.sense_index }}

@@ -45,19 +45,3 @@
   &::before
     content: "← "
     font-weight: normal
-
-.u__flagged
-  &::before
-    $image: "flag@2x.png"
-    $image-width: image-width($image) / 2
-    $image-height: image-height($image) / 2
-
-    content: ""
-    display: inline-block
-    width: $image-width
-    height: $image-height
-    margin-right: 0.2em
-    border-radius: 1px
-    background: asset-data-url($image) no-repeat
-    background-size: $image-width $image-height
-    opacity: 0.8

@@ -1,16 +1,13 @@
 - prefix = direction == 'outgoing' ? 'reverse_' : ''
 
 section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{prefix}relations | orderBy:'priority' | orderBy:'target_type'" ng-init="count = relation_type.senses.length"
-  h1.list__header.u__header(
-    ng-bind="relations[relation_type.relation_id] | getRelationName:'#{direction}'"
-    ng-class="{'u__flagged': relation_type.language == 'en_GB'}"
-    )
+  h1.list__header.u__header ng-bind="relations[relation_type.relation_id] | getRelationName:'#{direction}'"
   h2 ng-bind="relation_type.target_type"
 
   ul ng-init="truncate_after = 3"
     li ng-repeat="sense in relation_type.senses | limitTo:truncate_after"
       a.item.list__item href="" ng-href="/{{sense.id}}" ng-attr-title="{{ sense.comment }}"
-        b.item__lemma
+        b.item__lemma item-flag="relation_type.language"
           | {{ sense.lemma }}
           i.item__position ng-if="sense.sense_index"
             | &nbsp;{{ sense.sense_index }}

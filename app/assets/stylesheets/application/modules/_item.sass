@@ -27,6 +27,28 @@
     color: $default-color
     font-weight: 700
 
+%item__lemma--flagged
+  $flag-height: 0.7em
+  $flag-width: $flag-height * 4 / 3
+
+  content: ""
+  display: inline-block
+  vertical-align: baseline
+  width: $flag-width
+  height: $flag-height
+  margin-left: 0.3em
+  background-position: center center
+  background-size: cover
+
+@each $country in en pl
+  .item__lemma--#{$country}::after
+    @extend %item__lemma--flagged
+    background-image: asset-data-url("flags/#{$country}.svg")
+
+// Temporary
+.item__lemma--pl::after
+  display: none
+
 .item__position
   padding-left: 1px
   font: inherit
