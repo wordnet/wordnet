@@ -45,7 +45,7 @@ module WordnetPl
 
     def load_entities(limit, offset)
       raw = @connection[:lexicalunit].
-        select(:ID, :comment, :domain, :lemma, :project, :variant).
+        select(:ID, :comment, :domain, :lemma, :project, :variant, :pos).
         order(:ID).
         where('ID >= ? AND ID < ?', offset, offset + limit).to_a
 
@@ -58,12 +58,27 @@ module WordnetPl
           lemma: lemma[:lemma],
           comment: process_comment(lemma[:comment]),
           language: lemma[:project] > 0 ? 'pl_PL' : 'en_GB',
-          sense_index: lemma[:variant]
+          sense_index: lemma[:variant],
+          part_of_speech: convert_pos(lemma[:pos])
         }
       end
     end
 
     private
+
+    def convert_pos(pos_id)
+      [
+        "nieznana",
+        "czasownik",
+        "rzeczownik",
+        "przysłówek",
+        "przymiotnik",
+        "czasownik pwn",
+        "rzeczownik pwn",
+        "przysłówek pwn",
+        "przymiotnik pwn"
+      ].fetch(pos_id, "nieznana")
+    end
 
     def process_comment(comment)
       return nil if comment.blank?

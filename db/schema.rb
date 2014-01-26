@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140115230003) do
+ActiveRecord::Schema.define(version: 20140126215545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20140115230003) do
   add_index "sense_relations", ["parent_id", "child_id", "relation_id"], name: "sense_relations_idx", unique: true, using: :btree
 
   create_table "senses", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
-    t.integer "external_id", null: false
+    t.integer "external_id",    null: false
     t.integer "domain_id"
     t.text    "comment"
     t.uuid    "lexeme_id"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20140115230003) do
     t.string  "language"
     t.string  "lemma"
     t.uuid    "synset_id"
+    t.string  "part_of_speech"
   end
 
   add_index "senses", ["external_id"], name: "index_senses_on_external_id", unique: true, using: :btree

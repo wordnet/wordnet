@@ -64,6 +64,7 @@ class Sense < ActiveRecord::Base
       :sense_index => sense_index,
       :language => language,
       :domain_id => domain_id,
+      :part_of_speech => part_of_speech,
       :comment => comment
     }
 
