@@ -41,5 +41,5 @@
     .grid__cell.grid__cell--5-20
       h1.definition__term Źródło
     .grid__cell.grid__cell--15-20.definition__content
-      / TODO: data source
-      | Princeton Wordnet 3.0
+      span ng-if="sense.language == 'pl_PL'" Słowosieć
+      span ng-if="sense.language == 'en_GB'" Princeton Wordnet 3.0
