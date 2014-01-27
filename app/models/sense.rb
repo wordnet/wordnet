@@ -10,7 +10,7 @@ class Sense < ActiveRecord::Base
     :class_name => "SenseRelation"
 
   def fetch_relations
-    neo = Neography::Rest.new
+    neo = Neography::Rest.new(Figaro.env.neo4j_url)
     query = """
       match (s:Singleton{ id: {child_id} }),
             (s-[:relation*0..1 { weight: 0 }]->(h:Synset)),
@@ -36,7 +36,7 @@ class Sense < ActiveRecord::Base
   end
 
   def fetch_reverse_relations
-    neo = Neography::Rest.new
+    neo = Neography::Rest.new(Figaro.env.neo4j_url)
     query = """
       match (s:Singleton{ id: {parent_id} }),
             (s-[:relation*0..1 { weight: 0 }]->(h:Synset)),

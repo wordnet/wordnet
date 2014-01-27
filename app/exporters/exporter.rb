@@ -20,7 +20,7 @@ class Exporter
   end
 
   def initialize(options = {})
-    @connection = Neography::Rest.new
+    @connection = Neography::Rest.new(Figaro.env.neo4j_url)
     @batch_size = options.fetch(:batch_size, 500)
     @pages = options.fetch(:pages, (source.count.to_f / @batch_size).ceil)
   end

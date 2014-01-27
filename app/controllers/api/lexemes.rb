@@ -58,7 +58,7 @@ module API
           })
         """.gsub(/\s+/, ' ').strip.freeze
 
-        neo = Neography::Rest.new
+        neo = Neography::Rest.new(Figaro.env.neo4j_url)
 
         neo.execute_query(
           query, sense_id: params[:sense_id]
