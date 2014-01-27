@@ -26,12 +26,17 @@ App.factory 'getSense', ($http, getRelations) ->
     getRelations().then (relations) ->
       $http.get("#{DOMAIN}/api/senses/#{sense_id}", cache: true).then (response) ->
         sense = response.data
-        angular.forEach sense.relations, (relation) ->
+
+        angular.forEach sense.outgoing, (relation) ->
           relation.type = relations[relation.relation_id]
           relation.priority = relations[relation.relation_id].priority
-        angular.forEach sense.reverse_relations, (relation) ->
+
+        angular.forEach sense.incoming, (relation) ->
           relation.type = relations[relation.relation_id]
           relation.priority = relations[relation.relation_id].priority
+          relation.no_reverse = !!relations[relation.relation_id].reverse_name
+
+        console.log(sense.incoming)
 
         # Filter out the current sense
         # (so it’s not duplicated as its own synonym)

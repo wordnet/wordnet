@@ -75,8 +75,8 @@ class Sense < ActiveRecord::Base
     if options[:extended]
       data[:homographs] = lexeme.senses.order(language: :desc, sense_index: :asc).select(&:id).map(&:id)
       data[:synset] = synset.as_json
-      data[:relations] = fetch_relations
-      data[:reverse_relations] = fetch_reverse_relations
+      data[:outgoing] = fetch_relations
+      data[:incoming] = fetch_reverse_relations
     end
 
     data

@@ -13,6 +13,6 @@ App.filter 'toRelationName', ->
     reverse_name = tweak(relation.reverse_name)
     direction = toString(direction).toLowerCase()
 
-    return name unless direction == 'outgoing'
+    return name unless direction == 'incoming'
     return reverse_name if reverse_name
     "← (#{name || 'Relacja nieoznaczona'})"
