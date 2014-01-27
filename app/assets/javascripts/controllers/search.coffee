@@ -9,10 +9,12 @@ App.config ($routeProvider, $locationProvider) ->
     controller: 'SenseCtrl'
     templateUrl: 'index.html'
     resolve:
-      relations: (getRelations) ->
+      relations: ['getRelations', (getRelations) ->
         getRelations()
-      sense: ($route, getSense) ->
+      ]
+      sense: ['$route', 'getSense', ($route, getSense) ->
         getSense($route.current.params.senseId)
+      ]
 
   $locationProvider.html5Mode(true)
 
