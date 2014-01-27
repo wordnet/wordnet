@@ -3,16 +3,16 @@ class Sense < ActiveRecord::Base
   belongs_to :lexeme
   belongs_to :synset
 
-  has_many :relations, :foreign_key => "parent_id",
+  has_many :relations, :foreign_key => "child_id",
     :class_name => "SenseRelation"
 
-  has_many :reverse_relations, :foreign_key => "child_id",
+  has_many :reverse_relations, :foreign_key => "parent_id",
     :class_name => "SenseRelation"
 
   def fetch_relations
     neo = Neography::Rest.new
     query = """
-      match (s:Singleton{ id: {sense_id} }),
+      match (s:Singleton{ id: {child_id} }),
             (s-[:relation*0..1 { weight: 0 }]->(h:Synset)),
             (h-[r:relation { weight: 1 }]->(i:Synset)),
             (i-[r2:synset_sense]->(target:Sense))
@@ -31,14 +31,14 @@ class Sense < ActiveRecord::Base
     """.strip_heredoc
 
     neo.execute_query(
-      query, sense_id: id
+      query, child_id: id
     )["data"].map(&:first)
   end
 
   def fetch_reverse_relations
     neo = Neography::Rest.new
     query = """
-      match (s:Singleton{ id: {sense_id} }),
+      match (s:Singleton{ id: {parent_id} }),
             (s-[:relation*0..1 { weight: 0 }]->(h:Synset)),
             (h<-[r:relation { weight: 1 }]-(i:Synset)),
             (i-[r2:synset_sense]->(target:Sense))
@@ -57,7 +57,7 @@ class Sense < ActiveRecord::Base
     """.strip_heredoc
 
     neo.execute_query(
-      query, sense_id: id
+      query, parent_id: id
     )["data"].map(&:first)
   end
 

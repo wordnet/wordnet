@@ -1,0 +1,184 @@
+id,parent_id,reverse_id,primary,,name,priority,description
+10,NULL,11,x,hiponimia,hiponimy,1,"Hipo-/hiperonimia to podstawowa relacja kształtujaca hierarchiczną strukturę słownictwa. Jest to relacja, którą można określić jako implikację jednostronną. Hiperonimia jest relacją między jednostkami należącymi do tej samej klasy fleksyjnej. Warunek: Jednostki leksykalne synsetu X stanowią rodzaj jednostek synsetu Y, istnieje jeszcze co najmniej jeden synset Z, którego jednostki są rodzajem jednostek leksykalnych synsetu Y."
+11,NULL,10,,hiperonimia,hiperonimy,2,"Hipo-/hiperonimia to podstawowa relacja kształtująca hierarchiczną strukturę słownictwa.
+Jest to relacja, którą można określić jako implikację jednostronną. Hiperonimia jest relacją między jednostkami należącymi do tej samej klasy fleksyjnej."
+12,NULL,12,,antonimia,antonimy,23,"Relacja antonimii wskazuje każdą znaczeniową przeciwstawność między jednostkami leksykalnymi, wyjąwszy konwersję. Do antonimów zaliczamy antonimy komplementarne jak kręgowiec -- bezkręgowiec, antonimy właściwe, np. dzień -- noc oraz antonimy kierunkowe, np. północ -- południe i antonimy kulturowe, np. anioł -- diabeł. Antonimia jest relacją zachodzącą między jednostkami o tej samej klasie gramatycznej."
+13,NULL,13,,konwersja,konwersy,24,"Konwersja to relacja odwrotności łącząca jednostki leksykalne. Relacja ta przedstawia to samo zjawisko z dwóch różnych stron. Konwersja jest częsta między leksemami należącymi do słownictwa opisującego role społeczne, stopnie pokrewieństwa, stosunki czasowe i przestrzenne. Mówiąc ściślej, konwersami są takie predykaty o co najmniej dwóch walencjach semantycznych, które mają ten sam zbiór walencji, ale różny układ aktantów dla tych samych walencji."
+14,NULL,NULL,,meronimia,meronimy,6,"Mero-/holonimia jest relacją cząstkowości, często wzajemnie odwrotną, zachodzi tylko wśród rzeczowników."
+15,NULL,NULL,,holonimia,holonimy,8,"Mero-/holonimia jest relacją cząstkowości, często wzajemnie odwrotną, zachodzi tylko wśród rzeczowników."
+146,NULL,NULL,,określnik,określniki,,
+147,NULL,NULL,,gradacyjność,gradacje,4,Gradacyjnością łączymy różne stopnie intensywności tej samej cechy. Relacją tą łączymy tylko najbliższe stopnie natężenia cechy.
+19,NULL,19,,fuzzynimia,fuzzyimy,,
+20,14,25,,część,części,1,(dziedziczone)
+21,14,26,,porcja,porcje,2,(dziedziczone)
+22,14,27,,miejsce,miejsca,3,(dziedziczone)
+23,14,28,,element kolekcji,elementy kolekcji,4,(dziedziczone)
+24,14,29,,materiał,materiały,5,(dziedziczone)
+25,15,20,,część,części,1,(dziedziczone)
+26,15,21,,porcja,porcje,2,(dziedziczone)
+27,15,22,,miejsce,miejsca,3,(dziedziczone)
+28,15,23,,element kolekcji,elementy kolekcji,4,(dziedziczone)
+29,15,24,,materiał,materiały,5,(dziedziczone)
+30,NULL,30,,synonimia,synonimy,10,"Wszystkie jednostki należące do danego synsetu powinny wchodzić w te same relacje synsetów z tymi samymi jednostkami leksykalnymi. Oznacza to, że dwa synonimy są nierozróżnialne, patrząc wyłącznie na relacje synsetów, np. są hiponimami tego samego zbioru jednostek leksykalnych."
+32,NULL,NULL,,rola,role,,
+33,NULL,NULL,,zawieranie_roli,zawieranie roli,,
+34,32,NULL,,agens|subiekt,agensy,1,(dziedziczone)
+35,32,NULL,,pacjens|obiekt,pacjensy,2,(dziedziczone)
+36,32,NULL,,narzędzie,narzędzia,3,(dziedziczone)
+37,32,NULL,,miejsce,miejsca,4,(dziedziczone)
+38,32,NULL,,wytwór|rezultat,wytwory,5,(dziedziczone)
+39,32,NULL,,czas,czasy,6,(dziedziczone)
+40,32,NULL,,podtyp nieokreślony,nieokreślone,7,(dziedziczone)
+41,33,NULL,,zawieranie agensa|subiektu,agensy,1,(dziedziczone)
+42,33,NULL,,zawieranie pacjensa|obiektu,pacjensy,2,(dziedziczone)
+43,33,NULL,,zawieranie czasu,narzędzia,3,(dziedziczone)
+44,33,NULL,,zawieranie miejsca,miejsca,4,(dziedziczone)
+45,33,NULL,,zawieranie narzędzia,wytwory,5,(dziedziczone)
+46,33,NULL,,zawieranie wytworu | rezultatu,czasy,6,(dziedziczone)
+47,33,NULL,,podtyp nieokreślony,nieokreślone,7,(dziedziczone)
+48,32,NULL,,agens przy niewyrażonym predykacie,agensy przy niewyrażonym predykacie,8,(dziedziczone)
+49,32,NULL,,miejsce przy niewyrażonym predykacie,miejsca przy niewyrażonym predykacie,9,(dziedziczone)
+50,32,NULL,,wytwór | rezultat przy niewyrażonym predykacie,wytwory przy niewyrażonym predykacie,10,(dziedziczone)
+51,NULL,52,,nosiciel_stanu|cechy,nosiciele stanu,31,"Relacja służy połączeniu rzeczowników opisujących kogoś lub coś, będących w określonym stanie, przejawiających jakiś stan lub charakterystycznych ze względu na jakąś cechę, z przymiotnikami, które wyrażają stan lub cechę. Rzeczownik jest derywowany od przymiotnika."
+52,NULL,51,x,stan|cecha,stany,30,"Relacja służy połączeniu rzeczowników opisujących kogoś lub coś, będących w określonym stanie, przejawiających jakiś stan lub charakterystycznych ze względu na jakąś cechę, z przymiotnikami, które wyrażają stan lub cechę. Przymiotnik jest bazą derywacyjną dla rzeczownika."
+53,NULL,NULL,,żeńskość,nazwy żeńskie,,
+54,NULL,NULL,,nacechowanie,nacechowanie,26,"Relacja nacechowania łączy jednostki leksykalne, dla których istnieje związek derywacyjny o charakterze stylistycznym. Należy zwracać szczególną uwagę na to, czy wyrazy łączy związek derywacyjny. Może się zdarzyć, że wyraz o kształcie derywatu jest już zleksykalizowany (i np. synonimiczny lub bliskoznaczny do innego wyrazu)."
+55,54,NULL,,istota młoda,istoty młode,1,(dziedziczone)
+56,54,NULL,,deminutywność,deminutywy,2,(dziedziczone)
+57,54,NULL,,ekspresywność | augmentatywność,augmentatywy,3,(dziedziczone)
+58,NULL,NULL,,mieszkaniec,mieszkańce,12,"Relacja wynikająca z derywacji: bycie mieszkańcem/obywatelem jakiegoś kraju, regionu lub miasta. Relacja wiąże synsety, z których przynajmniej dwie jednostki musi wiązać relacja derywacyjna (po jednym z każdego)."
+59,NULL,NULL,,derywacyjność,derywatywy,35,Derywaty synchroniczne reprezentujące procesy mniej regularne łączymy z podstawami słowotwórczymi relacją derywacyjności.
+60,NULL,60,,bliskoznaczność,bliskoznaczne z,11,"Jeśli dwa leksemy -- kandydaci na parę synonimów -- są opisane w słowniku jako synonimy, ale: nie łączy ich hiperonimia wzajemna, albo nie mają wspólnego hiperonimu, albo nie są meronimami tego samego synsetu, albo nie są hiperonimami tego samego zbioru synsetów, to nazwiemy je wyrazami bliskoznacznymi. Bliskoznaczność można też rozpoznać po kontekstowej wymienności badanych jednostek leksykalnych."
+61,NULL,NULL,,synonimia_międzyparadygmatyczna,synonimy międzyparadygmatyczne,25,"O synonimii międzyparadygmatycznej mówimy, gdy to samo znaczenie reprezentują co najmniej dwa leksemy należące do różnych klas gramatycznych. Są to tzw. derywaty transpozycyjne."
+143,61,144,,synonimia międzyparadygmatyczna V-Pact,V-Pact,5,(dziedziczone)
+62,61,141,,synonimia międzyparadygmatyczna N-V,N-V,1,(dziedziczone)
+63,61,142,,synonimia międzyparadygmatyczna N-ADJ,N-Adj,2,(dziedziczone)
+64,14,65,,element taksonomiczny,taksonomiczne,6,(dziedziczone)
+65,15,64,,element taksonomiczny,taksonomiczne,6,(dziedziczone)
+73,NULL,NULL,,aspektowość,aspekty,,
+74,73,75,,aspektowość czysta DK-NDK,czyste DK-NDK,1,(dziedziczone)
+75,73,74,,aspektowość czysta NDK-DK,czyste NDK-DK,2,(dziedziczone)
+116,115,113,,holonimia podsytuacji,podsytuacji,1,(dziedziczone)
+117,115,114,,holonimia sytuacji towarzyszącej,sytuacji towarzyszącej,2,(dziedziczone)
+115,NULL,NULL,,holonimia_czasownikowa,holonimy czasownikowe,9,
+80,NULL,NULL,,kauzacja,kauzacje,13,"Czasownik kauzujący można sparafrazować za pomocą wyrażenia '(s)powodować, że...'. Relacją tą łączymy czasowniki z czasownikami, przymiotnikami i rzeczownikami."
+120,80,NULL,,kauzacja NDK-NDK,NDK-NDK,1,(dziedziczone)
+121,80,NULL,,kauzacja DK-DK,DK-DK,2,(dziedziczone)
+86,NULL,NULL,,procesywność,procesywności,14,"Czasownik procesywny można sparafrazować za pomocą wyrażenia 'stawać się jakimś, czymś'. Relacja ta łączy czasowniki z przymiotnikami i rzeczownikami."
+91,NULL,NULL,,stanowość,stany,15,"Stanowość to relacja łącząca czasowniki stanowe z przymiotnikami cechującymi ten stan. Taki czasownik stanowy może być sparafrazowany za pomocą wyrażenia 'być jakimś, kimś|czymś'"
+92,91,NULL,,stanowość V-Adj,V-Adj,1,(dziedziczone)
+93,91,NULL,,stanowość V-N,V-N,2,(dziedziczone)
+89,86,NULL,,procesywność V_NDK-Adj,V_NDK-Adj,1,(dziedziczone)
+90,86,NULL,,procesywność V_NDK-N,V_NDK-N,2,(dziedziczone)
+110,73,111,,aspektowość wtórna DK-NDK,wtórne DK-NDK,3,(dziedziczone)
+111,73,110,,aspektowość wtórna NDK-DK,wtórne NDK-DK,4,(dziedziczone)
+132,NULL,NULL,,wzajemność,znaczenia wzajemne,32,
+133,NULL,NULL,,wielokrotność,znaczenia wielokrotne,16,
+134,133,NULL,,iteratywność NDK-NDK,iteratywne NDK-NDK,1,(dziedziczone)
+131,NULL,NULL,,zwrotność,znaczenia zwrotne,33,
+112,NULL,NULL,,meronimia_czasownikowa,meronimy czasownikowe,7,
+113,112,116,,meronimia podsytuacji,podsytuacji,1,(dziedziczone)
+114,112,117,,meronimia sytuacji towarzyszącej,sytuacji towarzyszącej,2,(dziedziczone)
+101,12,101,,antonimia komplementarna,komplementarne,2,(dziedziczone)
+102,12,NULL,,forma kanoniczna,kanoniczne,3,(dziedziczone)
+104,12,104,,antonimia właściwa,właściwe,1,(dziedziczone)
+107,NULL,106,x,egzemplarz,przykłady,,
+106,NULL,107,,typ,typy,,
+108,NULL,108,,fuzzynimia_synsetów,fuzzynimy synsetów,,
+118,86,NULL,,procesywność V_DK-Adj,V_DK-Adj,3,(dziedziczone)
+119,86,NULL,,procesywność V_DK-N,V_DK-N,4,(dziedziczone)
+122,80,NULL,,kauzacja stanu DK-NDK,DK-NDK,3,(dziedziczone)
+124,80,NULL,,kauzacja procesu DK-Adj,DK-Adj,4,(dziedziczone)
+125,80,NULL,,kauzacja procesu DK-N,DK-N,5,(dziedziczone)
+126,80,NULL,,kauzacja procesu NDK-Adj,NDK-Adj,6,(dziedziczone)
+127,80,NULL,,kauzacja procesu NDK-N,NDK-N,7,(dziedziczone)
+128,NULL,NULL,,inchoatywność,znaczenia ichoatywne,17,
+129,128,NULL,,inchoatywność DK-NDK,DK-NDK,1,(dziedziczone)
+130,128,NULL,,inchoatywność NDK-NDK,NDK-NDK,2,(dziedziczone)
+145,NULL,NULL,,wartość_cechy,wartości cechy,3,Relacją wartość cechy łączymy przymiotniki oznaczające jakiś stopień natężenia cechy wyrażonej rzeczownikiem.
+136,133,NULL,,dystrybutywność,dystrybutywne,2,(dziedziczone)
+137,NULL,NULL,,presupozycja,presupozycyjne,18,
+138,NULL,NULL,,uprzedniość,uprzednie,19,
+140,133,NULL,,iteratywność NDK-DK,iteratywne NDK-DK,3,(dziedziczone)
+141,61,62,,synonimia międzyparadygmatyczna V-N,V-N,3,(dziedziczone)
+142,61,63,,synonimia międzyparadygmatyczna ADJ-N,ADJ-N,4,(dziedziczone)
+144,61,143,,synonimia międzyparadygmatyczna Pact-V,Pact-V,6,(dziedziczone)
+148,NULL,NULL,,podobieństwo,podobne znaczenia,36,"Relacją tą łączymy przymiotnik odrzeczownikowy z jego bazą słowotwórczą, jeśli przymiotnik jest jakościowy i przypomina byt wyrażony rzeczownikiem pod jakimś względem."
+149,NULL,NULL,,charakteryzowanie,znaczenia charaktetyzujące,37,Relacją tą łączymy te odrzeczownikowe przymiotniki jakościowe z ich podstawami słowotórczymi.
+150,NULL,NULL,,stopniowanie,stopnie,38,Syntetyczne formy stopnia wyższego i najwyższego uznajemy za osobne jednostki leksykalne
+151,150,NULL,,stopień wyższy,wyższe,2,(dziedziczone)
+152,150,NULL,,stopień najwyższy,najwyższe,3,(dziedziczone)
+153,NULL,NULL,,rola Adj-V,role Adj-V,39,
+154,153,NULL,,agens,agensy,2,(dziedziczone)
+155,153,NULL,,pacjens,pacjensy,3,(dziedziczone)
+156,153,NULL,,instrument,instrumenty,4,(dziedziczone)
+157,153,NULL,,miejsce,miejsca,5,(dziedziczone)
+158,153,NULL,,czas,czasy,6,(dziedziczone)
+160,153,NULL,,rezultat,rezultaty,7,(dziedziczone)
+161,153,NULL,,kauzacja,kauzacje,8,(dziedziczone)
+162,NULL,NULL,,predyspozycyjność,znaczenia predyspozycyjne,40,
+163,162,NULL,,potencjalność,potencjalne,2,(dziedziczone)
+164,162,NULL,,habitualność,habitualne,3,(dziedziczone)
+165,162,NULL,,kwantytatywność,kwantytatywne,4,(dziedziczone)
+166,162,NULL,,ocena,oceny,5,(dziedziczone)
+168,NULL,NULL,,nacechowanie-intensywność Adj-Adj,nacechowania intensywności,41,
+169,61,NULL,,synonimia międzyparadygmatyczna dla relacyjnych,relacyjne,7,(dziedziczone)
+170,NULL,NULL,,Antonym,antonyms,49,Opis
+171,NULL,173,,Hypernym,hypernyms,50,Opis
+172,NULL,NULL,,Instance_Hypernym,instances,51,Opis
+173,NULL,171,x,Hyponym,hyponyms,52,Opis
+174,NULL,172,,Instance_Hyponym,instances,53,Opis
+175,NULL,NULL,,Member_holonym,members,54,Opis
+176,NULL,NULL,,Substance_holonym,substances,55,Opis
+177,NULL,NULL,,Part_holonym,holonyms (parts),56,Opis
+178,NULL,NULL,,Member_meronym,meronyms (members),57,Opis
+179,NULL,NULL,,Substance_meronym,meronyms (substances),58,Opis
+180,NULL,NULL,,Part_meronym,meronyms (parts),59,Opis
+181,NULL,NULL,,Attribute,attributes,60,Opis
+182,NULL,NULL,,Derivationally related form,derivationally related forms,61,Opis
+183,NULL,184,,Domain_of_synset_-_TOPIC,synset domains (topic),62,Opis
+184,NULL,183,x,Member_of_this_domain_-_TOPIC,domain members (topic),63,Opis
+185,NULL,186,,Domain_of_synset_-_REGION,synset domains (region),64,Opis
+186,NULL,185,x,Member_of_this_domain_-_REGION,domain members (domain),65,Opis
+187,NULL,188,,Domain_of_synset_-_USAGE,synset domains (usage),67,Opis
+188,NULL,187,x,Member_of_this_domain_-_USAGE,domain members (topic),68,Opis
+189,NULL,NULL,,Entailment,entailments,69,Opis
+190,NULL,NULL,,Cause,causations,70,Opis
+191,NULL,NULL,,Also see,see also,71,Opis
+192,NULL,NULL,,Verb_Group,verb groups,72,Opis
+193,NULL,193,,Similar_to,similar,73,Opis
+194,NULL,193,x,Participle of verb,verb participles,74,Opis
+195,NULL,NULL,,Pertainym (pertains to noun),pertainyms,75,Opis
+197,NULL,199,x,hiponimia_międzyjęzykowa,hiponimy międzyjęzykowe,43,
+198,NULL,NULL,,synonimia_międzyjęzykowa,synonimy międzyjęzykowe,42,
+199,NULL,197,,hiperonimia_międzyjęzykowa,hiperonimy międzyjęzykowe,44,
+200,NULL,NULL,,meronimia_międzyjęzykowa,meronimy międzyjęzykowe,45,
+201,200,217,,mczęść_plWN-PWN,części,2,(dziedziczone)
+202,200,218,,melement_plWN-PWN,elementy,4,(dziedziczone)
+203,200,219,,mmateriał_plWN-PWN,materiały,6,(dziedziczone)
+204,NULL,NULL,,holonimia_międzyjęzykowa,holonimy międzyjęzykowe,46,
+205,204,214,,hczęść_plWN-PWN,części,2,(dziedziczone)
+206,204,215,,helement_plWN-PWN,elementy,4,(dziedziczone)
+207,204,216,,hmateriał_plWN-PWN,materiały,6,(dziedziczone)
+208,198,209,,Syn_plWN-PWN,,2,(dziedziczone)
+209,198,208,,Syn_PWN-plWN,,3,(dziedziczone)
+210,197,213,,Hipo_plWN-PWN,,2,(dziedziczone)
+211,197,212,,Hipo_PWN-plWN,,3,(dziedziczone)
+212,199,211,,Hiper_plWN-PWN,,2,(dziedziczone)
+213,199,210,,Hiper_PWN-plWN,,3,(dziedziczone)
+214,200,205,,mczęść_PWN-plWN,,3,(dziedziczone)
+215,200,206,,melement_PWN-plWN,elementy,5,(dziedziczone)
+216,200,207,,mmateriał_PWN-plWN,materiały,7,(dziedziczone)
+217,204,201,,hczęść_PWN-plWN,części,3,(dziedziczone)
+218,204,202,,helement_PWN-plWN,elementy,5,(dziedziczone)
+219,204,203,,hmateriał_PWN-plWN,materiały,7,(dziedziczone)
+220,NULL,220,,potencjalny_odpowiednik,potencjalne odpowiedniki międzyjęzykowe,76,
+222,220,223,,pot_odp_plWN-PWN,,2,(dziedziczone)
+223,220,222,,pot_odp_PWN-plWN,,3,(dziedziczone)
+224,NULL,NULL,,międzyjęzykowa_synonimia_częściowa,międzyjęzykowe synonymy częściowe,47,
+225,224,226,,międzyjęzykowa_synonimia_częściowa_plWN-PWN,,2,(dziedziczone)
+226,224,225,,międzyjęzykowa_synonimia_częściowa_PWN-plWN,,3,(dziedziczone)
+227,NULL,NULL,,międzyjęzykowa_synonimia_międzyrejestrowa,międzyjęzykowe synonimy międzyrejestrowe,48,
+228,227,229,,międzyjęzykowa_synonimia_międzyrejestrowa_plWN-PWN,,2,(dziedziczone)
+229,227,228,,międzyjęzykowa_synonimia_międzyrejestrowa_PWN-plWN,,3,(dziedziczone)
+230,NULL,NULL,,sumo_instance,sumo instances,77,

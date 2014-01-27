@@ -15,4 +15,4 @@ App.filter 'toRelationName', ->
 
     return name unless direction == 'incoming'
     return reverse_name if reverse_name
-    "← (#{name || 'Relacja nieoznaczona'})"
+    "← #{name || 'Relacja nieoznaczona'}"
