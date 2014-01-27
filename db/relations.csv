@@ -1,4 +1,4 @@
-id,parent_id,reverse_id,primary,,name,priority,description
+id,parent_id,reverse_id,primary,,parent_name,priority,description
 10,NULL,11,x,hiponimia,hiponimy,1,"Hipo-/hiperonimia to podstawowa relacja kształtujaca hierarchiczną strukturę słownictwa. Jest to relacja, którą można określić jako implikację jednostronną. Hiperonimia jest relacją między jednostkami należącymi do tej samej klasy fleksyjnej. Warunek: Jednostki leksykalne synsetu X stanowią rodzaj jednostek synsetu Y, istnieje jeszcze co najmniej jeden synset Z, którego jednostki są rodzajem jednostek leksykalnych synsetu Y."
 11,NULL,10,,hiperonimia,hiperonimy,2,"Hipo-/hiperonimia to podstawowa relacja kształtująca hierarchiczną strukturę słownictwa.
 Jest to relacja, którą można określić jako implikację jednostronną. Hiperonimia jest relacją między jednostkami należącymi do tej samej klasy fleksyjnej."
@@ -82,8 +82,8 @@ Jest to relacja, którą można określić jako implikację jednostronną. Hiper
 101,12,101,,antonimia komplementarna,komplementarne,2,(dziedziczone)
 102,12,NULL,,forma kanoniczna,kanoniczne,3,(dziedziczone)
 104,12,104,,antonimia właściwa,właściwe,1,(dziedziczone)
-107,NULL,106,x,egzemplarz,przykłady,,
-106,NULL,107,,typ,typy,,
+107,NULL,106,,egzemplarz,typy,,
+106,NULL,107,x,typ,przykłady,,
 108,NULL,108,,fuzzynimia_synsetów,fuzzynimy synsetów,,
 118,86,NULL,,procesywność V_DK-Adj,V_DK-Adj,3,(dziedziczone)
 119,86,NULL,,procesywność V_DK-N,V_DK-N,4,(dziedziczone)
