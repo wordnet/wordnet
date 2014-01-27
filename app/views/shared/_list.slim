@@ -1,7 +1,7 @@
 - prefix = direction == 'outgoing' ? 'reverse_' : ''
 
 section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{prefix}relations | orderBy:'priority' | orderBy:'target_type'" ng-init="count = relation_type.senses.length"
-  h1.list__header.u__header ng-bind="relations[relation_type.relation_id] | getRelationName:'#{direction}'"
+  h1.list__header.u__header ng-bind="relations[relation_type.relation_id] | toRelationName:'#{direction}'"
   / h2 ng-bind="relation_type.target_type"
 
   ul ng-init="truncate_after = 3"

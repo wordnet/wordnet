@@ -14,25 +14,7 @@ App.config ($routeProvider, $locationProvider) ->
       sense: ($route, getSense) ->
         getSense($route.current.params.senseId)
 
-
   $locationProvider.html5Mode(true)
-
-App.filter 'getRelationName', ->
-  toString = (value) ->
-    '' + (value || '')
-
-  tweak = (name) ->
-    n = toString(name).replace(/_+/g, ' ')
-    n.substr(0, 1).toUpperCase() + n.substr(1)
-
-  (relation, direction) ->
-    name = tweak(relation.name)
-    reverse_name = tweak(relation.reverse_name)
-    direction = toString(direction).toLowerCase()
-
-    return name unless direction == 'outgoing'
-    return reverse_name if reverse_name
-    "← (#{name || 'Relacja nieoznaczona'})"
 
 App.controller 'SenseCtrl', ($scope, getSense, getRelations, $modal, $routeParams, relations, sense) ->
   $scope.sense = null
