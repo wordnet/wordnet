@@ -68,7 +68,7 @@ module WordnetPl
 
     def convert_pos(pos_id)
       [
-        "nieznana",
+        nil,
         "czasownik",
         "rzeczownik",
         "przysłówek",
@@ -77,7 +77,7 @@ module WordnetPl
         "rzeczownik pwn",
         "przysłówek pwn",
         "przymiotnik pwn"
-      ].fetch(pos_id, "nieznana")
+      ][pos_id]
     end
 
     def process_comment(comment)
