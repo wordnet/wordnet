@@ -4,6 +4,9 @@ App.config ($routeProvider, $locationProvider) ->
   $routeProvider.when '/',
     controller: 'SenseCtrl'
     templateUrl: 'index.html'
+    resolve:
+      relations: -> []
+      sense: -> undefined
 
   $routeProvider.when '/:senseId',
     controller: 'SenseCtrl'
@@ -23,8 +26,10 @@ App.controller 'SenseCtrl', ($scope, getSense, getRelations, $modal, $routeParam
   $scope.sense_index = 0
 
   $scope.relations = _.indexBy(relations, (r) -> r.id)
-  $scope.sense = sense
-  $scope.sense_index = sense.homographs.indexOf(sense.id)
+
+  if sense
+    $scope.sense = sense
+    $scope.sense_index = sense.homographs.indexOf(sense.id)
 
   $scope.showHyponyms = (sense_id) ->
     $modal.open
