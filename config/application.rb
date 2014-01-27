@@ -22,4 +22,6 @@ class Application < Rails::Application
 
   config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
   config.assets.precompile += %w( .svg .eot .woff .ttf )
+
+  config.assets.js_compressor = Uglifier.new(mangle: false)
 end
