@@ -7,7 +7,7 @@
 #= require_tree ./directives
 #= require_tree ./filters
 
-DOMAIN = "http://localhost:3000"
+DOMAIN = ""
 
 App = angular.module('wordnet', ['ui.bootstrap', 'ngRoute'])
 
