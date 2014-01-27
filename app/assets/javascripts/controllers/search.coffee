@@ -8,6 +8,12 @@ App.config ($routeProvider, $locationProvider) ->
   $routeProvider.when '/:senseId',
     controller: 'SenseCtrl'
     templateUrl: 'index.html'
+    resolve:
+      relations: (getRelations) ->
+        getRelations()
+      sense: ($route, getSense) ->
+        getSense($route.current.params.senseId)
+
 
   $locationProvider.html5Mode(true)
 
@@ -28,16 +34,13 @@ App.filter 'getRelationName', ->
     return reverse_name if reverse_name
     "← (#{name || 'Relacja nieoznaczona'})"
 
-App.controller 'SenseCtrl', ($scope, getSense, getRelations, $modal, $routeParams) ->
+App.controller 'SenseCtrl', ($scope, getSense, getRelations, $modal, $routeParams, relations, sense) ->
   $scope.sense = null
   $scope.sense_index = 0
 
-  getRelations().then (relations) ->
-    $scope.relations = _.indexBy(relations, (r) -> r.id)
-
-    getSense($routeParams.senseId).then (sense) ->
-      $scope.sense = sense
-      $scope.sense_index = sense.homographs.indexOf(sense.id)
+  $scope.relations = _.indexBy(relations, (r) -> r.id)
+  $scope.sense = sense
+  $scope.sense_index = sense.homographs.indexOf(sense.id)
 
   $scope.showHyponyms = (sense_id) ->
     $modal.open

@@ -23,7 +23,6 @@ module API
 
     resource :senses do
       get '/:sense_id' do
-        sleep 1
         Sense.find(params[:sense_id]).as_json(extended: true)
       end
     end
