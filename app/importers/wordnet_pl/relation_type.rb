@@ -49,7 +49,6 @@ module WordnetPl
           r[:priority] += by_id[r[:parent_id]][:priority]
         end
       end
-      require'pry';binding.pry
 
       one_ways = relations.select { |r| r[:reverse_id].blank? }
       two_ways = relations.select { |r| r[:reverse_id].present? }
