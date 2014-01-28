@@ -3,11 +3,6 @@ require 'csv'
 module WordnetPl
   class RelationType < Importer
 
-    def initialize
-      @connection = Sequel.connect('mysql2://root@localhost/wordnet', :max_connections => 10)
-      super
-    end
-
     def metadata
       @relations_metadata ||= begin
         metadata = CSV.foreach(Rails.root.join('db', 'relations.csv'), headers: true).to_a.map(&:to_h)
@@ -21,37 +16,27 @@ module WordnetPl
           r.with_indifferent_access
         end
 
-        metadata = metadata.index_by { |e| e["id"] }
+        metadata
       end
     end
 
     def unique_attributes
-      [:external_id]
+      [:id]
     end
 
     def total_count
-      @connection[:relationtype].max(:ID)
+      metadata.size
     end
 
     def load_entities(limit, offset)
-      raw = @connection[:relationtype].
-        select(:ID, :PARENT_ID, :REVERSE_ID, :name, :description, :order).to_a
-
-      raw.map do |relation|
-        {
-          id: relation[:ID],
-          name: relation[:name],
-          parent_id: relation[:PARENT_ID],
-          reverse_id: relation[:REVERSE_ID],
-          description: relation[:description],
-          priority: relation[:PARENT_ID].nil? ? relation[:order] * 100 : relation[:order]
-        }
+      metadata.map do |item|
+        item[:priority] = item[:parent_id].present? ? item[:priority] * 100 : item[:priority]
+        item
       end
     end
 
     def process_entities!(relations)
-      by_id = metadata # Original data is invalid...
-      relations = by_id.values
+      by_id = relations.index_by { |e| e[:id] }
 
       relations.each do |r|
         if r[:parent_id].present?
@@ -64,6 +49,7 @@ module WordnetPl
           r[:priority] += by_id[r[:parent_id]][:priority]
         end
       end
+      require'pry';binding.pry
 
       one_ways = relations.select { |r| r[:reverse_id].blank? }
       two_ways = relations.select { |r| r[:reverse_id].present? }
