@@ -4,7 +4,7 @@ module Neo4j
     EXPORT_QUERY = """
       MATCH (a:Singleton { id: {parent_id} }),
       (b:Singleton { id: {child_id} })
-      MERGE (a)-[r:relation { id: {relation_id}, weight: 1 }]->(b)
+      MERGE (a)<-[r:relation { id: {relation_id}, weight: 1 }]-(b)
     """.gsub(/\s+/, ' ').strip.freeze
 
     def export_index(connection)
