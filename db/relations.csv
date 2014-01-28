@@ -82,8 +82,8 @@ Jest to relacja, którą można określić jako implikację jednostronną. Hiper
 101,12,101,,antonimia komplementarna,komplementarne,2,(dziedziczone)
 102,12,NULL,,forma kanoniczna,kanoniczne,3,(dziedziczone)
 104,12,104,,antonimia właściwa,właściwe,1,(dziedziczone)
-107,NULL,106,,egzemplarz,typy,,
-106,NULL,107,x,typ,przykłady,,
+107,NULL,106,,egzemplarz,przykłady,,
+106,NULL,107,x,typ,typy,,
 108,NULL,108,,fuzzynimia_synsetów,fuzzynimy synsetów,,
 118,86,NULL,,procesywność V_DK-Adj,V_DK-Adj,3,(dziedziczone)
 119,86,NULL,,procesywność V_DK-N,V_DK-N,4,(dziedziczone)
