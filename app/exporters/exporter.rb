@@ -4,7 +4,7 @@ require 'synchronized_write_exporter'
 
 class Exporter
   prepend ProgressBarExporter
-  prepend ThreadPoolExporter
+  # prepend ThreadPoolExporter
   prepend SynchronizedWriteExporter
 
   def source
