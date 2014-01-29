@@ -46,23 +46,27 @@ module API
       get '/:sense_id' do
         query = """
           match (k:Singleton{ id: {sense_id} }),
-                k-[:relation { id: 0 }]->(n:Synset),
-                p = n<-[r:hyponym*0..]-(s:Synset),
-                s-[:synset_sense]->(s2:Sense)
-
-          return distinct({
-            id: s2.id,
-            lemma: s2.lemma,
-            sense_index: s2.sense_index,
-            comment: s2.comment
-          })
+          k-[:relation { id: 0 }]->(n:Synset),
+          p = n<-[:hyponym*0..]-(s:Synset)
+          where not((s)<-[:hyponym]-())
+          with nodes(p) as nodes
+          return extract(nod in nodes | 
+            extract(e2 in extract(p2 in nod-[:synset_sense]->() |
+              last(nodes(p2))
+            ) | {
+              id: e2.id,
+              lemma: e2.lemma,
+              sense_index: e2.sense_index,
+              comment: e2.comment
+            })
+          )
         """.gsub(/\s+/, ' ').strip.freeze
 
         neo = Neography::Rest.new(Figaro.env.neo4j_url)
 
         neo.execute_query(
           query, sense_id: params[:sense_id]
-        )["data"]
+        )["data"].map(&:first).map { |e| e.map(&:first).compact.reverse }
       end
     end
   end

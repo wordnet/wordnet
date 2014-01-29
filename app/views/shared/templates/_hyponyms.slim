@@ -1,7 +1,10 @@
 a.modal__close href="" ng-click="closeModal()" Powrót
-
+div ng-if="hyponyms.length > 1"
+  a ng-show="index > 0" href="#" style="position: absolute; left: 20px" ng-click="previous()" Poprzedni &laquo;
+  a ng-show="index < hyponyms.length - 1" href="#" style="position: absolute; right: 20px" ng-click="next()" Następny &raquo;
+  p style="margin-bottom: 20px" {{index + 1}} z {{hyponyms.length}}
 ol.path.u__header
-  li.path__item ng-repeat="sense in hyponyms"
+  li.path__item ng-repeat="sense in hyponyms[index]"
     a.item.item--inline href="" ng-href="/{{sense.id}}" ng-click="closeModal()" ng-attr-title="{{ sense.comment }}"
       b.item__lemma
         | {{ sense.lemma }}
