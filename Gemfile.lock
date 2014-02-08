@@ -121,8 +121,6 @@ GEM
       rubyzip (~> 1.0.0)
     nest (1.1.2)
       redis
-    ngmin-rails (0.4.0)
-      rails (>= 3.1)
     ohm (1.3.2)
       nest (~> 1.0)
       redis
@@ -263,7 +261,6 @@ DEPENDENCIES
   mysql2
   neo4j-cypher
   neography
-  ngmin-rails
   ohm
   ohm-contrib
   pg

@@ -1,18 +1,18 @@
-App = angular.module('wordnet')
+angular.module('wordnet').controller 'HyponymCtrl', [
+  '$scope', '$modalInstance', 'getHyponyms', 'sense_id',
+  ($scope, $modalInstance, getHyponyms, sense_id) ->
+    $scope.hyponyms = []
+    $scope.index = 0
 
-App.controller 'HyponymCtrl', ($scope, $modalInstance, getHyponyms, sense_id) ->
-  $scope.hyponyms = []
-  $scope.index = 0
+    getHyponyms(sense_id).then (hyponyms) ->
+      $scope.hyponyms = hyponyms
 
-  $scope.next = ->
-    $scope.index += 1
+    $scope.next = ->
+      $scope.index += 1
 
-  $scope.previous = ->
-    $scope.index -= 1
+    $scope.previous = ->
+      $scope.index -= 1
 
-  getHyponyms(sense_id).then (hyponyms) ->
-    console.log(hyponyms)
-    $scope.hyponyms = hyponyms
-
-  $scope.closeModal = ->
-    $modalInstance.dismiss()
+    $scope.closeModal = ->
+      $modalInstance.dismiss()
+]

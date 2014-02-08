@@ -1,6 +1,4 @@
-App = angular.module('wordnet')
-
-App.directive 'itemFlag', ->
+angular.module('wordnet').directive 'itemFlag', ->
   lemmaClassName = 'item__lemma'
 
   toFlaggedClassName = (code) ->

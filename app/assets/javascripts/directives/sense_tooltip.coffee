@@ -1,8 +1,5 @@
-App = angular.module('wordnet')
-
-App.directive 'senseTooltip', ->
+angular.module('wordnet').directive 'senseTooltip', ->
   restrict: 'A'
-  replace: false
   scope:
     senseTooltip: '='
   link: (scope, element, attributes) ->

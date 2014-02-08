@@ -1,6 +1,4 @@
-App = angular.module('wordnet')
-
-App.filter 'toRelationName', ->
+angular.module('wordnet').filter 'toRelationName', ->
   toString = (value) ->
     '' + (value || '')
 

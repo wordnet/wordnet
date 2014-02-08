@@ -3,48 +3,32 @@
 #= require angular-bootstrap
 #= require angular-route
 #= require_self
+#= require_tree ./services
 #= require_tree ./controllers
 #= require_tree ./directives
 #= require_tree ./filters
 
-DOMAIN = ""
+angular.module('wordnet', ['ngRoute', 'ui.bootstrap']).config [
+  '$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
+    $routeProvider.when '/',
+      controller: 'SenseCtrl'
+      templateUrl: 'index.html'
+      resolve:
+        relations: -> []
+        sense: -> undefined
 
-App = angular.module('wordnet', ['ui.bootstrap', 'ngRoute'])
+    $routeProvider.when '/:senseId',
+      controller: 'SenseCtrl'
+      templateUrl: 'index.html'
+      resolve:
+        relations: [
+          'getRelations', (getRelations) ->
+            getRelations()
+        ]
+        sense: [
+          '$route', 'getSense', ($route, getSense) ->
+            getSense($route.current.params.senseId)
+        ]
 
-App.factory 'getLexemes', ($http) ->
-  (prefix) ->
-    $http.get("#{DOMAIN}/api/lexemes/#{prefix}", cache: true).then (response) ->
-      response.data
-
-App.factory 'getHyponyms', ($http) ->
-  (sense_id) ->
-    $http.get("#{DOMAIN}/api/hyponyms/#{sense_id}", cache: true).then (response) ->
-      response.data
-
-App.factory 'getSense', ($http, getRelations) ->
-  (sense_id) ->
-    getRelations().then (relations) ->
-      $http.get("#{DOMAIN}/api/senses/#{sense_id}", cache: true).then (response) ->
-        sense = response.data
-
-        angular.forEach sense.outgoing, (relation) ->
-          relation.type = relations[relation.relation_id]
-          relation.priority = relations[relation.relation_id].priority
-
-        angular.forEach sense.incoming, (relation) ->
-          relation.type = relations[relation.relation_id]
-          relation.priority = relations[relation.relation_id].priority
-          relation.no_reverse = !!relations[relation.relation_id].reverse_name
-
-        console.log(sense.incoming)
-
-        # Filter out the current sense
-        # (so it’s not duplicated as its own synonym)
-        synonyms_without_sense = _.filter(sense.synonyms, (s) -> s.id != sense_id)
-        _.extend(sense, synonyms: synonyms_without_sense)
-
-App.factory 'getRelations', ($http) ->
-  ->
-    $http.get("#{DOMAIN}/api/relations", cache: true).then (response) ->
-      _.indexBy(response.data, (r) -> r.id)
-
+    $locationProvider.html5Mode(true)
+]

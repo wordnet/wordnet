@@ -1,8 +1,7 @@
-App = angular.module('wordnet')
-
-App.filter 'inflect', ->
+angular.module('wordnet').filter 'inflect', ->
   (word, count) ->
     count = parseInt(count)
+
     switch word
       when 'połączenie' then switch
         when count == 1 then 'połączenie'
