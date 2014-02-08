@@ -3,13 +3,12 @@ section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{dire
 
   ul ng-init="truncate_after = 3"
     li ng-repeat="sense in relation_type.senses | limitTo:truncate_after"
-      a.item.list__item href="" ng-href="/{{sense.id}}" sense-tooltip="sense"
+      a.item.list__item href="" ng-href="/{{ sense.id }}" sense-tooltip="sense"
         b.item__lemma item-flag="relation_type.language"
           | {{ sense.lemma }}
           i.item__position ng-if="sense.sense_index"
             | &nbsp;{{ sense.sense_index }}
-        span.item__description.item__description--small.u__truncate ng-if="sense.comment"
-          span.u__hidden<> —
+        span.item__description.item__description--small.u__truncate< ng-if="sense.comment"
           | {{ sense.comment }}
 
     li ng-show="truncate_after < count"
