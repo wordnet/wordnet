@@ -3,7 +3,7 @@
 #= require angular-bootstrap
 #= require angular-route
 #= require_self
-#= require_tree ./services
+#= require_tree ./factories
 #= require_tree ./controllers
 #= require_tree ./directives
 #= require_tree ./filters
