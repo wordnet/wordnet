@@ -17,5 +17,5 @@ ol.path.u__header
     a.item.item--inline href="" ng-href="/{{ sense.id }}" ng-click="closeModal()" ng-attr-title="{{ sense.comment }}"
       b.item__lemma
         | {{ sense.lemma }}
-        i.item__position ng-if="sense.sense_index"
-          | &nbsp;{{ sense.sense_index }}
+        i.item__position
+          | &nbsp;{{ sense.sense_index || 0 }}

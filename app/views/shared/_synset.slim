@@ -6,8 +6,8 @@
       .item
         span.item__lemma.u__header item-flag="sense.language"
           | {{ sense.lemma }}
-          i.item__position ng-if="sense.sense_index"
-            | &nbsp;{{ sense.sense_index }}
+          i.item__position
+            | &nbsp;{{ sense.sense_index || 0 }}
         span.item__description< ng-if="sense.comment || sense.synset.definition"
           | {{ sense.comment || sense.synset.definition }}
 
@@ -27,8 +27,8 @@
         a.item href="" ng-href="/{{ synonym.id }}"
           b.item__lemma
             | {{ synonym.lemma }}
-            i.item__position ng-if="synonym.sense_index"
-              | &nbsp;{{ synonym.sense_index }}
+            i.item__position
+              | &nbsp;{{ synonym.sense_index || 0 }}
           span.item__description.item__description--small< ng-if="synonym.comment"
             | {{ synonym.comment }}
 

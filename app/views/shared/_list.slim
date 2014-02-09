@@ -6,8 +6,8 @@ section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{dire
       a.item.list__item href="" ng-href="/{{ sense.id }}" sense-tooltip="sense"
         b.item__lemma item-flag="relation_type.language"
           | {{ sense.lemma }}
-          i.item__position ng-if="sense.sense_index"
-            | &nbsp;{{ sense.sense_index }}
+          i.item__position
+            | &nbsp;{{ sense.sense_index || 0 }}
         span.item__description.item__description--small.u__truncate< ng-if="sense.comment"
           | {{ sense.comment }}
 
