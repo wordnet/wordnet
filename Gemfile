@@ -11,10 +11,10 @@ gem 'dotenv-rails', '~> 0.9'
 gem 'yajl-ruby', :require => 'yajl'
 
 # Frontend
-gem 'sass-rails', '~> 4.0.0'
-gem 'uglifier', '~> 2.3'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 4.0.0'
 gem 'slim-rails', '~> 2.0'
+gem 'uglifier', '~> 2.3'
 gem 'quiet_assets', '~> 1.0'
 gem 'compass-rails', '~> 1.1.3'
 gem 'autoprefixer-rails'
@@ -27,12 +27,9 @@ gem 'rails-assets-angular-route'
 gem 'rails-assets-angular-bootstrap'
 gem 'rails-assets-open-sans-fontface'
 
-gem 'ohm'
-gem 'ohm-contrib'
-
 # Wordnet Import
-gem 'sequel'
 gem 'mysql2'
+gem 'sequel'
 gem 'ruby-progressbar'
 gem 'thread', :require => 'thread/pool'
 gem 'upsert'
@@ -40,12 +37,10 @@ gem 'wisper', '~> 1.2.0'
 
 # Neo4J export
 gem 'neography'
-gem 'neo4j-cypher'
 
 # API
 gem 'grape', '~> 0.6.1'
 gem 'grape-kaminari', '~> 0.1.0'
-gem 'draper'
 
 group :development do
   gem 'awesome_print'
