@@ -1,8 +1,17 @@
 a.modal__close href="" ng-click="closeModal()" Powrót
-div ng-if="hyponyms.length > 1"
-  a ng-show="index > 0" href="#" style="position: absolute; left: 20px" ng-click="previous()" Poprzedni &laquo;
-  a ng-show="index < hyponyms.length - 1" href="#" style="position: absolute; right: 20px" ng-click="next()" Następny &raquo;
-  p style="margin-bottom: 20px" {{index + 1}} z {{hyponyms.length}}
+
+.modal__bar.grid ng-if="hyponyms.length > 1"
+  .grid__cell.grid__cell--7-20
+    a.u__previous href="" ng-click="previous()" ng-show="index > 0"
+      | Poprzedni
+  .grid__cell.grid__cell--6-20.u__text-center
+    span.u__bold ng-bind="index + 1"
+    span.u__dim<
+      | z {{ hyponyms.length }}&nbsp;ścieżek
+  .grid__cell.grid__cell--7-20.u__text-right
+    a.u__next href="" ng-click="next()" ng-show="index < hyponyms.length - 1"
+      | Następny
+
 ol.path.u__header
   li.path__item ng-repeat="sense in hyponyms[index]"
     a.item.item--inline href="" ng-href="/{{sense.id}}" ng-click="closeModal()" ng-attr-title="{{ sense.comment }}"
