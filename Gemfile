@@ -16,6 +16,7 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'slim-rails', '~> 2.0'
 gem 'uglifier', '~> 2.3'
 gem 'quiet_assets', '~> 1.0'
+gem 'compass-rails', '~> 1.1.3'
 gem 'autoprefixer-rails'
 
 # Rails Assets
