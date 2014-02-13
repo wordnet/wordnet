@@ -6,7 +6,7 @@ namespace :wordnet do
       WordnetPl.const_get(args[:klass]).new.import!
     else
       [
-        "RelationType", "Synset", "Sense", "SynsetSense",
+        "RelationType", "Synset", "Sense",
         "SenseRelation", "SynsetRelation"
       ].map { |c| WordnetPl.const_get(c).new.import! }
     end
@@ -17,7 +17,7 @@ namespace :wordnet do
       Neo4j.const_get(args[:klass]).new.export!
     else
       [
-        "Sense", "Synset", "SynsetSense",
+        "Synset", "Sense",
         "SenseRelation", "SynsetRelation"
       ].map { |c| Neo4j.const_get(c).new.export! }
     end

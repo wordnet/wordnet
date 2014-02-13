@@ -32,8 +32,9 @@ module WordnetPl
         if @relation_ids.include?(relation[:REL_ID])
           {
             relation_id: relation[:REL_ID],
-            parent_id: relation[:PARENT_ID],
-            child_id: relation[:CHILD_ID]
+            # PlWordnet gets it backward
+            parent_id: relation[:CHILD_ID],
+            child_id: relation[:PARENT_ID]
           }
         end
       end.compact

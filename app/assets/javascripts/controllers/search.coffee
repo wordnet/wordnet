@@ -4,6 +4,6 @@ angular.module('wordnet').controller 'SearchCtrl', [
     $scope.getLexemes = getLexemes
 
     $scope.onLexemeSelect = (lexeme) ->
-      $location.path("/#{lexeme.senses[0]}")
+      $location.path("/#{lexeme.sense_id}")
       $anchorScroll()
 ]

@@ -29,15 +29,12 @@ module API
 
     resource :lexemes do
 
-      get do
-        paginate(Lexeme.all)
-      end
-
       segment '/:lemma' do
         get do
-          Lexeme.order("length(lemma)").
-          where("lemma like ?", "#{params[:lemma]}%").
-          limit(10).to_a
+          Sense.select('lemma, id').
+          where("lemma like ? AND sense_index = 1", "#{params[:lemma]}%").
+          order('length(lemma)').
+          limit(10).to_a.map { |d| { sense_id: d.id, lemma: d.lemma } }
         end
       end
     end
@@ -50,8 +47,8 @@ module API
           p = n<-[:hyponym*0..]-(s:Synset)
           where not((s)<-[:hyponym]-())
           with nodes(p) as nodes
-          return extract(nod in nodes | 
-            extract(e2 in extract(p2 in nod-[:synset_sense]->() |
+          return extract(nod in nodes |
+            extract(e2 in extract(p2 in nod<-[:synset]-() |
               last(nodes(p2))
             ) | {
               id: e2.id,

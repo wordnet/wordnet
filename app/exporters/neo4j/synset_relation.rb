@@ -2,16 +2,16 @@ module Neo4j
   class SynsetRelation < Exporter
 
     EXPORT_QUERY = """
-      MATCH (a:Synset { id: {parent_id} }),
-      (b:Synset { id: {child_id} })
-      MERGE (a)<-[r:relation { id: {relation_id}, weight: 1 }]-(b)
+      MATCH (p:Synset { id: {parent_id} }),
+            (c:Synset { id: {child_id} })
+      MERGE (c)-[r:relation { id: {relation_id}, weight: 1 }]->(p)
     """.gsub(/\s+/, ' ').strip.freeze
 
     HYPONYM_QUERY = """
-      MATCH (a:Synset { id: {parent_id} }),
-      (b:Synset { id: {child_id} })
-      MERGE (a)<-[r:relation { id: {relation_id}, weight: 1 }]-(b)
-      MERGE (a)<-[r2:hyponym]-(b)
+      MATCH (p:Synset { id: {parent_id} }),
+            (c:Synset { id: {child_id} })
+      MERGE (c)-[r:relation { id: {relation_id}, weight: 1 }]->(p)
+      MERGE (c)-[r2:hyponym]->(p)
     """.gsub(/\s+/, ' ').strip.freeze
 
     def export_index(connection)

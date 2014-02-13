@@ -11,19 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126232808) do
+ActiveRecord::Schema.define(version: 20140213113922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
-
-  create_table "lexemes", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
-    t.string "lemma",    null: false
-    t.string "language"
-  end
-
-  add_index "lexemes", ["language"], name: "index_lexemes_on_language", using: :btree
-  add_index "lexemes", ["lemma"], name: "index_lexemes_on_lemma", unique: true, using: :btree
 
   create_table "relation_types", force: true do |t|
     t.integer "parent_id"
@@ -45,7 +37,6 @@ ActiveRecord::Schema.define(version: 20140126232808) do
     t.integer "external_id",    null: false
     t.integer "domain_id"
     t.text    "comment"
-    t.uuid    "lexeme_id"
     t.integer "sense_index"
     t.string  "language"
     t.string  "lemma"
@@ -56,7 +47,6 @@ ActiveRecord::Schema.define(version: 20140126232808) do
   add_index "senses", ["external_id"], name: "index_senses_on_external_id", unique: true, using: :btree
   add_index "senses", ["language"], name: "index_senses_on_language", using: :btree
   add_index "senses", ["lemma"], name: "index_senses_on_lemma", using: :btree
-  add_index "senses", ["lexeme_id"], name: "index_senses_on_lexeme_id", using: :btree
   add_index "senses", ["synset_id"], name: "index_senses_on_synset_id", using: :btree
 
   create_table "synset_relations", force: true do |t|
@@ -66,13 +56,6 @@ ActiveRecord::Schema.define(version: 20140126232808) do
   end
 
   add_index "synset_relations", ["parent_id", "child_id", "relation_id"], name: "synset_relations_idx", unique: true, using: :btree
-
-  create_table "synset_senses", force: true do |t|
-    t.uuid "synset_id", null: false
-    t.uuid "sense_id",  null: false
-  end
-
-  add_index "synset_senses", ["synset_id", "sense_id"], name: "index_synset_senses_on_synset_id_and_sense_id", unique: true, using: :btree
 
   create_table "synsets", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
     t.integer "external_id",              null: false
