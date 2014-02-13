@@ -1,3 +1,4 @@
 # Permanenent configuraton here. For local config use .env file.
 
 NEO4J_URL: http://127.0.0.1:7474
+SOURCE_URL: mysql2://root@localhost/wordnet

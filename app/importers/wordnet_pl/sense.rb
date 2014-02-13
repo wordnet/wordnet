@@ -2,7 +2,7 @@ module WordnetPl
   class Sense < Importer
 
     def initialize
-      @connection = Sequel.connect('mysql2://root@localhost/wordnet', :max_connections => 10)
+      @connection = Sequel.connect(Figaro.env.source_url, :max_connections => 10)
       super
     end
 
