@@ -44,12 +44,12 @@ module API
         query = """
           match (k:Singleton{ id: {sense_id} }),
           k-[:relation { id: 0 }]->(n:Synset),
-          p = n<-[:hyponym*0..]-(s:Synset)
-          where not((s)<-[:hyponym]-())
+          p = n-[:hyponym*0..]->(s:Synset)
+          where not((s)-[:hyponym]->())
           with nodes(p) as nodes
           return extract(nod in nodes |
             extract(e2 in extract(p2 in nod<-[:synset]-() |
-              last(nodes(p2))
+              nodes(p2)[0]
             ) | {
               id: e2.id,
               lemma: e2.lemma,
