@@ -150,8 +150,16 @@ GEM
     rails-assets-angular-bootstrap (0.9.0)
       rails-assets-angular (>= 1)
     rails-assets-angular-cache (2.2.0)
+    rails-assets-angular-cookies (1.2.7)
+      rails-assets-angular (= 1.2.7)
     rails-assets-angular-route (1.2.7)
       rails-assets-angular (= 1.2.7)
+    rails-assets-angular-translate (2.0.1)
+    rails-assets-angular-translate-storage-cookie (2.0.0)
+      rails-assets-angular-translate (~> 2.0.0)
+    rails-assets-angular-translate-storage-local (2.0.0)
+      rails-assets-angular-translate (~> 2.0.0)
+      rails-assets-angular-translate-storage-cookie (~> 2.0.0)
     rails-assets-lodash (2.4.1)
     rails-assets-open-sans-fontface (1.0.4)
     rails_12factor (0.0.2)
@@ -252,7 +260,11 @@ DEPENDENCIES
   rails-assets-angular (~> 1.2.7)
   rails-assets-angular-bootstrap
   rails-assets-angular-cache
+  rails-assets-angular-cookies
   rails-assets-angular-route
+  rails-assets-angular-translate
+  rails-assets-angular-translate-storage-cookie
+  rails-assets-angular-translate-storage-local
   rails-assets-lodash (~> 2.4)
   rails-assets-open-sans-fontface
   rails_12factor

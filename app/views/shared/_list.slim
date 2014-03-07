@@ -12,5 +12,7 @@ section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{dire
           | {{ sense.comment }}
 
     li ng-show="truncate_after < count"
-      a.list__item.list__item--more href="" ng-click="truncate_after = truncate_after * 100"
-        | Pokaż pozostałe {{ count - truncate_after }}&nbsp;{{ 'połączenie' | inflect:(count - truncate_after) }}
+      a.list__item.list__item--more(
+        href="" ng-click="truncate_after = truncate_after * 100"
+        translate="show_n_other_connections"
+        translate-values="{ n: count - truncate_after }")

@@ -17,7 +17,8 @@ html lang="pl" ng-app="wordnet"
           .top__container.top__container--main.grid__cell.grid__cell--10-20
             = render 'shared/search_field'
           .top__container.grid__cell.grid__cell--5-20.u__text-right
-            a href="https://github.com/wordnet/wordnet" title="Źródło na GitHubie" GitHub
+            a.item__lemma--pl href="" ng-click="changeLanguage('pl')"
+            a.item__lemma--en href="" ng-click="changeLanguage('en')"
 
     div ng-view=""
 

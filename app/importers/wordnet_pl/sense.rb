@@ -11,17 +11,10 @@ module WordnetPl
     end
 
     def process_entities!(senses)
-      lexemes = senses.map { |e| {
-        lemma: e[:lemma]
-      } }
-
-      persist_entities!("lexemes", lexemes, [:lemma])
-
       senses = fill_indexes(senses)
 
       senses = process_uuid_mappings(
         senses,
-        :lexeme_id => { table: :lexemes, attribute: :lemma },
         :synset_id => { table: :synsets, attribute: :external_id }
       )
 
@@ -54,7 +47,6 @@ module WordnetPl
         {
           external_id: lemma[:ID],
           domain_id: lemma[:domain],
-          lexeme_id: lemma[:lemma],
           lemma: lemma[:lemma],
           comment: process_comment(lemma[:comment]),
           language: lemma[:project] > 0 ? 'pl_PL' : 'en_GB',
@@ -69,14 +61,14 @@ module WordnetPl
     def convert_pos(pos_id)
       [
         nil,
-        "czasownik",
-        "rzeczownik",
-        "przysłówek",
-        "przymiotnik",
-        "czasownik pwn",
-        "rzeczownik pwn",
-        "przysłówek pwn",
-        "przymiotnik pwn"
+        "verb",
+        "noun",
+        "adverb",
+        "adjective",
+        "verb",
+        "noun",
+        "adverb",
+        "adjective"
       ][pos_id]
     end
 

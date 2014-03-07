@@ -26,6 +26,10 @@ gem 'rails-assets-angular-cache'
 gem 'rails-assets-angular-route'
 gem 'rails-assets-angular-bootstrap'
 gem 'rails-assets-open-sans-fontface'
+gem 'rails-assets-angular-translate'
+gem 'rails-assets-angular-cookies'
+gem 'rails-assets-angular-translate-storage-cookie'
+gem 'rails-assets-angular-translate-storage-local'
 
 # Wordnet Import
 gem 'mysql2'

@@ -1,7 +1,7 @@
 .definition.definition--header
   header.grid
     .grid__cell.grid__cell--5-20
-      .definition__term ng-bind="sense.part_of_speech"
+      .definition__term ng-bind="sense.part_of_speech | translate"
     h1.grid__cell.grid__cell--15-20.definition__content
       .item
         span.item__lemma.u__header item-flag="sense.language"
@@ -14,14 +14,14 @@
 .definition ng-if="sense.synset.examples.length"
   section.grid
     .grid__cell.grid__cell--5-20
-      h1.definition__term Przykłady
+      h1.definition__term translate="examples"
     ul.grid__cell.grid__cell--15-20.definition__content
       li.definition__content__item ng-repeat="example in sense.synset.examples" ng-bind="example"
 
 .definition ng-if="sense.synset.senses.length"
   section.grid
     .grid__cell.grid__cell--5-20
-      h1.definition__term Synonimy
+      h1.definition__term translate="synonyms"
     ul.grid__cell.grid__cell--15-20.definition__content
       li.definition__content__item ng-repeat="synonym in sense.synset.senses"
         a.item href="" ng-href="/{{ synonym.id }}"
@@ -35,7 +35,7 @@
 .definition.definition--source
   section.grid
     .grid__cell.grid__cell--5-20
-      h1.definition__term Źródło
+      h1.definition__term translate="source"
     .grid__cell.grid__cell--15-20.definition__content
       span ng-if="sense.language == 'pl_PL'" Słowosieć
       span ng-if="sense.language == 'en_GB'" Princeton Wordnet 3.0
@@ -43,7 +43,7 @@
 .definition
   section.grid
     .grid__cell.grid__cell--5-20
-      h1.definition__term Hiperonimy
+      h1.definition__term translate="hyperonyms"
     .grid__cell.grid__cell--15-20.definition__content
       a.u__bold href="" ng-click="showHyponyms(sense.id)"
-        | Pokaż ścieżkę&nbsp;hiperonimów
+        | {{ 'show_hyperonym_path' | translate }}
