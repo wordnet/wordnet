@@ -19,7 +19,7 @@ angular.module('wordnet', [
   'pascalprecht.translate'
 ])
 
-angular.module('wordnet').config ($translateProvider) ->
+angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
 
   $translateProvider.translations 'en',
     synonyms: "Synonyms"
@@ -55,6 +55,7 @@ angular.module('wordnet').config ($translateProvider) ->
 
   $translateProvider.useLocalStorage()
   $translateProvider.preferredLanguage('pl')
+]
 
 angular.module('wordnet').config [
   '$routeProvider', '$locationProvider',
