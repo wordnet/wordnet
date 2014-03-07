@@ -1,16 +1,18 @@
-a.modal__close href="" ng-click="closeModal()" Powrót
+a.modal__close href="" ng-click="closeModal()" translate="back"
 
 .modal__bar.grid ng-if="hyponyms.length > 1"
   .grid__cell.grid__cell--7-20
-    a.u__previous href="" ng-click="previous()" ng-show="index > 0"
-      | Poprzedni
+    a.u__previous(href="" ng-click="previous()"
+      ng-show="index > 0"
+      translate="previous")
   .grid__cell.grid__cell--6-20.u__text-center
-    span.u__bold ng-bind="index + 1"
-    span.u__dim<
-      | z {{ hyponyms.length }}&nbsp;ścieżek
+    span.u__dim(
+      translate="i_from_n_paths" 
+      translate-values="{i: '{{index + 1}}', n: '{{hyponyms.length}}'}")
   .grid__cell.grid__cell--7-20.u__text-right
-    a.u__next href="" ng-click="next()" ng-show="index < hyponyms.length - 1"
-      | Następny
+    a.u__next(href="" ng-click="next()"
+      ng-show="index < hyponyms.length - 1"
+      translate="next")
 
 ol.path.u__header
   li.path__item ng-repeat="sense in hyponyms[index]"

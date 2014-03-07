@@ -36,6 +36,8 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
     next: "Next"
     previous: "Previous"
     show_n_other_connections: "Show {{n}} more connections"
+    i_from_n_paths: "{{i}} of {{n}} paths"
+    back: "Go back"
 
   $translateProvider.translations 'pl',
     synonyms: "Synonimy"
@@ -52,6 +54,8 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
     previous: "Poprzednia"
     next: "Następna"
     show_n_other_connections: "Pokaż pozostałe {{n}}&nbsp;{{ 'połączenie' | inflect:n }}"
+    i_from_n_paths: "{{i}} z {{n}} ścieżek"
+    back: "Powrót"
 
   $translateProvider.useLocalStorage()
   $translateProvider.preferredLanguage('pl')
