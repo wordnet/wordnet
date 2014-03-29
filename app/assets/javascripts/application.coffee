@@ -42,6 +42,7 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
     show_n_other_connections: "Show {{n}} more connections"
     i_from_n_paths: "{{i}} of {{n}} paths"
     back: "Go back"
+    statistics: "Statistics"
 
   $translateProvider.translations 'pl',
     synonyms: "Synonimy"
@@ -64,6 +65,7 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
     show_n_other_connections: "Pokaż pozostałe {{n}}&nbsp;{{ 'połączenie' | inflect:n }}"
     i_from_n_paths: "{{i}} z {{n}} ścieżek"
     back: "Powrót"
+    statistics: "Statystyki"
 
   $translateProvider.useLocalStorage()
   $translateProvider.preferredLanguage('pl')
@@ -78,6 +80,9 @@ angular.module('wordnet').config [
       resolve:
         relations: -> []
         sense: -> undefined
+
+    $routeProvider.when '/stats',
+      templateUrl: 'stats.html'
 
     $routeProvider.when '/:senseId',
       controller: 'SenseCtrl'

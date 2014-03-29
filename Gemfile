@@ -9,6 +9,7 @@ gem 'pg'
 gem 'figaro', '~> 0.7'
 gem 'dotenv-rails', '~> 0.9'
 gem 'yajl-ruby', :require => 'yajl'
+gem 'hashie'
 
 # Frontend
 gem 'coffee-rails', '~> 4.0.0'

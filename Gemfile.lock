@@ -248,6 +248,7 @@ DEPENDENCIES
   figaro (~> 0.7)
   grape (~> 0.6.1)
   grape-kaminari (~> 0.1.0)
+  hashie
   mysql2
   neography
   pg

@@ -5,16 +5,6 @@ module WordnetPl
 
     def initialize
       @connection = Sequel.connect(Figaro.env.source_url, :max_connections => 10)
-
-      @part_of_speech ||= begin
-        path = Rails.root.join('db', 'part_of_speech.csv')
-        metadata = CSV.foreach(path, headers: true).to_a.map(&:to_h)
-        metadata.map do |r|
-          r["id"] = r["id"].to_i
-          r.with_indifferent_access
-        end
-      end.index_by { |pos| pos[:id] }
-
       super
     end
 
@@ -55,7 +45,6 @@ module WordnetPl
         where('ID >= ? AND ID < ?', offset, offset + limit).to_a
 
       raw.map do |lemma|
-
         {
           external_id: lemma[:ID],
           domain_id: lemma[:domain],
@@ -71,7 +60,7 @@ module WordnetPl
     private
 
     def convert_pos(pos_id)
-      @part_of_speech[pos_id.to_i][:uuid]
+      PartOfSpeech.find(pos_id).uuid
     end
 
     def process_comment(comment)

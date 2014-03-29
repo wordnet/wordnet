@@ -14,6 +14,7 @@ html lang="pl" ng-app="wordnet"
         .grid
           h1.top__container.grid__cell.grid__cell--5-20
             a.top__logo href="/" Słowosieć
+            a< href="/stats" translate="statistics"
           .top__container.top__container--main.grid__cell.grid__cell--10-20
             = render 'shared/search_field'
           .top__container.grid__cell.grid__cell--5-20.u__text-right
@@ -23,7 +24,10 @@ html lang="pl" ng-app="wordnet"
     div ng-view=""
 
     script type="text/ng-template" id="index.html"
-      = yield
+      = render file: 'home/index'
+
+    script type="text/ng-template" id="stats.html"
+      = render file: 'home/stats'
 
     script type="text/ng-template" id="autocompleteTemplate.html"
       = render 'shared/templates/autocomplete'

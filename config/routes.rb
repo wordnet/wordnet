@@ -2,6 +2,8 @@ Application.routes.draw do
 
   root to: 'home#index'
 
+  get '/stats' => 'home#stats'
+
   get '/:sense_id' => 'home#index'
 
   mount API::Engine => '/api'
