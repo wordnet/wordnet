@@ -19,7 +19,7 @@ module Neo4j
     end
 
     def export_query(entity)
-      if entity[:relation_id] == 10
+      if entity[:relation_id] == 10 || entity[:relation_id] == 173
         HYPONYM_QUERY
       else
         EXPORT_QUERY
