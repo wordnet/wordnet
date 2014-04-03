@@ -131,11 +131,11 @@ class Statistic < ActiveRecord::Base
   end
 
   def self.fetch_all!(names = [], *points)
-    [*names].flat_map do |name|
-      if name.nil?
-        return STATISTICS.keys.flat_map { |s| fetch_all!(s) }
-      end
+    if names.blank?
+      names = STATISTICS.keys
+    end
 
+    [*names].flat_map do |name|
       unless statistic = STATISTICS[name]
         raise ArgumentError.new("Unknown statistic: #{name}")
       end
@@ -158,7 +158,7 @@ class Statistic < ActiveRecord::Base
     end
   end
 
-  def self.refetch_all!(name, *points)
+  def self.refetch_all!(name = [], *points)
     fetch_all(name, *points).delete_all
     fetch_all!(name, *points)
   end
