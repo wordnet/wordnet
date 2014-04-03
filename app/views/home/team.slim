@@ -1,0 +1,20 @@
+.top.top--alternative
+  .wrapper
+    .grid
+      .grid__cell.grid__cell--5-20
+      .grid__cell.grid__cell--10-20.u__text-center
+        | {{ 'use_search_bar_to_begin' | translate }}
+      .grid__cell.grid__cell--5-20
+.wrapper.u__pad
+  .grid
+    .container.grid__cell.grid__cell--5-20
+      = render 'shared/menu'
+    .container.container--main.grid__cell.grid__cell--10-20
+      - roles = TeamMember.all_by_role
+      - roles.each do |role, members|
+        .container
+          h1.u__header translate=role style="margin-bottom: 10px"
+          ul style="-webkit-column-count: 2; -moz-column-count: 2; column-count: 2"
+            - members.each do |member|
+              li = member.name
+    .container.grid__cell.grid__cell--5-20

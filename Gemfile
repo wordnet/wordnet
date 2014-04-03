@@ -12,6 +12,7 @@ gem 'figaro', '~> 0.7'
 gem 'dotenv-rails', '~> 0.9'
 gem 'yajl-ruby', :require => 'yajl'
 gem 'hashie'
+gem 'redcarpet'
 
 # Frontend
 gem 'coffee-rails', '~> 4.0.0'
@@ -21,6 +22,7 @@ gem 'uglifier', '~> 2.3'
 gem 'quiet_assets', '~> 1.0'
 gem 'compass-rails', '~> 1.1.3'
 gem 'autoprefixer-rails'
+gem 'ngmin-rails'
 
 # Rails Assets
 gem 'rails-assets-lodash', '~> 2.4'
@@ -33,6 +35,7 @@ gem 'rails-assets-angular-translate'
 gem 'rails-assets-angular-cookies'
 gem 'rails-assets-angular-translate-storage-cookie'
 gem 'rails-assets-angular-translate-storage-local'
+gem 'font-awesome-rails', github: 'monterail/font-awesome-rails'
 
 # Wordnet Import
 gem 'mysql2'

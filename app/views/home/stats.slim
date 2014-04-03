@@ -1,19 +1,27 @@
+.top.top--alternative
+  .wrapper
+    .grid
+      .grid__cell.grid__cell--5-20
+      .grid__cell.grid__cell--10-20.u__text-center
+        | {{ 'use_search_bar_to_begin' | translate }}
+      .grid__cell.grid__cell--5-20
 .wrapper.u__pad ng-controller="StatsCtrl"
-  .grid ng-repeat="stat in stats"
-    .container.grid__cell.grid__cell--4-20
-    .container.container--main.grid__cell.grid__cell--12-20(
-      style="background-color: white; margin-bottom: 50px"
+  .grid
+    .container.grid__cell.grid__cell--5-20
+      = render 'shared/menu'
+    .container.container--main.grid__cell.grid__cell--15-20(
+      style="background-color: white;"
     )
-      h1.u__header ng-bind="stat.name | translate"
-      br
-      table style="width: 100%"
-        thead: tr
-          th
-          th ng-repeat="column in stat.columns"
-            span ng-bind="column | translate"
-        tbody
-          tr ng-repeat="rowdata in stat.data"
-            td ng-bind="stat.rows[$index] | translate"
-            td ng-repeat="value in rowdata track by $index"
-              span ng-bind="value"
-    .container.grid__cell.grid__cell--4-20
+      .container ng-repeat="stat in stats"
+        h1.u__header ng-bind="stat.name | translate"
+        br
+        table style="width: 100%"
+          thead: tr
+            th
+            th ng-repeat="column in stat.columns"
+              span ng-bind="column | translate"
+          tbody
+            tr ng-repeat="rowdata in stat.data"
+              td ng-bind="stat.rows[$index] | translate"
+              td ng-repeat="value in rowdata track by $index"
+                span ng-bind="value"

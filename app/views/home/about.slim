@@ -1,0 +1,27 @@
+.top.top--alternative
+  .wrapper
+    .grid
+      .grid__cell.grid__cell--5-20
+      .grid__cell.grid__cell--10-20.u__text-center
+        | {{ 'use_search_bar_to_begin' | translate }}
+      .grid__cell.grid__cell--5-20
+
+.wrapper.u__pad
+  .grid
+    .container.grid__cell.grid__cell--5-20
+      = render 'shared/menu'
+    .container.container--main.grid__cell.grid__cell--10-20
+      h1.u__header O Słowosieci
+
+      markdown:
+        Słowosieć (z ang. wordnet) – to słownik semantyczny, która odzwierciedla system leksykalny języka polskiego. Obecnie zawiera 142 000 rzeczowników, czasowników i przymiotników, 200 000 znaczeń oraz ponad 500 000 relacji. Jest drugim co do wielkości wordnetem na świecie i nieustannie się rozrasta.
+
+        Pojedyncze znaczenia w Słowosieci połączone są wzajemnymi [relacjami](http://nlp.pwr.wroc.pl/pl/slowosiec-20/relacje-slowosieci). Tak powstaje sieć, w której każdy wyraz jest zdefiniowany poprzez odniesienie do innych wyrazów. Na przykład: samochód jest rodzajem pojazdu drogowego i dwuśladu, stanowi całość, na którą składają się np. silnik, spryskiwacz, podwozie, zaś jego wyrazami bliskoznacznymi są fura i bryka.
+
+        Słowosieć może służyć także jako słownik polsko-angielski i angielsko-polski, ponieważ została połączona z pierwszym i największym wordnetem na świecie – Princeton WordNet. Jest także bardzo ważnym zasobem w komputerowym przetwarzaniu języka i badaniach nad sztuczną inteligencją, m.in. znajduje zastosowanie w automatycznych tłumaczeniach [Google Translate](http://translate.google.com/about/intl/pl_ALL/).
+
+        Polski wordnet jest budowany wspólnym wysiłkiem leksykografów i informatyków z [Grupy Technologii Językowych Politechniki Wrocławskiej](http://nlp.pwr.wroc.pl/). Decyzją władz uczelni Słowosieć jest dostępna bezpłatnie do powszechnego (również komercyjnego) użytku w oparciu o [licencję](http://nlp.pwr.wroc.pl/plwordnet/license/) wzorowaną na licencji Princeton WordNet. Programiści mają także dostęp do Słowosieci na poziomie usługi sieciowej za pomocą prostego [API](http://nlp.pwr.wroc.pl/clarin/ws/).
+
+        Prace nad Słowosiecią realizowane są dzięki grantom Ministerstwa Nauki i Szkolnictwa Wyższego i Funduszom Unijnym, a obecnie – w ramach ogólnoeuropejskiej infrastruktury naukowej [CLARIN](http://www.clarin.eu/).
+
+    .container.grid__cell.grid__cell--5-20

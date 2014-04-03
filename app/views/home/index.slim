@@ -14,12 +14,73 @@
           .grid__cell.grid__cell--5-20.u__text-right
             a.u__next href="" ng-href="/{{ sense.homographs[sense_index + 1] }}" ng-show="sense_index < sense.homographs.length - 1"
               | {{ 'next' | translate }}
+        .grid
+          .grid__cell.grid__cell--5-20
+          .grid__cell.grid__cell--10-20.u__text-center
+            | {{ 'use_search_bar_to_begin' | translate }}
+          .grid__cell.grid__cell--5-20
 
 .wrapper.u__pad
   .grid ng-show="!sense"
     .container.grid__cell.grid__cell--5-20
-    .container.container--main.grid__cell.grid__cell--10-20.u__dim
-      | {{ 'use_search_bar_to_begin' | translate }}
+      = render 'shared/menu'
+    .container.container--main.grid__cell.grid__cell--10-20
+      img src=image_path('slowosiec-text.png') width="450"
+      h1.u__text-center style="font-size: 30px" wielka sieć wyrazów
+      ul style="margin: 70px 0; text-align: center; font-size: 18px"
+        li
+          strong> 140 000
+          | słów
+        li
+          strong> 200 000
+          | znaczeń
+        li
+          strong> 500 000
+          | relacji
+        li
+          strong> 110 000
+          | haseł polsko-angielskich
+        li
+          a href="http://github.com/wordnet/wordnet"
+            | darmowa licencja
+        li drugi co do wielkości wordnet na świecie
+      h1 style="font-size: 20px; margin-top: 20px" Projekt rozwijany jest dzięki wsparciu:
+      .grid
+        .grid__cell style='margin-top: 16px; width: 50% !important'
+          a href="http://www.nauka.gov.pl/"
+            img src=image_path('supporters/mnsiw.jpg') width="100%"
+        .grid__cell style='margin-top: 30px; width: 50% !important'
+          a href="http://www.clarin.eu/"
+            img src=image_path('supporters/clarin.png') width="100%"
+      .grid
+        .grid__cell style='margin-top: -20px; width: 50% !important'
+          a href="http://www.pwr.edu.pl/"
+            img src=image_path('supporters/pwr.png') width="100%"
+        .grid__cell.u__text-center style='margin-top: 40px; width: 50% !important; font-size: 30px'
+          a href="http://nekst.ipipan.waw.pl/"
+            | NEKST
+      .grid
+        .grid__cell style='margin-top: 0px; width: 50% !important'
+          a href="http://www.synat.pl/"
+            img src=image_path('supporters/synat.png') width="100%"
+      div.u__dim style="margin: 30px 0; font-size: 8px"
+        p
+          | Copyright © 2006-2014
+          a< href="http://www.pwr.wroc.pl/" Wrocław University of Technology
+        p
+          | English data comes from
+          a<> href="http://wordnet.princeton.edu/"
+            | Princeton Wordnet 3.1
+          | (© 2014 The Trustees of Princeton University)
+        p
+          | During the works on the mapping between plWordNet and Princeton WordNet 3.1 the Polish-English dictionary of TiP Ltd. was used following the
+          a<> href="http://www.tip.net.pl/" TiP
+          | kind consent.
+        p
+          | Logo design:
+          a<> href="http://www.merhabstudio.com/" Merhab Studio
+    .container.grid__cell.grid__cell--5-20
+
   .grid ng-show="sense"
     .container.grid__cell.grid__cell--5-20
       = render 'shared/list', direction: 'incoming'

@@ -2,7 +2,9 @@ Application.routes.draw do
 
   root to: 'home#index'
 
+  get '/about' => 'home#about'
   get '/stats' => 'home#stats'
+  get '/team' => 'home#team'
 
   get '/:sense_id' => 'home#index'
 

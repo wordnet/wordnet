@@ -60,6 +60,11 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
     en_synset_relations: 'Princeton Synset Relations'
     en_sense_relations: 'Princeton Sense Relations'
     sum: 'Sum'
+    change_language: 'Change language:'
+    leader: "Project Leader"
+    coordinator: "Coordinators"
+    developer: "Developers"
+    lexograph: "Lexographs"
 
   $translateProvider.translations 'pl',
     synonyms: "Synonimy"
@@ -100,6 +105,11 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
     en_synset_relations: 'Relacje synsetów w Princeton Wordnet'
     en_sense_relations: 'Relacje jednostek leksykalnych w Princeton Wordnet'
     sum: 'Suma'
+    change_language: 'Zmień język:'
+    leader: "Lider Projekty"
+    coordinator: "Koordynatorzy"
+    developer: "Deweloperzy"
+    lexograph: "Leksografowie"
 
   $translateProvider.useLocalStorage()
   $translateProvider.preferredLanguage('pl')
@@ -117,6 +127,12 @@ angular.module('wordnet').config [
 
     $routeProvider.when '/stats',
       templateUrl: 'stats.html'
+
+    $routeProvider.when '/team',
+      templateUrl: 'team.html'
+
+    $routeProvider.when '/about',
+      templateUrl: 'about.html'
 
     $routeProvider.when '/:senseId',
       controller: 'SenseCtrl'
