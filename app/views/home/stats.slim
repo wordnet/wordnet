@@ -1,18 +1,19 @@
 .wrapper.u__pad ng-controller="StatsCtrl"
-  .grid
-    .container.grid__cell.grid__cell--5-20
-    .container.container--main.grid__cell.grid__cell--10-20
+  .grid ng-repeat="stat in stats"
+    .container.grid__cell.grid__cell--4-20
+    .container.container--main.grid__cell.grid__cell--12-20(
+      style="background-color: white; margin-bottom: 50px"
+    )
+      h1.u__header ng-bind="stat.name | translate"
+      br
       table style="width: 100%"
         thead: tr
-          th Name
-          th X
-          th Y
-          th Value
+          th
+          th ng-repeat="column in stat.columns"
+            span ng-bind="column | translate"
         tbody
-          tr ng-repeat="stat in stats.data"
-            td ng-bind="stat.name"
-            td ng-bind="stat.x"
-            td ng-bind="stat.y"
-            td ng-bind="stat.value"
-      
-    .container.grid__cell.grid__cell--5-20
+          tr ng-repeat="rowdata in stat.data"
+            td ng-bind="stat.rows[$index] | translate"
+            td ng-repeat="value in rowdata track by $index"
+              span ng-bind="value"
+    .container.grid__cell.grid__cell--4-20

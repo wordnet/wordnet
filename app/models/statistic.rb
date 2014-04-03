@@ -2,6 +2,7 @@ class Statistic < ActiveRecord::Base
 
   DIMENSIONS = Hashie::Mash.new
   STATISTICS = Hashie::Mash.new
+  VIEWS      = []
 
   class << self
     def def_dimension(name, &block)
@@ -20,6 +21,48 @@ class Statistic < ActiveRecord::Base
         dimensions: dimensions,
         constructor: block
       }]
+    end
+    
+    def table_view(name, options = {})
+      rows = options[:stats].map do |stat|
+        stat.send(options[:rows])
+      end.uniq.sort_by(&options[:rows_sorting])
+
+      columns = options[:stats].map do |stat|
+        stat.send(options[:columns])
+      end.uniq.sort_by(&options[:columns_sorting])
+
+      stats = options[:stats]
+      stats = stats.group_by(&options[:rows])
+      stats = Hash[stats.map do |key, values|
+        [key, values.index_by(&options[:columns])]
+      end]
+
+      formatter = options[:formatter] || :to_f.to_proc
+
+      table = rows.map do |row|
+        values = columns.map do |column|
+          formatter[stats[row][column].try(:value) || 0.0]
+        end
+
+        if options[:sum]
+          [*values, values.reduce(0, :+)]
+        else
+          values
+        end
+      end
+
+      {
+        name: name,
+        type: 'table',
+        rows: rows,
+        columns: columns + (options[:sum] ? ['sum'] : []),
+        data: table
+      }
+    end
+
+    def def_view(&block)
+      VIEWS << block
     end
   end
 
@@ -73,42 +116,44 @@ class Statistic < ActiveRecord::Base
     end
   end
 
-  def self.fetch_all(name = nil, *points)
+  def self.fetch_all(names = [], *points)
     x, y = points
 
     if y.present?
-      where(name: name, x: x, y: y).load
+      where.not(value: 0).where(name: names, x: x, y: y).load
     elsif x.present?
-      where(name: name, x: x).load
-    elsif name.present?
-      where(name: name).load
+      where.not(value: 0).where(name: names, x: x).load
+    elsif names.present?
+      where.not(value: 0).where(name: names).load
     else
-      all.load
+      where.not(value: 0).all.load
     end
   end
 
-  def self.fetch_all!(name = nil, *points)
-    if name.nil?
-      return STATISTICS.keys.flat_map { |s| fetch_all!(s) }
-    end
+  def self.fetch_all!(names = [], *points)
+    [*names].flat_map do |name|
+      if name.nil?
+        return STATISTICS.keys.flat_map { |s| fetch_all!(s) }
+      end
 
-    unless statistic = STATISTICS[name]
-      raise ArgumentError.new("Unknown statistic: #{name}")
-    end
+      unless statistic = STATISTICS[name]
+        raise ArgumentError.new("Unknown statistic: #{name}")
+      end
 
-    xd, yd = statistic.dimensions.map do |dim_name|
-      DIMENSIONS[dim_name].call
-    end
+      xd, yd = statistic.dimensions.map do |dim_name|
+        DIMENSIONS[dim_name].call
+      end
 
-    xd = [points[0]] if xd && points[0]
-    yd = [points[1]] if yd && points[1]
+      xd = [*points[0]] if xd && points[0]
+      yd = [*points[1]] if yd && points[1]
 
-    if xd.nil? && yd.nil?
-      [fetch!(name)]
-    else
-      arguments_array = xd.product(yd || [nil]).map(&:compact)
-      arguments_array.map do |args|
-        fetch!(name, *args)
+      if xd.nil? && yd.nil?
+        [fetch!(name)]
+      else
+        arguments_array = xd.product(yd || [nil]).map(&:compact)
+        arguments_array.map do |args|
+          fetch!(name, *args)
+        end
       end
     end
   end
@@ -146,7 +191,7 @@ class Statistic < ActiveRecord::Base
       distinct.count(:lemma)
   end
 
-  def_statistic "polisemous_lemmas", ["pos"] do |pos|
+  def_statistic "polysemous_lemmas", ["pos"] do |pos|
     Sense.
       where(:part_of_speech => pos).
       where('
@@ -155,7 +200,7 @@ class Statistic < ActiveRecord::Base
       '.squish).
       distinct.count(:lemma)
   end
-
+  
   def_statistic "lexemes", ["pos"] do |pos|
     Sense.
       where(:part_of_speech => pos).
@@ -168,7 +213,7 @@ class Statistic < ActiveRecord::Base
       distinct.count(:synset_id)
   end
 
-  def_statistic "polisemy", ["pos"] do |pos|
+  def_statistic "polysemy", ["pos"] do |pos|
     subquery = Sense.
       where(:part_of_speech => pos).
       group(:lemma).
@@ -182,7 +227,7 @@ class Statistic < ActiveRecord::Base
     )[0]["average"].to_f.round(2)
   end
 
-  def_statistic "polisemy_nomono", ["pos"] do |pos|
+  def_statistic "polysemy_nomono", ["pos"] do |pos|
     subquery = Sense.
       where(:part_of_speech => pos).
       group(:lemma).
@@ -237,26 +282,279 @@ class Statistic < ActiveRecord::Base
     ((of_size_count / all_count) * 100).round(2)
   end
 
-  def_statistic "synset_relations", ["relation", "pos"] do |rel, pos|
+  def_statistic "pl_synset_relations", ["relation", "pos"] do |rel, pos|
     SynsetRelation.
-      where("synset_relations.parent_id IN (#{
-        Synset.
-          joins(:senses).
-          where('senses.part_of_speech = ?', pos).
-          select('synsets.id').to_sql
-      })").
-      where(:relation_id => rel.to_i).
+      select(:id).
+      joins(:parent, :child).
+      where(:relation_id => rel.to_i,
+        :synsets => {
+          :part_of_speech => pos,
+          :language => 'pl_PL'
+        },
+        :children_synset_relations => {
+          :part_of_speech => pos,
+          :language => 'pl_PL'
+        }
+      ).
       count
   end
 
-  def_statistic "sense_relations", ["relation", "pos"] do |rel, pos|
+  def_statistic "en_synset_relations", ["relation", "pos"] do |rel, pos|
+    SynsetRelation.
+      select(:id).
+      joins(:parent, :child).
+      where(:relation_id => rel.to_i,
+        :synsets => {
+          :part_of_speech => pos,
+          :language => 'en_GB'
+        },
+        :children_synset_relations => {
+          :part_of_speech => pos,
+          :language => 'en_GB'
+        }
+      ).
+      count
+  end
+
+  def_statistic "pl_sense_relations", ["relation", "pos"] do |rel, pos|
     SenseRelation.
       select(:id).
-      joins(:parent).
-      where(:relation_id => rel.to_i, :senses => {
-        :part_of_speech => pos
-      }).
+      joins(:parent, :child).
+      where(:relation_id => rel.to_i,
+        :senses => {
+          :part_of_speech => pos,
+          :language => 'pl_PL'
+        },
+        :children_sense_relations => {
+          :part_of_speech => pos,
+          :language => 'pl_PL'
+        }
+      ).
       count
   end
 
+  def_statistic "en_sense_relations", ["relation", "pos"] do |rel, pos|
+    SenseRelation.
+      select(:id).
+      joins(:parent, :child).
+      where(:relation_id => rel.to_i,
+        :senses => {
+          :part_of_speech => pos,
+          :language => 'en_GB'
+        },
+        :children_sense_relations => {
+          :part_of_speech => pos,
+          :language => 'en_GB'
+        }
+      ).
+      count
+  end
+
+  def_view do
+    poss = DIMENSIONS['pos'].call
+
+    stats = fetch_all(
+      ['lemmas', 'lexemes', 'synsets',
+       'monosemous_lemmas', 'polysemous_lemmas'],
+      ['verb_pl', 'noun_pl', 'adjective_pl']
+    )
+
+    table_view "aspects_of_plwordnet",
+      columns: :x,
+      rows: :name,
+      columns_sorting: lambda { |element|
+        poss.index(element)
+      },
+      rows_sorting: lambda { |element|
+        ['lemmas', 'lexemes', 'synsets',
+         'monosemous_lemmas', 'polysemous_lemmas'].index(element)
+      },
+      formatter: lambda { |value|
+        value.to_i
+      },
+      stats: stats,
+      sum: true
+  end
+
+  def_view do
+    poss = DIMENSIONS['pos'].call
+
+    stats = fetch_all(
+      ['lemmas', 'lexemes', 'synsets',
+       'monosemous_lemmas', 'polysemous_lemmas'],
+      ['verb_pwn', 'noun_pwn', 'adjective_pwn']
+    )
+
+    table_view "aspects_of_enwordnet",
+      columns: :x,
+      rows: :name,
+      columns_sorting: lambda { |element|
+        poss.index(element)
+      },
+      rows_sorting: lambda { |element|
+        ['lemmas', 'lexemes', 'synsets',
+         'monosemous_lemmas', 'polysemous_lemmas'].index(element)
+      },
+      formatter: lambda { |value|
+        value.to_i
+      },
+      stats: stats,
+      sum: true
+  end
+
+  def_view do
+    poss = DIMENSIONS['pos'].call
+
+    stats = fetch_all(
+      ['polysemy', 'polysemy_nomono'],
+      poss
+    )
+
+    table_view "average_polysemy",
+      columns: :name,
+      rows: :x,
+      columns_sorting: lambda { |element|
+        ['polysemy', 'polysemy_nomono'].index(element)
+      },
+      rows_sorting: lambda { |element|
+        poss.index(element)
+      },
+      stats: stats
+  end
+
+  def_view do
+    poss = DIMENSIONS['pos'].call
+    sizes = DIMENSIONS['size'].call
+
+    stats = fetch_all(
+      'synset_size_ratio',
+      poss,
+      sizes
+    )
+
+    table_view "synset_size_ratio",
+      columns: :y,
+      rows: :x,
+      columns_sorting: lambda { |element|
+        sizes.index(element)
+      },
+      rows_sorting: lambda { |element|
+        poss.index(element)
+      },
+      stats: stats
+  end
+
+  def_view do
+    poss = DIMENSIONS['pos'].call
+    sizes = DIMENSIONS['size'].call
+
+    stats = fetch_all(
+      'lemma_synsets_ratio',
+      poss,
+      sizes
+    )
+
+    table_view "lemma_synsets_ratio",
+      columns: :y,
+      rows: :x,
+      columns_sorting: lambda { |element|
+        sizes.index(element)
+      },
+      rows_sorting: lambda { |element|
+        poss.index(element)
+      },
+      stats: stats
+  end
+
+  def_view do
+    poss = DIMENSIONS['pos'].call
+    relations = DIMENSIONS['relation'].call
+
+    stats = fetch_all(
+      'pl_synset_relations',
+      relations,
+      ['verb_pl', 'noun_pl', 'adjective_pl']
+    )
+
+    table_view "pl_synset_relations",
+      columns: :y,
+      rows: :x,
+      columns_sorting: lambda { |element|
+        poss.index(element)
+      },
+      rows_sorting: lambda { |element|
+        relations.index(element)
+      },
+      stats: stats,
+      sum: true
+  end
+
+  def_view do
+    poss = DIMENSIONS['pos'].call
+    relations = DIMENSIONS['relation'].call
+
+    stats = fetch_all(
+      'pl_sense_relations',
+      relations,
+      ['verb_pl', 'noun_pl', 'adjective_pl']
+    )
+
+    table_view "pl_sense_relations",
+      columns: :y,
+      rows: :x,
+      columns_sorting: lambda { |element|
+        poss.index(element)
+      },
+      rows_sorting: lambda { |element|
+        relations.index(element)
+      },
+      stats: stats,
+      sum: true
+  end
+
+  def_view do
+    poss = DIMENSIONS['pos'].call
+    relations = DIMENSIONS['relation'].call
+
+    stats = fetch_all(
+      'en_synset_relations',
+      relations,
+      ['verb_pwn', 'noun_pwn', 'adverb_pwn', 'adjective_pwn']
+    )
+
+    table_view "en_synset_relations",
+      columns: :y,
+      rows: :x,
+      columns_sorting: lambda { |element|
+        poss.index(element)
+      },
+      rows_sorting: lambda { |element|
+        relations.index(element)
+      },
+      stats: stats,
+      sum: true
+  end
+
+  def_view do
+    poss = DIMENSIONS['pos'].call
+    relations = DIMENSIONS['relation'].call
+
+    stats = fetch_all(
+      'en_sense_relations',
+      relations,
+      ['verb_pwn', 'noun_pwn', 'adverb_pwn', 'adjective_pwn']
+    )
+
+    table_view "en_sense_relations",
+      columns: :y,
+      rows: :x,
+      columns_sorting: lambda { |element|
+        poss.index(element)
+      },
+      rows_sorting: lambda { |element|
+        relations.index(element)
+      },
+      stats: stats,
+      sum: true
+  end
 end

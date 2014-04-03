@@ -8,18 +8,7 @@ module API
     end
 
     get :stats do
-      {
-        statistics: Statistic.definitions,
-        data: Statistic.fetch_all.map do |s|
-          {
-            name: s.name,
-            x: s.x,
-            y: s.y,
-            value: s.value
-          }
-        end
-      }
-      
+      Statistic::VIEWS.map(&:call)
     end
   end
 end

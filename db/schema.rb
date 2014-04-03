@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140329183253) do
+ActiveRecord::Schema.define(version: 20140403034903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,12 +71,17 @@ ActiveRecord::Schema.define(version: 20140329183253) do
   add_index "synset_relations", ["parent_id", "child_id", "relation_id"], name: "synset_relations_idx", unique: true, using: :btree
 
   create_table "synsets", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
-    t.integer "external_id",              null: false
+    t.integer "external_id",                 null: false
     t.text    "comment"
     t.text    "definition"
-    t.string  "examples",    default: [],              array: true
+    t.string  "examples",       default: [],              array: true
+    t.string  "language"
+    t.string  "lemma"
+    t.string  "part_of_speech"
   end
 
   add_index "synsets", ["external_id"], name: "index_synsets_on_external_id", unique: true, using: :btree
+  add_index "synsets", ["language"], name: "index_synsets_on_language", using: :btree
+  add_index "synsets", ["part_of_speech"], name: "index_synsets_on_part_of_speech", using: :btree
 
 end

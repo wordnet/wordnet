@@ -31,10 +31,10 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
     noun_pl: "Noun"
     adverb_pl: "Adverb"
     adjective_pl: "Adjective"
-    verb_pwn: "Verb"
-    noun_pwn: "Noun"
-    adverb_pwn: "Adverb"
-    adjective_pwn: "Adjective"
+    verb_pwn: "Verb PWN"
+    noun_pwn: "Noun PWN"
+    adverb_pwn: "Adverb PWN"
+    adjective_pwn: "Adjective PWN"
     i_from_n_lexical_units: "{{i}} of {{n}} lexical&nbsp;units"
     use_search_bar_to_begin: "Use search bar to begin"
     next: "Next"
@@ -43,6 +43,23 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
     i_from_n_paths: "{{i}} of {{n}} paths"
     back: "Go back"
     statistics: "Statistics"
+    polysemy: 'All Lemma'
+    polysemy_nomono: 'Only Polisemous Lemma'
+    average_polysemy: 'Average Polisemy'
+    lemmas: 'Lemmas'
+    lexemes: 'Lexical Units'
+    synsets: 'Synsets'
+    monosemous_lemmas: 'Monosemous Lemmas'
+    polysemous_lemmas: 'Polysemous Lemmas'
+    aspects_of_enwordnet: 'Princeton Wordnet Aspects'
+    aspects_of_plwordnet: 'Polish Wordnet Aspects'
+    synset_size_ratio: 'Sizes of Synsets'
+    lemma_synsets_ratio: 'Number of Synsets Lemma belongs to (%)'
+    pl_synset_relations: 'Słowosieć Synset Relations'
+    pl_sense_relations: 'Słowosieć Sense Relations'
+    en_synset_relations: 'Princeton Synset Relations'
+    en_sense_relations: 'Princeton Sense Relations'
+    sum: 'Sum'
 
   $translateProvider.translations 'pl',
     synonyms: "Synonimy"
@@ -54,10 +71,10 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
     noun_pl: "Rzeczownik"
     adverb_pl: "Przysłówek"
     adjective_pl: "Przymiotnik"
-    verb_pwn: "Czasownik"
-    noun_pwn: "Rzeczownik"
-    adverb_pwn: "Przysłówek"
-    adjective_pwn: "Przymiotnik"
+    verb_pwn: "Czasownik PWN"
+    noun_pwn: "Rzeczownik PWN"
+    adverb_pwn: "Przysłówek PWN"
+    adjective_pwn: "Przymiotnik PWN"
     i_from_n_lexical_units: "{{i}} z {{n}} jednostek&nbsp;leksykalnych"
     use_search_bar_to_begin: "Użyj wyszukiwarki by rozpocząć"
     previous: "Poprzednia"
@@ -66,6 +83,23 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
     i_from_n_paths: "{{i}} z {{n}} ścieżek"
     back: "Powrót"
     statistics: "Statystyki"
+    polysemy: 'Wszystke lemma'
+    polysemy_nomono: 'Polisemiczne lemma'
+    average_polysemy: 'Średnia polisemia'
+    lemmas: 'Lemma'
+    lexemes: 'Jednostki Leksykalne'
+    synsets: 'Synsety'
+    monosemous_lemmas: 'Monosemiczne Lemma'
+    polysemous_lemmas: 'Polisemiczne Lemma'
+    aspects_of_enwordnet: 'Pewne aspekty Princeton Wordnet'
+    aspects_of_plwordnet: 'Pewne aspekty Słowosieci'
+    synset_size_ratio: 'Wielkość synsetów'
+    lemma_synsets_ratio: 'Ilość synsetów do których należy lemma (%)'
+    pl_synset_relations: 'Relacje synsetów w Słowosieci'
+    pl_sense_relations: 'Relacje jedostek leksykalnych w Słowosieci'
+    en_synset_relations: 'Relacje synsetów w Princeton Wordnet'
+    en_sense_relations: 'Relacje jednostek leksykalnych w Princeton Wordnet'
+    sum: 'Suma'
 
   $translateProvider.useLocalStorage()
   $translateProvider.preferredLanguage('pl')

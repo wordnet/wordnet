@@ -12,6 +12,19 @@ namespace :wordnet do
     end
   end
 
+  desc "Cache synsets"
+  task :cache_synsets => [:environment] do
+    Synset.connection.execute "
+      update synsets set
+        lemma = senses.lemma,
+        part_of_speech = senses.part_of_speech,
+        language = senses.language
+      from senses
+      where senses.synset_id = synsets.id
+    "
+  end
+
+
   desc "Export database to Neo4j"
   task :export, [:klass] => [:environment] do |t, args|
     if args[:klass].present?
