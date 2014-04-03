@@ -22,6 +22,15 @@ bin/rake db:create db:migrate
 bin/rake wordnet:import
 ```
 
+## Ubuntu 12.04 deployment
+
+```
+apt-get update && apt-get upgrade
+apt-get install -y git make curl software-properties-common
+apt-get install -y python-software-properties
+curl -s https://get.docker.io/ubuntu/ | sudo sh
+```
+
 ## Project overview
 
 [Słowosieć][1] is a Polish equivalent of Princeton Wordnet, a lexical database of word senses and relations between them.

@@ -25,9 +25,8 @@ namespace :wordnet do
   end
 
   desc "Compute all available statistics"
-  task :stats => [:environment] do
+  task :stats, [:klass] => [:environment] do |t, args|
     Rails.logger = Logger.new(STDOUT)
-    Statistic.delete_all
-    Statistic.fetch_all!
+    Statistic.refetch_all!(args[:klass])
   end
 end

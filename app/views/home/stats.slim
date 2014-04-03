@@ -6,11 +6,13 @@
         thead: tr
           th Name
           th X
+          th Y
           th Value
         tbody
           tr ng-repeat="stat in stats.data"
             td ng-bind="stat.name"
             td ng-bind="stat.x"
+            td ng-bind="stat.y"
             td ng-bind="stat.value"
       
     .container.grid__cell.grid__cell--5-20
