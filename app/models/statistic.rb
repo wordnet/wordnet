@@ -177,7 +177,7 @@ class Statistic < ActiveRecord::Base
 
     Sense.connection.
       select_all(
-        "select avg(lemma_count) as average from (%s) as s" % 
+        "select avg(lemma_count) as average from (%s) as s" %
         subquery
     )[0]["average"].to_f.round(2)
   end
@@ -195,17 +195,17 @@ class Statistic < ActiveRecord::Base
 
     Sense.connection.
       select_all(
-        "select avg(lemma_count) as average from (%s) as s" % 
+        "select avg(lemma_count) as average from (%s) as s" %
         subquery
     )[0]["average"].to_f.round(2)
   end
 
   def_statistic "synset_size_ratio", ["pos", "size"] do |pos, size|
     of_size_count = Sense.connection.
-      select_all("select count(*) from (%s) as senses" % 
+      select_all("select count(*) from (%s) as senses" %
       Sense.where(:part_of_speech => pos).
       group(:synset_id).select('count(*)').
-      having("count(*) = #{size}").to_sql)[0]["count"].to_f 
+      having("count(*) = #{size}").to_sql)[0]["count"].to_f
 
     all_count = fetch!('synsets', pos).value
 
@@ -216,15 +216,19 @@ class Statistic < ActiveRecord::Base
     of_size_count = Sense.connection.select_all("
       select count(*) from (
         select lemma, (
-          select count(distinct synset_id) as synset_count
-          from senses where senses.lemma = lemmas.lemma
-        ) from (
-          select distinct lemma from senses where senses.part_of_speech = '#{pos}'
+          select count(distinct synset_id)
+          from senses
+          where senses.lemma = lemmas.lemma
+        ) as synset_count
+        from (
+          select distinct lemma
+          from senses
+          where senses.part_of_speech = '#{pos}'
         ) as lemmas
       ) as stats
       where stats.synset_count = #{size}
     ")[0]["count"].to_f
-    
+
     all_count = Sense.
       where(:part_of_speech => pos).
       distinct.
