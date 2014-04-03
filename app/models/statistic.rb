@@ -126,7 +126,7 @@ class Statistic < ActiveRecord::Base
     elsif names.present?
       where.not(value: 0).where(name: names).load
     else
-      where.not(value: 0).all.load
+      where.not(value: 0).load
     end
   end
 
