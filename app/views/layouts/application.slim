@@ -18,6 +18,14 @@ html lang="pl" ng-app="wordnet"
               img.top__logoimage src=image_path('slowosiec-mini.png') height="36"
               | Słowosieć
           .top__container.top__container--main.grid__cell.grid__cell--10-20
+            script type="text/ng-template" id="template/typeahead/typeahead-popup.html"
+              div ng-init="selectable = { enabled: false }" ng-mousemove="selectable.enabled = true"
+                ul class="dropdown-menu" ng-if="selectable.enabled && isOpen()" ng-style="{top: position.top+'px', left: position.left+'px'}" style="display: block;" role="listbox" aria-hidden="{{!isOpen()}}"
+                  li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option"
+                    div typeahead-match="" index="$index" match="match" query="query" template-url="templateUrl"
+                ul class="dropdown-menu" ng-if="!selectable.enabled && isOpen()" ng-style="{top: position.top+'px', left: position.left+'px'}" style="display: block;" role="listbox" aria-hidden="{{!isOpen()}}"
+                  li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }" ng-click="selectMatch($index)" role="option"
+                    div typeahead-match="" index="$index" match="match" query="query" template-url="templateUrl" ng-init="selectable.enabled = false"
             .autocomplete
               input.autocomplete__field(
                 type="search"
