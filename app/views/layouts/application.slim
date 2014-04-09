@@ -18,7 +18,18 @@ html lang="pl" ng-app="wordnet"
               img.top__logoimage src=image_path('slowosiec-mini.png') height="36"
               | Słowosieć
           .top__container.top__container--main.grid__cell.grid__cell--10-20
-            = render 'shared/search_field'
+            .autocomplete
+              input.autocomplete__field(
+                type="search"
+                autofocus
+                ng-model="lexeme"
+                typeahead-template-url="autocompleteTemplate.html"
+                typeahead="lexeme for lexemes in getLexemes($viewValue)"
+                typeahead-wait-ms="200"
+                typeahead-editable="true"
+                typeahead-on-select="onLexemeSelect($item)"
+                ng-enter="onEnter()"
+              )
           .top__container.grid__cell.grid__cell--5-20.u__text-right
             a< href="/stats" translate="change_language"
             a.item__lemma--pl href="" ng-click="changeLanguage('pl')"
