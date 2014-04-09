@@ -6,3 +6,5 @@ App.directive 'ngEnter', ->
       if event.which == 13
         scope.$apply ->
           scope.$eval(attrs.ngEnter)
+
+        event.preventDefault()

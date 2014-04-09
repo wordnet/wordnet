@@ -7,12 +7,13 @@ angular.module('wordnet').controller 'SearchCtrl', [
       getLexemes(name).then (lexemes) ->
         if $scope.enter
           $scope.onLexemeSelect(lexemes[0]) if lexemes.length > 0
+          $scope.enter = false
           []
         else
+          $scope.enter = false
           lexemes
 
     $scope.onLexemeSelect = (lexeme) ->
-      $scope.matches = []
       $scope.enter = false
       $scope.lexeme = lexeme.lemma
       $location.path("/#{lexeme.sense_id}")
