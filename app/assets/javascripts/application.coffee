@@ -61,10 +61,10 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
     en_sense_relations: 'Princeton Sense Relations'
     sum: 'Sum'
     change_language: 'Change language:'
-    leader: "Project Leader"
+    leader: "Leader"
     coordinator: "Coordinators"
     developer: "Developers"
-    lexograph: "Lexographs"
+    lexograph: "Linguists"
     about_wordnet: "About plWordnet"
     team: "Team"
     publications: "Publications"
@@ -105,17 +105,17 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
     aspects_of_enwordnet: 'Pewne aspekty Princeton Wordnet'
     aspects_of_plwordnet: 'Pewne aspekty Słowosieci'
     synset_size_ratio: 'Wielkość synsetów'
-    lemma_synsets_ratio: 'Ilość synsetów do których należy lemma (%)'
+    lemma_synsets_ratio: 'Liczba synsetów do których należy lemma (%)'
     pl_synset_relations: 'Relacje synsetów w Słowosieci'
-    pl_sense_relations: 'Relacje jedostek leksykalnych w Słowosieci'
+    pl_sense_relations: 'Relacje jednostek leksykalnych w Słowosieci'
     en_synset_relations: 'Relacje synsetów w Princeton Wordnet'
     en_sense_relations: 'Relacje jednostek leksykalnych w Princeton Wordnet'
     sum: 'Suma'
     change_language: 'Zmień język:'
-    leader: "Lider Projekty"
+    leader: "Kierownik"
     coordinator: "Koordynatorzy"
-    developer: "Deweloperzy"
-    lexograph: "Leksografowie"
+    developer: "Programiści"
+    lexograph: "Lingwiści"
     about_wordnet: "O Słowosieci"
     team: "Zespół"
     publications: "Publikacje"
