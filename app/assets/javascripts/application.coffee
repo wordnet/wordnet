@@ -65,6 +65,12 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
     coordinator: "Coordinators"
     developer: "Developers"
     lexograph: "Lexographs"
+    about_wordnet: "About plWordnet"
+    team: "Team"
+    publications: "Publications"
+    contact: "Contact"
+    archive_versions: "Archive Versions"
+    learn_more: 'Learn more'
 
   $translateProvider.translations 'pl',
     synonyms: "Synonimy"
@@ -110,10 +116,25 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
     coordinator: "Koordynatorzy"
     developer: "Deweloperzy"
     lexograph: "Leksografowie"
+    about_wordnet: "O Słowosieci"
+    team: "Zespół"
+    publications: "Publikacje"
+    contact: "Kontakt"
+    archive_versions: "Wersje Archiwalne"
+    learn_more: 'Dowiedz się więcej'
 
   $translateProvider.useLocalStorage()
   $translateProvider.preferredLanguage('pl')
 ]
+
+angular.module('wordnet').run ($rootScope, $translate) ->
+
+  $rootScope.config =
+    language: $translate.use()
+
+  $rootScope.toggleLanguage = (language) ->
+    $translate.use(language)
+    $rootScope.config.language = language
 
 angular.module('wordnet').config [
   '$routeProvider', '$locationProvider',

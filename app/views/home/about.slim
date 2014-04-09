@@ -10,8 +10,8 @@
   .grid
     .container.grid__cell.grid__cell--5-20
       = render 'shared/menu'
-    .container.container--main.grid__cell.grid__cell--10-20.u__markdown
-      h1.u__header O Słowosieci
+    .container.container--main.grid__cell.grid__cell--10-20.u__markdown ng-if="config.language == 'pl'"
+      h1.u__header translate="about_wordnet"
 
       markdown:
         Słowosieć (z ang. wordnet) – to słownik semantyczny, która odzwierciedla system leksykalny języka polskiego. Obecnie zawiera 142 000 rzeczowników, czasowników i przymiotników, 200 000 znaczeń oraz ponad 500 000 relacji. Jest drugim co do wielkości wordnetem na świecie i nieustannie się rozrasta.
@@ -20,8 +20,21 @@
 
         Słowosieć może służyć także jako słownik polsko-angielski i angielsko-polski, ponieważ została połączona z pierwszym i największym wordnetem na świecie – Princeton WordNet. Jest także bardzo ważnym zasobem w komputerowym przetwarzaniu języka i badaniach nad sztuczną inteligencją, m.in. znajduje zastosowanie w automatycznych tłumaczeniach [Google Translate](http://translate.google.com/about/intl/pl_ALL/).
 
-        Polski wordnet jest budowany wspólnym wysiłkiem leksykografów i informatyków z [Grupy Technologii Językowych Politechniki Wrocławskiej](http://nlp.pwr.wroc.pl/). Decyzją władz uczelni Słowosieć jest dostępna bezpłatnie do powszechnego (również komercyjnego) użytku w oparciu o [licencję](http://nlp.pwr.wroc.pl/plwordnet/license/) wzorowaną na licencji Princeton WordNet. Programiści mają także dostęp do Słowosieci na poziomie usługi sieciowej za pomocą prostego [API](http://nlp.pwr.wroc.pl/clarin/ws/).
+        Polski wordnet jest budowany wspólnym wysiłkiem leksykografów i informatyków z [Grupy Technologii Językowych Politechniki Wrocławskiej](http://nlp.pwr.wroc.pl/). Decyzją władz uczelni Słowosieć jest dostępna bezpłatnie do powszechnego (również komercyjnego) użytku w oparciu o [licencję](http://nlp.pwr.wroc.pl/plwordnet/license/) wzorowaną na licencji Princeton WordNet. Programiści mają także dostęp do Słowosieci na poziomie usługi sieciowej za pomocą [usługi sieciowej](http://nlp.pwr.wroc.pl/clarin/ws/).
 
         Prace nad Słowosiecią realizowane są dzięki grantom Ministerstwa Nauki i Szkolnictwa Wyższego i Funduszom Unijnym, a obecnie – w ramach ogólnoeuropejskiej infrastruktury naukowej [CLARIN](http://www.clarin.eu/).
+
+    .container.container--main.grid__cell.grid__cell--10-20.u__markdown ng-if="config.language == 'en'"
+      h1.u__header translate="about_wordnet"
+      markdown:
+        plWordNet – is a lexico-semantic network which reflects the lexical system of Polish language. Currently it includes 144 000 words - nouns, verbs and adjectives, 203 000 word meanings and ca 500 000 relations. It is the second largest wordnet in the world and it is constantly growing.
+
+        Single meanings in plWordNet are connected by mutual [relations](http://nlp.pwr.wroc.pl/pl/slowosiec-20/relacje-slowosieci). That is how a network is formed, in which each word is defined by reference to other words. For example samochód - 'car' is a kind of pojazd drogowy - 'road vehicle'; it is a whole consisting of silnik - 'engine', spryskiwacz - 'windscreen washer', podwozie - 'chassis', and its near equivalent is fura - 'wheels'.
+
+        plWordNet can be also used as a Polish-English and English-Polish dictionary, because it was connected to the first and world-largest wordnet - Princeton WordNet. It is also a very important resource in natural language processing and in artificial intelligence research, for example it is used by Google Translate for the purposes of [automatic translation](http://translate.google.com/about/intl/pl_ALL/).
+
+        plWordNet is a joint effort of lexicographers and computer scientists from [Language Technology Group](http://nlp.pwr.wroc.pl/) of Wrocław University of Technology. The authorities of the University decided to make plWordNet available free of charge for all applications (including commercial ones), based on the [licence](http://nlp.pwr.wroc.pl/plwordnet/license/) modelled on Princeton WordNet license. Programmers can also access plWordNet via [web service](http://nlp.pwr.wroc.pl/clarin/ws/).
+
+        Works on plWordNet are financed by the grants of the Ministry of Science and Higher Education and by UE funds, and currently within the pan-European research infrastructure [CLARIN](http://www.clarin.eu/).
 
     .container.grid__cell.grid__cell--5-20
