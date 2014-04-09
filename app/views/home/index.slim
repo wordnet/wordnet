@@ -8,7 +8,7 @@
             a.u__previous href="" ng-href="/{{ sense.homographs[sense_index - 1] }}" ng-show="sense_index > 0"
               | {{ 'previous' | translate }}
           .grid__cell.grid__cell--10-20.u__text-center
-            span.u__dim(
+            span.u__bold(
               translate="i_from_n_lexical_units" 
               translate-values="{i: '{{sense_index + 1}}', n: '{{sense.homographs.length}}'}")
           .grid__cell.grid__cell--5-20.u__text-right
@@ -63,7 +63,7 @@
         .grid__cell style='margin-top: 0px; width: 50% !important'
           a href="http://www.synat.pl/"
             img src=image_path('supporters/synat.png') width="100%"
-      div.u__dim style="margin: 30px 0; font-size: 8px"
+      div.u__dim style="margin: 30px 0; font-size: 9px"
         p
           | Copyright © 2006-2014
           a< href="http://www.pwr.wroc.pl/" Wrocław University of Technology
