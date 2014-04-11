@@ -43,19 +43,10 @@ html lang="pl" ng-app="wordnet"
             a.item__lemma--pl href="" ng-click="toggleLanguage('pl')"
             a.item__lemma--en href="" ng-click="toggleLanguage('en')"
 
-    div ng-view=""
+    div(ui-view)
 
-    script type="text/ng-template" id="index.html"
+    script type="text/ng-template" id="/templates/index"
       = render file: 'home/index'
-
-    script type="text/ng-template" id="stats.html"
-      = render file: 'home/stats'
-
-    script type="text/ng-template" id="team.html"
-      = render file: 'home/team'
-
-    script type="text/ng-template" id="about.html"
-      = render file: 'home/about'
 
     script type="text/ng-template" id="autocompleteTemplate.html"
       = render 'shared/templates/autocomplete'

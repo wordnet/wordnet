@@ -1,6 +1,6 @@
-angular.module('wordnet').controller 'SearchCtrl', [
-  '$scope', '$location', '$anchorScroll', 'getLexemes', "$translate"
-  ($scope, $location, $anchorScroll, getLexemes, $translate) ->
+App = angular.module('wordnet')
+  
+App.controller 'SearchCtrl', ($scope, $state, $anchorScroll, getLexemes, $translate) ->
     $scope.enter = false
 
     $scope.getLexemes = (name) ->
@@ -16,7 +16,9 @@ angular.module('wordnet').controller 'SearchCtrl', [
     $scope.onLexemeSelect = (lexeme) ->
       $scope.enter = false
       $scope.lexeme = lexeme.lemma
-      $location.path("/#{lexeme.sense_id}")
+
+      $state.go('sense', senseId: lexeme.sense_id)
+
       $anchorScroll()
 
     $scope.onEnter = ->
@@ -24,4 +26,3 @@ angular.module('wordnet').controller 'SearchCtrl', [
 
     $scope.changeLanguage = (name) ->
       $translate.use(name)
-]

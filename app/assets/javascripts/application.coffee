@@ -2,7 +2,7 @@
 #= require angular
 #= require angular-bootstrap
 #= require angular-cookies
-#= require angular-route
+#= require angular-ui-router
 #= require angular-translate
 #= require angular-translate-storage-local
 #= require angular-translate-storage-cookie
@@ -12,14 +12,14 @@
 #= require_tree ./directives
 #= require_tree ./filters
 
-angular.module('wordnet', [
-  'ngRoute'
+App = angular.module 'wordnet', [
+  'ui.router'
   'ngCookies'
   'ui.bootstrap'
   'pascalprecht.translate'
-])
+]
 
-angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
+App.config ($translateProvider) ->
 
   $translateProvider.translations 'en',
     synonyms: "Synonyms"
@@ -125,9 +125,8 @@ angular.module('wordnet').config ['$translateProvider', ($translateProvider) ->
 
   $translateProvider.useLocalStorage()
   $translateProvider.preferredLanguage('pl')
-]
 
-angular.module('wordnet').run ($rootScope, $translate) ->
+App.run ($rootScope, $translate) ->
 
   $rootScope.config =
     language: $translate.use()
@@ -136,37 +135,35 @@ angular.module('wordnet').run ($rootScope, $translate) ->
     $translate.use(language)
     $rootScope.config.language = language
 
-angular.module('wordnet').config [
-  '$routeProvider', '$locationProvider',
-  ($routeProvider, $locationProvider) ->
-    $routeProvider.when '/',
+  $rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
+    console.error { error, event, toState, toParams, fromState, fromParams }
+
+App.config ($stateProvider, $locationProvider) ->
+    ['stats', 'team', 'about'].forEach (page) ->
+      $stateProvider.state page,
+        url: '/' + page
+        templateUrl: '/templates/' + page
+
+    $stateProvider.state 'index',
+      url: '/'
       controller: 'SenseCtrl'
-      templateUrl: 'index.html'
+      templateUrl: '/templates/index'
       resolve:
         relations: -> []
         sense: -> undefined
 
-    $routeProvider.when '/stats',
-      templateUrl: 'stats.html'
-
-    $routeProvider.when '/team',
-      templateUrl: 'team.html'
-
-    $routeProvider.when '/about',
-      templateUrl: 'about.html'
-
-    $routeProvider.when '/:senseId',
+    $stateProvider.state 'sense',
+      url: '/{senseId:[^/]*}'
       controller: 'SenseCtrl'
-      templateUrl: 'index.html'
+      templateUrl: '/templates/index'
       resolve:
         relations: [
           'getRelations', (getRelations) ->
             getRelations()
         ]
         sense: [
-          '$route', 'getSense', ($route, getSense) ->
-            getSense($route.current.params.senseId)
+          '$stateParams', 'getSense', ($stateParams, getSense) ->
+            getSense($stateParams.senseId)
         ]
 
     $locationProvider.html5Mode(true)
-]

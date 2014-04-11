@@ -25,9 +25,9 @@
     .container.grid__cell.grid__cell--5-20
       = render 'shared/menu'
     .container.container--main.grid__cell.grid__cell--10-20 ng-if="config.language == 'pl'"
-      img src=image_path('slowosiec-text.png') width="450"
+      img src=image_path('slowosiec-text.png') width="100%"
       h1.u__text-center style="font-size: 30px" wielka sieć wyrazów
-      ul style="margin: 70px 0; text-align: center; font-size: 18px"
+      ul style="margin: 40px 0 50px; text-align: center; font-size: 18px"
         li
           strong> 140 000
           | słów
@@ -44,7 +44,7 @@
           a href="http://github.com/wordnet/wordnet"
             | darmowa licencja
         li drugi co do wielkości wordnet na świecie
-      h1 style="font-size: 20px; margin-top: 20px" Projekt rozwijany jest dzięki wsparciu:
+      h1 style="font-size: 20px;" Projekt rozwijany jest dzięki wsparciu:
       .grid
         .grid__cell style='margin-top: 16px; width: 50% !important'
           a href="http://www.nauka.gov.pl/"

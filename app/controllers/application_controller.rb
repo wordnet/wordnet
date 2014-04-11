@@ -1,5 +1,13 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+
+ layout :determine_layout
+
+  def determine_layout
+    if request.path.start_with?('/template')
+      false
+    else
+      "application"
+    end
+  end
 end
