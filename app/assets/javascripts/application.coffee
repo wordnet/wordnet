@@ -71,6 +71,9 @@ App.config ($translateProvider) ->
     contact: "Contact"
     archive_versions: "Archive Versions"
     learn_more: 'Learn more'
+    contact_information: "Contact Information"
+    institution_name: "Institute of Informatics, Wroclaw University of Technology"
+    phone: 'phone:'
 
   $translateProvider.translations 'pl',
     synonyms: "Synonimy"
@@ -122,6 +125,9 @@ App.config ($translateProvider) ->
     contact: "Kontakt"
     archive_versions: "Wersje Archiwalne"
     learn_more: 'Dowiedz się więcej'
+    contact_information: "Informacje Kontaktowe"
+    institution_name: "Instytut Informatyki, Politechnika Wrocławska"
+    phone: 'telefon:'
 
   $translateProvider.useLocalStorage()
   $translateProvider.preferredLanguage('pl')
@@ -139,7 +145,7 @@ App.run ($rootScope, $translate) ->
     console.error { error, event, toState, toParams, fromState, fromParams }
 
 App.config ($stateProvider, $locationProvider) ->
-    ['stats', 'team', 'about'].forEach (page) ->
+    ['stats', 'team', 'about', 'contact'].forEach (page) ->
       $stateProvider.state page,
         url: '/' + page
         templateUrl: '/templates/' + page

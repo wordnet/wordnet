@@ -1,0 +1,30 @@
+.top.top--alternative
+  .wrapper
+    .grid
+      .grid__cell.grid__cell--5-20
+      .grid__cell.grid__cell--10-20.u__text-center
+        | {{ 'use_search_bar_to_begin' | translate }}
+      .grid__cell.grid__cell--5-20
+.wrapper.u__pad
+  .grid
+    .container.grid__cell.grid__cell--5-20
+      = render 'shared/menu'
+    .container.container--main.grid__cell.grid__cell--10-20.u__contact
+      h1.u__header translate="contact_information" style="margin-bottom: 10px"
+      p.u__bold translate="institution_name"
+      p.u__margin-top ng-init="A = '@'"
+        span>
+          | {{ ':liame' | reverse }}
+        a ng-href="{{ 'lp.ude.rwp'+A+'tendrowlp:o'+'tliam' | reverse }}" 
+          | {{ 'lp.ude.r'+'wp'+A+'ten'+'drowlp' | reverse }}
+      p
+        span> translate="phone"
+        a href="tel:+48713204221"
+          | (48 71) 320 42 21
+      p.u__margin-top
+        | ul. Wybrzeże Wyspiańskiego 27
+      p
+        | 50-370 Wrocław
+      p
+        | Poland
+    .container.grid__cell.grid__cell--5-20
