@@ -7,8 +7,12 @@ html lang="pl" ng-app="wordnet"
     = stylesheet_link_tag 'application', media: 'all'
     link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'
     = javascript_include_tag 'application'
+    javascript:
+      angular.module('wordnet').config(function($translateProvider) {
+        $translateProvider.translations('en', #{translations[:en].to_json.html_safe});
+        $translateProvider.translations('pl', #{translations[:pl].to_json.html_safe});
+      });
     = favicon_link_tag '/favicon.ico'
-
   body
     header.top.top--invert ng-controller="SearchCtrl"
       .wrapper

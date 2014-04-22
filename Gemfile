@@ -13,6 +13,7 @@ gem 'dotenv-rails', '~> 0.9'
 gem 'yajl-ruby', :require => 'yajl'
 gem 'hashie'
 gem 'redcarpet'
+gem 'rails-i18n'
 
 # Frontend
 gem 'coffee-rails', '~> 4.0.0'

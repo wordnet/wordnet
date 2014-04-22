@@ -22,4 +22,6 @@ class Application < Rails::Application
 
   config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
   config.assets.precompile += %w( .svg .eot .woff .ttf )
+
+  config.i18n.available_locales = [:pl, :en]
 end

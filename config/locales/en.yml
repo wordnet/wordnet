@@ -1,23 +1,53 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  synonyms: "Synonyms"
+  source: "Source"
+  examples: "Examples"
+  hyperonyms: "Hyperonyms"
+  show_hyperonym_path: "Show hyperonym path"
+  verb_pl: "Verb"
+  noun_pl: "Noun"
+  adverb_pl: "Adverb"
+  adjective_pl: "Adjective"
+  verb_pwn: "Verb PWN"
+  noun_pwn: "Noun PWN"
+  adverb_pwn: "Adverb PWN"
+  adjective_pwn: "Adjective PWN"
+  i_from_n_lexical_units: "{{i}} of {{n}} lexical&nbsp;units"
+  use_search_bar_to_begin: "Use search bar to begin"
+  next: "Next"
+  previous: "Previous"
+  show_n_other_connections: "Show {{n}} more connections"
+  i_from_n_paths: "{{i}} of {{n}} paths"
+  back: "Go back"
+  statistics: "Statistics"
+  polysemy: 'All Lemma'
+  polysemy_nomono: 'Only Polisemous Lemma'
+  average_polysemy: 'Average Polisemy'
+  lemmas: 'Lemmas'
+  lexemes: 'Lexical Units'
+  synsets: 'Synsets'
+  monosemous_lemmas: 'Monosemous Lemmas'
+  polysemous_lemmas: 'Polysemous Lemmas'
+  aspects_of_enwordnet: 'Princeton Wordnet Aspects'
+  aspects_of_plwordnet: 'Polish Wordnet Aspects'
+  synset_size_ratio: 'Sizes of Synsets'
+  lemma_synsets_ratio: 'Number of Synsets Lemma belongs to (%)'
+  pl_synset_relations: 'Słowosieć Synset Relations'
+  pl_sense_relations: 'Słowosieć Sense Relations'
+  en_synset_relations: 'Princeton Synset Relations'
+  en_sense_relations: 'Princeton Sense Relations'
+  sum: 'Sum'
+  change_language: 'Change language:'
+  leader: "Leader"
+  coordinator: "Coordinators"
+  developer: "Developers"
+  lexograph: "Linguists"
+  about_wordnet: "About plWordnet"
+  team: "Team"
+  publications: "Publications"
+  contact: "Contact"
+  archive_versions: "Archive Versions"
+  learn_more: 'Learn more'
+  contact_information: "Contact Information"
+  institution_name: "Institute of Informatics, Wroclaw University of Technology"
+  phone: 'phone:'
