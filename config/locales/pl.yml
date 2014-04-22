@@ -18,7 +18,7 @@ pl:
   next: "Następna"
   show_n_other_connections: "Pokaż pozostałe {{n}}&nbsp;{{ 'połączenie' | inflect:n }}"
   i_from_n_paths: "{{i}} z {{n}} ścieżek"
-  back: "Powrót"
+  back: "ZAMKNIJ"
   statistics: "Statystyki"
   polysemy: "Średnia liczba znaczeń na lemat"
   polysemy_nomono: "Średnia liczba znaczeń dla lematów polisemicznych"

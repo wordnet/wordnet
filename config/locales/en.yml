@@ -18,7 +18,7 @@ en:
   previous: "Previous"
   show_n_other_connections: "Show {{n}} more connections"
   i_from_n_paths: "{{i}} of {{n}} paths"
-  back: "Go back"
+  back: "CLOSE"
   statistics: "Statistics"
   polysemy: "Polysemy"
   polysemy_nomono: "Only Polysemous Lemma"
