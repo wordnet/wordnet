@@ -14,6 +14,7 @@ gem 'yajl-ruby', :require => 'yajl'
 gem 'hashie'
 gem 'redcarpet'
 gem 'rails-i18n'
+gem 'twitter_cldr'
 
 # Frontend
 gem 'coffee-rails', '~> 4.0.0'

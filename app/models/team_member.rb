@@ -12,6 +12,10 @@ class TeamMember
   end
 
   def self.all_by_role
-    @all_by_id = all.group_by(&:role)
+    collator = TwitterCldr::Collation::Collator.new(:pl)
+
+    @all_by_id = Hash[all.group_by(&:role).map do |name, members|
+      [name, member.sort_by { |m| collator.get_sort_key(m[:name].split(' ')[1] })]
+    end]
   end
 end

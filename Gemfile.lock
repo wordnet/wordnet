@@ -50,6 +50,7 @@ GEM
     byebug (2.5.0)
       columnize (~> 0.3.6)
       debugger-linecache (~> 1.2.0)
+    camertron-eprun (1.1.0)
     chunky_png (1.2.9)
     coderay (1.0.9)
     coercible (1.0.0)
@@ -235,6 +236,10 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    twitter_cldr (3.0.0)
+      camertron-eprun
+      json
+      tzinfo
     tzinfo (0.3.38)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
@@ -295,6 +300,7 @@ DEPENDENCIES
   sequel
   slim-rails (~> 2.0)
   thread
+  twitter_cldr
   uglifier (~> 2.3)
   upsert
   wisper (~> 1.2.0)
