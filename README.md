@@ -238,7 +238,7 @@ Or by tool you choose (Capistrano or other).
 
 ## License
 
-Product has open-sourced and MIT-licensed.
+Wordnet is released under the MIT License.
 
 [1]: http://plwordnet.pwr.wroc.pl/wordnet/
 [2]: http://sql-info.de/mysql/gotchas.html
