@@ -22,7 +22,7 @@ class Statistic < ActiveRecord::Base
         constructor: block
       }]
     end
-    
+
     def table_view(name, options = {})
       rows = options[:stats].map do |stat|
         stat.send(options[:rows])
@@ -100,7 +100,7 @@ class Statistic < ActiveRecord::Base
   end
 
   def self.fetch!(name, *points)
-    record = find_by(name: name, x: points[0], y: points[1]) || begin
+    find_by(name: name, x: points[0], y: points[1]) || begin
       Rails.logger.info("Fetching statistic #{name}(#{points.join(',')})")
       fetch(name, *points).tap { |r| r.save }
     end
@@ -172,7 +172,7 @@ class Statistic < ActiveRecord::Base
   end
 
   def_dimension "relation" do
-    RelationType.pluck(:id).map(&:to_s)
+    RelationType.pluck(:id).map(&:to_s).map { |r| "relation_#{r}" }
   end
 
   def_statistic "lemmas", ["pos"] do |pos|
@@ -200,7 +200,7 @@ class Statistic < ActiveRecord::Base
       '.squish).
       distinct.count(:lemma)
   end
-  
+
   def_statistic "lexemes", ["pos"] do |pos|
     Sense.
       where(:part_of_speech => pos).
@@ -286,7 +286,7 @@ class Statistic < ActiveRecord::Base
     SynsetRelation.
       select(:id).
       joins(:parent, :child).
-      where(:relation_id => rel.to_i,
+      where(:relation_id => rel.split('_').last.to_i,
         :synsets => {
           :part_of_speech => pos,
           :language => 'pl_PL'
@@ -303,7 +303,7 @@ class Statistic < ActiveRecord::Base
     SynsetRelation.
       select(:id).
       joins(:parent, :child).
-      where(:relation_id => rel.to_i,
+      where(:relation_id => rel.split('_').last.to_i,
         :synsets => {
           :part_of_speech => pos,
           :language => 'en_GB'
@@ -320,7 +320,7 @@ class Statistic < ActiveRecord::Base
     SenseRelation.
       select(:id).
       joins(:parent, :child).
-      where(:relation_id => rel.to_i,
+      where(:relation_id => rel.split('_').last.to_i,
         :senses => {
           :part_of_speech => pos,
           :language => 'pl_PL'
@@ -337,7 +337,7 @@ class Statistic < ActiveRecord::Base
     SenseRelation.
       select(:id).
       joins(:parent, :child).
-      where(:relation_id => rel.to_i,
+      where(:relation_id => rel.split('_').last.to_i,
         :senses => {
           :part_of_speech => pos,
           :language => 'en_GB'
