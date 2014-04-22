@@ -2,16 +2,16 @@ en:
   synonyms: "Synonyms"
   source: "Source"
   examples: "Examples"
-  hyperonyms: "Hyperonyms"
-  show_hyperonym_path: "Show hyperonym path"
+  hyperonyms: "Hypernyms"
+  show_hyperonym_path: "Show hypernym path"
   verb_pl: "Verb"
   noun_pl: "Noun"
   adverb_pl: "Adverb"
   adjective_pl: "Adjective"
-  verb_pwn: "Verb PWN"
-  noun_pwn: "Noun PWN"
-  adverb_pwn: "Adverb PWN"
-  adjective_pwn: "Adjective PWN"
+  verb_pwn: "PWN Verb"
+  noun_pwn: "PWN Noun"
+  adverb_pwn: "PWN Adverb"
+  adjective_pwn: "PWN Adjective"
   i_from_n_lexical_units: "{{i}} of {{n}} lexical&nbsp;units"
   use_search_bar_to_begin: "Use search bar to begin"
   next: "Next"
@@ -20,22 +20,22 @@ en:
   i_from_n_paths: "{{i}} of {{n}} paths"
   back: "Go back"
   statistics: "Statistics"
-  polysemy: 'All Lemma'
-  polysemy_nomono: 'Only Polisemous Lemma'
-  average_polysemy: 'Average Polisemy'
+  polysemy: 'Polysemy'
+  polysemy_nomono: 'Only Polysemous Lemma'
+  average_polysemy: 'Average Polysemy'
   lemmas: 'Lemmas'
   lexemes: 'Lexical Units'
   synsets: 'Synsets'
   monosemous_lemmas: 'Monosemous Lemmas'
   polysemous_lemmas: 'Polysemous Lemmas'
-  aspects_of_enwordnet: 'Princeton Wordnet Aspects'
-  aspects_of_plwordnet: 'Polish Wordnet Aspects'
-  synset_size_ratio: 'Sizes of Synsets'
-  lemma_synsets_ratio: 'Number of Synsets Lemma belongs to (%)'
-  pl_synset_relations: 'Słowosieć Synset Relations'
-  pl_sense_relations: 'Słowosieć Sense Relations'
-  en_synset_relations: 'Princeton Synset Relations'
-  en_sense_relations: 'Princeton Sense Relations'
+  aspects_of_enwordnet: 'Word counts in Princeton WordNet'
+  aspects_of_plwordnet: 'Word counts in plWordNet'
+  synset_size_ratio: 'Percentage of synsets by size'
+  lemma_synsets_ratio: 'Percentage of words by synsets per word'
+  pl_synset_relations: 'plWordNet Synset Relations'
+  pl_sense_relations: 'plWordNet Lexical Unit Relations'
+  en_synset_relations: 'WordNet Synset Relations'
+  en_sense_relations: 'WordNet Lexical Unit Relations'
   sum: 'Sum'
   change_language: 'Change language:'
   leader: "Leader"
@@ -46,7 +46,7 @@ en:
   team: "Team"
   publications: "Publications"
   contact: "Contact"
-  archive_versions: "Archival versions"
+  archive_versions: "Archive Versions"
   learn_more: 'Learn more'
   contact_information: "Contact Information"
   institution_name: "Institute of Informatics, Wroclaw University of Technology"

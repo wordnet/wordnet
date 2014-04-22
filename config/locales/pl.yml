@@ -20,18 +20,18 @@ pl:
   i_from_n_paths: "{{i}} z {{n}} ścieżek"
   back: "Powrót"
   statistics: "Statystyki"
-  polysemy: 'Wszystkie lematy'
-  polysemy_nomono: 'Polisemiczne lematy'
+  polysemy: 'Średnia liczba znaczeń na lemat'
+  polysemy_nomono: 'Średnia liczba znaczeń dla lematów polisemicznych'
   average_polysemy: 'Średnia polisemia'
   lemmas: 'Lematy'
   lexemes: 'Jednostki leksykalne'
   synsets: 'Synsety'
-  monosemous_lemmas: 'Monosemiczne lemma'
-  polysemous_lemmas: 'Polisemiczne lemma'
+  monosemous_lemmas: 'Lematy monosemiczne'
+  polysemous_lemmas: 'Lematy polisemiczne'
   aspects_of_enwordnet: 'Wybrane statystyki Princeton Wordnet (PWN)'
   aspects_of_plwordnet: 'Wybrane statystyki Słowosieci'
   synset_size_ratio: 'Wielkość synsetów'
-  lemma_synsets_ratio: 'Liczba synsetów do których należy lemma (%)'
+  lemma_synsets_ratio: 'Liczba synsetów do których należy lemat (%)'
   pl_synset_relations: 'Relacje synsetów w Słowosieci'
   pl_sense_relations: 'Relacje jednostek leksykalnych w Słowosieci'
   en_synset_relations: 'Relacje synsetów w Princeton Wordnet'
