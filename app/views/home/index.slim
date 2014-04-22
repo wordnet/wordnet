@@ -3,7 +3,7 @@
     .grid
       .top__container.grid__cell.grid__cell--5-20
       .top__container.top__container--main.grid__cell.grid__cell--10-20
-        .grid ng-if="sense.homographs.length > 1"
+        .grid ng-if="sense"
           .grid__cell.grid__cell--5-20
             a.u__previous href="" ng-href="/{{ sense.homographs[sense_index - 1] }}" ng-show="sense_index > 0"
               | {{ 'previous' | translate }}
