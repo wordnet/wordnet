@@ -5,12 +5,14 @@ Application.routes.draw do
   get '/stats' => 'home#stats'
   get '/team' => 'home#team'
   get '/contact' => 'home#contact'
+  get '/unknown/:lemma' => 'home#unknown'
 
   get '/templates/index' => 'home#index'
   get '/templates/about' => 'home#about'
   get '/templates/stats' => 'home#stats'
   get '/templates/team' => 'home#team'
   get '/templates/contact' => 'home#contact'
+  get '/templates/unknown' => 'home#unknown'
 
   get '/:sense_id' => 'home#index'
 

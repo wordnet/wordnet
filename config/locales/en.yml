@@ -52,3 +52,4 @@ en:
   contact_information: "Contact Information"
   institution_name: "Institute of Informatics, Wroclaw University of Technology"
   phone: "phone:"
+  unknown_lemma: "Unknown word: {{ lemma }}"

@@ -8,12 +8,23 @@ App.controller 'SearchCtrl', ($scope, $state, $anchorScroll, getLexemes, $transl
   $scope.getLexemes = (name) ->
     getLexemes(name).then (lexemes) ->
       if $scope.enter
-        $scope.onLexemeSelect(lexemes[0]) if lexemes.length > 0
-        $scope.enter = false
+        if lexemes.length > 0
+          $scope.onLexemeSelect(lexemes[0])
+        else
+          $scope.unknownLemma(name)
+
         []
       else
         $scope.enter = false
         lexemes
+
+  $scope.unknownLemma = (lemma) ->
+    $scope.enter = false
+    $scope.changed = false
+
+    $state.go('unknown', lemma: lemma)
+
+    $anchorScroll()
 
   $scope.onLexemeSelect = (lexeme) ->
     $scope.enter = false

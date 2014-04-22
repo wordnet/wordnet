@@ -50,6 +50,16 @@ App.config ($stateProvider, $locationProvider) ->
         relations: -> []
         sense: -> undefined
 
+    $stateProvider.state 'unknown',
+      url: '/unknown/{lemma:[^/]*}'
+      templateUrl: '/templates/unknown'
+      controller: 'UnknownCtrl'
+      resolve:
+        lemma: [
+          '$stateParams',  ($stateParams) ->
+            $stateParams.lemma
+        ]
+
     $stateProvider.state 'sense',
       url: '/{senseId:[^/]*}'
       controller: 'SenseCtrl'
