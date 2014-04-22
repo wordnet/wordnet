@@ -1,6 +1,6 @@
 # Wordnet
 
-Open Source engine for Wordnet databases.
+Open Source browsing application for Wordnet databases.
 
 ## Requirements
 
