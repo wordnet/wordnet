@@ -47,6 +47,7 @@ html lang="pl" ng-app="wordnet"
                 typeahead-editable="true"
                 typeahead-on-select="onLexemeSelect($item)"
                 ng-enter="onEnter()"
+                ng-change="onChange()"
               )
           .top__container.grid__cell.grid__cell--5-20.u__text-right
             a< href="/stats" translate="change_language"
