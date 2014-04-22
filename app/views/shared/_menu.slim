@@ -25,6 +25,15 @@ section.list class="list--incoming"
         span &raquo;
     a.item.list__item(
       href="http://nlp.pwr.wroc.pl/plwordnet/download/?lang=pl"
+      ng-if="config.language == 'pl'"
+    )
+      b.item__lemma
+        i.fa.fa-archive> 
+        span> translate="archive_versions"
+        span &raquo;
+    a.item.list__item(
+      href="http://nlp.pwr.wroc.pl/plwordnet/download/?lang=eng"
+      ng-if="config.language == 'en'"
     )
       b.item__lemma
         i.fa.fa-archive> 
