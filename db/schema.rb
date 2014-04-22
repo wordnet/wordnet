@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403034903) do
+ActiveRecord::Schema.define(version: 20140422124145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,5 +83,11 @@ ActiveRecord::Schema.define(version: 20140403034903) do
   add_index "synsets", ["external_id"], name: "index_synsets_on_external_id", unique: true, using: :btree
   add_index "synsets", ["language"], name: "index_synsets_on_language", using: :btree
   add_index "synsets", ["part_of_speech"], name: "index_synsets_on_part_of_speech", using: :btree
+
+  create_table "translations", force: true do |t|
+    t.string "locale"
+    t.string "key"
+    t.text   "value"
+  end
 
 end

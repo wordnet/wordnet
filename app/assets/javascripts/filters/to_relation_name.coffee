@@ -1,4 +1,4 @@
-angular.module('wordnet').filter 'toRelationName', ->
+angular.module('wordnet').filter 'toRelationName', ($filter) ->
   toString = (value) ->
     '' + (value || '')
 
@@ -7,8 +7,8 @@ angular.module('wordnet').filter 'toRelationName', ->
     n.substr(0, 1).toUpperCase() + n.substr(1)
 
   (relation, direction) ->
-    name = tweak(relation.name)
-    reverse_name = tweak(relation.reverse_name)
+    name = tweak($filter('translate')(relation.name))
+    reverse_name = tweak($filter('translate')(relation.reverse_name))
     direction = toString(direction).toLowerCase()
 
     return name unless direction == 'incoming'

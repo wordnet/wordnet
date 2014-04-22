@@ -39,15 +39,24 @@ module WordnetPl
       by_id = relations.index_by { |e| e[:id] }
 
       relations.each do |r|
+
         if r[:parent_id].present?
-          if r[:name].present?
-            r[:name] = "#{by_id[r[:parent_id]][:name]} (#{r[:name]})"
+          if r[:en].present?
+            r[:en] = "#{by_id[r[:parent_id]][:en]} (#{r[:en]})"
           else
-            r[:name] = by_id[r[:parent_id]][:name]
+            r[:en] = by_id[r[:parent_id]][:en]
+          end
+
+          if r[:pl].present?
+            r[:pl] = "#{by_id[r[:parent_id]][:pl]} (#{r[:pl]})"
+          else
+            r[:pl] = by_id[r[:parent_id]][:pl]
           end
 
           r[:priority] += by_id[r[:parent_id]][:priority]
         end
+
+        r[:name] = "relation_#{r[:id]}"
       end
 
       one_ways = relations.select { |r| r[:reverse_id].blank? }
@@ -66,7 +75,33 @@ module WordnetPl
       all_relations = one_ways + reverses.map { |k, v| v }
 
       all_relations = all_relations.map do |r|
-        r.extract!(:id, :name, :parent_id, :name, :description, :reverse_name, :priority)
+        r.dup.extract!(:id, :parent_id, :description, :priority, :name, :reverse_name)
+      end
+
+      all_translations = relations.flat_map do |r|
+        pl = Translation.new(
+          :locale => "pl",
+          :key => "relation_#{r[:id]}",
+          :value => r[:pl]
+        )
+
+        en = Translation.new(
+          :locale => "en",
+          :key => "relation_#{r[:id]}",
+          :value => r[:en]
+        )
+
+        [pl, en]
+      end
+
+      all_translations.map do |t|
+        translation = Translation.find_or_initialize_by(
+          locale: t.locale,
+          key: t.key
+        )
+
+        translation.value = t.value
+        translation.save!
       end
 
       persist_entities!("relation_types", all_relations, [:id])
