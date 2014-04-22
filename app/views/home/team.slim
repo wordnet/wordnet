@@ -16,5 +16,9 @@
           h1.u__header translate=role style="margin-bottom: 10px"
           ul style="-webkit-column-count: 2; -moz-column-count: 2; column-count: 2"
             - members.each do |member|
-              li = member.name
+              li style="margin-bottom: 4px"
+                = member.name
+                - if member.date.present?
+                  br
+                  = " (#{member.date})"
     .container.grid__cell.grid__cell--5-20
