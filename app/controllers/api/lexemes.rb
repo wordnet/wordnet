@@ -31,10 +31,12 @@ module API
 
       segment '/:lemma' do
         get do
-          Sense.select('lemma, id').
-          where("lemma like ? AND sense_index = 1", "#{params[:lemma]}%").
+          Sense.select('lemma, id, language').
+          where("LOWER(lemma) like LOWER(?) AND sense_index = 1", "#{params[:lemma]}%").
           order('length(lemma)').
-          limit(10).to_a.map { |d| { sense_id: d.id, lemma: d.lemma } }
+          limit(10).to_a.map { |d|
+            { sense_id: d.id, lemma: d.lemma, language: d.language }
+          }
         end
       end
     end

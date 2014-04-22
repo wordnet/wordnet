@@ -73,7 +73,13 @@ class Sense < ActiveRecord::Base
     }
 
     if options[:extended]
-      data[:homographs] = Sense.where(lemma: lemma).order(language: :desc, sense_index: :asc).select(:id).map(&:id)
+      data[:homographs] = Sense.where(
+        "LOWER(lemma) like LOWER(?) AND language = ?",
+        lemma, language
+      ).order(
+        sense_index: :asc
+      ).select(:id).map(&:id)
+
       data[:synset] = synset.as_json
       data[:outgoing] = fetch_related
       data[:incoming] = fetch_reverse_related
