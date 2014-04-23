@@ -9,8 +9,14 @@ class Synset < ActiveRecord::Base
     :class_name => "SynsetRelation"
 
   def as_json(options = {})
+    the_senses = senses.order(:sense_index)
+
+    if options[:without]
+      the_senses = the_senses.where.not(id: options[:without])
+    end
+
     {
-      senses: senses.order(:sense_index).as_json,
+      senses: the_senses.as_json,
       comment: comment,
       definition: definition,
       examples: examples

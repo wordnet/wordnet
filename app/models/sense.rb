@@ -80,7 +80,7 @@ class Sense < ActiveRecord::Base
         sense_index: :asc
       ).select(:id).map(&:id)
 
-      data[:synset] = synset.as_json
+      data[:synset] = synset.as_json(without: id)
       data[:outgoing] = fetch_related
       data[:incoming] = fetch_reverse_related
     end
