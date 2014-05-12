@@ -1,5 +1,5 @@
 section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{direction} | orderBy:['-language', '-no_reverse', 'target_type', 'priority']" ng-init="count = relation_type.senses.length"
-  h1.list__header.u__header ng-bind="relations[relation_type.relation_id] | toRelationName:'#{direction}'"
+  h1.list__header.u__header.u__overflow ng-bind="relations[relation_type.relation_id] | toRelationName:'#{direction}'"
 
   ul ng-init="truncation = { after: relation_type.senses.length > 7 ? 4 : relation_type.senses.length }"
     li ng-repeat="sense in relation_type.senses | limitTo:truncation.after"
@@ -8,8 +8,9 @@ section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{dire
           | {{ sense.lemma }}
           i.item__position
             | &nbsp;{{ sense.sense_index || 0 }}
-        span.item__description.item__description--small.u__truncate< ng-if="sense.comment"
-          | {{ sense.comment }}
+        span.item__description.item__description--small.u__truncate<
+          span ng-if="sense.comment" ng-bind="sense.comment"
+          span ng-if="!sense.comment" ng-bind="('domain_' + sense.domain_id) | translate"
 
     li ng-show="truncation.after < count"
       a.list__item.list__item--more(

@@ -164,6 +164,8 @@ GEM
       rails-assets-angular (= 1.2.16)
     rails-assets-angular-route (1.2.16)
       rails-assets-angular (= 1.2.16)
+    rails-assets-angular-sanitize (1.2.16)
+      rails-assets-angular (= 1.2.16)
     rails-assets-angular-translate (2.0.1)
     rails-assets-angular-translate-storage-cookie (2.0.0)
       rails-assets-angular-translate (~> 2.0.0)
@@ -172,8 +174,17 @@ GEM
       rails-assets-angular-translate-storage-cookie (~> 2.0.0)
     rails-assets-angular-ui-router (0.2.7)
       rails-assets-angular (>= 1.1.5)
+    rails-assets-jquery (2.1.1)
     rails-assets-lodash (2.4.1)
+    rails-assets-microplugin (0.0.3)
     rails-assets-open-sans-fontface (1.0.4)
+    rails-assets-selectize (0.8.5)
+      rails-assets-jquery (>= 0.6.0)
+      rails-assets-microplugin (~> 0.0.0)
+      rails-assets-sifter (~> 0.3.0)
+    rails-assets-sheerun--ui-select (0.2.1)
+      rails-assets-angular (~> 1.2)
+    rails-assets-sifter (0.3.3)
     rails-i18n (4.0.2)
       i18n (~> 0.6)
       rails (>= 4.0)
@@ -285,12 +296,15 @@ DEPENDENCIES
   rails-assets-angular-cache
   rails-assets-angular-cookies
   rails-assets-angular-route
+  rails-assets-angular-sanitize
   rails-assets-angular-translate
   rails-assets-angular-translate-storage-cookie
   rails-assets-angular-translate-storage-local
   rails-assets-angular-ui-router
   rails-assets-lodash (~> 2.4)
   rails-assets-open-sans-fontface
+  rails-assets-selectize (~> 0.8.5)
+  rails-assets-sheerun--ui-select (= 0.2.1)
   rails-i18n
   rails_12factor
   redcarpet

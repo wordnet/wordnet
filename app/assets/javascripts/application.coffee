@@ -3,9 +3,11 @@
 #= require angular-bootstrap
 #= require angular-cookies
 #= require angular-ui-router
+#= require angular-sanitize
 #= require angular-translate
 #= require angular-translate-storage-local
 #= require angular-translate-storage-cookie
+#= require ui-select
 #= require_self
 #= require_tree ./factories
 #= require_tree ./controllers
@@ -15,15 +17,38 @@
 App = angular.module 'wordnet', [
   'ui.router'
   'ngCookies'
+  'ngSanitize'
+  'ui.bootstrap.typeahead'
   'ui.bootstrap'
   'pascalprecht.translate'
+  'pascalprecht.translate'
+  'ui.select'
 ]
 
 App.config ($translateProvider) ->
   $translateProvider.useLocalStorage()
   $translateProvider.preferredLanguage('pl')
 
-App.run ($rootScope, $translate) ->
+App.config (uiSelectConfig) ->
+  uiSelectConfig.theme = 'selectize'
+
+App.run ($templateCache) ->
+  $templateCache.put('selectize/choices.tpl.html', '<div ng-show="$select.open" class="ui-select-choices selectize-dropdown single"> <div class="ui-select-choices-content selectize-dropdown-content" onmousewheel="preventScrolling(this)"> <div class="ui-select-choices-row" ng-class="{\'active\': $select.activeIndex===$index}"> <div class="option" data-selectable ng-transclude></div> </div> </div> </div> ')
+
+App.run ($rootScope, $translate, $interpolate) ->
+
+  window.preventScrolling = (t) ->
+    e = event
+    return unless e && t
+    if (e.deltaY > 0 and t.clientHeight + t.scrollTop == t.scrollHeight) or (e.deltaY < 0 and t.scrollTop == 0)
+      e.stopPropagation()
+      e.preventDefault()
+      return false
+
+    true
+
+  $rootScope.lexicalUnitsValues =
+    $interpolate('{ i: "{{sense_index + 1}}", n: "{{sense.homographs.length}}" }')
 
   $rootScope.config =
     language: $translate.use()

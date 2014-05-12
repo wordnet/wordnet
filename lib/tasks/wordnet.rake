@@ -42,4 +42,10 @@ namespace :wordnet do
     Rails.logger = Logger.new(STDOUT)
     Statistic.refetch_all!(args[:klass])
   end
+
+  desc "Reload all translations"
+  task :translations => [:environment] do |t, args|
+    Rails.logger = Logger.new(STDOUT)
+    Translation.export
+  end
 end

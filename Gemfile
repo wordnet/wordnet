@@ -25,6 +25,7 @@ gem 'quiet_assets', '~> 1.0'
 gem 'compass-rails', '~> 1.1.3'
 gem 'autoprefixer-rails'
 gem 'ngmin-rails'
+gem 'font-awesome-rails', github: 'monterail/font-awesome-rails'
 
 # Rails Assets
 gem 'rails-assets-lodash', '~> 2.4'
@@ -36,9 +37,11 @@ gem 'rails-assets-angular-bootstrap'
 gem 'rails-assets-open-sans-fontface'
 gem 'rails-assets-angular-translate'
 gem 'rails-assets-angular-cookies'
+gem 'rails-assets-angular-sanitize'
 gem 'rails-assets-angular-translate-storage-cookie'
 gem 'rails-assets-angular-translate-storage-local'
-gem 'font-awesome-rails', github: 'monterail/font-awesome-rails'
+gem 'rails-assets-sheerun--ui-select', '0.2.1'
+gem 'rails-assets-selectize', '~> 0.8.5'
 
 # Wordnet Import
 gem 'mysql2'

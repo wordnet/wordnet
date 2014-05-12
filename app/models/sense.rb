@@ -23,6 +23,7 @@ class Sense < ActiveRecord::Base
         senses: collect({
           id: target.id,
           lemma: target.lemma,
+          domain_id: target.domain_id,
           comment: target.comment,
           part_of_speech: target.part_of_speech,
           sense_index: target.sense_index
@@ -49,6 +50,7 @@ class Sense < ActiveRecord::Base
         senses: collect({
           id: target.id,
           lemma: target.lemma,
+          domain_id: target.domain_id,
           comment: target.comment,
           part_of_speech: target.part_of_speech,
           sense_index: target.sense_index
@@ -74,11 +76,12 @@ class Sense < ActiveRecord::Base
 
     if options[:extended]
       data[:homographs] = Sense.where(
-        "LOWER(lemma) like LOWER(?) AND language = ?",
-        lemma, language
+        "LOWER(lemma) like LOWER(?)",
+        lemma
       ).order(
+        language: :desc,
         sense_index: :asc
-      ).select(:id).map(&:id)
+      ).as_json
 
       data[:synset] = synset.as_json(without: id)
       data[:outgoing] = fetch_related
