@@ -77,7 +77,7 @@ module WordnetPl
     end
 
     def extract_examples(comment)
-      comment.scan(/\[##W: ([^\]]*)\]/).flatten.map! { |d| d[0..1023] }
+      comment.scan(/\[##[^:]+: ([^\]]*)\]/).flatten.map! { |d| d[0..1023] }
     end
 
   end
