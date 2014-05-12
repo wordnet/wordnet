@@ -18,12 +18,12 @@
     ul.grid__cell.grid__cell--15-20.definition__content
       span ng-bind="'domain_' + sense.domain_id | translate"
 
-.definition ng-if="sense.synset.examples.length"
+.definition ng-if="sense.examples.length"
   section.grid
     .grid__cell.grid__cell--5-20
       h1.definition__term translate="examples"
     ul.grid__cell.grid__cell--15-20.definition__content
-      li.definition__content__item ng-repeat="example in sense.synset.examples" ng-bind="example"
+      li.definition__content__item ng-repeat="example in sense.examples" ng-bind="example"
 
 .definition ng-if="sense.synset.senses.length"
   section.grid

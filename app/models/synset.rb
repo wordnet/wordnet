@@ -18,8 +18,7 @@ class Synset < ActiveRecord::Base
     {
       senses: the_senses.as_json,
       comment: comment,
-      definition: definition,
-      examples: examples
+      definition: definition
     }
   end
 end

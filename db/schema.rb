@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140422124145) do
+ActiveRecord::Schema.define(version: 20140512035733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20140422124145) do
   add_index "sense_relations", ["parent_id", "child_id", "relation_id"], name: "sense_relations_idx", unique: true, using: :btree
 
   create_table "senses", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
-    t.integer "external_id",    null: false
+    t.integer "external_id",                              null: false
     t.integer "domain_id"
     t.text    "comment"
     t.integer "sense_index"
@@ -42,11 +42,14 @@ ActiveRecord::Schema.define(version: 20140422124145) do
     t.string  "lemma"
     t.uuid    "synset_id"
     t.string  "part_of_speech"
+    t.string  "slug"
+    t.string  "examples",       limit: 1023, default: [],              array: true
   end
 
   add_index "senses", ["external_id"], name: "index_senses_on_external_id", unique: true, using: :btree
   add_index "senses", ["language"], name: "index_senses_on_language", using: :btree
   add_index "senses", ["lemma"], name: "index_senses_on_lemma", using: :btree
+  add_index "senses", ["slug"], name: "index_senses_on_slug", using: :btree
   add_index "senses", ["synset_id"], name: "index_senses_on_synset_id", using: :btree
 
   create_table "statistics", force: true do |t|

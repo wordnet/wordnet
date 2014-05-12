@@ -50,6 +50,7 @@ module WordnetPl
           domain_id: lemma[:domain],
           lemma: lemma[:lemma],
           comment: process_comment(lemma[:comment]),
+          examples: extract_examples(lemma[:comment]),
           language: lemma[:project] > 0 ? 'pl_PL' : 'en_GB',
           sense_index: lemma[:variant],
           part_of_speech: convert_pos(lemma[:pos])
@@ -73,6 +74,10 @@ module WordnetPl
       return nil if comment == "AOds"
       return nil unless comment.match(/[a-z]/)
       comment
+    end
+
+    def extract_examples(comment)
+      comment.scan(/\[##W: ([^\]]*)\]/).flatten.map! { |d| d[0..1023] }
     end
 
   end
