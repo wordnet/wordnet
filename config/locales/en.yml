@@ -3,7 +3,7 @@ en:
   source: "Source"
   examples: "Examples"
   hyperonyms: "Hypernyms"
-  show_hyperonym_path: "Show hypernym path"
+  show_hyperonym_path: "Show path to highest hyperonym"
   verb_pl: "Verb"
   noun_pl: "Noun"
   adverb_pl: "Adverb"

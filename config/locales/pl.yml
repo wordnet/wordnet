@@ -3,7 +3,7 @@ pl:
   source: "Źródło"
   examples: "Przykłady"
   hyperonyms: "Hiperonimy"
-  show_hyperonym_path: "Pokaż ścieżkę hiperonimów"
+  show_hyperonym_path: "Pokaż ścieżkę do najwyższego hiperonimu"
   verb_pl: "Czasownik"
   noun_pl: "Rzeczownik"
   adverb_pl: "Przysłówek"
