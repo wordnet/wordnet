@@ -283,7 +283,7 @@ DEPENDENCIES
   hashie
   mysql2
   neography
-  ngmin-rails
+  ngmin-rails (~> 0.4.0)
   pg
   pry (= 0.9.12.2)
   pry-byebug

@@ -24,7 +24,7 @@ gem 'uglifier', '~> 2.3'
 gem 'quiet_assets', '~> 1.0'
 gem 'compass-rails', '~> 1.1.3'
 gem 'autoprefixer-rails'
-gem 'ngmin-rails'
+gem 'ngmin-rails', '~> 0.4.0'
 gem 'font-awesome-rails', github: 'monterail/font-awesome-rails'
 
 # Rails Assets
