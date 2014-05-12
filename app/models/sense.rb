@@ -84,6 +84,7 @@ class Sense < ActiveRecord::Base
       ).as_json
 
       data[:synset] = synset.as_json(without: id)
+      data[:definition] = definition
       data[:examples] = examples || synset.examples || []
       data[:outgoing] = fetch_related
       data[:incoming] = fetch_reverse_related

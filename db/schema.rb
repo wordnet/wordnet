@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140512035733) do
+ActiveRecord::Schema.define(version: 20140512045131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20140512035733) do
     t.string  "part_of_speech"
     t.string  "slug"
     t.string  "examples",       limit: 1023, default: [],              array: true
+    t.text    "definition"
   end
 
   add_index "senses", ["external_id"], name: "index_senses_on_external_id", unique: true, using: :btree

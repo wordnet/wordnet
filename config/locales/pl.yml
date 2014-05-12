@@ -56,3 +56,4 @@ pl:
   phone: "telefon:"
   unknown_lemma: "Nieznany wyraz: {{ lemma }}"
   domain: "Domena"
+  definition: "Definicja"

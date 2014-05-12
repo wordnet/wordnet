@@ -49,8 +49,10 @@ module WordnetPl
           external_id: lemma[:ID],
           domain_id: lemma[:domain],
           lemma: lemma[:lemma],
-          comment: process_comment(lemma[:comment]),
+          comment: process_comment(lemma[:comment]) || 
+            extract_short_definition(lemma[:comment]),
           examples: extract_examples(lemma[:comment]),
+          definition: extract_definition(lemma[:comment]),
           language: lemma[:project] > 0 ? 'pl_PL' : 'en_GB',
           sense_index: lemma[:variant],
           part_of_speech: convert_pos(lemma[:pos])
@@ -80,5 +82,14 @@ module WordnetPl
       comment.scan(/\[##[^:]+: ([^\]]*)\]/).flatten.map! { |d| d[0..1023] }
     end
 
+    def extract_short_definition(comment)
+      definition = comment.scan(/##D: ([^\.]+)\./).flatten.first
+      definition && definition.size < 128 ? definition : nil
+    end
+
+    def extract_definition(comment)
+      definition = comment.scan(/##D: ([^\.]+)\./).flatten.first
+      definition && definition.size >= 128 ? definition : nil
+    end
   end
 end
