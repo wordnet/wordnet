@@ -68,18 +68,18 @@ module WordnetPl
 
     def process_comment(comment)
       return nil if comment.blank?
-      return nil if comment == "brak danych"
-      return nil if comment.include?("{")
-      return nil if comment.include?("#")
-      return nil if comment.include?("WSD")
-      return nil if comment.size < 3
-      return nil if comment == "AOds"
-      return nil unless comment.match(/[a-z]/)
-      comment
+      return nil if comment.include?("brak danych")
+      return nil if comment.include?("##")
+      return nil if comment[0..1] == "NP"
+      comment.match(/^([^#<]+)/).to_s.presence
     end
 
     def extract_examples(comment)
-      comment.scan(/\[##[^:]+: ([^\]]*)\]/).flatten.map! { |d| d[0..1023] }
+      comment.
+        scan(/\[##[^:]+: ([^\]]*)\]/).
+        flatten.
+        map { |d| d.strip[0..1023] }.
+        reject(&:empty?)
     end
 
     def extract_short_definition(comment)

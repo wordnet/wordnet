@@ -182,3 +182,7 @@ Jest to relacja, którą można określić jako implikację jednostronną. Hiper
 228,227,229,,międzyjęzykowa_synonimia_międzyrejestrowa_plWN-PWN,,,2,(dziedziczone)
 229,227,228,,międzyjęzykowa_synonimia_międzyrejestrowa_PWN-plWN,,,3,(dziedziczone)
 230,NULL,NULL,,sumo_instance,sumo instances,sumo instances,77,
+232,NULL,NULL,,międzyjęzykowa synonimia międzyparadygmatyczna,międzyjęzykowe synonimy paradygmatyczne,,,
+235,232,NULL,,międzyjęzykowa_synonimia_międzyparadygmatyczna_made_of_plWN-PWN,made of,,,
+238,232,NULL,,międzyjęzykowa_synonimia_międzyparadygmatyczna_resembling_plWN-PWN,resembling,,,
+239,232,NULL,,międzyjęzykowa_synonimia_międzyparadygmatyczna_related_to_plWN-PWN,related to,,,

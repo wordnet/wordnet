@@ -1,6 +1,7 @@
 id,uuid,lang,en_GB,pl_PL
 1,verb_pl,pl_PL,Verb,Czasownik
 2,noun_pl,pl_PL,Noun,Rzeczownik
+3,adverb_pl,pl_PL,Adverb,Przysłówek
 4,adjective_pl,pl_PL,Adjective,Przymiotnik
 5,verb_pwn,en_GB,Verb,Czasownik
 6,noun_pwn,en_GB,Noun,Rzeczownik

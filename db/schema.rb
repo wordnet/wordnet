@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 20140512045131) do
     t.string  "lemma"
     t.uuid    "synset_id"
     t.string  "part_of_speech"
-    t.string  "slug"
     t.string  "examples",       limit: 1023, default: [],              array: true
     t.text    "definition"
   end
@@ -50,7 +49,6 @@ ActiveRecord::Schema.define(version: 20140512045131) do
   add_index "senses", ["external_id"], name: "index_senses_on_external_id", unique: true, using: :btree
   add_index "senses", ["language"], name: "index_senses_on_language", using: :btree
   add_index "senses", ["lemma"], name: "index_senses_on_lemma", using: :btree
-  add_index "senses", ["slug"], name: "index_senses_on_slug", using: :btree
   add_index "senses", ["synset_id"], name: "index_senses_on_synset_id", using: :btree
 
   create_table "statistics", force: true do |t|

@@ -21,7 +21,6 @@ module WordnetPl
       raw.map do |synset|
         {
           external_id: synset[:ID],
-          comment: process_comment(synset[:comment]),
           definition: process_definition(synset[:definition]),
           examples: extract_examples(synset[:definition])
         }
@@ -36,7 +35,7 @@ module WordnetPl
 
     def extract_examples(definition)
       return [] if definition.blank?
-      
+
       definition.split(';')[1..-1].map do |example|
         if example.include?('"')
           custom_strip(example, " \"")
@@ -45,29 +44,15 @@ module WordnetPl
     end
 
     def custom_strip(string, chars)
-      ars = Regexp.escape(chars)
-      string.gsub(/\A[#{chars}]+|[#{chars}]+\Z/, "")
-    end
-
-    def process_comment(comment)
-      return nil if comment == "brak danych"
-      return nil if comment.include?("{")
-      return nil if comment.include?("#")
-      return nil if comment.include?("WSD")
-      return nil if comment.size < 3
-      return nil if comment == "AOds"
-      return nil if comment.match(/[a-z]/)
-      return nil if comment.blank?
-      comment
+      chars = Regexp.escape(chars)
+      string.gsub(/\A[#{chars}]+|[#{chars}]+\Z/, "")[0..253]
     end
 
     def process_definition(definition)
       return nil if definition == "brak danych"
-      return nil if definition.include?("{")
-      return nil if definition.include?("##")
       return nil if definition.size < 3
       return nil if definition.blank?
-      definition.split(";").first.strip
+      definition.split(";").first.strip[0..253]
     end
   end
 end
