@@ -1,0 +1,76 @@
+@charset "utf-8";
+
+@import "font-awesome";
+@import "selectize";
+@import "ui-select/dist/select";
+@import "application/variables";
+@import "application/mixins";
+@import "application/fonts";
+@import "application/base";
+@import "application/placeholders";
+@import "application/modules/*";
+@import "application/utilities";
+@import "application/vendor";
+
+.u__pad {
+  padding-top: 10px + $top-height + $top-alternative-height;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table th + th {
+  padding: 3px;
+  border-left: 1px dashed black;
+  text-align: center;
+}
+
+table td {
+  padding: 3px;
+  border: 1px solid black;
+}
+
+.top__logoimage {
+  height: 36px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+.u__markdown {
+  p {
+    margin-top: 20px;
+  }
+}
+
+.u__margin-top {
+  margin-top: 8px;
+}
+
+.selectize-input {
+  padding: 4px 8px;
+  margin: 6px 0;
+}
+
+.selectize-dropdown {
+  margin: -15px 0 0 0;
+}
+
+.ui-select-search {
+  &::-webkit-input-placeholder {
+    text-align: center;
+  }
+  &:-moz-placeholder {
+    text-align: center;
+  }
+  &::-moz-placeholder {
+    text-align: center;
+  }
+  &:-ms-input-placeholder {
+    text-align: center;
+  }
+}
+
+.ui-select-choices-content {
+  max-height: 440px;
+}

@@ -1,0 +1,37 @@
+$default-color: #222222;
+$default-transition: color 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out, opacity 0.2s ease-out;
+
+$primary-link-color: #1786c8;
+$secondary-link-color: #929292;
+
+$hover-link-color: darken($primary-link-color, 10%);
+$active-link-color: #c82925;
+
+$header-font-size: 1.4em;
+
+$list-border-color: gainsboro;
+$list-vertical-padding: 0.5em;
+
+$definition-border-color: mix($list-border-color, white);
+$definition-vertical-padding: 2 * $list-vertical-padding;
+
+$grid-units: 20;
+$column-units: 5;
+$column-background: #f8f8f8;
+
+$main-column-units: $grid-units - 2 * $column-units;
+$main-column-background: white;
+
+$wrapper-width: 1000px;
+
+$top-height: 50px;
+$top-background: rgba(#525252, 0.95);
+$top-link-color: $secondary-link-color;
+$top-hover-link-color: mix($secondary-link-color, $list-border-color);
+$top-active-link-color: mix($top-hover-link-color, $list-border-color);
+
+$top-alternative-height: 40px;
+$top-alternative-background: rgba($list-border-color, 0.8);
+
+$modal-background: $column-background;
+$modal-overlay-background: $top-background;

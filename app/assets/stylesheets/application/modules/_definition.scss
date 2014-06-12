@@ -1,0 +1,28 @@
+.definition {
+  & + & {
+    margin-top: $definition-vertical-padding;
+    padding-top: $definition-vertical-padding;
+    border-top: 1px solid $definition-border-color;
+  }
+  .definition--header + & {
+    margin-top: $list-vertical-padding * strip-unit($header-font-size);
+  }
+}
+
+.definition__term {
+  font-size: 0.85em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: $secondary-link-color;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  .definition--header & {
+    padding-top: 0.4em;
+  }
+}
+
+.definition__content__item {
+  & + & {
+    padding-top: $list-vertical-padding;
+  }
+}

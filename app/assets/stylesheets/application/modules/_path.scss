@@ -1,0 +1,15 @@
+.path {
+  @extend .list__header;
+  border: none;
+}
+
+.path__item {
+  & + &::before {
+    content: "↓";
+    display: block;
+    padding: 0.75em 0 1em;
+    color: $secondary-link-color;
+    font-size: 10px;
+    font-weight: 700;
+  }
+}

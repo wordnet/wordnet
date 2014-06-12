@@ -1,0 +1,62 @@
+.u__header {
+  font-size: $header-font-size;
+  font-weight: 700 !important;
+  line-height: 1.2;
+  letter-spacing: -0.05rem;
+}
+
+.u__hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.u__truncate {
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.u__overflow {
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.u__text-center {
+  text-align: center !important;
+}
+
+.u__text-right {
+  text-align: right !important;
+}
+
+.u__dim {
+  color: $secondary-link-color;
+}
+
+.u__bold {
+  font-weight: 600;
+}
+
+.u__next {
+  @extend .u__bold;
+  &::after {
+    content: " →";
+    font-weight: normal;
+  }
+}
+
+.u__previous {
+  @extend .u__bold;
+  &::before {
+    content: "← ";
+    font-weight: normal;
+  }
+}

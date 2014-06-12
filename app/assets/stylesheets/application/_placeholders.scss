@@ -1,0 +1,14 @@
+%inverted-link {
+  color: $top-link-color;
+  &:hover {
+    color: $top-hover-link-color;
+  }
+  &:active {
+    color: $top-active-link-color;
+  }
+}
+
+%word-wrap {
+  word-break: break-word;
+  word-wrap: break-word;
+}
