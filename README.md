@@ -6,7 +6,7 @@ Open Source browsing application for Wordnet database
 
 - Ruby 2.1.0
 - PostgreSQL 9
-- Neo4J 2
+- Neo4J 2.1.2 (at least this version)
 - MySQL (for WordnetSQL import)
 
 ## Installation

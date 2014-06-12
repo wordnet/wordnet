@@ -15,7 +15,7 @@ module API
       Domain.all
     end
 
-    get '/senses/:sense_id' do
+    get '/senses/*sense_id' do
       Sense.find(params[:sense_id]).as_json(extended: true)
     end
 
@@ -34,7 +34,7 @@ module API
       } }[0..10]
     end
 
-    get '/hyponyms/:sense_id' do
+    get '/hyponyms/*sense_id' do
       query = """
         match (k:Singleton{ id: {sense_id} }),
         k-[:relation { id: 0 }]->(n:Synset),
@@ -62,6 +62,38 @@ module API
 
     get '/stats' do
       Statistic::VIEWS.map(&:call)
+    end
+
+    get '/graph' do
+      neo = Neography::Rest.new(Figaro.env.neo4j_url)
+
+      query = """
+        match (s:Singleton),
+              (s-[:relation*0..1 { weight: 0 }]->(h:Synset)),
+              (h-[r:relation { weight: 1 }]-(i:Synset)),
+              (i<-[r2:synset]-(target:Sense))
+        where s.id in { id }
+        return {
+          nodes: collect({
+            id: target.id,
+            lemma: target.lemma,
+            domain: target.domain_id,
+            language: target.language,
+            part_of_speech: target.part_of_speech,
+            target_type: lower(labels(i)[-1]),
+            sense_index: target.sense_index
+          }),
+          relations: collect({
+            id: r.id,
+            source: (CASE startnode(r) = h WHEN true THEN s.id ELSE target.id END),
+            target: (CASE startnode(r) = h WHEN false THEN s.id ELSE target.id END)
+          })
+        }
+      """.strip_heredoc
+
+      neo.execute_query(
+        query, id: params[:nodes]
+      )["data"].first
     end
   end
 end
