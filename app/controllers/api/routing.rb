@@ -93,7 +93,7 @@ module API
 
       neo.execute_query(
         query, id: params[:nodes]
-      )["data"].first
+      )["data"].first.first
     end
   end
 end
