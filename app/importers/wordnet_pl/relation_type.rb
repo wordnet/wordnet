@@ -13,6 +13,8 @@ module WordnetPl
           r["parent_id"] = (r["parent_id"] == "NULL") ? nil : r["parent_id"].to_i
           r["priority"] = (r["priority"].blank? || r["priority"] == "NULL") ? 10000 : r["priority"].to_i
           r["primary"] = r["primary"].present?
+          r["color"] = r["color"].present? ? r["color"] : "#000000"
+          r["vertical"] = r["vertical"].present?
           r.with_indifferent_access
         end
 
@@ -75,7 +77,7 @@ module WordnetPl
       all_relations = one_ways + reverses.map { |k, v| v }
 
       all_relations = all_relations.map do |r|
-        r.dup.extract!(:id, :parent_id, :description, :priority, :name, :reverse_name)
+        r.dup.extract!(:id, :parent_id, :description, :priority, :name, :reverse_name, :color, :vertical)
       end
 
       all_translations = relations.flat_map do |r|
