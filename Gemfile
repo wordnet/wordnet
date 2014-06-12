@@ -56,7 +56,6 @@ gem 'neography'
 
 # API
 gem 'grape', '~> 0.6.1'
-gem 'grape-kaminari', '~> 0.1.0'
 
 group :development do
   gem 'awesome_print'

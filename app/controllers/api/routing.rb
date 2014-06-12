@@ -1,8 +1,6 @@
 module API
-  class Lexemes < Grape::API
+  class Routing < Grape::API
     include API::Base
-
-    include Grape::Kaminari
 
     before do
       header['Access-Control-Allow-Origin'] = '*'
@@ -73,6 +71,10 @@ module API
           query, sense_id: params[:sense_id]
         )["data"].map(&:first).map { |e| e.map(&:first).compact.reverse }
       end
+    end
+
+    get :stats do
+      Statistic::VIEWS.map(&:call)
     end
   end
 end

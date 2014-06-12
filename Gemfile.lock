@@ -93,18 +93,12 @@ GEM
       rack-accept
       rack-mount
       virtus (>= 1.0.0)
-    grape-kaminari (0.1.0)
-      grape
-      kaminari
     hashie (2.0.5)
     hike (1.2.3)
     httpclient (2.3.4.1)
     i18n (0.6.9)
     ice_nine (0.11.0)
     json (1.8.1)
-    kaminari (0.15.0)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -279,7 +273,6 @@ DEPENDENCIES
   figaro (~> 0.7)
   font-awesome-rails!
   grape (~> 0.6.1)
-  grape-kaminari (~> 0.1.0)
   hashie
   mysql2
   neography

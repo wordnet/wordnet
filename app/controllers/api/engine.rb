@@ -1,6 +1,5 @@
 module API
   class Engine < Grape::API
-    mount API::Lexemes
-    mount API::Stats
+    mount API::Routing
   end
 end
