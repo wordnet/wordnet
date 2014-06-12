@@ -14,6 +14,7 @@ html lang="pl" ng-app="wordnet"
       });
 
       angular.module('wordnet').constant('relativeUrlRoot', '#{Rails.configuration.action_controller.relative_url_root}')
+
     = favicon_link_tag "#{Rails.configuration.action_controller.relative_url_root}/favicon.ico"
   body(ng-cloak)
     header.top.top--invert ng-controller="SearchCtrl"
@@ -21,7 +22,7 @@ html lang="pl" ng-app="wordnet"
         .grid
           h1.top__container.grid__cell.grid__cell--5-20
             a.top__logo ui-sref="index"
-              img.top__logoimage src=image_path('slowosiec-mini.png') height="36"
+              img.top__logoimage src=image_path('slowosiec-mini.png') height="36" width="49"
               | Słowosieć
           .top__container.top__container--main.grid__cell.grid__cell--10-20
             script type="text/ng-template" id="template/typeahead/typeahead-popup.html"
@@ -61,6 +62,9 @@ html lang="pl" ng-app="wordnet"
 
     script type="text/ng-template" id="/templates/index"
       = render file: 'home/index'
+
+    script type="text/ng-template" id="/templates/sense"
+      = render file: 'home/sense'
 
     script type="text/ng-template" id="autocompleteTemplate.html"
       = render 'shared/templates/autocomplete'

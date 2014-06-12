@@ -33,11 +33,19 @@ App.config (uiSelectConfig) ->
   uiSelectConfig.theme = 'selectize'
 
 App.run ($templateCache) ->
-  $templateCache.put('selectize/choices.tpl.html', '<div ng-show="$select.open" class="ui-select-choices selectize-dropdown single"> <div class="ui-select-choices-content selectize-dropdown-content" onmousewheel="preventScrolling(this)"> <div class="ui-select-choices-row" ng-class="{\'active\': $select.activeIndex===$index}"> <div class="option" data-selectable ng-transclude></div> </div> </div> </div> ')
+  $templateCache.put 'selectize/choices.tpl.html', """
+    <div ng-show="$select.open" class="ui-select-choices selectize-dropdown single">
+      <div class="ui-select-choices-content selectize-dropdown-content" onmousewheel="preventScrolling(this)">
+        <div class="ui-select-choices-row" ng-class="{\'active\': $select.activeIndex===$index}">
+          <div class="option" data-selectable ng-transclude></div>
+        </div>
+      </div>
+    </div>
+  """
 
-App.run ($rootScope, $translate, $interpolate) ->
+App.run ($window, $rootScope, $translate, $interpolate) ->
 
-  window.preventScrolling = (t) ->
+  $window.preventScrolling = (t) ->
     e = event
     return unless e && t
     if (e.deltaY > 0 and t.clientHeight + t.scrollTop == t.scrollHeight) or (e.deltaY < 0 and t.scrollTop == 0)
@@ -80,7 +88,6 @@ App.config ($stateProvider, $locationProvider, relativeUrlRoot) ->
 
     $stateProvider.state 'index',
       url: relativeUrlRoot + '/'
-      controller: 'SenseCtrl'
       templateUrl: '/templates/index'
       resolve:
         relations: -> []
@@ -99,7 +106,7 @@ App.config ($stateProvider, $locationProvider, relativeUrlRoot) ->
     $stateProvider.state 'sense',
       url: relativeUrlRoot + '/{senseId:[^/]*}'
       controller: 'SenseCtrl'
-      templateUrl: '/templates/index'
+      templateUrl: '/templates/sense'
       resolve:
         relations: [
           'getRelations', (getRelations) ->
