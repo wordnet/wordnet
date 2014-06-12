@@ -64,10 +64,16 @@ module API
       Statistic::VIEWS.map(&:call)
     end
 
-    get '/graph' do
+    get '/graph/:query_id' do
+      cleaned_params = params.slice(:nodes)
+
+      graph_query = GraphQuery.find_or_create_by(id: params[:query_id]) do |q|
+        q.params = cleaned_params
+      end
+
       neo = Neography::Rest.new(Figaro.env.neo4j_url)
 
-      query = """
+      cypher_query = """
         match (s:Singleton),
               (s-[:relation*0..1 { weight: 0 }]->(h:Synset)),
               (h-[r:relation { weight: 1 }]-(i:Synset)),
@@ -92,7 +98,7 @@ module API
       """.strip_heredoc
 
       neo.execute_query(
-        query, id: params[:nodes]
+        cypher_query, id: graph_query.nodes
       )["data"].first.first
     end
   end
