@@ -15,7 +15,7 @@ html lang="pl" ng-app="wordnet"
 
       angular.module('wordnet').constant('relativeUrlRoot', '#{Rails.configuration.action_controller.relative_url_root}')
     = favicon_link_tag "#{Rails.configuration.action_controller.relative_url_root}/favicon.ico"
-  body
+  body(ng-cloak)
     header.top.top--invert ng-controller="SearchCtrl"
       .wrapper
         .grid

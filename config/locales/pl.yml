@@ -57,3 +57,4 @@ pl:
   unknown_lemma: "Nieznany wyraz: {{ lemma }}"
   domain: "Domena"
   definition: "Definicja"
+  semantic_similarity: "Funkcja podobieństwa znaczeniowego jednostek leksykalnych"

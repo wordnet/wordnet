@@ -57,3 +57,4 @@ en:
   unknown_lemma: "Unknown word: {{ lemma }}"
   domain: "Domain"
   definition: "Definition"
+  semantic_similarity: "Function of semantic similarity of lexical units"
