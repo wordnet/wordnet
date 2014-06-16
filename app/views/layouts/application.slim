@@ -14,13 +14,13 @@ html lang="pl" ng-app="wordnet"
       });
 
       angular.module('wordnet').constant('relativeUrlRoot', '#{Rails.configuration.action_controller.relative_url_root}')
-    = favicon_link_tag '/favicon.ico'
+    = favicon_link_tag "#{Rails.configuration.action_controller.relative_url_root}/favicon.ico"
   body
     header.top.top--invert ng-controller="SearchCtrl"
       .wrapper
         .grid
           h1.top__container.grid__cell.grid__cell--5-20
-            a.top__logo href="/"
+            a.top__logo href="#{Rails.configuration.action_controller.relative_url_root || '/'}"
               img.top__logoimage src=image_path('slowosiec-mini.png') height="36"
               | Słowosieć
           .top__container.top__container--main.grid__cell.grid__cell--10-20
