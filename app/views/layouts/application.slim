@@ -12,6 +12,8 @@ html lang="pl" ng-app="wordnet"
         $translateProvider.translations('en', #{translations[:en].to_json.html_safe});
         $translateProvider.translations('pl', #{translations[:pl].to_json.html_safe});
       });
+
+      angular.module('wordnet').constant('relativeUrlRoot', '#{Rails.configuration.action_controller.relative_url_root}')
     = favicon_link_tag '/favicon.ico'
   body
     header.top.top--invert ng-controller="SearchCtrl"

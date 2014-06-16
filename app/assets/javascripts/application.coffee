@@ -61,6 +61,17 @@ App.run ($rootScope, $translate, $interpolate) ->
   (event, toState, toParams, fromState, fromParams, error) ->
     console.error { error, event, toState, toParams, fromState, fromParams }
 
+
+App.config ($httpProvider, $provide, relativeUrlRoot) ->
+  $provide.factory 'prefixInterceptor', ->
+    request: (config) ->
+      if config.url[0] == '/'
+        config.url = "#{relativeUrlRoot}#{config.url}"
+
+      config
+
+  $httpProvider.interceptors.push('prefixInterceptor')
+
 App.config ($stateProvider, $locationProvider) ->
     ['stats', 'team', 'about', 'contact'].forEach (page) ->
       $stateProvider.state page,
