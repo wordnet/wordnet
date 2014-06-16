@@ -72,14 +72,14 @@ App.config ($httpProvider, $provide, relativeUrlRoot) ->
 
   $httpProvider.interceptors.push('prefixInterceptor')
 
-App.config ($stateProvider, $locationProvider) ->
+App.config ($stateProvider, $locationProvider, relativeUrlRoot) ->
     ['stats', 'team', 'about', 'contact'].forEach (page) ->
       $stateProvider.state page,
-        url: '/' + page
+        url: relativeUrlRoot + '/' + page
         templateUrl: '/templates/' + page
 
     $stateProvider.state 'index',
-      url: '/'
+      url: relativeUrlRoot + '/'
       controller: 'SenseCtrl'
       templateUrl: '/templates/index'
       resolve:
@@ -87,7 +87,7 @@ App.config ($stateProvider, $locationProvider) ->
         sense: -> undefined
 
     $stateProvider.state 'unknown',
-      url: '/unknown/{lemma:[^/]*}'
+      url: relativeUrlRoot + '/unknown/{lemma:[^/]*}'
       templateUrl: '/templates/unknown'
       controller: 'UnknownCtrl'
       resolve:
@@ -97,7 +97,7 @@ App.config ($stateProvider, $locationProvider) ->
         ]
 
     $stateProvider.state 'sense',
-      url: '/{senseId:[^/]*}'
+      url: relativeUrlRoot + '/{senseId:[^/]*}'
       controller: 'SenseCtrl'
       templateUrl: '/templates/index'
       resolve:
