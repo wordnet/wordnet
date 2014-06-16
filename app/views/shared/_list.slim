@@ -3,7 +3,7 @@ section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{dire
 
   ul ng-init="truncation = { after: relation_type.senses.length > 7 ? 4 : relation_type.senses.length }"
     li ng-repeat="sense in relation_type.senses | limitTo:truncation.after"
-      a.item.list__item href="" ng-href="/{{ sense.id }}" sense-tooltip="sense"
+      a.item.list__item ui-sref="sense({ senseId: sense.id })" sense-tooltip="sense"
         b.item__lemma item-flag="relation_type.language"
           | {{ sense.lemma }}
           i.item__position

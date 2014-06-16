@@ -3,7 +3,7 @@
     .grid
       .top__container.grid__cell.grid__cell--5-20
         div.u__text-right ng-if="sense"
-          a.u__previous href="" ng-href="/{{ sense.homographs[sense_index - 1].id }}" ng-show="sense_index > 0"
+          a.u__previous ui-sref="sense({ senseId: sense.homographs[sense_index - 1].id })" ng-show="sense_index > 0"
             | {{ 'previous_meaning' | translate }}
       .top__container.top__container--main.grid__cell.grid__cell--10-20
         div ng-if="sense"
@@ -30,7 +30,7 @@
           | {{ 'use_search_bar_to_begin' | translate }}
       .top__container.grid__cell.grid__cell--5-20
         div.u__text-left ng-if="sense"
-          a.u__next href="" ng-href="/{{ sense.homographs[sense_index + 1].id }}" ng-show="sense_index < sense.homographs.length - 1"
+          a.u__next ui-sref="sense({ senseId: sense.homographs[sense_index + 1].id })" ng-show="sense_index < sense.homographs.length - 1"
             | {{ 'next_meaning' | translate }}
 
 .wrapper.u__pad
