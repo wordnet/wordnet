@@ -20,7 +20,7 @@ html lang="pl" ng-app="wordnet"
       .wrapper
         .grid
           h1.top__container.grid__cell.grid__cell--5-20
-            a.top__logo href="#{Rails.configuration.action_controller.relative_url_root || '/'}"
+            a.top__logo ui-sref="index"
               img.top__logoimage src=image_path('slowosiec-mini.png') height="36"
               | Słowosieć
           .top__container.top__container--main.grid__cell.grid__cell--10-20
