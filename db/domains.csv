@@ -1,50 +1,50 @@
 id,pl,en
-0,dziedzina nie ustawiona,dziedzina nie ustawiona
-1,najwyższe w hierarchii,najwyższe w hierarchii
-2,czynności (nazwy),czynności (nazwy)
-3,wytwory ludzkie (nazwy),wytwory ludzkie (nazwy)
-4,cechy ludzi i zwierząt,cechy ludzi i zwierząt
-5,części ciała,części ciała
-6,związane z myśleniem,związane z myśleniem
-7,związane z porozumiewaniem się,związane z porozumiewaniem się
-8,zdarzenia,zdarzenia
-9,"uczucia, odczucia i emocje","uczucia, odczucia i emocje"
-10,jedzenie,jedzenie
-11,grupy ludzi i rzeczy,grupy ludzi i rzeczy
-12,miejsca i umiejscowienie,miejsca i umiejscowienie
-13,cel działania,cel działania
-14,obiekty naturalne,obiekty naturalne
-15,ludzie,ludzie
-16,zjawiska naturalne,zjawiska naturalne
-17,nazwy roślin,nazwy roślin
-18,posiadanie i jego zmiana,posiadanie i jego zmiana
-19,procesy naturalne,procesy naturalne
-20,"ilość, liczebność, jednoski miary","ilość, liczebność, jednoski miary"
-21,zwierzęta,zwierzęta
-22,kształty,kształty
-23,sytuacje statyczne (stany),sytuacje statyczne (stany)
-24,substancje,substancje
-25,czas i stosunki czasowe,czas i stosunki czasowe
-26,"związek miedzy ludźmi, rzeczami lub ideami","związek miedzy ludźmi, rzeczami lub ideami"
-27,pielęgnacja ciała,pielęgnacja ciała
-28,"zmiana wielkości, temeraturym natężenia, itp.","zmiana wielkości, temeraturym natężenia, itp."
-29,czasowniki myślenia (szeroko rozumianego),czasowniki myślenia (szeroko rozumianego)
-30,"czasowniki mówienia, śpiewania itp.","czasowniki mówienia, śpiewania itp."
-31,czasowniki rywalizacji fizycznej,czasowniki rywalizacji fizycznej
-32,czasowniki jedzenia,czasowniki jedzenia
-33,"czasowniki oznacz. kontakt fizyczny (dotykanie, uderzenie, rycie itp.)","czasowniki oznacz. kontakt fizyczny (dotykanie, uderzenie, rycie itp.)"
-34,czasowniki oznacz. wytwarzanie czegoś,czasowniki oznacz. wytwarzanie czegoś
-35,czasowniki wyrażające uczucia,czasowniki wyrażające uczucia
-36,czasowniki ruchu,czasowniki ruchu
-37,Czasowniki postrzegania (percepcji),Czasowniki postrzegania (percepcji)
-38,czasowniki posiadania i zmiany posiadania,czasowniki posiadania i zmiany posiadania
-39,czasowniki oznacz. wydarzenie i działania społeczne i polityczne,czasowniki oznacz. wydarzenie i działania społeczne i polityczne
-40,czasowniki stanowe,czasowniki stanowe
-41,czasowniki oznacz. zjawiska pogodowe,czasowniki oznacz. zjawiska pogodowe
-42,przymiotniki jakościowe,przymiotniki jakościowe
-43,przymiotniki relacyjne (rzeczownikowe),przymiotniki relacyjne (rzeczownikowe)
-44,przymiotniki odczasownikowe,przymiotniki odczasownikowe
-45,przymiotniki odprzymiotnikowe (natężenie cechy),przymiotniki odprzymiotnikowe (natężenie cechy)
-46,"systematyka, klasyfikacja","systematyka, klasyfikacja"
-47,PWN: all adjective clusters,PWN: all adjective clusters
-48,PWN: all adverbs,PWN: all adverbs
+0,dziedzina nie ustawiona,unspecified
+1,najwyższe w hierarchii,the highest in the hierarchy
+2,czynności (nazwy),act
+3,wytwory ludzkie (nazwy),artefact
+4,cechy ludzi i zwierząt,attribute
+5,części ciała,body
+6,związane z myśleniem,cognition
+7,związane z porozumiewaniem się,communication
+8,zdarzenia,event
+9,"uczucia, odczucia i emocje",emotion
+10,jedzenie,food
+11,grupy ludzi i rzeczy,group
+12,miejsca i umiejscowienie,location
+13,cel działania,motive
+14,obiekty naturalne,natural object
+15,ludzie,person
+16,zjawiska naturalne,natural phenomenon
+17,nazwy roślin,plant
+18,posiadanie i jego zmiana,possession
+19,procesy naturalne,process
+20,"ilość, liczebność, jednoski miary",quantity
+21,zwierzęta,animal
+22,kształty,shape
+23,sytuacje statyczne (stany),state
+24,substancje,substance
+25,czas i stosunki czasowe,time
+26,"związek miedzy ludźmi, rzeczami lub ideami",relation
+27,pielęgnacja ciała,body
+28,"zmiana wielkości, temeraturym natężenia, itp.",change
+29,czasowniki myślenia (szeroko rozumianego),cognition
+30,"czasowniki mówienia, śpiewania itp.",communication
+31,czasowniki rywalizacji fizycznej,competition
+32,czasowniki jedzenia,consumption
+33,"czasowniki oznacz. kontakt fizyczny (dotykanie, uderzenie, rycie itp.)",contact
+34,czasowniki oznacz. wytwarzanie czegoś,creation
+35,czasowniki wyrażające uczucia,emotion
+36,czasowniki ruchu,motion
+37,Czasowniki postrzegania (percepcji),perception
+38,czasowniki posiadania i zmiany posiadania,possession
+39,czasowniki oznacz. wydarzenie i działania społeczne i polityczne,social
+40,czasowniki stanowe,state
+41,czasowniki oznacz. zjawiska pogodowe,weather
+42,przymiotniki jakościowe,quality
+43,przymiotniki relacyjne (rzeczownikowe),relation
+44,przymiotniki odczasownikowe,deverbal
+45,przymiotniki odprzymiotnikowe (natężenie cechy),deadjectival
+46,"systematyka, klasyfikacja",classification
+47,PWN: all adjective clusters,adjective
+48,PWN: all adverbs,adverb
