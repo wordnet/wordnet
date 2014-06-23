@@ -1,0 +1,32 @@
+.top.top--alternative
+  .wrapper
+    .grid
+      .top__container.grid__cell.grid__cell--5-20
+        div.u__text-right
+          a.u__previous ui-sref="sense({ senseId: sense.homographs[sense_index - 1].id })" ng-show="sense_index > 0"
+            | {{ 'previous_meaning' | translate }}
+      .top__container.top__container--main.grid__cell.grid__cell--10-20
+        div
+          ui-select ng-model="current.selected" theme="selectize"
+            ui-select-choices repeat="homograph in sense.homographs | filter:$select.search"
+              div style="position: relative"
+                div style="white-space: nowrap; width: 95%; overflow: hidden; text-overflow: ellipsis"
+                  span.u__bold> ng-bind-html="homograph.lemma"
+                  small> ng-bind="homograph.sense_index"
+                  small.u__dim<(
+                    ng-if="homograph.comment"
+                    ng-bind-html="homograph.comment | highlight: $select.search"
+                  )
+                  small.u__dim<(
+                    ng-if="!homograph.comment"
+                    ng-bind-html="('domain_' + homograph.domain_id) | translate | highlight: $select.search"
+                  )
+                div style="position: absolute; right: 0px; top: -1px"
+                  a.item__lemma--pl href="" ng-if="homograph.language == 'pl_PL'"
+                  a.item__lemma--en href="" ng-if="homograph.language == 'en_GB'"
+            ui-select-match placeholder="{{ 'i_from_n_lexical_units' | translate:lexicalUnitsValues(this) }}"
+              | {{ $select.selected.lemma }}
+      .top__container.grid__cell.grid__cell--5-20
+        div.u__text-left
+          a.u__next ui-sref="sense({ senseId: sense.homographs[sense_index + 1].id })" ng-show="sense_index < sense.homographs.length - 1"
+            | {{ 'next_meaning' | translate }}

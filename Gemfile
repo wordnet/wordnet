@@ -42,6 +42,8 @@ gem 'rails-assets-angular-translate-storage-cookie'
 gem 'rails-assets-angular-translate-storage-local'
 gem 'rails-assets-sheerun--ui-select', '0.2.1'
 gem 'rails-assets-selectize', '~> 0.8.5'
+gem 'rails-assets-svg.js', '~> 1.0.0.rc.6'
+gem 'rails-assets-anvaka--VivaGraphJS', '~> 0.5.6'
 
 # Wordnet Import
 gem 'mysql2'

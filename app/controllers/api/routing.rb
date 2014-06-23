@@ -15,10 +15,6 @@ module API
       Domain.all
     end
 
-    get '/senses/*sense_id' do
-      Sense.find(params[:sense_id]).as_json(extended: true)
-    end
-
     get '/lexemes/:lemma' do
       Sense.select('id, lemma, language').
       where("LOWER(lemma) like LOWER(?) AND sense_index = 1", "#{params[:lemma]}%").
@@ -27,7 +23,7 @@ module API
         { sense_id: d.id, lemma: d.lemma, language: d.language }
       }.to_a.
       group_by { |s| s[:lemma].downcase }.
-      map { |a, b| b.reduce(b.first){ |sum, b|
+      map { |a, b| b.reduce(b.first) { |sum, b|
         sum[:languages] ||= Set.new
         sum[:languages] << b[:language]
         sum
@@ -64,42 +60,20 @@ module API
       Statistic::VIEWS.map(&:call)
     end
 
-    get '/graph/:query_id' do
-      cleaned_params = params.slice(:nodes)
-
-      graph_query = GraphQuery.find_or_create_by(id: params[:query_id]) do |q|
-        q.params = cleaned_params
-      end
-
-      neo = Neography::Rest.new(Figaro.env.neo4j_url)
-
-      cypher_query = """
-        match (s:Singleton),
-              (s-[:relation*0..1 { weight: 0 }]->(h:Synset)),
-              (h-[r:relation { weight: 1 }]-(i:Synset)),
-              (i<-[r2:synset]-(target:Sense))
-        where s.id in { id }
-        return {
-          nodes: collect({
-            id: target.id,
-            lemma: target.lemma,
-            domain: target.domain_id,
-            language: target.language,
-            part_of_speech: target.part_of_speech,
-            target_type: lower(labels(i)[-1]),
-            sense_index: target.sense_index
-          }),
-          relations: collect({
-            id: r.id,
-            source: (CASE startnode(r) = h WHEN true THEN s.id ELSE target.id END),
-            target: (CASE startnode(r) = h WHEN false THEN s.id ELSE target.id END)
-          })
+    get '/graph/:sense_id' do
+      main_id = params[:sense_id]
+      node_ids = params[:nodes]
+      
+      GraphQuery.new(
+        params: {
+          "query_id" => main_id,
+          "nodes" => node_ids
         }
-      """.strip_heredoc
+      ).as_json
+    end
 
-      neo.execute_query(
-        cypher_query, id: graph_query.nodes
-      )["data"].first.first
+    get '/senses/*sense_id' do
+      Sense.find(params[:sense_id]).as_json(extended: true)
     end
   end
 end

@@ -20,7 +20,7 @@ html lang="pl" ng-app="wordnet"
     header.top.top--invert ng-controller="SearchCtrl"
       .wrapper
         .grid
-          h1.top__container.grid__cell.grid__cell--5-20
+          h1.top__container.grid__cell.grid__cell--5-20.top__container--sidebar
             a.top__logo ui-sref="index"
               img.top__logoimage src=image_path('slowosiec-mini.png') height="36" width="49"
               | Słowosieć
@@ -53,7 +53,7 @@ html lang="pl" ng-app="wordnet"
                 ng-enter="onEnter()"
                 ng-change="onChange()"
               )
-          .top__container.grid__cell.grid__cell--5-20.u__text-right
+          .top__container.grid__cell.grid__cell--5-20.u__text-right.top__container--sidebar
             a< href="" translate="change_language"
             a.item__lemma--pl href="" ng-click="toggleLanguage('pl')"
             a.item__lemma--en href="" ng-click="toggleLanguage('en')"

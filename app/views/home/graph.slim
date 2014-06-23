@@ -1,0 +1,9 @@
+.wrapper style="background-color: white; position: fixed; bottom: 0; top: 50px; left: 0; right: 0; z-index: -1"
+  .grid wordnet-graph=""
+    container.grid__cell.grid__cell--20-20
+      graph-canvas.graph__canvas
+        script type="text/ng-template" node-template=".*"
+          .node__border
+            node ng-class="{ selected: graph.selectedNode == node.data }" ng-mousedown="selectNode(node.data)"
+              node-container
+                span ng-bind="node.data.lemma"

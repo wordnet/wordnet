@@ -61,3 +61,11 @@
     .grid__cell.grid__cell--15-20.definition__content
       a.u__bold href="" ng-click="showHyponyms(sense.id)"
         | {{ 'show_hyperonym_path' | translate }}
+
+.definition
+  section.grid
+    .grid__cell.grid__cell--5-20
+      h1.definition__term translate="graph"
+    .grid__cell.grid__cell--15-20.definition__content
+      a.u__bold href="" ui-sref="graph({ queryId: sense.id })"
+        | Show sense graph

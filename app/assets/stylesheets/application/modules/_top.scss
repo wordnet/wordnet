@@ -31,6 +31,11 @@
   @extend .container--main;
 }
 
+.top__container--sidebar {
+  overflow: hidden;
+  height: 40px;
+}
+
 .top__logo {
   font-size: 1.6em;
   font-weight: 600;

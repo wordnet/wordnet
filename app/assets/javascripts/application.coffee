@@ -8,7 +8,10 @@
 #= require angular-translate-storage-local
 #= require angular-translate-storage-cookie
 #= require ui-select
+#= require svg.js
+#= require ./vendor/vivagraph.js
 #= require_self
+#= require_tree ./vendor
 #= require_tree ./factories
 #= require_tree ./controllers
 #= require_tree ./directives
@@ -101,6 +104,20 @@ App.config ($stateProvider, $locationProvider, relativeUrlRoot) ->
         lemma: [
           '$stateParams',  ($stateParams) ->
             $stateParams.lemma
+        ]
+
+    $stateProvider.state 'graph',
+      url: '/graph/{queryId:[^/]*}'
+      controller: 'GraphCtrl'
+      templateUrl: '/templates/graph'
+      resolve:
+        relations: [
+          'getRelations', (getRelations) ->
+            getRelations()
+        ]
+        graphData: [
+          '$stateParams', 'getGraph', ($stateParams, getGraph) ->
+            getGraph([$stateParams.queryId])
         ]
 
     $stateProvider.state 'sense',
