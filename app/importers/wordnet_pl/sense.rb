@@ -49,8 +49,7 @@ module WordnetPl
           external_id: lemma[:ID],
           domain_id: lemma[:domain],
           lemma: lemma[:lemma],
-          comment: process_comment(lemma[:comment]) || 
-            extract_short_definition(lemma[:comment]),
+          comment: extract_short_definition(lemma[:comment]),
           examples: extract_examples(lemma[:comment]),
           definition: extract_definition(lemma[:comment]),
           language: lemma[:project] > 0 ? 'pl_PL' : 'en_GB',
