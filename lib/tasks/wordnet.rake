@@ -38,7 +38,7 @@ namespace :wordnet do
   end
 
   desc "Compute all available statistics"
-  task :stats, [:klass] => [:environment] do |t, args|
+  task :stats, [:klass] => [:environment, :cache_synsets] do |t, args|
     Rails.logger = Logger.new(STDOUT)
     Statistic.refetch_all!(args[:klass])
   end
