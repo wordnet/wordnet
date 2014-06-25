@@ -167,6 +167,10 @@ class Statistic < ActiveRecord::Base
     PartOfSpeech.all.map(&:uuid)
   end
 
+  def_dimension "int_pos" do
+    ['noun', 'verb', 'adjective', 'adverb']
+  end
+
   def_dimension "size" do
     (1..10).map(&:to_s)
   end
@@ -283,20 +287,7 @@ class Statistic < ActiveRecord::Base
   end
 
   def_statistic "pl_synset_relations", ["relation", "pos"] do |rel, pos|
-    SynsetRelation.
-      select(:id).
-      joins(:parent, :child).
-      where(:relation_id => rel.split('_').last.to_i,
-        :synsets => {
-          :part_of_speech => pos,
-          :language => 'pl_PL'
-        },
-        :children_synset_relations => {
-          :part_of_speech => pos,
-          :language => 'pl_PL'
-        }
-      ).
-      count
+    SynsetRelation.select(:id).joins(:parent, :child).where(:relation_id => 208, :synsets => { :language => 'pl_PL' }, :children_synset_relations => { :language => 'pl_PL' }).count
   end
 
   def_statistic "en_synset_relations", ["relation", "pos"] do |rel, pos|
@@ -311,6 +302,37 @@ class Statistic < ActiveRecord::Base
         :children_synset_relations => {
           :part_of_speech => pos,
           :language => 'en_GB'
+        }
+      ).
+      count
+  end
+
+  def_statistic "int_synset_relations", ["relation", "int_pos"] do |rel, pos|
+    SynsetRelation.
+      select(:id).
+      joins(:parent, :child).
+      where(:relation_id => rel.split('_').last.to_i,
+        :synsets => {
+          :part_of_speech => ["#{pos}_pl", "#{pos}_pwn"],
+          :language => 'pl_PL'
+        },
+        :children_synset_relations => {
+          :part_of_speech => ["#{pos}_pl", "#{pos}_pwn"],
+          :language => 'en_GB'
+        }
+      ).
+      count +
+    SynsetRelation.
+      select(:id).
+      joins(:parent, :child).
+      where(:relation_id => rel.split('_').last.to_i,
+        :synsets => {
+          :part_of_speech => ["#{pos}_pl", "#{pos}_pwn"],
+          :language => 'en_GB'
+        },
+        :children_synset_relations => {
+          :part_of_speech => ["#{pos}_pl", "#{pos}_pwn"],
+          :language => 'pl_PL'
         }
       ).
       count
@@ -345,6 +367,37 @@ class Statistic < ActiveRecord::Base
         :children_sense_relations => {
           :part_of_speech => pos,
           :language => 'en_GB'
+        }
+      ).
+      count
+  end
+
+  def_statistic "int_sense_relations", ["relation", "int_pos"] do |rel, pos|
+    SenseRelation.
+      select(:id).
+      joins(:parent, :child).
+      where(:relation_id => rel.split('_').last.to_i,
+        :senses => {
+          :part_of_speech => ["#{pos}_pl", "#{pos}_pwn"],
+          :language => 'pl_PL'
+        },
+        :children_sense_relations => {
+          :part_of_speech => ["#{pos}_pl", "#{pos}_pwn"],
+          :language => 'en_GB'
+        }
+      ).
+      count + 
+    SenseRelation.
+      select(:id).
+      joins(:parent, :child).
+      where(:relation_id => rel.split('_').last.to_i,
+        :senses => {
+          :part_of_speech => pos.split('_').first + '_pwn',
+          :language => 'en_GB'
+        },
+        :children_sense_relations => {
+          :part_of_speech => pos.split('_').first + '_pl',
+          :language => 'pl_PL'
         }
       ).
       count
@@ -546,6 +599,52 @@ class Statistic < ActiveRecord::Base
     )
 
     table_view "en_sense_relations",
+      columns: :y,
+      rows: :x,
+      columns_sorting: lambda { |element|
+        poss.index(element)
+      },
+      rows_sorting: lambda { |element|
+        relations.index(element)
+      },
+      stats: stats,
+      sum: true
+  end
+
+  def_view do
+    poss = DIMENSIONS['pos'].call
+    relations = DIMENSIONS['relation'].call
+
+    stats = fetch_all(
+      'int_sense_relations',
+      relations,
+      ['verb', 'noun', 'adverb', 'adjective']
+    )
+
+    table_view "int_sense_relations",
+      columns: :y,
+      rows: :x,
+      columns_sorting: lambda { |element|
+        poss.index(element)
+      },
+      rows_sorting: lambda { |element|
+        relations.index(element)
+      },
+      stats: stats,
+      sum: true
+  end
+
+  def_view do
+    poss = DIMENSIONS['pos'].call
+    relations = DIMENSIONS['relation'].call
+
+    stats = fetch_all(
+      'int_synset_relations',
+      relations,
+      ['verb', 'noun', 'adverb', 'adjective']
+    )
+
+    table_view "int_synset_relations",
       columns: :y,
       rows: :x,
       columns_sorting: lambda { |element|

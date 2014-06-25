@@ -12,7 +12,7 @@
     .container.container--main.grid__cell.grid__cell--15-20(
       style="background-color: white;"
     )
-      .container ng-repeat="stat in stats"
+      .container ng-repeat="stat in stats" ng-show="stat.data.length > 0"
         h1.u__header ng-bind="stat.name | translate"
         br
         table style="width: 100%"
