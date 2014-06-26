@@ -90,6 +90,84 @@ App.directive 'graphCanvas', ($compile, $rootScope, $translate, $stateParams, ge
           .attr('d', 'm5.96441,6.79817l43.47275,-5.43207l12.96584,12.38383l13.15984,-12.4l37.26466,4.67223l6.19193,0.80834l-7.24277,10.83181l-0.85684,1.45502l1.13168,1.74603l5.30273,7.93793l1.68137,2.55437l-40.99923,5.10873l-2.9262,0.3395l-0.63051,-0.38801l-12.04433,-12.01199l-1.56819,1.51968l-10.1043,10.26597l-1.19635,0.59818l-41.09622,-5.1249l-2.45737,-0.35567l0.85685,-1.35802l6.03025,-8.98879l1.19635,-1.84302l-0.93768,-1.55202l-7.19426,-10.76715z')
       )
 
+      top_empty = Viva.Graph.svg('path')
+        .attr('fill', "blue")
+        .attr('d', 'm51.43275,1.36207l10.96584,10.4l11.15984,-10.4z')
+
+      top_half = Viva.Graph.svg('path')
+        .attr('fill', "red")
+        .attr('d', 'm51.43275,1.36207l10.96584,10.4l0,-10.4z')
+        .attr('style', 'display: none')
+
+      top_full = Viva.Graph.svg('path')
+        .attr('fill', "red")
+        .attr('d', 'm51.43275,1.36207l10.96584,10.4l11.15984,-10.4z')
+        .attr('style', 'display: none')
+
+
+      bottom_empty = Viva.Graph.svg('path')
+        .attr('fill', "blue")
+        .attr('d', 'm51.43275,36.80l10.96584,-10.4l11.15984,10.4z')
+
+      bottom_half = Viva.Graph.svg('path')
+        .attr('fill', "red")
+        .attr('d', 'm51.43275,36.80l10.96584,-10.4l0,10.4z')
+        .attr('style', 'display: none')
+
+      bottom_full = Viva.Graph.svg('path')
+        .attr('fill', "red")
+        .attr('d', 'm51.43275,36.80l10.96584,-10.4l11.15984,10.4z')
+        .attr('style', 'display: none')
+
+
+      left_empty = Viva.Graph.svg('path')
+        .attr('fill', "blue")
+        .attr('d', 'm2,30.9l2.7,0.35l0.85685,-1.35802l6.03025,-8.98879l1.19635,-1.84302l-0.93768,-1.55202l-7.19426,-10.76715l-2.7,0.35z')
+
+      left_half = Viva.Graph.svg('path')
+        .attr('fill', "red")
+        .attr('d', 'm2,18.9l10.78345,0l-0.93768,-1.55202l-7.19426,-10.76715l-2.7,0.35z')
+        .attr('style', 'display: none')
+
+      left_full = Viva.Graph.svg('path')
+        .attr('fill', "red")
+        .attr('d', 'm2,30.9l2.7,0.35l0.85685,-1.35802l6.03025,-8.98879l1.19635,-1.84302l-0.93768,-1.55202l-7.19426,-10.76715l-2.7,0.35z')
+        .attr('style', 'display: none')
+
+
+      right_empty = Viva.Graph.svg('path')
+        .attr('fill', "blue")
+        .attr('d', 'm123,30.9l-2.7,0.35l-0.85685,-1.35802l-6.03025,-8.98879l-1.19635,-1.84302l0.93768,-1.55202l7.19426,-10.76715l2.7,0.35z')
+
+      right_half = Viva.Graph.svg('path')
+        .attr('fill', "red")
+        .attr('d', 'm123,18.9l-10.78345,0l0.93768,-1.55202l7.19426,-10.76715l2.7,0.35z')
+        .attr('style', 'display: none')
+
+      right_full = Viva.Graph.svg('path')
+        .attr('fill', "red")
+        .attr('d', 'm123,30.9l-2.7,0.35l-0.85685,-1.35802l-6.03025,-8.98879l-1.19635,-1.84302l0.93768,-1.55202l7.19426,-10.76715l2.7,0.35z')
+        .attr('style', 'display: none')
+
+      states =
+        top: [top_empty, top_half, top_full]
+        right: [right_empty, right_half, right_full]
+        bottom: [bottom_empty, bottom_half, bottom_full]
+        left: [left_empty, left_half, left_full]
+
+      for name, list of states
+        container.append(state) for state in list
+
+      container.setState = (direction, number) ->
+        for state in states[direction]
+          state.style.display = "none"
+
+        [0..number].forEach (i) ->
+          states[direction][i].style.display = "block"
+
+      container.onclick = (e) ->
+        console.log(e, e)
+
       label = Viva.Graph.svg('text')
         .attr('font-family', 'verdana')
         .attr('font-size', 12.5)
