@@ -543,6 +543,22 @@ The application introduces 2 filters:
 * `inflect`: given a word and a number, it returns the inflected version of the word (`połączenie`, `2` → `połączenia`). It’s not a universal solution that handles Polish language—all words and their versions have to be specified manually.
 * `toRelationName`: given a relation object and direction of the relation (`incoming` or `outgoing`), the filter chooses between `relation.name`/ `relation.reverse_name` and provides fallback if the name isn’t defined.
 
+## Notes on Wordnetloom-like representation
+
+The graph representation of senses and synset relations is available by clicking on the "Show sense graph" link.
+
+Visualization shows all available connections between senses and synsets visible.
+
+It's possible to expand relations by clicking on them.
+
+The visualization uses Neo4J database to generate list of relations through an API.
+
+The renderring is done using [VivaGraphJS](anvaka/VivaGraphJS) library and an [SVG](https://pl.wikipedia.org/wiki/Scalable_Vector_Graphics) engine.
+
+The logic for renderring graph is available in file `app/assets/javascripts/directives/ng-graph.coffee`.
+
+The logic for generating list of relations is implemented in `app/models/graph_query.rb`.
+
 ## Deployment
 
 Application is supposed to be run on at least 3 servers:
