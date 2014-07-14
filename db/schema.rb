@@ -11,11 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140512045131) do
+ActiveRecord::Schema.define(version: 20140714141922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "graph_queries", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
+    t.text "params"
+  end
 
   create_table "relation_types", force: true do |t|
     t.integer "parent_id"
@@ -23,6 +27,8 @@ ActiveRecord::Schema.define(version: 20140512045131) do
     t.string  "reverse_name"
     t.text    "description"
     t.integer "priority"
+    t.string  "color"
+    t.boolean "vertical"
   end
 
   create_table "sense_relations", force: true do |t|
@@ -34,7 +40,7 @@ ActiveRecord::Schema.define(version: 20140512045131) do
   add_index "sense_relations", ["parent_id", "child_id", "relation_id"], name: "sense_relations_idx", unique: true, using: :btree
 
   create_table "senses", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
-    t.integer "external_id",                              null: false
+    t.integer "external_id",                                 null: false
     t.integer "domain_id"
     t.text    "comment"
     t.integer "sense_index"
@@ -42,10 +48,12 @@ ActiveRecord::Schema.define(version: 20140512045131) do
     t.string  "lemma"
     t.uuid    "synset_id"
     t.string  "part_of_speech"
-    t.string  "examples",       limit: 1023, default: [],              array: true
+    t.string  "examples",       limit: 1023, default: [],                 array: true
     t.text    "definition"
+    t.boolean "core",                        default: false
   end
 
+  add_index "senses", ["core"], name: "index_senses_on_core", using: :btree
   add_index "senses", ["external_id"], name: "index_senses_on_external_id", unique: true, using: :btree
   add_index "senses", ["language"], name: "index_senses_on_language", using: :btree
   add_index "senses", ["lemma"], name: "index_senses_on_lemma", using: :btree

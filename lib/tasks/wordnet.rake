@@ -4,11 +4,19 @@ namespace :wordnet do
   task :import, [:klass] => [:environment] do |t, args|
     if args[:klass].present?
       WordnetPl.const_get(args[:klass]).new.import!
+
+      if args[:class] == 'Sense'
+        puts "Labelling core senses..."
+        Sense.label_core_senses!
+      end
     else
       [
         "RelationType", "Synset", "Sense",
         "SenseRelation", "SynsetRelation"
       ].map { |c| WordnetPl.const_get(c).new.import! }
+
+      puts "Labelling core senses..."
+      Sense.label_core_senses!
     end
   end
 
