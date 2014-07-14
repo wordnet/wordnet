@@ -35,7 +35,8 @@ App.config (uiSelectConfig) ->
 App.run ($templateCache) ->
   $templateCache.put('selectize/choices.tpl.html', '<div ng-show="$select.open" class="ui-select-choices selectize-dropdown single"> <div class="ui-select-choices-content selectize-dropdown-content" onmousewheel="preventScrolling(this)"> <div class="ui-select-choices-row" ng-class="{\'active\': $select.activeIndex===$index}"> <div class="option" data-selectable ng-transclude></div> </div> </div> </div> ')
 
-App.run ($rootScope, $translate, $interpolate) ->
+App.run ($rootScope, $translate, $interpolate, $state) ->
+  $rootScope.$state = $state
 
   window.preventScrolling = (t) ->
     e = event

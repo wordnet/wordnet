@@ -16,7 +16,7 @@ a.modal__close href="" ng-click="closeModal()" translate="back"
 
 ol.path.u__header
   li.path__item ng-repeat="sense in hyponyms[index]"
-    a.item.item--inline ui-sref="sense({ senseId: sense.id })" ng-click="closeModal()" ng-attr-title="{{ sense.comment }}"
+    a.item.item--inline href="" ng-click="closeModal(); $state.go('sense', { senseId: sense.id })" ng-attr-title="{{ sense.comment }}"
       b.item__lemma
         | {{ sense.lemma }}
         i.item__position
