@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140714141922) do
+ActiveRecord::Schema.define(version: 20140716122448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,14 +50,19 @@ ActiveRecord::Schema.define(version: 20140714141922) do
     t.string  "part_of_speech"
     t.string  "examples",       limit: 1023, default: [],                 array: true
     t.text    "definition"
-    t.boolean "core",                        default: false
+    t.integer "synset_index"
+    t.boolean "sense_core",                  default: false, null: false
+    t.boolean "synset_core",                 default: false, null: false
   end
 
-  add_index "senses", ["core"], name: "index_senses_on_core", using: :btree
   add_index "senses", ["external_id"], name: "index_senses_on_external_id", unique: true, using: :btree
   add_index "senses", ["language"], name: "index_senses_on_language", using: :btree
   add_index "senses", ["lemma"], name: "index_senses_on_lemma", using: :btree
+  add_index "senses", ["sense_core"], name: "index_senses_on_sense_core", using: :btree
+  add_index "senses", ["sense_index"], name: "index_senses_on_sense_index", using: :btree
+  add_index "senses", ["synset_core"], name: "index_senses_on_synset_core", using: :btree
   add_index "senses", ["synset_id"], name: "index_senses_on_synset_id", using: :btree
+  add_index "senses", ["synset_index"], name: "index_senses_on_synset_index", using: :btree
 
   create_table "statistics", force: true do |t|
     t.string   "name"

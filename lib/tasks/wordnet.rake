@@ -6,8 +6,13 @@ namespace :wordnet do
       WordnetPl.const_get(args[:klass]).new.import!
 
       if args[:class] == 'Sense'
-        puts "Labelling core senses..."
-        Sense.label_core_senses!
+        puts "Labelling sense cores..."
+        Sense.label_sense_cores!
+      end
+
+      if args[:class] == 'Synset'
+        puts "Labelling synset cores..."
+        Sense.label_synset_cores!
       end
     else
       [
@@ -15,8 +20,10 @@ namespace :wordnet do
         "SenseRelation", "SynsetRelation"
       ].map { |c| WordnetPl.const_get(c).new.import! }
 
-      puts "Labelling core senses..."
-      Sense.label_core_senses!
+      puts "Labelling sense cores..."
+      Sense.label_sense_cores!
+      puts "Labelling synset cores..."
+      Sense.label_synset_cores!
     end
   end
 

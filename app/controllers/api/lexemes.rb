@@ -34,7 +34,7 @@ module API
           Sense.
             select('id, lemma, language, part_of_speech').
             where("LOWER(lemma) like LOWER(?)", "#{params[:lemma]}%").
-            where(core: true).
+            where(sense_core: true).
             order('length(lemma)').
             limit(20).to_a.map { |d|
               {
@@ -45,11 +45,13 @@ module API
               }
             }.to_a.
             group_by { |s| [s[:lemma].downcase, s[:part_of_speech]] }.
-            map { |a, b| b.reduce(b.first) { |sum, b|
-              sum[:languages] ||= Set.new
-              sum[:languages] << b[:language]
-              sum
-            } }[0..10]
+            map { |a, b|
+              b.reduce(b.first) { |sum, b|
+                sum[:languages] ||= Set.new
+                sum[:languages] << b[:language]
+                sum
+              }
+            }[0..10]
         end
       end
     end
