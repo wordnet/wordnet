@@ -9,6 +9,28 @@ class Sense < ActiveRecord::Base
   has_many :reverse_related, :foreign_key => "child_id",
     :class_name => "SenseRelation"
 
+  # Take lowest synset_index in groups by synset_id and mark it as core. 
+  # Synset cores are representations of matching synsets.
+  def self.label_sense_cores!
+    Sense.update_all('sense_core = true', "id in (#{
+      Sense.
+        select('distinct on (LOWER(lemma), language, part_of_speech) id').
+        order('LOWER(lemma), language, part_of_speech, sense_index').
+        to_sql
+    })")
+  end
+
+  # Take lowest sense_index in groups by lemma, language, and part_of_speech
+  # and mark it as core. Sense cores are representations of connected lemma.
+  def self.label_synset_cores!
+    Sense.update_all('synset_core = true', "id in (#{
+      Sense.
+        select('distinct on (synset_id) id').
+        order('synset_id, synset_index').
+        to_sql
+    })")
+  end
+
   def fetch_related
     neo = Neography::Rest.new(Figaro.env.neo4j_url)
     query = """
@@ -76,8 +98,8 @@ class Sense < ActiveRecord::Base
 
     if options[:extended]
       data[:homographs] = Sense.where(
-        "LOWER(lemma) like LOWER(?)",
-        lemma
+        "LOWER(lemma) like LOWER(?) and part_of_speech = ?",
+        lemma, part_of_speech
       ).order(
         language: :desc,
         sense_index: :asc

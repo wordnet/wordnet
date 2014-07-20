@@ -46,7 +46,8 @@ App.run ($templateCache) ->
     </div>
   """
 
-App.run ($window, $rootScope, $translate, $interpolate) ->
+App.run ($window, $rootScope, $translate, $interpolate, $state) ->
+  $rootScope.$state = $state
 
   $window.preventScrolling = (t) ->
     e = event

@@ -54,7 +54,7 @@ module Neo4j
       entities.map do |entity|
         [:execute_query,
          SENSE_EXPORT_QUERY, entity.attributes.except(:external_id)]
-      end + entities.select { |e| e[:sense_index] == 1 }.map do |entity|
+      end + entities.select { |e| e[:synset_core] }.map do |entity|
         [:execute_query,
           SYNSET_SENSE_EXPORT_QUERY, { sense_id: entity[:id], synset_id: entity[:synset_id] }]
       end + entities.map do |entity|

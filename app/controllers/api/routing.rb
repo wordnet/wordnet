@@ -16,18 +16,27 @@ module API
     end
 
     get '/lexemes/:lemma' do
-      Sense.select('id, lemma, language').
-      where("LOWER(lemma) like LOWER(?) AND sense_index = 1", "#{params[:lemma]}%").
-      order('length(lemma)').
-      limit(20).to_a.map { |d|
-        { sense_id: d.id, lemma: d.lemma, language: d.language }
-      }.to_a.
-      group_by { |s| s[:lemma].downcase }.
-      map { |a, b| b.reduce(b.first) { |sum, b|
-        sum[:languages] ||= Set.new
-        sum[:languages] << b[:language]
-        sum
-      } }[0..10]
+      Sense.
+        select('id, lemma, language, part_of_speech').
+        where("LOWER(lemma) like LOWER(?)", "#{params[:lemma]}%").
+        where(sense_core: true).
+        order('length(lemma)').
+        limit(20).to_a.map { |d|
+          {
+            sense_id: d.id,
+            lemma: d.lemma,
+            language: d.language,
+            part_of_speech:  d.part_of_speech
+          }
+        }.to_a.
+        group_by { |s| [s[:lemma].downcase, s[:part_of_speech]] }.
+        map { |a, b|
+          b.reduce(b.first) { |sum, b|
+            sum[:languages] ||= Set.new
+            sum[:languages] << b[:language]
+            sum
+          }
+        }[0..10]
     end
 
     get '/hyponyms/*sense_id' do
@@ -63,7 +72,7 @@ module API
     get '/graph/:sense_id' do
       main_id = params[:sense_id]
       node_ids = params[:nodes]
-      
+
       GraphQuery.new(
         params: {
           "query_id" => main_id,

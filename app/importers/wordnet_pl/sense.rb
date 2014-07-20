@@ -25,14 +25,16 @@ module WordnetPl
 
     def fill_indexes(senses)
       rows = @connection[:unitandsynset].
-        select(:LEX_ID, :SYN_ID).
+        select(:LEX_ID, :SYN_ID, :unitindex).
         where(:LEX_ID => senses.map { |s| s[:external_id] }).
         to_a
 
       synset_mapping = Hash[rows.map { |row| [row[:LEX_ID], row[:SYN_ID]] } ]
+      index_mapping = Hash[rows.map { |row| [row[:LEX_ID], row[:unitindex]] } ]
 
       senses.each { |s|
         s[:synset_id] = synset_mapping[s[:external_id]]
+        s[:synset_index] = index_mapping[s[:external_id]]
       }
 
       senses
