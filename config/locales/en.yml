@@ -61,6 +61,6 @@ en:
   institution_name: "Institute of Informatics, Wroclaw University of Technology"
   phone: "phone:"
   unknown_lemma: "Unknown word: {{ lemma }}"
-  domain: "Domain"
+  domain: "domain"
   definition: "Definition"
   semantic_similarity: "Function of semantic similarity of lexical units"

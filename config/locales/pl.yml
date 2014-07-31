@@ -61,6 +61,6 @@ pl:
   institution_name: "Instytut Informatyki, Politechnika Wrocławska"
   phone: "telefon:"
   unknown_lemma: "Nieznany wyraz: {{ lemma }}"
-  domain: "Domena"
+  domain: "domena"
   definition: "Definicja"
   semantic_similarity: "Funkcja podobieństwa znaczeniowego jednostek leksykalnych"
