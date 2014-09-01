@@ -80,7 +80,7 @@ In summary: Each Lexeme is represented by Lemma. Each Lexeme has multiple Senses
 
 Above concepts of Wordnet are modelled in application in following way:
 
-![Class Diagram](http://d.pr/i/Kl6N.png)
+![Class Diagram](https://raw.githubusercontent.com/wordnet/wordnet/master/doc/class_diagram.png)
 
 
 ## Relational Database
@@ -141,11 +141,11 @@ Imported relations are normalised in few ways:
 3. Name and reverse_name are in plural form for for UI purposes
 4. Even name has it’s parent, the name describes full relation type name (for example “Meronymes (place)”, not “place”)
 
-![Relations](http://d.pr/i/n3UN.png)
+![Relations](https://github.com/wordnet/wordnet/blob/master/doc/reverse_relation.png)
 
 ## Graph Database
 
-![Graph Database](http://d.pr/i/O1NQ.png)
+![Graph Database](https://github.com/wordnet/wordnet/blob/master/doc/graph_database.png)
 Graph database has slightly different structure than relational database. Most importantly Sense and Synset nodes don’t contain any data except their IDs. The relationships of type `relation` exist only between Synset and Senses. All data displayed in UI columns is hold in Data nodes.
 
 Each Synset and each Sense is represented by connected Data node in UI.
