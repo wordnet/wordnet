@@ -1,7 +1,7 @@
 namespace :wordnet do
 
   desc "Import wordnet database"
-  task :import, [:klass] => [:environment] do |t, args|
+  task :import, [:klass] => [:dotenv, :environment] do |t, args|
     if args[:klass].present?
       WordnetPl.const_get(args[:klass]).new.import!
 
@@ -28,7 +28,7 @@ namespace :wordnet do
   end
 
   desc "Cache synsets"
-  task :cache_synsets => [:environment] do
+  task :cache_synsets => [:dotenv, :environment] do
     Synset.connection.execute "
       update synsets set
         lemma = senses.lemma,
@@ -41,7 +41,7 @@ namespace :wordnet do
 
 
   desc "Export database to Neo4j"
-  task :export, [:klass] => [:environment] do |t, args|
+  task :export, [:klass] => [:dotenv, :environment] do |t, args|
     if args[:klass].present?
       Neo4j.const_get(args[:klass]).new.export!
     else
@@ -53,13 +53,13 @@ namespace :wordnet do
   end
 
   desc "Compute all available statistics"
-  task :stats, [:klass] => [:environment] do |t, args|
+  task :stats, [:klass] => [:dotenv, :environment] do |t, args|
     Rails.logger = Logger.new(STDOUT)
     Statistic.refetch_all!(args[:klass])
   end
 
   desc "Reload all translations"
-  task :translations => [:environment] do |t, args|
+  task :translations => [:dotenv, :environment] do |t, args|
     Rails.logger = Logger.new(STDOUT)
     Translation.export
   end
