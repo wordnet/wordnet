@@ -78,7 +78,7 @@ Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  unless ENV['URL_ROOT'] == ""
-    config.action_controller.relative_url_root = ENV['URL_ROOT'] || '/wordnet'
+  if ENV['URL_ROOT'].present?
+    config.action_controller.relative_url_root = ENV['URL_ROOT']
   end
 end
