@@ -36,9 +36,9 @@ Video: [https://www.youtube.com/watch?v=kJVyO9I173o](https://www.youtube.com/wat
   - ruby, java
   - mysql, postgresql, neo4j
   - deployment framework
-- ssh to wordnet@HOST and run `./deploy` script
+- `ssh wordnet@HOST -p PORT` and run `./deploy` script
 - download mysql database to server
-- import database to mysql via "mysql -D wordnet < wordnet.sql"
+- import database to mysql via `mysql -D wordnet < wordnet.sql`
 - go to current deployment location (cd production/current) and run:
   - `RAILS_ENV=production bin/rake wordnet:import` (imports mysql to postgresql)
   - `RAILS_ENV=production bin/rake wordnet:export` (exports postgresql to neo4j)
@@ -47,8 +47,6 @@ Video: [https://www.youtube.com/watch?v=kJVyO9I173o](https://www.youtube.com/wat
 - to change url prefix of application:
   - add `URL_ROOT=/wordnet` to `.env` file in application's deployment directory
   - touch tmp/restart.txt to restart an application
-
-```
 
 ## Project overview
 
