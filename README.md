@@ -24,11 +24,30 @@ bin/rake wordnet:import
 
 ## Ubuntu 12.04 deployment
 
-```
-apt-get update && apt-get upgrade
-apt-get install -y git make curl software-properties-common
-apt-get install -y python-software-properties
-curl -s https://get.docker.io/ubuntu/ | sudo sh
+Video: [https://www.youtube.com/watch?v=kJVyO9I173o](https://www.youtube.com/watch?v=kJVyO9I173o).
+
+- Create hosting account (e.g. digitalocean)
+- Create user with sudo permissions
+- Remember to `ssh-copy-id` your public key to this new user account
+- Add your public key to `data/playbook.yml
+- Ensure ansible is installed on your machine
+- Run `bin/setup-host USER@HOST:PORT` command to setup your server. It installs:
+  - common tools
+  - ruby, java
+  - mysql, postgresql, neo4j
+  - deployment framework
+- ssh to wordnet@HOST and run `./deploy` script
+- download mysql database to server
+- import database to mysql via "mysql -D wordnet < wordnet.sql"
+- go to current deployment location (cd production/current) and run:
+  - `RAILS_ENV=production bin/rake wordnet:import` (imports mysql to postgresql)
+  - `RAILS_ENV=production bin/rake wordnet:export` (exports postgresql to neo4j)
+  - `RAILS_ENV=production bin/rake wordnet:translations` (generates translations)
+  - `RAILS_ENV=production bin/rake wordnet:stats` (generates statistics)
+- to change url prefix of application:
+  - add `URL_ROOT=/wordnet` to `.env` file in application's deployment directory
+  - touch tmp/restart.txt to restart an application
+
 ```
 
 ## Project overview
