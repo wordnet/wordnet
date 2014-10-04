@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+
+LoadPlugin write_graphite
+
+<Plugin write_graphite>
+ <Carbon>
+   Host "{{ collectd_carbon_host }}"
+   Port "{{ collectd_carbon_port }}"
+   Prefix "{{ collectd_carbon_prefix }}"
+   #Postfix ""
+   Protocol "tcp"
+   EscapeCharacter "_"
+   SeparateInstances true
+   StoreRates true
+   AlwaysAppendDS false
+ </Carbon>
+</Plugin>

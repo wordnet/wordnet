@@ -1,0 +1,52 @@
+*filter
+:ufw-user-input - [0:0]
+:ufw-user-output - [0:0]
+:ufw-user-forward - [0:0]
+:ufw-before-logging-input - [0:0]
+:ufw-before-logging-output - [0:0]
+:ufw-before-logging-forward - [0:0]
+:ufw-user-logging-input - [0:0]
+:ufw-user-logging-output - [0:0]
+:ufw-user-logging-forward - [0:0]
+:ufw-after-logging-input - [0:0]
+:ufw-after-logging-output - [0:0]
+:ufw-after-logging-forward - [0:0]
+:ufw-logging-deny - [0:0]
+:ufw-logging-allow - [0:0]
+:ufw-user-limit - [0:0]
+:ufw-user-limit-accept - [0:0]
+### RULES ###
+
+{% for limit in ufw_connection_rate_limits %}
+### tuple ### limit {{ limit.protocol }} {{ limit.port }} 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p {{ limit.protocol }} --dport {{ limit.port }} -m state --state NEW -m recent --set
+-A ufw-user-input -p {{ limit.protocol }} --dport {{ limit.port }} -m state --state NEW -m recent --update --seconds 30 --hitcount 6 -j ufw-user-limit
+-A ufw-user-input -p {{ limit.protocol }} --dport {{ limit.port }} -j ufw-user-limit-accept
+
+{% endfor %}
+{% for item in ufw_whitelisted_ports %}
+### tuple ### allow {{ item.protocol }} {{ item.port }} 0.0.0.0/0 any 0.0.0.0/0 in
+-A ufw-user-input -p {{ item.protocol }} --dport {{ item.port }} -j ACCEPT
+
+{% endfor %}
+{% for tuple in ufw_whitelisted_ipv4_addresses %}
+### tuple ### allow {{ tuple.protocol }} {{ tuple.port }} 0.0.0.0/0 any {{ tuple.address }} in
+-A ufw-user-input -p {{ tuple.protocol }} --dport {{ tuple.port }} -s {{ tuple.address }} -j ACCEPT
+
+{% endfor %}
+### END RULES ###
+
+### LOGGING ###
+-A ufw-after-logging-input -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-after-logging-forward -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-I ufw-logging-deny -m state --state INVALID -j RETURN -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-deny -j LOG --log-prefix "[UFW BLOCK] " -m limit --limit 3/min --limit-burst 10
+-A ufw-logging-allow -j LOG --log-prefix "[UFW ALLOW] " -m limit --limit 3/min --limit-burst 10
+### END LOGGING ###
+
+### RATE LIMITING ###
+-A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT BLOCK] "
+-A ufw-user-limit -j REJECT
+-A ufw-user-limit-accept -j ACCEPT
+### END RATE LIMITING ###
+COMMIT

@@ -1,0 +1,14 @@
+---
+sudoers_apt_cache_valid_time: 3600
+
+# Who has sudo access - use %foo for groups
+sudoers: []
+
+# Do users need to enter a password?
+sudoers_nopasswd: true
+
+# What users can sudoers impersonate?
+sudoers_users: ["ALL"]
+
+# Remove file from /etc/sudoers.d?
+sudoers_remove: false

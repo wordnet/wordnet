@@ -1,0 +1,7 @@
+{{ app_rack_env }}:
+  adapter: postgresql
+  encoding: unicode
+  database: {{ app_postgresql_database }}
+  pool: 25
+  username: {{ app_postgresql_database }}
+  password: {{ app_postgresql_password }}

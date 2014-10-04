@@ -1,0 +1,11 @@
+---
+collectd_version: 5.4.1
+collectd_url: "https://collectd.org/files/collectd-{{ collectd_version }}.tar.bz2"
+
+collectd_statsd_host: localhost
+collectd_statsd_port: 8125
+
+collectd_carbon_host: metrics.monterail.io
+collectd_carbon_port: 2003
+collectd_carbon_prefix: "collectd."
+

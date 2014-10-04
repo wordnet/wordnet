@@ -1,0 +1,6 @@
+---
+passenger_version: "4.0.37"
+passenger_max_pool_size: 6
+passenger_pool_idle_time: 300
+nginx_location: "/opt/nginx"
+nginx_config_dir: "/opt/nginx/conf"

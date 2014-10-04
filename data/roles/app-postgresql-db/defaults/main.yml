@@ -1,0 +1,20 @@
+---
+app_postgresql_database: "{{ app_full_name }}"
+app_postgresql_password: "{{ lookup('password', 'tmp/pass/' + app_full_name + '-postgresql chars=hexdigits') }}"
+
+postgresql_ext_install_contrib: yes
+postgresql_ext_install_dev_headers: yes
+
+postgresql_databases:
+  - name: "{{ app_postgresql_database }}"
+    hstore: 'yes' # sane default
+    uuid_ossp: 'yes'
+
+postgresql_users:
+  - name: "{{ app_postgresql_database }}"
+    pass: "{{ app_postgresql_password }}"
+
+postgresql_user_privileges:
+  - name: "{{ app_postgresql_database }}"
+    db: "{{ app_postgresql_database }}"
+    priv: "ALL"

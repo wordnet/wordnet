@@ -1,0 +1,19 @@
+server {
+  listen 80;
+  {% if app_ssl %}
+  listen 443 ssl;
+  ssl_certificate     /etc/nginx/ssl/{{ app_full_name }}.crt;
+  ssl_certificate_key /etc/nginx/ssl/{{ app_full_name }}.key;
+  {% endif %}
+  server_name {{ app_domain }};
+
+  access_log {{ app_location }}/shared/log/nginx-access.log;
+  error_log  {{ app_location }}/shared/log/nginx-error.log;
+
+  root {{ app_location }}/current/public;
+  index index.html;
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}

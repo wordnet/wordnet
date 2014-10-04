@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Julien Roubieu
+  description: Neo4j
+  company: Selvz LLC
+  license: BSD
+  min_ansible_version: 1.6
+  platforms:
+    - name: Ubuntu
+      versions:
+        - precise
+  categories:
+    - database
+    - database:nosql
+dependencies:
+  - { role: briancoca.oracle_java7 }

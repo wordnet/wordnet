@@ -1,0 +1,41 @@
+---
+
+# ==================================================
+# Specify which Neo4j version you want to install
+# ==================================================
+neo4j_package: neo4j
+neo4j_package_version: 2.1.5
+
+# ==================================================
+# Server configuration
+# ==================================================
+
+neo4j_server_database_location: data/graph.db
+
+# Let the webserver only listen on the specified IP. Default is localhost (only
+# accept local connections). Uncomment to allow any connection. Please see the
+# security section in the neo4j manual before modifying this.
+# neo4j_server_webserver_address: 0.0.0.0
+
+neo4j_server_webserver_port: 7474
+neo4j_server_webserver_https_enabled: true
+neo4j_server_webserver_https_port: 7473
+neo4j_server_webserver_https_cert_location: conf/ssl/snakeoil.cert
+neo4j_server_webserver_https_key_location: conf/ssl/snakeoil.key
+neo4j_server_webserver_https_keystore_location: data/keystore
+
+# ==================================================
+# Administration client configuration
+# ==================================================
+neo4j_server_webadmin_rrdb_location: data/rrd
+neo4j_server_webadmin_data_uri: /db/data/
+neo4j_server_webadmin_management_uri: /db/manage/
+neo4j_server_db_tuning_properties: conf/neo4j.properties
+neo4j_server_manage_console_engines: shell
+neo4j_server_database_mode: SINGLE
+
+# ==================================================
+# HTTP logging configuration
+# ==================================================
+neo4j_server_http_log_enabled: false
+neo4j_server_http_log_config: conf/neo4j-http-logging.xml

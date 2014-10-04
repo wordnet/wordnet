@@ -1,0 +1,20 @@
+server {
+  listen 80;
+  {% if app_ssl %}
+  listen 443 ssl;
+  ssl_certificate     {{ nginx_location }}/conf/ssl/{{ app_full_name }}.crt;
+  ssl_certificate_key {{ nginx_location }}/conf/ssl/{{ app_full_name }}.key;
+  {% endif %}
+  server_name {{ app_domain }};
+
+  root {{ app_location }}/current/public;
+
+  access_log {{ app_location }}/shared/log/nginx-access.log;
+  error_log  {{ app_location }}/shared/log/nginx-error.log;
+
+  passenger_enabled on;
+  passenger_user    {{ app_user }};
+  passenger_group   {{ app_user }};
+  passenger_min_instances {{ passenger_min_instances }};
+  rack_env          {{ app_rack_env }};
+}

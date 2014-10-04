@@ -1,0 +1,20 @@
+---
+galaxy_info:
+  author: Brian Coca
+  description: oracle-java7
+  company:
+  license: GPLv2
+  min_ansible_version: 1.6
+  platforms:
+    - name: Ubuntu
+      versions:
+        - precise
+        - saucy
+    - name: Debian
+      versions:
+        - wheezy
+        - squeeze
+  categories:
+    - system
+    - web
+dependencies: []

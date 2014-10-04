@@ -1,0 +1,33 @@
+upstream app-{{ app_full_name }} {
+  {% for i in range(0,app_workers) %}
+  server 127.0.0.1:{{ upstream_base_port + i + 1 }};
+  {% endfor %}
+}
+
+server {
+  listen 80;
+  {% if app_ssl %}
+  listen 443 ssl;
+  ssl_certificate     /etc/nginx/ssl/{{ app_full_name }}.crt;
+  ssl_certificate_key /etc/nginx/ssl/{{ app_full_name }}.key;
+  {% endif %}
+  server_name {{ app_domain }};
+
+  access_log {{ app_location }}/shared/log/nginx-access.log;
+  error_log  {{ app_location }}/shared/log/nginx-error.log;
+
+  root {{ app_location }}/current/public;
+
+  location / {
+    proxy_next_upstream off;
+    proxy_set_header  Host $http_host;
+    proxy_set_header  X-Forwarded-For    $proxy_add_x_forwarded_for;
+    proxy_set_header  X-Real-IP  $remote_addr;
+    proxy_set_header  CLIENT_IP  $remote_addr;
+    proxy_redirect    off;
+
+    if (!-f $request_filename) {
+      proxy_pass http://app-{{ app_full_name }};
+    }
+  }
+}

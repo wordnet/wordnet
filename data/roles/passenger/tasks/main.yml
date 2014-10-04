@@ -1,0 +1,46 @@
+---
+- name: Install Passenger gem
+  command:  gem install passenger -v {{ passenger_version }}
+            creates={{ ruby_gems_location }}/passenger-{{ passenger_version }}/README.md
+
+- name: Install Passenger Nginx module
+  command:  passenger-install-nginx-module --auto --languages ruby --auto-download --prefix {{ nginx_location }}
+            creates={{ nginx_location }}/sbin/nginx
+
+
+- name: Install skylab-passenger wrapper script
+  template: src=skylab-passenger.j2
+            dest=/usr/bin/skylab-passenger
+            owner=root
+            group=root
+            mode=0755
+
+- name: Generate Nginx configuration file
+  template: src=nginx-conf.j2
+            dest={{ nginx_location }}/conf/nginx.conf
+            owner=root
+            group=root
+  notify: Restart Nginx
+
+- name: Set up Nginx vhost directories
+  file: path={{ nginx_location }}/conf/sites-enabled state=directory
+  notify: Restart Nginx
+
+- name: Generate Nginx init script
+  template: src=nginx-init.j2
+            dest=/etc/init.d/nginx
+            owner=root
+            group=root
+            mode=755
+  notify: Restart Nginx
+
+- name: Enable the Nginx init script in rc.d
+  command: update-rc.d nginx defaults
+           creates=/etc/rc0.d/K20nginx
+
+- name: Set up logrotate for Nginx
+  template: src=nginx-logrotate.j2
+            dest=/etc/logrotate.d/nginx
+            owner=root
+            group=root
+            mode=644

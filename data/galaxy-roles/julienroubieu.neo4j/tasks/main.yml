@@ -1,0 +1,48 @@
+---
+- name: Update python-apt
+  sudo: true
+  command: apt-get install python-apt -y
+
+- name: Update python-pycurl
+  sudo: true
+  command: apt-get install python-pycurl -y
+
+- name: Add the Neo4j apt key
+  apt_key: url=http://debian.neo4j.org/neotechnology.gpg.key state=present
+
+- name: Setup Neo4j repository
+  apt_repository: repo="deb http://debian.neo4j.org/repo stable/" state=present update_cache=yes
+
+- name: Check Neo4j package is installed
+  apt: pkg={{ neo4j_package }}={{ neo4j_package_version }} state=present
+
+- name: Ensure graph DB folder exists
+  file: path={{ neo4j_server_database_location }} state=directory owner=neo4j group=adm mode=0755
+
+- name: Configure Neo4j server properties
+  sudo: yes
+  template: src=neo4j-server.properties  dest=/etc/neo4j/neo4j-server.properties owner=neo4j group=adm mode=0644
+  notify: Restart neo4j
+
+- name: Configure Neo4j server wrapper properties
+  sudo: yes
+  template: src=neo4j-wrapper.conf dest=/etc/neo4j/neo4j-wrapper.conf owner=neo4j group=adm mode=0644
+  notify: Restart neo4j
+
+- name: Configure Neo4j properties
+  sudo: yes
+  template: src=neo4j.properties dest=/etc/neo4j/neo4j.properties owner=neo4j group=adm mode=0644
+  notify: Restart neo4j
+
+- name: Ensure open files soft limit is set
+  lineinfile: dest=/etc/security/limits.conf regexp="^neo4j\s+soft" line="neo4j   soft    nofile  40000" insertbefore="# End of file" state=present
+
+- name: Ensure open files hard limit is set
+  lineinfile: dest=/etc/security/limits.conf regexp="^neo4j\s+hard" line="neo4j   hard    nofile  40000" insertbefore="# End of file" state=present
+
+- name: Ensure limits are enabled
+  lineinfile: dest=/etc/pam.d/su  regexp="^(# )?session    required   pam_limits.so" line="session    required   pam_limits.so" state=present
+  notify: Reboot
+
+- name: Ensure Neo4j service is enabled and started
+  service: name=neo4j-service enabled=yes state=started

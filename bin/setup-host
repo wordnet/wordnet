@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ -z "$1" ]]; then
+  echo "Usage: bin/setup-host wordnet@example.com:1234"
+  exit 1
+fi
+
+
+if [[ $1 == *:* ]]; then
+  XPORT=$(echo "$1" | awk -F ':' '{ print $2 }')
+else
+  XPORT="22"
+fi
+
+if [[ $1 == *@* ]]; then
+  XUSER=$(echo "$1" | awk -F ':' '{ print $1 }' | awk -F '@' '{ print $1 }')
+  XHOST=$(echo "$1" | awk -F ':' '{ print $1 }' | awk -F '@' '{ print $2 }')
+else
+  XUSER="$USER"
+  XHOST=$(echo "$1" | awk -F ':' '{ print $1 }')
+fi
+
+printf "USER: $XUSER\n"
+printf "HOST: $XHOST\n"
+printf "PORT: $XPORT\n"
+
+printf "[wordnet-production]\n$XHOST:$XPORT\n" > ./data/hosts
+(cd ./data && ansible-playbook --user=$XUSER --ask-sudo-pass --sudo playbook.yml)

@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+
+/var/log/collectd.log {
+    daily
+    missingok
+    notifempty
+    rotate 7
+    compress
+    endscript
+}

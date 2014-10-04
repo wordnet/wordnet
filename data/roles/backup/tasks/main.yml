@@ -1,0 +1,57 @@
+---
+- name: Backup | Create skylab-backup.log
+  file: path="/var/log/skylab-backup.log"
+        owner=root
+        group=root
+        mode=0666
+        state=touch
+  tags:
+  - backup
+
+- name: Backup | Set up logrotate for skylab-backup
+  template: src=skylab-backup-logrotate.j2
+            dest=/etc/logrotate.d/skylab-backup
+            owner=root
+            group=root
+            mode=644
+  tags:
+  - logrotate
+  - backup
+
+- name: Install backup gem
+  command:  gem install backup --no-ri --no-rdoc
+            creates=/usr/local/bin/backup
+  tags:
+  - backup
+
+- name: Create Backup dir
+  file: path="/root/Backup/models" state=directory
+  tags:
+  - backup
+
+- name: Configure backup
+  template: src=config.rb.j2
+            dest="/root/Backup/config.rb"
+  when: backup_s3_key is defined and backup_s3_secret is defined
+  tags:
+  - backup
+
+- name: Configure archive backup
+  template: src=backup-archive.rb.j2
+            dest="/root/Backup/models/{{ app_full_name }}-archive.rb"
+  tags:
+  - backup
+
+- name: Configure archive backup cron
+  cron: name="backup-{{ app_full_name }}-archive"
+        cron_file="backup-{{ app_full_name }}-archive"
+        job="/usr/local/bin/backup perform -t {{ app_full_name }}-archive >> /var/log/skylab-backup.log 2>&1"
+        special_time=daily
+        user=root
+  tags:
+  - backup
+
+- name: Check backup configuration
+  shell: backup check
+  tags:
+  - backup

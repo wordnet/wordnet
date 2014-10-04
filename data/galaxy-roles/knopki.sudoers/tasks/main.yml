@@ -1,0 +1,43 @@
+---
+- name: Install sudo (Debian-like)
+  apt: pkg=sudo state=installed update_cache=yes cache_valid_time={{ sudoers_apt_cache_valid_time }}
+  when: ansible_os_family == "Debian"
+
+- name: Install sudo (RedHat-like)
+  yum: name=sudo state=present
+  when: ansible_os_family == "RedHat"
+
+- name: Install sudo (SUSE-like)
+  zypper: name=sudo state=present
+  when: ansible_os_family == "SUSE"
+
+- name: Create sudoers.d directory
+  file:
+    path: /etc/sudoers.d
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+
+- name: Set includedir in sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    line: "#includedir /etc/sudoers.d"
+    state: present
+    validate: "/usr/sbin/visudo -cf %s"
+
+- name: Create sudoers
+  template:
+    src: sudoers.d.j2
+    dest: "/etc/sudoers.d/{{ sudoers_filename }}"
+    mode: 0440
+    owner: root
+    group: root
+    validate: "/usr/sbin/visudo -cf %s"
+  when: not sudoers_remove
+
+- name: Remove sudoers
+  file:
+    path: "/etc/sudoers.d/{{ sudoers_filename }}"
+    state: absent
+  when: sudoers_remove

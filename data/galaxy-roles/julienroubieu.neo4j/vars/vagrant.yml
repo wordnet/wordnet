@@ -1,0 +1,9 @@
+#
+# Overriden variables for the Vagrant VM
+#
+
+neo4j_package: neo4j-enterprise
+neo4j_package_version: 2.0.0
+
+# The port here must be the same as in Vagrantfile
+neo4j_server_webserver_port: 7474

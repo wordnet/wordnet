@@ -1,0 +1,7 @@
+---
+- name: Generate vhost config
+  template: src=vhost.j2
+            dest=/etc/nginx/sites-enabled/{{ app_full_name }}.conf
+  notify: Reload Nginx
+  tags:
+  - nginx

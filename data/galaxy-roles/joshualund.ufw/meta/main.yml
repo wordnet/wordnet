@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: "Joshua Lund"
+  description: "Ansible role that installs and configures ufw, AKA The Uncomplicated Firewall (https://launchpad.net/ufw)"
+  license: MIT
+  min_ansible_version: 1.3
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+  categories:
+    - networking
+dependencies: []

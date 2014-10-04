@@ -1,0 +1,66 @@
+##############################################################################
+# Global                                                                     #
+#----------------------------------------------------------------------------#
+# Global settings for the daemon.                                            #
+##############################################################################
+Interval     10
+ReadThreads  7
+Hostname "{{ collectd_hostname }}"
+FQDNLookup false
+
+##############################################################################
+# Logging                                                                    #
+#----------------------------------------------------------------------------#
+# Plugins which provide logging functions should be loaded first, so log     #
+# messages generated when loading or configuring other plugins can be        #
+# accessed.                                                                  #
+##############################################################################
+LoadPlugin syslog
+
+<Plugin syslog>
+  LogLevel info
+</Plugin>
+
+##############################################################################
+# LoadPlugin section                                                         #
+#----------------------------------------------------------------------------#
+# Lines beginning with a single `#' belong to plugins which have been built  #
+# but are disabled by default.                                               #
+#                                                                            #
+# Lines begnning with `##' belong to plugins which have not been built due   #
+# to missing dependencies or because they have been deactivated explicitly.  #
+##############################################################################
+
+LoadPlugin cpu
+LoadPlugin df
+LoadPlugin disk
+LoadPlugin interface
+LoadPlugin load
+LoadPlugin memory
+LoadPlugin swap
+LoadPlugin vmem
+LoadPlugin protocols
+
+##############################################################################
+# Plugin configuration                                                       #
+#----------------------------------------------------------------------------#
+# In this section configuration stubs for each plugin are provided. A desc-  #
+# ription of those options is available in the collectd.conf(5) manual page. #
+##############################################################################
+
+
+<Plugin protocols>
+  Value "/^Tcp:/"
+# IgnoreSelected false
+</Plugin>
+
+
+<Plugin "swap">
+  ReportByDevice false
+</Plugin>
+
+<Plugin vmem>
+  Verbose false
+</Plugin>
+
+Include "/etc/collectd.d/*.conf"

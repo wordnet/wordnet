@@ -1,0 +1,15 @@
+---
+- name: Elasticsearch | ELASELASTICSEARCH_URL in .env
+  lineinfile: line="ELASTICSEARCH_URL=http://localhost:9200"
+              dest="{{ app_location }}/shared/.env"
+  tags:
+  - env
+
+- name: Elasticsearch | Set up logrotate for Elasticsearch
+  template: src=elasticsearch-logrotate.j2
+            dest=/etc/logrotate.d/elasticsearch
+            owner=root
+            group=root
+            mode=644
+  tags:
+  - logrotate

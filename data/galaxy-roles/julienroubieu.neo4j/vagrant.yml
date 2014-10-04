@@ -1,0 +1,16 @@
+---
+#
+# Top configuration file to use with Vagrant. Defines all the roles of you vagrant VM.
+# This file is referenced from Vagrantfile.
+#
+
+- hosts: all
+  vars_files:
+    - defaults/main.yml
+    - vars/vagrant.yml
+  tasks:
+    - include: tasks/main.yml
+    - name: Ready
+      debug: msg="Done. You should be able to access Neo4j at http://localhost:{{ neo4j_server_webserver_port }}"
+  handlers:
+    - include: handlers/main.yml

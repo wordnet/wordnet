@@ -1,0 +1,6 @@
+---
+apt_repositories:
+  - "deb http://archive.ubuntu.com/ubuntu saucy main"
+  - "deb http://archive.ubuntu.com/ubuntu saucy-security main"
+  - "deb http://archive.ubuntu.com/ubuntu saucy-updates main"
+  - "deb http://archive.ubuntu.com/ubuntu saucy universe"

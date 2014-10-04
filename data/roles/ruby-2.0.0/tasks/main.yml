@@ -1,0 +1,14 @@
+---
+- name: Install ruby 2.0
+  apt: pkg=ruby2.0 state=present
+
+- name: Install ruby 2.0 dev package
+  apt: pkg=ruby2.0-dev state=present
+
+- name: Install bundler
+  command:  gem install bundler --no-ri --no-rdoc
+            creates=/usr/local/bin/bundle
+
+- name: Install common ruby apps dependencies
+  apt: pkg={{ item }} state=present
+  with_items: ruby_app_dependencies

@@ -1,0 +1,24 @@
+---
+- hosts: all
+  sudo: yes
+
+  vars:
+    sudoers_filename: "testing"
+    sudoers:
+      - name: "testone"
+        users:
+          - "vagrant"
+          - "root"
+      - name: "testtwo"
+        users:
+          - "ALL"
+
+  tasks:
+    - name: add test users
+      user: name={{ item }} shell=/bin/bash state=present
+      with_items:
+        - "testone"
+        - "testtwo"
+
+  roles:
+    - .

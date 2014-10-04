@@ -1,0 +1,80 @@
+# TODO: nginx-status.conf
+
+---
+- name: Fetch collectd package
+  shell: curl "{{ collectd_url }}" > "/root/collectd-{{ collectd_version }}.tar.bz2"
+         chdir="/root"
+         creates="/root/collectd-{{ collectd_version }}.tar.bz2"
+  tags:
+  - metrics
+
+- name: Unpack collectd
+  shell: tar jxf "collectd-{{ collectd_version }}.tar.bz2"
+         chdir="/root"
+         creates="/root/collectd-{{ collectd_version }}"
+  tags:
+  - metrics
+
+- name: Configure collectd
+  shell: ./configure
+        chdir="/root/collectd-{{ collectd_version }}"
+        creates="/root/collectd-{{ collectd_version }}/Makefile"
+  tags:
+  - metrics
+
+- name: Install collectd
+  shell: make all install
+        chdir="/root/collectd-{{ collectd_version }}"
+        creates="/opt/collectd/sbin/collectd"
+  tags:
+  - metrics
+
+- name: Create /etc/collectd.d
+  file: name=/etc/collectd.d state=directory
+        owner=root group=root mode=0644
+  tags:
+  - metrics
+
+- name: Configure collectd
+  template: src=collectd.conf.j2 dest=/etc/collectd.conf
+            validate='/opt/collectd/sbin/collectd -t -C %s'
+            owner=root group=root mode=0644
+  tags:
+  - metrics
+
+- name: Setup nginx status
+  template: src=nginx-status.conf.j2
+            dest={{ nginx_config_dir }}/sites-enabled/nginx-status.conf
+  notify: Reload Nginx
+  tags:
+  - metrics
+
+- name: Setup collectd plugins
+  template: src="{{ item }}.conf.j2" dest="/etc/collectd.d/{{ item }}.conf"
+            validate='/opt/collectd/sbin/collectd -t -C %s'
+            owner=root group=root mode=0644
+  with_items:
+  - statsd
+  - graphite
+  - nginx
+  tags:
+  - metrics
+
+- name: Generate upstart config
+  template: src=upstart.conf.j2 dest=/etc/init/collectd.conf
+            owner=root group=root mode=0644
+  tags:
+  - metrics
+
+
+- name: Copy logrotate config
+  template: src=collectd.logrotate.j2
+            dest=/etc/logrotate.d/collectd
+            owner=root group=root mode=0644
+  tags:
+  - metrics
+
+- name: Restart collectd service
+  service: name=collectd state=restarted enabled=yes
+  tags:
+  - metrics

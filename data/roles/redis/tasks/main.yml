@@ -1,0 +1,32 @@
+---
+- name: Redis | Add redis repository
+  apt_repository: repo=ppa:chris-lea/redis-server
+                  state=present
+
+- name: Redis | Install redis server and tools
+  apt: pkg={{ item }} state=present
+  with_items:
+  - redis-server
+  - redis-tools
+
+- name: Redis | REDIS_URL in .env
+  lineinfile: line="REDIS_URL=redis://localhost:6379"
+              dest="{{ app_location }}/shared/.env"
+  tags:
+  - env
+
+
+- name: Redis | Configure backup
+  template: src=backup-redis.rb.j2
+            dest="/root/Backup/models/{{ app_full_name }}-redis.rb"
+  tags:
+  - backup
+
+- name: Redis | Configure backup cron
+  cron: name="backup-{{ app_full_name }}-redis"
+        cron_file="backup-{{ app_full_name }}-redis"
+        job="/usr/local/bin/backup perform -t {{ app_full_name }}-redis >> /var/log/skylab-backup.log 2>&1"
+        special_time=daily
+        user=root
+  tags:
+  - backup

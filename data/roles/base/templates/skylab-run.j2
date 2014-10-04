@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Set PATH
+export PATH="./bin:$PATH"
+
+# Read env
+test -f .env && eval $(cat .env | sed -E 's/^([a-zA-Z0-9_]+)((: *)|=)/export \1=/')
+
+$@

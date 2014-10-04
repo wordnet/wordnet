@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+
+LoadPlugin statsd
+
+<Plugin statsd>
+  Host "{{ collectd_statsd_host }}"
+  Port "{{ collectd_statsd_port }}"
+  DeleteSets     true
+  TimerPercentile 90.0
+</Plugin>

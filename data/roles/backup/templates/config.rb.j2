@@ -1,0 +1,18 @@
+# encoding: utf-8
+# {{ ansible_managed }}
+
+##
+# Backup v4.x Configuration
+#
+# Documentation: http://meskyanichi.github.io/backup
+# Issue Tracker: https://github.com/meskyanichi/backup/issues
+
+Storage::S3.defaults do |s3|
+  s3.access_key_id     = "{{ backup_s3_key }}"
+  s3.secret_access_key = "{{ backup_s3_secret }}"
+
+  s3.region            = "us-east-1"
+  s3.bucket            = "{{ backup_s3_bucket }}"
+
+  s3.keep = {{ backup_s3_keep }}
+end

@@ -1,0 +1,26 @@
+---
+- name: PostgreSQL | Generate database.yml
+  template: src=database.yml.j2
+            dest={{ app_location }}/shared/config/database.yml
+            owner={{ app_user }}
+            group={{ app_user }}
+
+- name: PostgreSQL | Create backup directory
+  file: path="/root/Backup/models" state=directory
+  tags:
+  - backup
+
+- name: PostgreSQL | Configure backup
+  template: src=backup-postgresql.rb.j2
+            dest="/root/Backup/models/{{ app_full_name }}-postgresql.rb"
+  tags:
+  - backup
+
+- name: PostgreSQL | Configure backup cron
+  cron: name="backup-{{ app_full_name }}-postgresql"
+        cron_file="backup-{{ app_full_name }}-postgresql"
+        job="/usr/local/bin/backup perform -t {{ app_full_name }}-postgresql >> /var/log/skylab-backup.log 2>&1"
+        special_time=daily
+        user=root
+  tags:
+  - backup

@@ -1,0 +1,19 @@
+---
+ruby_version: "2.1.1"
+ruby_gems_location: "/var/lib/gems/2.1.0/gems"
+ruby_app_dependencies:
+  - imagemagick
+  - libmagickcore-dev
+  - libmagickwand-dev
+  - libcurl4-openssl-dev
+  - libssl-dev
+  - libssl0.9.8
+  - libxml2-dev
+  - libxslt-dev
+  - libyaml-dev
+  - libcurl3-dev
+  - libmysqlclient-dev
+  - libpq-dev
+  - libreadline5
+  - nodejs
+  - curl

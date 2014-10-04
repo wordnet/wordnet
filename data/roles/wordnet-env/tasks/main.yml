@@ -1,0 +1,33 @@
+---
+- name: RAILS_ENV
+  lineinfile: line="RAILS_ENV=production"
+              dest="{{ app_location }}/shared/.env"
+  tags:
+  - env
+
+
+- name: NEO4J_URL
+  lineinfile: line="NEO4J_URL=http://127.0.0.1:7474"
+              dest="{{ app_location }}/shared/.env"
+  tags:
+  - env
+
+- name: SOURCE_URL
+  lineinfile: line="SOURCE_URL=mysql2://wordnet@127.0.0.1/wordnet"
+              dest="{{ app_location }}/shared/.env"
+  tags:
+  - env
+
+- name: Deploy script
+  template: src=deploy.sh
+            dest="/home/wordnet/deploy"
+            owner=wordnet
+            group=wordnet
+            mode=744
+
+- name: Link to curent
+  file: src=/var/www/wordnet/production/current
+        dest=/home/wordnet/current
+        owner=wordnet
+        group=wordnet
+        state=link

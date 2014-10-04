@@ -1,0 +1,6 @@
+---
+ufw_connection_rate_limits: [ ]
+ufw_whitelisted_ipv4_addresses: [ ]
+ufw_whitelisted_ipv6_addresses: [ ]
+ufw_whitelisted_ports:
+  -  { port: 22,  protocol: tcp }

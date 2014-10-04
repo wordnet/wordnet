@@ -1,0 +1,26 @@
+user  www-data;
+worker_processes  4;
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    passenger_root {{ ruby_gems_location}}/passenger-{{ passenger_version }};
+    passenger_ruby /usr/bin/skylab-passenger;
+    passenger_friendly_error_pages off;
+    passenger_max_pool_size {{ passenger_max_pool_size }};
+    passenger_pool_idle_time {{ passenger_pool_idle_time }};
+
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    sendfile       on;
+    server_names_hash_bucket_size 64;
+    client_max_body_size  100M;
+
+    keepalive_timeout  65;
+
+    include {{ nginx_location }}/conf/sites-enabled/*;
+}

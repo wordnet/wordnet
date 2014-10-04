@@ -1,0 +1,34 @@
+# encoding: utf-8
+# {{ ansible_managed }}
+
+Model.new("{{ app_full_name }}-postgresql", '{{ app_full_name }} postgresql backup') do
+  store_with S3 do |s3|
+    s3.path              = "apps/{{ app_path }}"
+  end
+
+  database PostgreSQL do |db|
+    db.name               = "{{ app_postgresql_database }}"
+    db.username           = "{{ app_postgresql_database }}"
+    db.password           = "{{ app_postgresql_password }}"
+    db.host               = "localhost"
+    db.port               = 5432
+  end
+
+  compress_with Gzip
+
+  after do |exit_status|
+    s3 = storages.find {|s| s.is_a?(Backup::Storage::S3) }
+    fog = Fog::Storage.new(
+      :provider                 => 'AWS',
+      :aws_access_key_id        => s3.access_key_id,
+      :aws_secret_access_key    => s3.secret_access_key
+    )
+    expire = Time.now + 3600
+
+    package.filenames.each do |file|
+      key = File.join(s3.path, trigger, time, file)
+      url = fog.directories.new(:key => s3.bucket).files.new(:key => key).url(expire)
+      puts "Download URL: #{url}"
+    end
+  end
+end

@@ -1,0 +1,7 @@
+---
+- name: Ansible | Add ansible repository
+  apt_repository: repo=ppa:rquillo/ansible
+                  state=present
+
+- name: Ansible | Install ansible
+  apt: pkg=ansible state=present update_cache=true

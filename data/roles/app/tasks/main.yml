@@ -1,0 +1,68 @@
+---
+- name: Create app user
+  user: name={{ app_user }}
+        home=/home/{{ app_user }}
+        shell=/bin/bash
+  tags:
+  - app
+
+- name: Set up ssh keys
+  sudo_user: "{{ app_user }}"
+  sudo: yes
+  authorized_key: user={{ app_user }}
+                  state=present
+                  key="{{ item }}"
+  with_items: app_keys
+  tags:
+  - app
+  - ssh
+
+- name: Set up skylab-web ssh key
+  sudo_user: "{{ app_user }}"
+  authorized_key: user="{{ app_user }}"
+                  key="{{ lookup('file', skylab_public_key_path) }}"
+  when: skylab_public_key_path is defined
+  tags:
+  - app
+
+- name: Generate ssh deploy key
+  sudo: yes
+  sudo_user: "{{ app_user }}"
+  shell: creates="{{ app_ssh_deploy_key_file }}"
+         /usr/bin/ssh-keygen -f {{ app_ssh_deploy_key_file }} -N ''
+
+- name: Generate directory structure
+  file: path={{ item }}
+        owner={{ app_user }}
+        group={{ app_user }}
+        state=directory
+  with_items:
+    - "{{ app_location }}"
+    - "{{ app_location }}/scm"
+    - "{{ app_location }}/releases"
+    - "{{ app_location }}/shared"
+    - "{{ app_location }}/shared/bundle"
+    - "{{ app_location }}/shared/config"
+    - "{{ app_location }}/shared/log"
+    - "{{ app_location }}/shared/tmp"
+  tags:
+  - app
+
+- name: Generate .env file
+  file: path="{{ app_location }}/shared/.env"
+        owner={{ app_user }}
+        group={{ app_user }}
+        state=touch
+  tags:
+  - app
+  - env
+
+- name: Set up logrotate for App
+  template: src=app-logrotate.j2
+            dest="/etc/logrotate.d/{{ app_full_name }}"
+            owner=root
+            group=root
+            mode=644
+  tags:
+  - app
+  - logrotate

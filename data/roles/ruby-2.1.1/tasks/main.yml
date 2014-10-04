@@ -1,0 +1,27 @@
+---
+- name: Add brightbox repository
+  apt_repository: repo=ppa:brightbox/ruby-ng-experimental
+                  state=present
+
+- name: Install ruby 2.1
+  apt: pkg=ruby2.1 state=present
+
+- name: Install ruby 2.1 dev package
+  apt: pkg=ruby2.1-dev state=present
+
+- name: Set ruby 2.1 as default ruby
+  shell: update-alternatives  --install /usr/bin/ruby ruby /usr/bin/ruby2.1 400
+                                --slave /usr/share/man/man1/ruby.1.gz ruby.1.gz
+                                        /usr/share/man/man1/ruby2.1.1
+                                --slave /usr/bin/ri ri /usr/bin/ri2.1
+                                --slave /usr/bin/irb irb /usr/bin/irb2.1
+- name: Same for gem
+  shell: update-alternatives  --install /usr/bin/gem gem /usr/bin/gem2.1 400
+
+- name: Install bundler
+  command:  gem install bundler --no-ri --no-rdoc
+            creates=/usr/local/bin/bundle
+
+- name: Install common ruby apps dependencies
+  apt: pkg={{ item }} state=present
+  with_items: ruby_app_dependencies

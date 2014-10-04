@@ -1,0 +1,53 @@
+---
+- name: Install python-pycurl
+  apt:  pkg=python-pycurl state=latest
+
+- name: Add apt repositories
+  apt_repository: repo="{{ item }}" state=present
+  with_items: apt_repositories
+
+- name: Update apt-cache
+  apt:  update_cache=yes cache_valid_time=3600
+
+- name: Install common packages
+  apt: pkg="{{ item }}" state=present
+  with_items:
+   - git-core
+   - ntp
+   - vim
+   - build-essential
+   - htop
+   - tmux
+
+- name: Install extra packages
+  apt: pkg="{{ item }}" state=present
+  with_items: base_extra_packages
+  when: base_extra_packages is defined
+  tags:
+  - pkg
+
+- name: Install skylab-run wrapper script
+  template: src=skylab-run.j2
+            dest=/usr/bin/skylab-run
+            owner=root
+            group=root
+            mode=0755
+
+- name: Install skylab-git-ssh wrapper script
+  template: src=skylab-git-ssh.j2
+            dest=/usr/bin/skylab-git-ssh
+            owner=root
+            group=root
+            mode=0755
+
+# - name: Allow OpenSSH connections
+#   ufw: rule=allow name=OpenSSH
+
+# - name: Allow HTTP connections
+#   ufw: rule=allow port=80 proto=tcp
+
+# - name: Allow HTTPS connections
+#   ufw: rule=allow port=443 proto=tcp
+
+# - name: Enable firewall
+#   ufw: state=enabled policy=deny

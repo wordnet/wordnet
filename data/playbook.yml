@@ -1,0 +1,52 @@
+---
+- hosts: wordnet-production
+  roles:
+  - knopki.sudoers
+  - joshualund.ufw
+  - base
+  - app
+  - julienroubieu.neo4j
+  - ruby-2.1.1
+  - passenger
+  - mysql
+  - app-passenger
+  - app-postgresql-db
+  - wordnet-env
+  gather_facts: true
+  vars:
+    app_full_name: wordnet-production
+    app_path: wordnet/production
+    app_location: "/var/www/wordnet/production"
+    app_user: wordnet
+    app_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA4dLWQDWxS5ZkdDV//Co60sPdBfUcDWUQjTvv7LBQoCWMHX76gBPD1mfW6hPWNOmKdkgZz6G/ClNp4vju6YNCbJ3i2J3G2T3FGdwCljF57wEy/9KpJMnS2YNTA2NosrfpQeyYdkwRecLIpAuL3ejMYzIaQYj44yBIv+KsoMtfwo11TQhP9L4aUf15tOfeI3fsewMVctexF3w4mgDJlZ9343VcF5ehu0Ls0oBOQLCOsTsPDEJ+pQ07sLyq1LY2MaD4E9kLYogRBGq67vSwyPssF+XFVd2XvpsG/x8/HKPTjiMIVYToZZhvmxC47aG5fxbrKbBb24CyzjCu2/faaXCQ0w== sheerun@Adam-Stankiewicz.local
+    app_rack_env: production
+    app_ssh_deploy_key_file: "/home/wordnet/.ssh/wordnet-production"
+    base_extra_packages: []
+    backup_archive_paths: []
+    sudoers_filename: wordnet
+    sudoers:
+    - name: wordnet
+      users:
+      - root
+    ufw_whitelisted_ports:
+    - port: 22
+      protocol: tcp
+    - port: 80
+      protocol: tcp
+    - port: 443
+      protocol: tcp
+    - port: 9622
+      protocol: tcp
+    app_domain: wordnet.sher.pl
+    app_ssl: false
+    passenger_min_instances: 4
+    neo4j_server_database_location: "{{ app_location }}/shared/graph.db"
+    mysql_bind_address: "127.0.0.1"
+    mysql_root_password: "password"
+    mysql_databases:
+      - name: wordnet
+    mysql_users:
+      - name: wordnet
+        pass:
+  tasks: []
