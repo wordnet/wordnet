@@ -71,7 +71,7 @@ module API
               id: e2.id,
               lemma: e2.lemma,
               sense_index: e2.sense_index,
-              comment: e2.comment
+              definition: e2.definition
             })
           )
         """.gsub(/\s+/, ' ').strip.freeze

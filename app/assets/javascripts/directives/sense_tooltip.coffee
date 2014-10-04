@@ -9,6 +9,6 @@ angular.module('wordnet').directive 'senseTooltip', ->
       if sense?
         title += sense.lemma
         title += " (#{sense.part_of_speech})" if sense.part_of_speech
-        title += " — #{sense.comment}" if sense.comment
+        title += " — #{sense.definition}" if sense.definition
 
       element.attr('title', title)

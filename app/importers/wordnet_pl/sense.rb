@@ -51,7 +51,6 @@ module WordnetPl
           external_id: lemma[:ID],
           domain_id: lemma[:domain],
           lemma: lemma[:lemma],
-          comment: extract_short_definition(lemma[:comment]),
           examples: extract_examples(lemma[:comment]),
           definition: extract_definition(lemma[:comment]),
           language: lemma[:project] > 0 ? 'pl_PL' : 'en_GB',
@@ -67,14 +66,6 @@ module WordnetPl
       PartOfSpeech.find(pos_id).uuid
     end
 
-    def process_comment(comment)
-      return nil if comment.blank?
-      return nil if comment.include?("brak danych")
-      return nil if comment.include?("##")
-      return nil if comment[0..1] == "NP"
-      comment.match(/^([^#<]+)/).to_s.presence
-    end
-
     def extract_examples(comment)
       comment.
         scan(/\[##[^:]+: ([^\]]*)\]/).
@@ -83,14 +74,14 @@ module WordnetPl
         reject(&:empty?)
     end
 
-    def extract_short_definition(comment)
-      definition = comment.scan(/##D: ([^\.]+)\./).flatten.first
-      definition && definition.size < 128 ? definition : nil
-    end
-
     def extract_definition(comment)
-      definition = comment.scan(/##D: ([^\.]+)\./).flatten.first
-      definition && definition.size >= 128 ? definition : nil
+      comment.
+        scan(/##D:\s*(.+?)\.\s*(?:\z|\[##|\{##L:|<#)/m).
+        flatten.
+        first.
+        to_s.
+        strip.
+        presence
     end
   end
 end

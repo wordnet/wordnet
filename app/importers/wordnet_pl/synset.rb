@@ -15,7 +15,7 @@ module WordnetPl
     end
 
     def load_entities(limit, offset)
-      raw = @connection[:synset].select(:ID, :comment, :definition).order(:ID).
+      raw = @connection[:synset].select(:ID, :definition).order(:ID).
         where('ID >= ? AND ID < ?', offset, offset + limit).to_a
 
       raw.map do |synset|

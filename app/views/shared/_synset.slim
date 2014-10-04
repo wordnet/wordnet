@@ -9,7 +9,7 @@
           i.item__position
             | &nbsp;{{ sense.sense_index || 0 }}
         span.item__description<
-          | {{ sense.comment || sense.definition || sense.synset.definition }}
+          | {{ sense.definition || sense.synset.definition }}
 
 .definition ng-if="sense.domain_id"
   section.grid
@@ -36,8 +36,8 @@
             | {{ synonym.lemma }}
             i.item__position
               | &nbsp;{{ synonym.sense_index || 0 }}
-          span.item__description.item__description--small< ng-if="synonym.comment"
-            | {{ synonym.comment }}
+          span.item__description.item__description--small< ng-if="synonym.definition"
+            | {{ synonym.definition }}
 
 .definition.definition--source
   section.grid

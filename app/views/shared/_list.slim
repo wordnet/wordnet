@@ -9,8 +9,8 @@ section.list class="list--#{direction}" ng-repeat="relation_type in sense.#{dire
           i.item__position
             | &nbsp;{{ sense.sense_index || 0 }}
         span.item__description.item__description--small.u__truncate<
-          span ng-if="sense.comment" ng-bind="sense.comment"
-          span ng-if="!sense.comment"
+          span ng-if="sense.definition" ng-bind="sense.definition"
+          span ng-if="!sense.definition"
             span ng-bind="'domain' | translate"
             span> = ":"
             span ng-bind="('domain_' + sense.domain_id) | translate"

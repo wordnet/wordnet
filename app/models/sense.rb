@@ -46,7 +46,7 @@ class Sense < ActiveRecord::Base
           id: target.id,
           lemma: target.lemma,
           domain_id: target.domain_id,
-          comment: target.comment,
+          definition: target.definition,
           part_of_speech: target.part_of_speech,
           sense_index: target.sense_index
         })
@@ -73,7 +73,7 @@ class Sense < ActiveRecord::Base
           id: target.id,
           lemma: target.lemma,
           domain_id: target.domain_id,
-          comment: target.comment,
+          definition: target.definition,
           part_of_speech: target.part_of_speech,
           sense_index: target.sense_index
         })
@@ -93,7 +93,7 @@ class Sense < ActiveRecord::Base
       :language => language,
       :domain_id => domain_id,
       :part_of_speech => part_of_speech,
-      :comment => comment
+      :definition => definition
     }
 
     if options[:extended]
@@ -106,7 +106,6 @@ class Sense < ActiveRecord::Base
       ).as_json
 
       data[:synset] = synset.as_json(without: id)
-      data[:definition] = definition
       data[:examples] = examples || synset.examples || []
       data[:outgoing] = fetch_related
       data[:incoming] = fetch_reverse_related

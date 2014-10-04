@@ -14,11 +14,11 @@
                   span.u__bold> ng-bind-html="homograph.lemma"
                   small> ng-bind="homograph.sense_index"
                   small.u__dim<(
-                    ng-if="homograph.comment"
-                    ng-bind-html="homograph.comment | highlight: $select.search"
+                    ng-if="homograph.definition"
+                    ng-bind-html="homograph.definition | highlight: $select.search"
                   )
                   small.u__dim<(
-                    ng-if="!homograph.comment"
+                    ng-if="!homograph.definition"
                     ng-bind-html="('domain_' + homograph.domain_id) | translate | highlight: $select.search"
                   )
                 div style="position: absolute; right: 0px; top: -1px"

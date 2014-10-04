@@ -2,7 +2,7 @@ module ProgressBarImporter
   def import!(*args, &block)
     @progress_bar = ProgressBar.create(
       :title => self.class.name.split('::').last,
-      :total => @pages,
+      :total => self.pages,
       :format => "%t: |%B| %c/%C %E",
       :smoothing => 0.8
     )

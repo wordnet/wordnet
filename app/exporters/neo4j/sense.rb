@@ -6,7 +6,7 @@ module Neo4j
 
       ON CREATE SET
       n.domain_id = {domain_id},
-      n.comment = {comment},
+      n.definition = {definition},
       n.sense_index = {sense_index},
       n.language = {language},
       n.part_of_speech = {part_of_speech},
@@ -14,7 +14,7 @@ module Neo4j
 
       ON MATCH SET
       n.domain_id = {domain_id},
-      n.comment = {comment},
+      n.definition = {definition},
       n.sense_index = {sense_index},
       n.language = {language},
       n.part_of_speech = {part_of_speech},
