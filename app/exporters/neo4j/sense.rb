@@ -36,7 +36,7 @@ module Neo4j
     """.gsub(/\s+/, ' ').strip.freeze
 
     def source
-      ::Sense
+      ::Sense.includes(:synset)
     end
 
     def export_index!
@@ -52,8 +52,11 @@ module Neo4j
 
     def prepare_batch(entities)
       entities.map do |entity|
+        data = entity.attributes.except(:external_id)
+        data['definition'] ||= entity.synset.definition
+
         [:execute_query,
-         SENSE_EXPORT_QUERY, entity.attributes.except(:external_id)]
+         SENSE_EXPORT_QUERY, data]
       end + entities.select { |e| e[:synset_core] }.map do |entity|
         [:execute_query,
           SYNSET_SENSE_EXPORT_QUERY, { sense_id: entity[:id], synset_id: entity[:synset_id] }]
