@@ -26,8 +26,8 @@
             mode=744
 
 - name: Link to curent
-  file: src=/var/www/wordnet/production/current
-        dest=/home/wordnet/current
+  file: src=/var/www/wordnet/production
+        dest=/home/wordnet/production
         owner=wordnet
         group=wordnet
         state=link

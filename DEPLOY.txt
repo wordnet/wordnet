@@ -1,3 +1,5 @@
+# Production deployment instructions:
+
 - Create hosting account (e.g. digitalocean)
 - Create user with sudo permissions
 - Remember to ssh-copy-id your public key to this new user account
@@ -11,7 +13,7 @@
 - ssh to wordnet@HOST and run ./deploy script
 - download mysql database to server
 - import database to mysql via "mysql < wordnet.sql"
-- go to current deployment location (cd current) and run:
+- go to current deployment location (cd production/current) and run:
   - RAILS_ENV=production bin/rake wordnet:import (imports mysql to postgresql)
   - RAILS_ENV=production bin/rake wordnet:export (exports postgresql to neo4j)
   - RAILS_ENV=production bin/rake wordnet:translations (generates translations)
