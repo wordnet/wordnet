@@ -4,7 +4,7 @@ require 'synchronized_write_importer'
 
 class Importer
   prepend ProgressBarImporter
-  # prepend ThreadPoolImporter
+  prepend ThreadPoolImporter
   prepend SynchronizedWriteImporter
 
   def total_count
@@ -20,8 +20,7 @@ class Importer
   end
 
   def base_connection
-    @base_connection ||=
-      options.fetch(:connection, ActiveRecord::Base.connection)
+    @base_connection
   end
 
   def sequel_connection
@@ -38,6 +37,7 @@ class Importer
   def initialize(options = {})
     @batch_size = options.fetch(:batch_size, 400)
     @pages = options.fetch(:pages, nil)
+    @base_connection = options.fetch(:connection, ActiveRecord::Base.connection)
   end
 
   def import!
