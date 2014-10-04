@@ -1,0 +1,7 @@
+---
+- name: 'Memcached Playbook'
+  hosts: memcached_nodes
+  user: root
+
+  roles:
+    - memcached

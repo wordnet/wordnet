@@ -1,0 +1,14 @@
+language: python
+
+python:
+  - "2.7"
+
+install:
+  - pip install ansible
+
+script:
+  - find . -name '*.yml' -not -path './.travis.yml'  -not -path './roles/*/files/*' | xargs -t -n1 ansible-playbook --syntax-check -i tests/ansible.inventory
+
+notifications:
+  email:
+    - tomaz+travisci@tomaz.me

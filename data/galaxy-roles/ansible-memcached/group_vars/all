@@ -1,0 +1,3 @@
+---
+memcached:
+  install_development_headers: true
