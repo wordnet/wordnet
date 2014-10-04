@@ -64,3 +64,7 @@ en:
   domain: "domain"
   definition: "Definition"
   semantic_similarity: "Function of semantic similarity of lexical units"
+  feedback: "Feedback form"
+  email: "Your e-mail:"
+  message: "Message:"
+  send: "Send"

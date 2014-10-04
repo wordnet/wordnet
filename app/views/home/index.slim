@@ -147,6 +147,32 @@
           | Logo design:
           a<> href="http://www.merhabstudio.com/" Merhab Studio
     .container.grid__cell.grid__cell--5-20
+      section.list class="list--outgoing"
+        h1.u__header style="margin-bottom: 10px"
+          span translate="feedback"
+        
+        form action="http://forms.brace.io/sheerun@sher.pl" method="POST"
+          div style="margin-bottom: 10px;"
+            label for="email" translate="email"
+            input(
+              name="email"
+              spellcheck="false"
+              type="email"
+              id="email"
+              required="required"
+            )
+
+          div style="margin-bottom: 10px;"
+            label for="message" translate="message"
+            textarea(
+              name="message"
+              spellcheck="false"
+              required
+            )
+
+          div style="margin-bottom: 10px; text-align: right"
+            button style="background-color: #6a6a6a; color: #fafafa; font-size: 15px; padding: 6px 20px; border: 0; border-radius: 3px; cursor: pointer" translate="send"
+
 
   .grid ng-show="sense"
     .container.grid__cell.grid__cell--5-20

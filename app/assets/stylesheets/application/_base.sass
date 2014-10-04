@@ -37,7 +37,7 @@ ul, ol, li
   padding: 0
   list-style: none
 
-input
+input, textarea
   -webkit-appearance: none
   display: block
   width: 100%
@@ -47,10 +47,12 @@ input
   color: $secondary-link-color
   font: inherit
   font-weight: 600
-  line-height: 1 !important
   transition: $default-transition
 
   &:focus
     outline: none
     background-color: #ffefda
     color: $default-color
+
+input
+  line-height: 1 !important
