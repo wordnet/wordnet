@@ -29,7 +29,7 @@ Video: [https://www.youtube.com/watch?v=kJVyO9I173o](https://www.youtube.com/wat
 - Create hosting account (e.g. digitalocean)
 - Create user with sudo permissions
 - Remember to `ssh-copy-id` your public key to this new user account
-- Add your public key to `data/playbook.yml
+- Add your public key to `data/playbook.yml`
 - Ensure ansible is installed on your machine
 - Run `bin/setup-host USER@HOST:PORT` command to setup your server. It installs:
   - common tools
