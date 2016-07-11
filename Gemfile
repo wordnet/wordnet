@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-source 'https://rails-assets.org'
 
 # Core
 gem 'rails', '4.0.2'
@@ -23,23 +22,25 @@ gem 'quiet_assets', '~> 1.0'
 gem 'compass-rails', '~> 1.1.3'
 gem 'autoprefixer-rails'
 gem 'ngmin-rails', '~> 0.4.0'
-gem 'font-awesome-rails', github: 'monterail/font-awesome-rails'
+gem 'font-awesome-rails'
 
 # Rails Assets
-gem 'rails-assets-lodash', '~> 2.4'
-gem 'rails-assets-angular', '~> 1.2.16'
-gem 'rails-assets-angular-cache'
-gem 'rails-assets-angular-route'
-gem 'rails-assets-angular-ui-router'
-gem 'rails-assets-angular-bootstrap'
-gem 'rails-assets-open-sans-fontface'
-gem 'rails-assets-angular-translate'
-gem 'rails-assets-angular-cookies'
-gem 'rails-assets-angular-sanitize'
-gem 'rails-assets-angular-translate-storage-cookie'
-gem 'rails-assets-angular-translate-storage-local'
-gem 'rails-assets-sheerun--ui-select', '0.2.1'
-gem 'rails-assets-selectize', '~> 0.8.5'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-lodash', '~> 2.4'
+  gem 'rails-assets-angular', '~> 1.2.16'
+  gem 'rails-assets-angular-cache'
+  gem 'rails-assets-angular-route'
+  gem 'rails-assets-angular-ui-router'
+  gem 'rails-assets-angular-bootstrap'
+  gem 'rails-assets-open-sans-fontface'
+  gem 'rails-assets-angular-translate'
+  gem 'rails-assets-angular-cookies'
+  gem 'rails-assets-angular-sanitize'
+  gem 'rails-assets-angular-translate-storage-cookie'
+  gem 'rails-assets-angular-translate-storage-local'
+  gem 'rails-assets-sheerun--ui-select', '0.2.1'
+  gem 'rails-assets-selectize', '~> 0.8.5'
+end
 
 # Wordnet Import
 gem 'mysql2'

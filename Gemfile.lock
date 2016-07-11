@@ -1,10 +1,3 @@
-GIT
-  remote: git://github.com/monterail/font-awesome-rails.git
-  revision: 451c6157724f8cd059f78398a3b7fbd9b0e5d1b8
-  specs:
-    font-awesome-rails (4.0.3.1)
-      railties (>= 3.2, < 5.0)
-
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -82,6 +75,8 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
+    font-awesome-rails (4.6.3.1)
+      railties (>= 3.2, < 5.1)
     fssm (0.2.10)
     grape (0.6.1)
       activesupport
@@ -277,7 +272,7 @@ DEPENDENCIES
   compass-rails (~> 1.1.3)
   dotenv-rails (~> 0.9)
   figaro (~> 0.7)
-  font-awesome-rails!
+  font-awesome-rails
   grape (~> 0.6.1)
   grape-kaminari (~> 0.1.0)
   hashie
@@ -291,20 +286,20 @@ DEPENDENCIES
   pry-stack_explorer
   quiet_assets (~> 1.0)
   rails (= 4.0.2)
-  rails-assets-angular (~> 1.2.16)
-  rails-assets-angular-bootstrap
-  rails-assets-angular-cache
-  rails-assets-angular-cookies
-  rails-assets-angular-route
-  rails-assets-angular-sanitize
-  rails-assets-angular-translate
-  rails-assets-angular-translate-storage-cookie
-  rails-assets-angular-translate-storage-local
-  rails-assets-angular-ui-router
-  rails-assets-lodash (~> 2.4)
-  rails-assets-open-sans-fontface
-  rails-assets-selectize (~> 0.8.5)
-  rails-assets-sheerun--ui-select (= 0.2.1)
+  rails-assets-angular (~> 1.2.16)!
+  rails-assets-angular-bootstrap!
+  rails-assets-angular-cache!
+  rails-assets-angular-cookies!
+  rails-assets-angular-route!
+  rails-assets-angular-sanitize!
+  rails-assets-angular-translate!
+  rails-assets-angular-translate-storage-cookie!
+  rails-assets-angular-translate-storage-local!
+  rails-assets-angular-ui-router!
+  rails-assets-lodash (~> 2.4)!
+  rails-assets-open-sans-fontface!
+  rails-assets-selectize (~> 0.8.5)!
+  rails-assets-sheerun--ui-select (= 0.2.1)!
   rails-i18n
   rails_12factor
   redcarpet
@@ -319,3 +314,6 @@ DEPENDENCIES
   upsert
   wisper (~> 1.2.0)
   yajl-ruby
+
+BUNDLED WITH
+   1.12.5
