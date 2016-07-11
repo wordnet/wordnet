@@ -17,18 +17,12 @@ ActiveRecord::Schema.define(version: 20140716122448) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "graph_queries", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
-    t.text "params"
-  end
-
   create_table "relation_types", force: true do |t|
     t.integer "parent_id"
     t.string  "name"
     t.string  "reverse_name"
     t.text    "description"
     t.integer "priority"
-    t.string  "color"
-    t.boolean "vertical"
   end
 
   create_table "sense_relations", force: true do |t|
