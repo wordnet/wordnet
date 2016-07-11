@@ -80,10 +80,10 @@ ActiveRecord::Schema.define(version: 20140716122448) do
   add_index "synset_relations", ["parent_id", "child_id", "relation_id"], name: "synset_relations_idx", unique: true, using: :btree
 
   create_table "synsets", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
-    t.integer "external_id",                 null: false
+    t.integer "external_id",                              null: false
     t.text    "comment"
     t.text    "definition"
-    t.string  "examples",       default: [],              array: true
+    t.string  "examples",       limit: 1023, default: [],              array: true
     t.string  "language"
     t.string  "lemma"
     t.string  "part_of_speech"
