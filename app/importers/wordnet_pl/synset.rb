@@ -49,9 +49,9 @@ module WordnetPl
     end
 
     def process_definition(definition)
+      return nil if definition.blank?
       return nil if definition == "brak danych"
       return nil if definition.size < 3
-      return nil if definition.blank?
       definition.split(";").first.strip[0..253]
     end
   end
