@@ -4,7 +4,7 @@ Open Source browsing application for Wordnet database
 
 ## Requirements
 
-- Ruby 2.1.0
+- Ruby 2.1.10
 - PostgreSQL 9
 - Neo4J 2
 - MySQL (for WordnetSQL import)
@@ -14,8 +14,8 @@ Open Source browsing application for Wordnet database
 ```
 # Load wordnet database to MySQL
 
-rbenv install 2.1.0
-rbenv use 2.1.0
+rbenv install 2.1.10
+rbenv use 2.1.10
 bundle install
 
 bin/rake db:create db:migrate
