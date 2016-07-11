@@ -68,3 +68,7 @@ en:
   email: "Your e-mail:"
   message: "Message:"
   send: "Send"
+  source_code: "Source code"
+  mobile_app: "Mobile app"
+  wnloom_viewer: "WNLoom-Viewer"
+  to_download: "Download"

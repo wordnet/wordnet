@@ -68,3 +68,7 @@ pl:
   email: "Twój e-mail:"
   message: "Wiadomość:"
   send: "Wyślij"
+  source_code: "Kod źródłowy"
+  mobile_app: "Aplikacja mobilna"
+  wnloom_viewer: "WNLoom-Viewer"
+  to_download: "Do pobrania"
