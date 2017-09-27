@@ -9,7 +9,7 @@ class Sense < ActiveRecord::Base
   has_many :reverse_related, :foreign_key => "child_id",
     :class_name => "SenseRelation"
 
-  # Take lowest synset_index in groups by synset_id and mark it as core. 
+  # Take lowest synset_index in groups by synset_id and mark it as core.
   # Synset cores are representations of matching synsets.
   def self.label_sense_cores!
     Sense.update_all('sense_core = true', "id in (#{
@@ -35,9 +35,9 @@ class Sense < ActiveRecord::Base
     neo = Neography::Rest.new(Figaro.env.neo4j_url)
     query = """
       match (s:Singleton{ id: {id} }),
-            (s-[:relation*0..1 { weight: 0 }]->(h:Synset)),
-            (h<-[r:relation { weight: 1 }]-(i:Synset)),
-            (i<-[r2:synset]-(target:Sense))
+            ((s)-[:relation*0..1 { weight: 0 }]->(h:Synset)),
+            ((h)<-[r:relation { weight: 1 }]-(i:Synset)),
+            ((i)<-[r2:synset]-(target:Sense))
       return {
         relation_id: r.id,
         language: target.language,
@@ -62,9 +62,9 @@ class Sense < ActiveRecord::Base
     neo = Neography::Rest.new(Figaro.env.neo4j_url)
     query = """
       match (s:Singleton{ id: {id} }),
-            (s-[:relation*0..1 { weight: 0 }]->(h:Synset)),
-            (h-[r:relation { weight: 1 }]->(i:Synset)),
-            (i<-[r2:synset]-(target:Sense))
+            ((s)-[:relation*0..1 { weight: 0 }]->(h:Synset)),
+            ((h)-[r:relation { weight: 1 }]->(i:Synset)),
+            ((i)<-[r2:synset]-(target:Sense))
       return {
         relation_id: r.id,
         language: target.language,
