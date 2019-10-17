@@ -54,7 +54,7 @@ gem 'wisper', '~> 1.2.0'
 gem 'neography'
 
 # API
-gem 'grape', '~> 0.6.1'
+gem 'grape', '~> 1.1.0'
 gem 'grape-kaminari', '~> 0.1.0'
 
 group :development do
