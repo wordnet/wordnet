@@ -258,7 +258,7 @@ GEM
       equalizer (~> 0.0.7)
     wisper (1.2.1)
     yajl-ruby (1.2.0)
-    yard (0.8.7.3)
+    yard (0.9.20)
 
 PLATFORMS
   ruby
