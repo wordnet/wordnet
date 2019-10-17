@@ -136,7 +136,7 @@ GEM
       pry (>= 0.9.11)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
-    rack (1.5.2)
+    rack (1.5.5)
     rack-accept (0.4.5)
       rack (>= 0.4)
     rack-mount (0.8.3)
