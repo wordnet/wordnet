@@ -257,7 +257,7 @@ GEM
       descendants_tracker (~> 0.0.1)
       equalizer (~> 0.0.7)
     wisper (1.2.1)
-    yajl-ruby (1.2.0)
+    yajl-ruby (1.4.2)
     yard (0.8.7.3)
 
 PLATFORMS
