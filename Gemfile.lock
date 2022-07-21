@@ -246,7 +246,7 @@ GEM
       camertron-eprun
       json
       tzinfo
-    tzinfo (0.3.38)
+    tzinfo (0.3.61)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
